@@ -1,0 +1,68 @@
+---
+title: "Using the MapX AI Chat Interface for Spatial Analysis"
+sidebarTitle: "AI Chat"
+description: "MapX's AI chat lets you run buffer zones, spatial joins, heatmaps, and site scoring by typing plain English. Learn how to phrase effective spatial queries."
+---
+
+The AI chat interface is the primary way you interact with MapX. Rather than navigating menus or writing code, you simply describe what you want to see — the same way you'd ask a knowledgeable colleague. Type a question, get a map. It's spatial analysis without the learning curve.
+
+## How It Works
+
+When you submit a prompt, MapX parses your intent and identifies the most appropriate spatial operation — whether that's a buffer analysis, a heatmap, a spatial join, or a filtered view. It then resolves which columns in your uploaded data correspond to locations, values, or categories, executes the operation on your dataset, and renders the result as an interactive map layer in seconds.
+
+You don't need to specify the operation by name. MapX infers it from context. Saying *"show me customers near transit stops"* is enough to trigger a proximity/buffer analysis automatically.
+
+## Example Prompts by Analysis Type
+
+The examples below illustrate how naturally you can phrase requests. Each one maps to a specific spatial operation under the hood.
+
+<CodeGroup>
+
+```text Buffer Analysis
+Show me all coffee shops within 800m of subway stations
+```
+
+```text Heatmap
+Create a heatmap of customer density across the city
+```
+
+```text Site Scoring
+Score these 50 locations by population density, distance from competitors, and foot traffic
+```
+
+```text Spatial Join
+Attach neighborhood names to each of my store locations
+```
+
+```text Filtering & Styling
+Show only stores with revenue above $500k, color by region
+```
+
+</CodeGroup>
+
+You're not limited to these exact phrasings — they're starting points. MapX understands variations, synonyms, and combined requests (e.g., *"Create a heatmap of sales, but only for the western region"*).
+
+## Refining Your Analysis
+
+MapX maintains context across your conversation, so you can iterate on results with follow-up prompts just as you would in a chat. After an initial result is rendered, try:
+
+- **Adjusting parameters:** *"Change the buffer to 1km"* or *"Use a 15-minute walk time instead"*
+- **Narrowing scope:** *"Only show results in the north district"*
+- **Changing the visual:** *"Switch to a dark basemap"* or *"Color the points by revenue instead of category"*
+- **Drilling deeper:** *"Which of those locations have the highest foot traffic?"*
+
+Each follow-up updates the map in place — you're always building on the previous result rather than starting over.
+
+## Tips for Better Prompts
+
+A little specificity goes a long way. Keep these guidelines in mind when crafting your queries:
+
+- **Be explicit about distances and units.** Say *"500 meters"* rather than *"nearby"* when precision matters.
+- **Name your columns.** Referencing *"the revenue column"* or *"the store_type field"* helps MapX resolve ambiguity, especially in datasets with many columns.
+- **Specify how to color or size points.** If you want a visual encoding, ask for it: *"size points by sales volume"* or *"color by category"*.
+- **Ask for comparisons when needed.** Prompts like *"compare store performance between Q1 and Q2"* unlock multi-layer or side-by-side views.
+- **Combine filters and operations in one prompt.** MapX can handle compound requests: *"Show a heatmap of incidents in the downtown zone only, weighted by severity"*.
+
+<Note>
+  MapX works best when your data columns have clear, descriptive names. If your file uses generic headers like `col_1` or `field_A`, consider renaming them before uploading — names like `store_revenue`, `latitude`, or `neighborhood` make it much easier for MapX to interpret your prompts accurately.
+</Note>

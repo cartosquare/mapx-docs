@@ -1,0 +1,87 @@
+{
+  "projectType": "saas",
+  "projectName": "MapX",
+  "projectDescription": "MapX is an AI-powered spatial analysis platform that lets anyone turn CSV and GeoJSON data into interactive maps, heatmaps, and professional reports using plain English — no GIS training required.",
+  "theme": "luma",
+  "primaryColor": "#1b6cda",
+  "lightColor": "#bcc483",
+  "darkColor": "#8cbe9c",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "uploading-data"
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/ai-chat",
+              "concepts/spatial-operations",
+              "concepts/layers-and-maps"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/site-selection",
+              "guides/logistics-analysis",
+              "guides/real-estate",
+              "guides/heatmaps",
+              "guides/reports"
+            ]
+          },
+          {
+            "group": "Sharing & Export",
+            "pages": [
+              "sharing/sharing-maps",
+              "sharing/exporting"
+            ]
+          },
+          {
+            "group": "Plans & Account",
+            "pages": [
+              "account/plans",
+              "account/team-collaboration",
+              "account/data-security"
+            ]
+          },
+          {
+            "group": "Help",
+            "pages": [
+              "help/faq",
+              "help/troubleshooting"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Plain-English AI chat interface for spatial queries",
+    "Auto-detection of location columns in CSV, GeoJSON, and Excel files",
+    "GPU-accelerated WebGL rendering for 100K+ data points at 60fps",
+    "Spatial operations: buffer, overlay, spatial join, heatmap, site scoring",
+    "One-click professional report generation with maps, charts, and AI insights",
+    "Custom map styling: colors, dark mode basemaps, branded exports",
+    "Public and private map sharing with editable access controls",
+    "Team collaboration (up to 5 seats on Pro, unlimited on Enterprise)",
+    "White-label reports and scheduled auto-reporting on Enterprise",
+    "SSO and admin controls for Enterprise customers"
+  ],
+  "publicApiSurface": [
+    "AI chat prompt — describe spatial analysis in plain English",
+    "File upload — CSV, GeoJSON, Excel with auto column detection",
+    "Map layer controls — style, color, basemap selection",
+    "Report export — one-click HTML report generation",
+    "Share link — public or private map sharing",
+    "PNG export — watermark-free on paid plans",
+    "Project management — up to 3 (Free), 30 (Basic), 100 (Pro), unlimited (Enterprise)"
+  ]
+}

@@ -1,0 +1,111 @@
+---
+title: "Spatial Operations Available in MapX"
+sidebarTitle: "Spatial Operations"
+description: "MapX supports buffer analysis, spatial joins, overlay, heatmaps, and multi-criteria site scoring — all triggered by plain English prompts with no GIS expertise needed."
+---
+
+Spatial operations are the analytical building blocks of GIS — they answer questions like *"what's near what?"*, *"where do these two datasets overlap?"*, and *"which locations score best across multiple factors?"*. In traditional GIS tools, running these operations requires technical training and manual configuration. In MapX, you simply describe your goal in plain English and the platform selects, configures, and executes the right operation automatically.
+
+The sections below describe every spatial operation MapX supports, when to reach for each one, and example prompts you can use or adapt.
+
+---
+
+### Buffer Analysis
+
+Buffer analysis creates a zone of a specified distance around each feature in a dataset — points, lines, or polygons. The result is a new geometry layer showing everything that falls within that radius.
+
+**When to use it:** Catchment area mapping, proximity analysis, service-area planning, regulatory setback checks.
+
+```text Example prompt
+Show me all coffee shops within 800m of subway stations
+```
+
+```text Example prompt
+Which residential parcels fall within 200m of the proposed highway extension?
+```
+
+---
+
+### Spatial Join
+
+A spatial join transfers attributes from one dataset onto features in another based on their geographic relationship (e.g., containment or intersection). The result enriches your existing data without requiring a manual key-based merge.
+
+**When to use it:** Associating administrative boundaries (neighborhoods, ZIP codes, census tracts) with point datasets; tagging events with the zone they fall in; combining demographic data with location records.
+
+```text Example prompt
+Attach neighborhood names to each of my store locations
+```
+
+```text Example prompt
+Join census tract income data to my customer points
+```
+
+---
+
+### Heatmap
+
+A heatmap visualizes the spatial distribution of point data as a smooth color gradient — high-density or high-value areas appear in warm colors, low-density areas in cool colors. MapX supports both count-based heatmaps and value-weighted heatmaps.
+
+**When to use it:** Customer density mapping, incident frequency analysis, sales concentration, foot traffic visualization.
+
+```text Example prompt
+Create a heatmap of customer density across the city
+```
+
+```text Example prompt
+Show a heatmap of delivery incidents weighted by severity score
+```
+
+---
+
+### Overlay / Intersection
+
+Overlay analysis finds the geographic areas where two datasets coincide. MapX can compute intersections (only the overlapping portions) and differences (areas in one layer but not another), producing new geometry representing the result.
+
+**When to use it:** Identifying parcels within flood zones or protected areas; finding census blocks that intersect a proposed development footprint; combining zoning layers with land-use data.
+
+```text Example prompt
+Show which parcels in my dataset fall inside the flood risk zone
+```
+
+```text Example prompt
+Find the overlap between my delivery zones and the city's commercial districts
+```
+
+---
+
+### Site Scoring
+
+Site scoring — also called multi-criteria analysis — evaluates a set of candidate locations against several weighted factors simultaneously and produces a ranked score for each. You define the criteria; MapX computes the composite scores and visualizes them on the map.
+
+**When to use it:** Retail site selection, facility planning, logistics depot placement, competitive landscape analysis, franchise territory evaluation.
+
+```text Example prompt
+Score these 50 locations by population density, distance from competitors, and foot traffic
+```
+
+```text Example prompt
+Rank my candidate sites based on proximity to highways, median household income, and available square footage
+```
+
+---
+
+### Filtering & Styling
+
+Filtering restricts the visible features to those matching an attribute condition (e.g., revenue above a threshold, category equals a specific value). Styling controls how those features are rendered — point size, color scale, opacity — based on column values.
+
+**When to use it:** Highlighting revenue tiers, isolating a single product category, comparing performance across regions, preparing clean maps for reports or presentations.
+
+```text Example prompt
+Show only stores with revenue above $500k, color by region
+```
+
+```text Example prompt
+Filter to locations opened after 2020 and size the points by monthly visitors
+```
+
+---
+
+<Tip>
+  Not sure which operation you need? Just describe your goal in plain English — MapX will pick the right one. You never have to name an operation explicitly.
+</Tip>

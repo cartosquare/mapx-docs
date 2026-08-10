@@ -1,47 +1,73 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Get Started with MapX in 30 Seconds"
+sidebarTitle: "Quickstart"
+description: "Learn how to upload a dataset, run your first spatial analysis, and export a map in under a minute using MapX's AI chat interface."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
-
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+This guide walks you through the complete MapX workflow from a blank screen to a shareable interactive map. By the end you will have created a project, uploaded a dataset, run your first AI-powered spatial query, and exported the result — all in under a minute.
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
-
-    ```bash
-    npm install your-package
-    ```
+  <Step title="Create your free account">
+    Go to [app.mapxagent.com](https://app.mapxagent.com) and sign up with your email or Google account. No credit card is required. You will land on your project dashboard immediately after confirming your email.
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+  <Step title="Create a new project">
+    Click **New Project**, give it a name (e.g. *"Store Network Q3"*), and choose a visibility setting:
+    - **Private** — only you (and invited team members on Pro/Enterprise) can view it.
+    - **Public** — anyone with the link can view the published map and report.
 
-    ```bash
-    your-cli init
-    ```
+    Click **Create** to open the project workspace.
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+  <Step title="Upload your data">
+    Drag and drop a **CSV**, **GeoJSON**, or **Excel** file onto the upload zone, or click **Browse files** to select one. MapX will:
+    1. Scan your column headers and automatically identify latitude/longitude or address columns.
+    2. Show a preview of detected location columns for you to confirm or correct.
+    3. Render your data points on the map canvas within seconds.
 
-    ```bash
-    your-cli start
-    ```
+    Not sure what format to use? See [Uploading Data](/uploading-data) for full details on supported formats and column naming conventions.
+  </Step>
+  <Step title="Ask your first question">
+    Click the **AI Chat** panel and type a question in plain English. A simple starting prompt is:
+
+    > "Show locations on a map, color points by [column name]"
+
+    MapX will interpret your request, apply the spatial operation, and update the map in real time. You can follow up with refinements like *"zoom to the top 20 by revenue"* or *"add a 1 km buffer around each point"* — the AI maintains context across the conversation.
+  </Step>
+  <Step title="Export or share your map">
+    When you are happy with the result, choose one of the following:
+    - **Download PNG** — exports a static image of the current map view.
+    - **Generate Report** — produces a standalone HTML file with interactive maps, charts, and AI-written narrative insights. Click **Download** or **Copy share link** to distribute it.
+    - **Copy share link** — anyone with the link can view the live interactive map (subject to your project visibility setting).
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## Example Prompts by Use Case
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+<CodeGroup>
+  ```text Retail & Site Selection
+  Show all stores within 500 m of metro stations, color by monthly revenue
+  Score candidate sites by foot traffic, competitor distance, and median income
+  Highlight any store location with revenue below $10,000 in red
+  ```
+
+  ```text Logistics & Delivery
+  Draw 10-minute drive-time zones around each depot
+  Find all delivery addresses more than 30 minutes from the nearest warehouse
+  Cluster delivery stops into 5 zones and color each zone differently
+  ```
+
+  ```text Real Estate
+  Show properties listed above $500,000 within 1 km of a school
+  Overlay planning boundary polygons on top of the property points
+  Color parcels by zoning category and show a legend
+  ```
+
+  ```text Environmental & Infrastructure
+  Show all monitoring stations within 2 km of a river polygon
+  Heatmap incident reports from the last 12 months
+  Highlight sites that intersect with flood-risk zones
+  ```
+</CodeGroup>
+
+<Note>
+  The **Free plan** includes **50 AI prompts per month** and up to **3 projects**. If you need more, the Basic plan ($19/mo) offers 500 prompts and 30 projects. See the [pricing page](https://app.mapxagent.com) for a full comparison.
+</Note>

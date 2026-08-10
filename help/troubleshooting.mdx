@@ -1,0 +1,104 @@
+---
+title: "Troubleshooting Common Issues in MapX"
+sidebarTitle: "Troubleshooting"
+description: "Solutions to common MapX issues: data upload errors, location column detection problems, slow rendering, and prompt errors."
+---
+
+Most MapX issues can be resolved quickly with a small adjustment to your data or prompt. This page covers the most common problems users encounter and the fastest way to fix them.
+
+<AccordionGroup>
+
+  <Accordion title="Data Upload Issues">
+    **My CSV won't upload**
+
+    - Check your file size. The Free plan has a **200MB upload limit** — if your file exceeds this, consider upgrading to Basic (5GB) or Pro (20GB).
+    - Make sure the file is a valid **UTF-8 encoded CSV**. Files with special characters or unusual encodings can cause upload failures.
+    - If the file was created in Excel, try re-saving it: go to **File → Save As** and choose **CSV UTF-8 (Comma delimited)** as the format.
+
+    ---
+
+    **MapX can't find my lat/lng columns**
+
+    - Rename your coordinate columns to one of the recognised names: `lat`, `lng`, `latitude`, or `longitude`.
+    - Alternatively, use the **manual column mapping dialog** that appears after upload to tell MapX which columns contain your coordinates.
+
+    ---
+
+    **Some rows are missing from my map**
+
+    - Rows with **blank or invalid coordinate values** are automatically skipped during rendering.
+    - Open your source file and check for empty cells, placeholder text (e.g. `N/A`, `null`), or non-numeric values in your coordinate columns.
+    - Valid latitude values range from **-90 to 90** and valid longitude values from **-180 to 180**.
+  </Accordion>
+
+  <Accordion title="Analysis / AI Chat Issues">
+    **My analysis prompt isn't working**
+
+    - Try being more specific in your prompt. Include **column names**, **distances with units**, and a clear description of what you want to see.
+    - ❌ Vague: `show clusters`
+    - ✅ Specific: `show stores within 500m of subway stations, color by monthly_revenue`
+
+    ---
+
+    **I've hit my prompt limit**
+
+    - Prompt limits reset on your billing date, which is shown in your **account settings**.
+    - To continue immediately, upgrade your plan — Basic offers 500 prompts/month and Pro offers unlimited prompts. You can upgrade at any time from account settings.
+
+    ---
+
+    **The analysis result looks wrong**
+
+    - Use a follow-up prompt in the AI chat to refine the result. For example:
+      - `Use kilometers instead of miles`
+      - `Exclude points south of the river`
+      - `Recalculate using the population_2023 column instead`
+    - MapX maintains conversation context, so you can iteratively correct results without starting over.
+  </Accordion>
+
+  <Accordion title="Map Rendering Issues">
+    **The map is slow or not loading**
+
+    - Try **refreshing the page** first — this resolves most transient rendering issues.
+    - For very large datasets (500,000+ points), consider **filtering to a specific region or time range** before running analysis to reduce the rendering load.
+
+    ---
+
+    **My map is blank after upload**
+
+    - Verify that your coordinate values are valid: latitude must be between **-90 and 90**, longitude between **-180 and 180**.
+    - Check that you haven't accidentally **swapped the lat and lng columns** — a common issue when columns aren't named in a standard way.
+
+    ---
+
+    **Basemap isn't showing**
+
+    - Basemap tiles are loaded from a CDN and require an active internet connection. Check your network connectivity and try refreshing.
+    - If you're on a corporate network, confirm that your firewall or proxy isn't blocking tile requests.
+  </Accordion>
+
+  <Accordion title="Export / Sharing Issues">
+    **My PNG export has a watermark**
+
+    - Watermarks are applied to exports on the **Free plan**. Upgrade to **Basic or higher** to remove watermarks from all PNG and report exports.
+
+    ---
+
+    **My share link isn't working**
+
+    - Check that the project is set to **Public** in your project settings — private projects require the viewer to be authenticated.
+    - On Pro and above, you can share **private project links** with specific users who have a MapX account. Confirm the recipient is logged in before opening the link.
+
+    ---
+
+    **Report export is missing content**
+
+    - Ensure your analysis is **fully complete** before triggering an export. Analyses that are still processing or that returned an error may produce incomplete reports.
+    - Wait for the AI chat to finish responding, then re-export the report.
+  </Accordion>
+
+</AccordionGroup>
+
+## Still need help?
+
+If you've worked through the steps above and are still running into issues, our team is happy to help. Reach out by emailing [sales@mapxagent.com](mailto:sales@mapxagent.com) or use the **in-app chat support button** (bottom-right corner of the app) to connect with support directly from your MapX session.

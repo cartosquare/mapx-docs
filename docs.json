@@ -1,72 +1,90 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "theme": "luma",
+  "name": "MapX",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#1b6cda",
+    "light": "#bcc483",
+    "dark": "#8cbe9c"
   },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
+  "favicon": "https://media.brand.dev/a33af33c-a6f2-423b-a9e7-53d5b0f6b96a.svg",
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "https://media.brand.dev/722e5f9e-d838-478a-ae9b-c12bb53e6139.png",
+    "dark": "https://media.brand.dev/722e5f9e-d838-478a-ae9b-c12bb53e6139.png"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:sales@mapxagent.com"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Try MapX Free",
+      "href": "https://app.mapxagent.com"
     }
   },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "uploading-data"
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/ai-chat",
+              "concepts/spatial-operations",
+              "concepts/layers-and-maps"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/site-selection",
+              "guides/logistics-analysis",
+              "guides/real-estate",
+              "guides/heatmaps",
+              "guides/reports"
+            ]
+          },
+          {
+            "group": "Sharing & Export",
+            "pages": [
+              "sharing/sharing-maps",
+              "sharing/exporting"
+            ]
+          },
+          {
+            "group": "Plans & Account",
+            "pages": [
+              "account/plans",
+              "account/team-collaboration",
+              "account/data-security"
+            ]
+          },
+          {
+            "group": "Help",
+            "pages": [
+              "help/faq",
+              "help/troubleshooting"
+            ]
+          }
+        ]
+      }
     ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/mapxagent"
     }
   }
 }

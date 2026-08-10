@@ -1,0 +1,100 @@
+---
+title: "Working with Map Layers and Basemaps in MapX"
+sidebarTitle: "Layers & Maps"
+description: "Manage multiple data layers, change basemaps, adjust colors and opacity, and customize your map's appearance for presentations and exports."
+---
+
+MapX uses a layer-based canvas — the same mental model as design tools like Figma or Photoshop, applied to geographic data. Every dataset you upload and every analysis you run produces a named layer that sits on top of a basemap. Layers can be stacked, toggled, reordered, and individually styled, giving you precise control over what your map communicates and how it looks.
+
+## The Layers Panel
+
+The Layers panel, accessible on the left side of the map canvas, lists every active layer in your session. Each uploaded file (CSV, GeoJSON, Excel) and each analysis result (buffer zones, heatmaps, spatial joins, scored sites) appears as its own entry.
+
+From the Layers panel you can:
+
+- **Toggle visibility** — click the eye icon to show or hide a layer without deleting it.
+- **Reorder layers** — drag layers up or down to control which ones render on top. This matters when polygons or heatmaps overlap point layers.
+- **Rename layers** — double-click a layer name to give it a meaningful label (e.g., *"Q3 Store Locations"* instead of *"upload_2"*).
+- **Delete layers** — remove a layer from the canvas when it's no longer needed.
+- **Open layer settings** — click a layer to access its styling options (see [Styling Layers](#styling-layers) below).
+
+You can also manage layers through the AI chat. Prompts like *"hide the competitor layer"* or *"move the heatmap below the store points"* are fully supported.
+
+## Basemap Options
+
+The basemap is the background map that provides geographic context for your data layers. MapX offers four basemap styles:
+
+| Basemap | Best for |
+|---|---|
+| **Light** | Day-to-day analysis, data-dense maps, printed reports |
+| **Dark** | Presentations, heatmaps, neon/bright color schemes |
+| **Satellite** | Site analysis, land-use review, terrain context |
+| **Streets** | Navigation context, proximity analysis, urban planning |
+
+To switch basemaps, either open the **Settings panel** (the gear icon, top right of the canvas) and select from the Basemap dropdown, or type your preference in the AI chat:
+
+```text
+Switch to the dark basemap
+```
+
+```text
+Show this on a satellite background
+```
+
+Basemap changes apply immediately and don't affect your data or analysis layers.
+
+## Styling Layers
+
+MapX gives you fine-grained control over how each layer looks. Open a layer's settings by clicking it in the Layers panel or by asking the AI chat to make a change.
+
+### Color by Column
+
+Assign colors based on a data attribute rather than using a single flat color. MapX supports two color scale types:
+
+- **Categorical** — each unique value in a text column (e.g., region, store type) gets a distinct color. Useful for comparing discrete categories at a glance.
+- **Continuous** — numeric values (e.g., revenue, score, density) are mapped to a gradient from low to high. Useful for communicating magnitude.
+
+```text Example prompt
+Color the store points by region using a categorical scale
+```
+
+```text Example prompt
+Use a blue-to-red gradient to show revenue across all locations
+```
+
+### Point Size
+
+Scale point radius by a numeric column to add a second visual dimension to your map. Large points draw the eye to high-value locations; small points recede.
+
+```text Example prompt
+Size the points by monthly foot traffic
+```
+
+### Opacity
+
+Adjust a layer's opacity (0–100%) to let underlying layers show through. This is especially useful when stacking a polygon layer (e.g., buffer zones or census tracts) on top of point data — setting the polygon layer to 40–60% opacity keeps both layers readable.
+
+## Multi-Layer Analysis
+
+One of MapX's most powerful capabilities is combining multiple layers in a single view. A typical multi-layer map might include:
+
+1. A **demographic heatmap** as the bottom-most layer (continuous color, semi-transparent)
+2. **Competitor locations** as a point layer (red, medium opacity)
+3. **Your store locations** as a point layer (blue, full opacity, sized by revenue)
+4. **Buffer zones** around your stores as a polygon layer (blue outline, low fill opacity)
+
+To build this view, upload each dataset separately and issue a series of prompts — or describe the full picture at once:
+
+```text
+Show my store locations sized by revenue, competitor locations in red, and a heatmap of population density underneath. Add 1km buffer zones around my stores.
+```
+
+MapX will create and stack the layers automatically. You can then fine-tune each one from the Layers panel.
+
+<Tip>
+  Dark basemaps make heatmaps and bright color scales pop — they're the best choice for slide decks, stakeholder presentations, and exported report covers. Switch to dark mode before generating a report for a polished, professional look.
+</Tip>
+
+<Note>
+  Custom brand colors, logo overlays, and white-labeled export themes are available on **Pro** and **Enterprise** plans. If you're on a Free or Basic plan, exports use MapX's default styling. [See pricing →](https://app.mapxagent.com)
+</Note>

@@ -1,0 +1,85 @@
+---
+title: "Uploading and Preparing Your Location Data in MapX"
+sidebarTitle: "Upload Data"
+description: "MapX supports CSV, GeoJSON, and Excel files with automatic location column detection. Learn what formats work, how auto-detection works, and how to fix common issues."
+---
+
+MapX accepts **CSV, GeoJSON, and Excel** files and is designed to work with data exactly as it comes out of your existing tools — no reformatting required in most cases. When you upload a file, MapX scans it automatically, identifies the columns that contain location information, and renders your data on the map canvas within seconds.
+
+## Supported File Formats
+
+| Format | Extension | Notes |
+|---|---|---|
+| **CSV** | `.csv` | Latitude/longitude columns are auto-detected by header name. Address columns are supported and geocoded automatically on Basic plans and above. |
+| **GeoJSON** | `.geojson`, `.json` | Point, LineString, and Polygon geometry types are all supported. Properties are imported as attribute columns available for styling and filtering. |
+| **Excel** | `.xlsx`, `.xls` | The first sheet is imported. Latitude/longitude or address columns are auto-detected using the same rules as CSV. Additional sheets are ignored. |
+
+## How Auto-Detection Works
+
+When you upload a file, MapX performs the following steps before displaying your data:
+
+1. **Header scan** — MapX reads the column names and checks them against a built-in list of common location field names (see [Column Naming Tips](#column-naming-tips) below).
+2. **Value inspection** — For candidate columns, MapX samples up to 100 rows to confirm that the values look like valid coordinates (decimal degrees in the range −180 to 180 for longitude, −90 to 90 for latitude).
+3. **Confidence preview** — MapX shows you the detected columns and a small sample of matched rows before import completes. You can confirm the detection or manually reassign columns if needed.
+4. **Map render** — Once confirmed, all rows with valid coordinates are plotted on the map. Rows with missing or invalid coordinates are skipped, and a count of skipped rows is shown in the import summary.
+
+## Column Naming Tips
+
+For the fastest and most reliable auto-detection, use one of the following standard column names in your file:
+
+**Latitude:**
+- `lat`
+- `latitude`
+- `y`
+- `y_coord`
+- `lat_dd`
+
+**Longitude:**
+- `lng`
+- `lon`
+- `long`
+- `longitude`
+- `x`
+- `x_coord`
+- `lng_dd`
+
+**Address (geocoded automatically on Basic and above):**
+- `address`
+- `full_address`
+- `street_address`
+- `location`
+
+## Handling Messy Data
+
+<Accordion title="My lat/lng columns have unusual names">
+  If MapX does not automatically detect your coordinate columns, you can map them manually during the import preview step. Click **Edit column mapping**, then use the dropdowns to assign which column represents latitude and which represents longitude. Your custom mapping is saved for the session — if you re-upload the same file, MapX will remember the mapping.
+
+  For bulk workflows or repeated uploads, renaming your columns to one of the standard names listed above is the most reliable long-term solution.
+</Accordion>
+
+<Accordion title="Some rows have missing coordinates">
+  Rows where the latitude or longitude value is blank, `null`, `N/A`, or outside the valid coordinate range (−90 to 90 for lat, −180 to 180 for lng) are automatically skipped during import. The import summary panel shows the total number of skipped rows and lets you download a CSV of the problematic rows so you can investigate and re-upload.
+
+  Missing coordinates do not cause the import to fail — MapX simply plots the rows it can and reports what was skipped.
+</Accordion>
+
+<Accordion title="My addresses aren't coordinates">
+  MapX supports address-based geocoding (converting a street address to lat/lng) on the **Basic, Pro, and Enterprise** plans. If your file contains an address column instead of numeric coordinates, MapX will detect it and offer to geocode the column automatically before rendering the map.
+
+  Geocoding uses the column names listed in the [Column Naming Tips](#column-naming-tips) section. Each address lookup counts as one AI prompt against your monthly allowance. Free plan users can manually convert addresses to coordinates using a free tool like [geocod.io](https://geocod.io) or Google Sheets before uploading.
+</Accordion>
+
+## Data Size & Performance
+
+MapX uses GPU-accelerated WebGL rendering, which means even large datasets stay smooth and interactive:
+
+- **100,000+ data points** rendered at a stable **60 fps** in the browser.
+- **No row limits** on paid plans (Basic, Pro, Enterprise).
+- **Free plan** supports files up to 10 MB and 25,000 rows per dataset.
+- Very large files (500 MB+) are automatically streamed and tiled server-side to maintain browser performance.
+
+For best performance with datasets above 50,000 rows, ensure your file does not contain unnecessary columns — trimming unused fields before upload reduces parse time and memory usage.
+
+<Warning>
+  **Do not upload sensitive personal data to public projects.** Any project set to **Public** visibility can be viewed by anyone with the link, including all uploaded attribute data. If your dataset contains personal identifiers (names, email addresses, phone numbers, etc.), keep the project set to **Private** or remove those columns before uploading.
+</Warning>

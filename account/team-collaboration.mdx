@@ -1,0 +1,63 @@
+---
+title: "Team Collaboration and Project Sharing in MapX"
+sidebarTitle: "Collaboration"
+description: "Add team members to MapX projects, manage roles and permissions, and work together on spatial analysis with real-time access controls."
+---
+
+Pro and Enterprise plans support team collaboration on shared MapX projects. Rather than exporting and emailing files back and forth, collaborators all work from the same live project — with role-based permissions controlling exactly what each person can do.
+
+<Note>
+  Team collaboration requires a **Pro or Enterprise** plan. Free and Basic plans support public and private link sharing but do not include multi-user project collaboration.
+</Note>
+
+## Adding Collaborators
+
+<Steps>
+  <Step title="Open project settings">
+    With your project open, click the **Settings** icon (gear) in the top-right corner, then select **Collaborators**.
+  </Step>
+  <Step title="Invite by email">
+    Enter the email address of the person you want to invite. They don't need to have a MapX account yet — they'll be prompted to create one when they accept.
+  </Step>
+  <Step title="Choose a role">
+    Select either **Viewer** or **Editor** from the role dropdown. See the [Roles and Permissions](#roles-and-permissions) table below for details on what each role can do.
+  </Step>
+  <Step title="Send the invite">
+    Click **Send Invite**. The collaborator receives an email with a link to join the project.
+  </Step>
+</Steps>
+
+You can manage or remove existing collaborators at any time from the same **Collaborators** settings panel.
+
+## Roles and Permissions
+
+| Role | View map | Run analysis | Export | Edit data | Manage collaborators |
+|---|---|---|---|---|---|
+| **Viewer** | ✓ | ✗ | ✓ (PNG) | ✗ | ✗ |
+| **Editor** | ✓ | ✓ | ✓ | ✓ | ✗ |
+| **Owner** | ✓ | ✓ | ✓ | ✓ | ✓ |
+
+- **Viewer** — can view the map and export a PNG snapshot, but cannot run new AI prompts or modify any project data.
+- **Editor** — has full analytical access: run prompts, edit layer data, and export results. Cannot add or remove other collaborators.
+- **Owner** — full control over the project, including inviting/removing collaborators and changing project settings. The project creator is the Owner by default; ownership can be transferred in project settings.
+
+## Plan Limits
+
+| Plan | Collaborators per project |
+|---|---|
+| Free | — (not available) |
+| Basic | — (not available) |
+| Pro | Up to **5** collaborators |
+| Enterprise | **Unlimited** |
+
+If you're on Pro and need more than 5 collaborators on a single project, consider upgrading to Enterprise or using public/private link sharing for read-only stakeholder access.
+
+## Enterprise Admin Controls
+
+Enterprise accounts include centralized administration tools beyond per-project collaboration:
+
+- **SSO (SAML / OIDC)** — manage all MapX access through your existing identity provider (Okta, Azure AD, Google Workspace, etc.)
+- **Centralized user management** — admins can provision and deprovision users, reset permissions, and manage seat allocation from a single dashboard
+- **Audit logs** — track who accessed which project, ran which analysis, and exported what data — useful for compliance and data governance requirements
+
+To discuss Enterprise admin features, contact [sales@mapxagent.com](mailto:sales@mapxagent.com).
