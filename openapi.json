@@ -3,7 +3,7 @@
   "info": {
     "title": "MapX SaaS API",
     "version": "1.0.0",
-    "description": "Public REST API for MapX. Authenticate with a personal API key (Bearer mkx_...) created from the MapX account. All endpoints are scoped to the account that owns the key; each endpoint also enforces a capability scope (session, chat, files, layers, map, reports, remote, keys). Errors use a uniform envelope: {\"error\":{\"code\",\"message\",\"details\"}}. Rate limit: 300 requests per minute per key."
+    "description": "Public REST API for MapX. Authenticate with a personal API key (Bearer mkx_...) created from the MapX account. All endpoints are scoped to the account that owns the key; each endpoint also enforces a capability scope (session, chat, files, layers, map, reports, remote, keys). Errors use a uniform envelope: {\"error\":{\"code\",\"message\",\"details\"}}. Rate limit: 300 requests per minute per key. The API resource is named `session` for historical reasons; it represents a persistent project in the product (a workspace with map state, layers, files, chat history, and reports)."
   },
   "servers": [
     {
@@ -22,8 +22,8 @@
   ],
   "tags": [
     {
-      "name": "Sessions",
-      "description": "Session lifecycle and metadata."
+      "name": "Projects",
+      "description": "Project lifecycle and metadata."
     },
     {
       "name": "Map",
@@ -62,14 +62,14 @@
     "/sessions": {
       "get": {
         "tags": [
-          "Sessions"
+          "Projects"
         ],
         "operationId": "listSessions",
-        "summary": "List sessions",
+        "summary": "List projects",
         "description": "Requires scope: session.",
         "responses": {
           "200": {
-            "description": "List of sessions owned by the account.",
+            "description": "List of projects owned by the account.",
             "content": {
               "application/json": {
                 "schema": {
@@ -90,7 +90,7 @@
                         "properties": {
                           "id": {
                             "type": "string",
-                            "description": "Session UUID."
+                            "description": "Project UUID."
                           },
                           "title": {
                             "type": "string"
@@ -306,7 +306,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -340,7 +350,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -374,7 +394,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -408,7 +438,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -442,7 +482,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -476,7 +526,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -495,21 +555,21 @@
       },
       "post": {
         "tags": [
-          "Sessions"
+          "Projects"
         ],
         "operationId": "createSession",
-        "summary": "Create a session",
+        "summary": "Create a project",
         "description": "Requires scope: session.",
         "requestBody": {
           "required": true,
-          "description": "All fields are optional; an empty object creates a session with default title and map state.",
+          "description": "All fields are optional; an empty object creates a project with default title and map state.",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "title": {
-                    "description": "Session title. Optional; defaults to \"New Session\" when omitted or empty.",
+                    "description": "Project title. Optional; defaults to \"New Session\" when omitted or empty.",
                     "type": "string",
                     "maxLength": 200
                   },
@@ -666,7 +726,7 @@
         },
         "responses": {
           "201": {
-            "description": "Session created.",
+            "description": "Project created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -674,7 +734,7 @@
                   "properties": {
                     "id": {
                       "type": "string",
-                      "description": "Session UUID."
+                      "description": "Project UUID."
                     },
                     "title": {
                       "type": "string"
@@ -833,7 +893,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -867,7 +937,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -901,7 +981,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -935,7 +1025,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -969,7 +1069,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1003,7 +1113,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1024,17 +1144,17 @@
     "/sessions/{id}": {
       "get": {
         "tags": [
-          "Sessions"
+          "Projects"
         ],
         "operationId": "getSession",
-        "summary": "Get a session",
+        "summary": "Get a project",
         "description": "Requires scope: session.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -1042,7 +1162,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Session details including map state and layers.",
+            "description": "Project details including map state and layers.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1054,7 +1174,7 @@
                   "properties": {
                     "id": {
                       "type": "string",
-                      "description": "Session UUID."
+                      "description": "Project UUID."
                     },
                     "title": {
                       "type": "string"
@@ -1264,7 +1384,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1298,7 +1428,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1332,7 +1472,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1366,7 +1516,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1400,7 +1560,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1434,7 +1604,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1453,17 +1633,17 @@
       },
       "patch": {
         "tags": [
-          "Sessions"
+          "Projects"
         ],
         "operationId": "updateSession",
-        "summary": "Update a session",
-        "description": "Requires scope: session.",
+        "summary": "Partially update a project",
+        "description": "Partial update with merge semantics (PATCH): only fields present in the request body are applied; omitted fields retain their current values. mapState is merged into the existing map state (shallow merge), so a partial mapState (e.g. only basemap) preserves the other viewport fields; nested objects such as basemap or masks are replaced as a whole when provided. An empty object {} is a no-op and returns the current project. Requires scope: session.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -1471,12 +1651,14 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "Partial update payload. Only include the fields to change; omitted fields are left unchanged.",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "title": {
+                    "description": "Project title.",
                     "type": "string",
                     "maxLength": 200
                   },
@@ -1604,17 +1786,6 @@
                     },
                     "additionalProperties": false,
                     "description": "Current map viewport and basemap state."
-                  },
-                  "thumbnailUrl": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 500
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
                   }
                 },
                 "additionalProperties": false
@@ -1624,7 +1795,7 @@
         },
         "responses": {
           "200": {
-            "description": "Updated session.",
+            "description": "Updated project.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1632,7 +1803,7 @@
                   "properties": {
                     "id": {
                       "type": "string",
-                      "description": "Session UUID."
+                      "description": "Project UUID."
                     },
                     "title": {
                       "type": "string"
@@ -1791,7 +1962,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1825,7 +2006,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1859,7 +2050,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1893,7 +2094,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1927,7 +2138,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1961,7 +2182,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -1980,17 +2211,17 @@
       },
       "delete": {
         "tags": [
-          "Sessions"
+          "Projects"
         ],
         "operationId": "deleteSession",
-        "summary": "Delete a session",
+        "summary": "Delete a project",
         "description": "Requires scope: session.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -1998,7 +2229,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Session deleted.",
+            "description": "Project deleted.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2034,7 +2265,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2068,7 +2309,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2102,7 +2353,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2136,7 +2397,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2170,7 +2441,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2204,7 +2485,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2228,14 +2519,14 @@
           "Map"
         ],
         "operationId": "getMapState",
-        "summary": "Get the session map state",
+        "summary": "Get the project map state",
         "description": "Requires scope: session.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -2393,7 +2684,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2427,7 +2728,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2461,7 +2772,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2495,7 +2816,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2529,7 +2860,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2563,7 +2904,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2594,7 +2945,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -2652,7 +3003,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2686,7 +3047,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2720,7 +3091,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2754,7 +3135,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2788,7 +3179,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2822,7 +3223,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2853,7 +3264,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -2908,7 +3319,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2942,7 +3363,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -2976,7 +3407,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3010,7 +3451,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3044,7 +3495,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3078,7 +3539,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3102,14 +3573,14 @@
           "Files"
         ],
         "operationId": "listFiles",
-        "summary": "List session files",
+        "summary": "List project files",
         "description": "Requires scope: files.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -3117,7 +3588,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Files in the session.",
+            "description": "Files in the project.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3191,7 +3662,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3225,7 +3706,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3259,7 +3750,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3293,7 +3794,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3327,7 +3838,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3361,7 +3882,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3390,7 +3921,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -3469,7 +4000,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3503,7 +4044,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3537,7 +4088,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3571,7 +4132,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3605,7 +4176,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3639,7 +4220,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3670,7 +4261,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -3716,7 +4307,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3750,7 +4351,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3784,7 +4395,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3818,7 +4439,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3852,7 +4483,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3886,7 +4527,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -3910,14 +4561,14 @@
           "Layers"
         ],
         "operationId": "listLayers",
-        "summary": "List session layers",
+        "summary": "List project layers",
         "description": "Requires scope: layers.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -3925,7 +4576,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Layers in the session.",
+            "description": "Layers in the project.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4010,7 +4661,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4044,7 +4705,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4078,7 +4749,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4112,7 +4793,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4146,7 +4837,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4180,7 +4881,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4211,7 +4922,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -4321,7 +5032,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4355,7 +5076,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4389,7 +5120,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4423,7 +5164,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4457,7 +5208,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4491,7 +5252,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4520,7 +5291,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -4593,7 +5364,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4627,7 +5408,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4661,7 +5452,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4695,7 +5496,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4729,7 +5540,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4763,7 +5584,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4792,7 +5623,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -4845,7 +5676,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4879,7 +5720,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4913,7 +5764,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4947,7 +5808,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -4981,7 +5852,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5015,7 +5896,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5046,7 +5937,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -5161,7 +6052,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5195,7 +6096,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5229,7 +6140,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5263,7 +6184,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5297,7 +6228,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5331,7 +6272,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5356,13 +6307,13 @@
         ],
         "operationId": "dispatchMapActions",
         "summary": "Dispatch map actions",
-        "description": "Requires scope: map. Applies actions (fly-to, add/remove layer, style changes) to the live session.",
+        "description": "Requires scope: map. Applies actions (fly-to, add/remove layer, style changes) to the live project.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -5431,7 +6382,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5465,7 +6426,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5499,7 +6470,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5533,7 +6514,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5567,7 +6558,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5601,7 +6602,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5626,13 +6637,13 @@
         ],
         "operationId": "saveReport",
         "summary": "Save an HTML report",
-        "description": "Requires scope: reports. The HTML is stored as a session file (max 2MB).",
+        "description": "Requires scope: reports. The HTML is stored as a project file (max 2MB).",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -5710,7 +6721,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5744,7 +6765,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5778,7 +6809,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5812,7 +6853,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5846,7 +6897,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5880,7 +6941,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -5911,7 +6982,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -5984,7 +7055,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6018,7 +7099,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6052,7 +7143,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6086,7 +7187,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6120,7 +7231,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6154,7 +7275,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6172,20 +7303,20 @@
         }
       }
     },
-    "/sessions/{id}/remote-url": {
+    "/sessions/{id}/live-view-url": {
       "post": {
         "tags": [
-          "Sessions"
+          "Projects"
         ],
-        "operationId": "getRemoteUrl",
-        "summary": "Get a live remote map URL",
-        "description": "Requires scope: remote. The URL opens a real-time view of the session.",
+        "operationId": "getLiveViewUrl",
+        "summary": "Get the live view URL for a project",
+        "description": "Requires scope: remote. Returns a URL to a real-time map page that stays in sync with the project via SSE; suitable for embedding in third-party tools.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Session UUID.",
+            "description": "Project UUID.",
             "schema": {
               "type": "string"
             }
@@ -6193,18 +7324,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Remote URL.",
+            "description": "Live view URL.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "required": [
-                    "remoteUrl"
+                    "liveViewUrl"
                   ],
                   "properties": {
-                    "remoteUrl": {
+                    "liveViewUrl": {
                       "type": "string",
-                      "description": "Live remote map URL for the session."
+                      "description": "Live view URL. Opens a real-time map page that stays in sync with the project via SSE."
                     }
                   }
                 }
@@ -6230,7 +7361,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6264,7 +7405,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6298,7 +7449,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6332,7 +7493,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6366,7 +7537,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6400,7 +7581,323 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "description": "Optional extra context."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sessions/{id}/static-view-url": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "operationId": "getStaticViewUrl",
+        "summary": "Get the static embed URL for a project",
+        "description": "Requires scope: remote. Returns a URL to a read-only static snapshot of the project, suitable for embedding as an iframe in reports.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Project UUID.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Static embed URL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "staticViewUrl"
+                  ],
+                  "properties": {
+                    "staticViewUrl": {
+                      "type": "string",
+                      "description": "Static embed URL. Opens a read-only snapshot of the project, suitable for iframes and reports."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — invalid or missing fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "description": "Optional extra context."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "description": "Optional extra context."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — insufficient scope or disabled account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "description": "Optional extra context."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "description": "Optional extra context."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict — e.g. a chat turn is already in progress",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "description": "Optional extra context."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited or usage limit reached",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6498,7 +7995,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6532,7 +8039,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6566,7 +8083,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6600,7 +8127,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6634,7 +8171,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6668,7 +8215,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6809,7 +8366,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6843,7 +8410,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6877,7 +8454,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6911,7 +8498,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6945,7 +8542,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -6979,7 +8586,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7054,7 +8671,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7088,7 +8715,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7122,7 +8759,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7156,7 +8803,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7190,7 +8847,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7224,7 +8891,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7330,7 +9007,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7364,7 +9051,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7398,7 +9095,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7432,7 +9139,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7466,7 +9183,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -7500,7 +9227,17 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "Stable machine-readable error code, e.g. bad_request, insufficient_scope, rate_limited."
+                          "description": "MapX v1 error code.",
+                          "enum": [
+                            "bad_request",
+                            "unauthorized",
+                            "forbidden",
+                            "not_found",
+                            "conflict",
+                            "rate_limited",
+                            "usage_limit_exceeded",
+                            "internal_error"
+                          ]
                         },
                         "message": {
                           "type": "string"

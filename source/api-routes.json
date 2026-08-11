@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-08-11T04:08:22.131Z",
+  "generatedAt": "2026-08-11T07:14:40.767Z",
   "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api-keys",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api-keys",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api-keys/:keyId",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
     {
       "method": "GET",
       "path": "/api/admin/logs",
@@ -36,24 +54,6 @@
       "path": "/api/admin/users/:id/usage",
       "file": "admin.ts",
       "router": "adminRoutes"
-    },
-    {
-      "method": "GET",
-      "path": "/api/api-keys",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "POST",
-      "path": "/api/api-keys",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "DELETE",
-      "path": "/api/api-keys/:keyId",
-      "file": "v1.ts",
-      "router": "v1Routes"
     },
     {
       "method": "POST",
@@ -237,12 +237,6 @@
     },
     {
       "method": "GET",
-      "path": "/api/openapi.json",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "GET",
       "path": "/api/samples",
       "file": "samples.ts",
       "router": "sampleRoutes"
@@ -282,12 +276,6 @@
       "path": "/api/sessions/:id",
       "file": "sessions.ts",
       "router": "sessionRoutes"
-    },
-    {
-      "method": "POST",
-      "path": "/api/sessions/:id/ask/respond",
-      "file": "v1.ts",
-      "router": "v1Routes"
     },
     {
       "method": "POST",
@@ -345,18 +333,6 @@
     },
     {
       "method": "POST",
-      "path": "/api/sessions/:id/files",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "GET",
-      "path": "/api/sessions/:id/files/:fileId/content",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "POST",
       "path": "/api/sessions/:id/import-project",
       "file": "project.ts",
       "router": "projectRoutes"
@@ -380,42 +356,6 @@
       "router": "sessionRoutes"
     },
     {
-      "method": "DELETE",
-      "path": "/api/sessions/:id/layers/:layerId",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "GET",
-      "path": "/api/sessions/:id/layers/:layerId",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "PATCH",
-      "path": "/api/sessions/:id/layers/:layerId",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "PUT",
-      "path": "/api/sessions/:id/layers/:layerId/style",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "GET",
-      "path": "/api/sessions/:id/map",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "POST",
-      "path": "/api/sessions/:id/map/actions",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
       "method": "GET",
       "path": "/api/sessions/:id/messages",
       "file": "sessions.ts",
@@ -435,12 +375,6 @@
     },
     {
       "method": "POST",
-      "path": "/api/sessions/:id/remote-url",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "POST",
       "path": "/api/sessions/:id/report",
       "file": "report.ts",
       "router": "reportRoutes"
@@ -456,18 +390,6 @@
       "path": "/api/sessions/:id/report/:filename",
       "file": "report.ts",
       "router": "reportRoutes"
-    },
-    {
-      "method": "POST",
-      "path": "/api/sessions/:id/reports",
-      "file": "v1.ts",
-      "router": "v1Routes"
-    },
-    {
-      "method": "GET",
-      "path": "/api/sessions/:id/reports/:fileId",
-      "file": "v1.ts",
-      "router": "v1Routes"
     },
     {
       "method": "POST",
@@ -531,15 +453,147 @@
     },
     {
       "method": "GET",
-      "path": "/api/usage",
+      "path": "/api/user/profile",
+      "file": "user.ts",
+      "router": "userRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/openapi.json",
       "file": "v1.ts",
       "router": "v1Routes"
     },
     {
       "method": "GET",
-      "path": "/api/user/profile",
-      "file": "user.ts",
-      "router": "userRoutes"
+      "path": "/sessions",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/sessions",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/sessions/:id",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/sessions/:id",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/sessions/:id",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/sessions/:id/ask/respond",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/sessions/:id/chat",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/sessions/:id/files",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/sessions/:id/files",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/sessions/:id/files/:fileId/content",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/sessions/:id/layers",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/sessions/:id/layers/:layerId",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/sessions/:id/layers/:layerId",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/sessions/:id/layers/:layerId",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "PUT",
+      "path": "/sessions/:id/layers/:layerId/style",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/sessions/:id/live-view-url",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/sessions/:id/map",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/sessions/:id/map/actions",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/sessions/:id/reports",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/sessions/:id/reports/:fileId",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/sessions/:id/static-view-url",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/usage",
+      "file": "v1.ts",
+      "router": "v1Routes"
     }
   ]
 }

@@ -1,12 +1,15 @@
 ---
 title: "mapx CLI"
-description: "Drive MapX sessions, data, styles, and reports from third-party platforms with the mapx command-line client."
+description: "Drive MapX projects, data, styles, and reports from third-party platforms with the mapx command-line client."
 ---
 
 MapX exposes its agent-callable surface through the `mapx` command-line client.
 Third-party platforms (WorkBuddy, local LLM tool loops, automation scripts) can
-run the single binary to control sessions, upload data, change map styles, and
+run the single binary to control projects, upload data, change map styles, and
 save reports without embedding the product UI.
+
+The API calls each project a `session` internally; the CLI command names (such
+as `mapx session create`) keep that technical name.
 
 ## Install and configure
 
@@ -17,18 +20,18 @@ mapx auth status                                  # verify
 ```
 
 Every command accepts `--api-key` and `--url` overrides. The key is scoped to
-your account, and session ownership is enforced by the backend.
+your account, and project ownership is enforced by the backend.
 
 ## Typical workflow
 
 1. `mapx session create --title "analysis"` (or `mapx session list`) to get a
-   `session_id`.
+   `session_id` (the project id).
 2. `mapx upload ./data.geojson --session <id>` — upload local data directly.
 3. `mapx layers list --session <id>` then `mapx layers get <layer_id> --session <id>`
    to inspect geometry, fields, and the current style.
 4. `mapx layers style <layer_id> --session <id> --file style.json` — apply
    incremental style changes.
-5. `mapx remote --session <id>` — print a live, shareable URL of the session.
+5. `mapx remote --session <id>` — print a live, shareable URL of the project.
 6. `mapx report save ./report.html --session <id>` — save an HTML report.
 
 ## Output contract
