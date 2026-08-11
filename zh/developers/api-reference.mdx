@@ -1,0 +1,112 @@
+---
+title: "API 参考"
+description: "MapX 后端暴露的 HTTP 端点。"
+---
+
+交互式 API 参考由 OpenAPI 契约生成，位于侧边栏的 **API Reference** 组下。契约由 API 自身在 `GET /api/v1/openapi.json` 提供，并存储在本仓库根目录的 `openapi.json` 中。
+
+API 资源名为 `session` 是历史原因；它代表产品中的一个持久化**项目**（包含地图状态、图层、文件、对话历史和报告的工作区）。
+
+完整端点列表从源码仓库生成，存储在 `source/api-routes.json` 中。如果本页看起来过期了，请重新生成 source pack：
+
+```bash
+cd /data/xuxiang/mapx
+pnpm docs:gen
+```
+
+然后同步生成的文件：
+
+```bash
+cp -r /data/xuxiang/mapx/docs-source/* source/
+cp /data/xuxiang/mapx/docs-source/openapi.json openapi.json
+```
+
+## 关键端点
+
+| 方法 | 路径 | 用途 |
+| --- | --- | --- |
+| `POST` | `/api/sessions` | 创建项目 |
+| `GET` | `/api/sessions` | 列出项目 |
+| `GET` | `/api/sessions/:id` | 获取项目详情 |
+| `PATCH` | `/api/sessions/:id` | 更新项目元数据 |
+| `GET` | `/api/sessions/:id/embed` | 获取或创建嵌入 token |
+| `POST` | `/api/keys` | 创建个人 API key |
+| `GET` | `/api/keys` | 列出 API key |
+| `DELETE` | `/api/keys/:id` | 撤销 API key |
+| `POST` | `/api/internal/action` | 向项目派发地图操作 |
+| `POST` | `/api/internal/save-layer` | 保存图层 |
+| `POST` | `/api/internal/upload-base64` | 以 base64 上传文件 |
+| `POST` | `/api/internal/save-report` | 保存 HTML 报告 |
+
+完整列表见 `source/api-routes.json`。
+
+## 支持的上传类型
+
+`POST /api/v1/sessions/{id}/files` 接受以下文件类型（每个文件最大 50MB，可通过 `UPLOAD_MAX_SIZE_MB` 配置）：
+
+| 扩展名 | 处理方式 |
+| --- | --- |
+| `.geojson` / `.json` | 直接作为地图图层添加 |
+| `.csv` / `.xlsx` / `.xls` | 转换为 GeoJSON 图层 |
+| `.tif` / `.tiff` | 转换为 COG 影像图层 |
+| `.txt` / `.md` / `.docx` / `.doc` / `.pdf` | 作为普通文件存储（不创建图层） |
+
+## 能力范围
+
+API key 通过能力范围（capability scopes）授予访问权限。`["*"]`（或空的 `scopes` 数组）授予全部访问权限；否则只允许列出的范围。
+
+| 范围 | 用途 |
+| --- | --- |
+| `session` | 项目列表/创建/获取/更新/删除、用量 |
+| `chat` | 对话 turn、提问/回答 |
+| `files` | 文件列表、上传、文件内容 |
+| `layers` | 图层列表、详情、更新、样式 |
+| `map` | 地图操作 |
+| `reports` | 报告保存、报告元数据 |
+| `remote` | 实时/静态视图 URL |
+| `keys` | API key 管理 |
+
+## 地图操作
+
+`POST /api/v1/sessions/{id}/map/actions` 接受一个操作对象数组。每个操作需要 `type`；参数取决于类型。也接受 `map.*` 前缀的旧别名（例如 `map.flyTo`）。
+
+### 视图与相机
+
+| 类型 | 必填 | 可选 | 说明 |
+| --- | --- | --- | --- |
+| `fly_to` | `center` | `zoom`、`bearing`、`pitch` | 飞行到地图中心 |
+| `jump_to` | `center` | `zoom` | 无动画跳转到中心 |
+| `fit_bounds` | `bbox` | `padding` | 把视口缩放到边界框 |
+| `go_home` | — | — | 重置为默认全球视图 |
+| `zoom_in` / `zoom_out` | — | — | 缩放一级 |
+| `pan` | `direction` | `amount` | 向某个方向平移 |
+| `zoom_to_layer` | `layer_id` | — | 缩放到图层范围 |
+
+### 图层
+
+| 类型 | 必填 | 可选 | 说明 |
+| --- | --- | --- | --- |
+| `add_geojson_layer` | `layer_id`、`geojson` / `file_id` 之一 | `session_id`、`file_path`、`layer_type`、`name`、`columns`、`style` | 从内联数据或服务器文件添加 GeoJSON 图层 |
+| `add_tile_layer` | `url`、`layer_id` | `layer_name`、`attribution`、`opacity`、`min_zoom`、`max_zoom`、`tile_size` | 添加栅格瓦片图层 |
+| `add_cog_layer` | `url`、`layer_id` | `layer_name`、`opacity`、`min_zoom`、`max_zoom` | 添加 Cloud-Optimized GeoTIFF 图层 |
+| `remove_layer` | `layer_id` | — | 移除图层及其数据源 |
+| `rename_layer` | `layer_id`、`name` | — | 重命名图层 |
+| `set_layer_visibility` | `layer_id`、`visible` | — | 显示或隐藏图层 |
+| `move_layer_up` / `move_layer_down` | `layer_id` | — | 调整图层顺序 |
+| `update_layer_style` | `layer_id`、`style` | — | 替换图层样式 |
+
+### 底图与遮罩
+
+| 类型 | 必填 | 可选 | 说明 |
+| --- | --- | --- | --- |
+| `set_basemap_style` | `style` | — | 切换底图风格 |
+| `set_basemap_category` | `category_key` | `color`、`visible` | 覆盖底图类别 |
+| `set_country_mask` | `country_code` | `visible`、`color` | 显示或隐藏国家遮罩 |
+| `set_custom_mask` | — | `geojson`、`color` | 设置或清除自定义多边形遮罩 |
+
+### 系统与通知
+
+| 类型 | 必填 | 可选 | 说明 |
+| --- | --- | --- | --- |
+| `file_generated` | `file_id`、`file_name` | `description`、`url` | 通知 UI 已生成文件/报告（后端发出） |
+| `clear_layers` | — | — | 移除所有 AI 创建的图层 |

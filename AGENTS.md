@@ -4,6 +4,8 @@
 
 - This is the Mintlify documentation site for MapX.
 - Content lives in `.mdx` files with YAML frontmatter.
+- Content is bilingual: English pages live under `en/`, Simplified Chinese
+  pages under `zh/`, with identical relative structure.
 - Site configuration lives in `docs.json`.
 - The product/source repository is `github.com/cartosquare/mapx` (locally usually
   `/data/xuxiang/mapx`).
@@ -35,7 +37,16 @@ Always read the relevant source file before writing or updating documentation.
    - MCP tool changes → `developers/mcp.mdx`
    - Skill changes → `developers/skills.mdx`
    - Product/feature changes → existing `guides/*.mdx` or `concepts/*.mdx`
-4. If `source/` is stale, regenerate it in the MapX repository:
+   - Page paths above are relative to each language directory (`en/` and `zh/`)
+4. Every page must exist in **both languages**: `en/<path>` is the source of
+   truth, `zh/<path>` is the translated copy. Create or update both together.
+5. Internal links are language-scoped: use `/en/...` inside English pages and
+   `/zh/...` inside Chinese pages. Never link across language prefixes.
+6. Register new pages in **both** `languages` entries of `docs.json`
+   (`en` and `zh`), with localized group/tab labels.
+7. When moving or renaming pages, add a redirect from the old path to the new
+   one in `docs.json`.
+8. If `source/` is stale, regenerate it in the MapX repository:
 
    ```bash
    cd /data/xuxiang/mapx
@@ -49,8 +60,7 @@ Always read the relevant source file before writing or updating documentation.
    cp /data/xuxiang/mapx/docs-source/openapi.json openapi.json
    ```
 
-5. Add any new pages to `docs.json` navigation.
-6. Verify with `mint validate` and `mint broken-links`.
+9. Verify with `mint validate` and `mint broken-links`.
 
 ## Style preferences
 

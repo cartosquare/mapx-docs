@@ -1,0 +1,51 @@
+---
+title: "Agent 工具接入"
+sidebarTitle: "Agent 工具接入"
+description: "给任何 LLM 代理一个链接：它下载 mapx skill、安装 CLI，就能驱动 MapX 项目。"
+---
+
+把 MapX 集成到外部代理不需要按代理逐个适配。Claude Code、Codex、OpenCode、OpenClaw、Hermes、WorkBuddy 以及其他 LLM 工具循环都可以使用同一个 skill 文件。代理下载它并按其中说明完成自我配置。
+
+## 一步接入
+
+把 skill 下载链接给代理，让它安装并遵循该 skill：
+
+```text
+下载 https://mapx.oss-cn-hongkong.aliyuncs.com/skill/mapx-skill/SKILL.md
+并按其中的说明安装 mapx CLI、配置你的 API key。
+```
+
+这个 skill 文件是自包含的。它说明如何：
+
+- 为 Linux、macOS 或 Windows 下载对应的 `mapx` 二进制；
+- 设置 `MAPX_API_KEY`（以及可选的 `MAPX_API_URL`）；
+- 用 `mapx auth status` 验证配置；
+- 使用项目、图层、样式、地图控制、视图 URL 和报告相关命令；
+- 用 `mapx skill styles`、`mapx skill layer-style-editing` 或 `mapx skill report-generation` 按需加载主题手册。
+
+## 代理无法安装 skill 时的兜底方案
+
+有些纯对话代理无法创建 skill 文件。这种情况下，把完整的 `SKILL.md` 内容粘贴进对话即可。它是纯 Markdown，设计上可以直接从上下文遵循。
+
+## 获取 API key
+
+在 MapX 应用的 **Profile** 面板中创建个人 API key。完整 key 只显示一次，请立即保存。key 以 `mkx_` 开头。
+
+## 验证集成
+
+让代理确认连接：
+
+```bash
+export MAPX_API_KEY="mkx_..."
+mapx auth status
+```
+
+然后运行一个简单的端到端检查：
+
+```bash
+mapx session list
+mapx session create --title "agent test"
+mapx upload ./data.geojson --session <session_id>
+```
+
+如果三步都成功，代理就可以端到端驱动 MapX 项目了。

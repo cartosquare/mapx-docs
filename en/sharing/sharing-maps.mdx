@@ -1,0 +1,67 @@
+---
+title: "Sharing MapX Maps and Projects with Your Team or Clients"
+sidebarTitle: "Sharing"
+description: "Share MapX maps via public links, private access-controlled links, or collaborative team projects. Control who can view and edit your work."
+---
+
+MapX makes it easy to share spatial analysis with clients, teams, or the public — no GIS expertise required on the receiving end. Whether you're presenting findings to a stakeholder, collaborating with analysts, or embedding a live map in a dashboard, MapX gives you flexible, plan-appropriate sharing options.
+
+## Public Sharing
+
+Public link sharing is available on **all plans**, including Free. When you generate a public link, anyone who has it can view your map in a read-only browser window — no MapX account required.
+
+- All data points are **fully rendered** in public shares — nothing is truncated or hidden from viewers.
+- Public maps display your uploaded layers, styling, and any AI-generated analysis overlays exactly as you see them.
+- To generate a public link, open your project and click **Share → Copy Public Link**.
+
+<Note>
+  All plans include public link sharing with full data rendering. You never need to upgrade just to share a map with a client or colleague.
+</Note>
+
+## Private Sharing
+
+Private sharing is available on **Pro and Enterprise** plans. Private links require the recipient to authenticate before viewing — ensuring that sensitive or client-specific maps stay confidential.
+
+With private sharing you can:
+
+- **Control permissions** — choose whether the recipient can only view, or can view and edit the project.
+- **Revoke access** at any time from your project's sharing settings.
+- **Invite by email** — recipients are sent a direct link tied to their MapX account.
+
+To generate a private link, open your project and click **Share → Invite People** or **Share → Generate Private Link**, then set the permission level (Viewer or Editor).
+
+<Tip>
+  Use private sharing for any client or confidential data. Public links are convenient, but private links ensure only the people you choose can access your analysis.
+</Tip>
+
+## Team Collaboration
+
+MapX supports real-time collaborative projects for teams:
+
+- **Pro plan** — add up to **5 collaborators** per project. Collaborators can view, annotate, run their own AI analysis prompts, and (if granted Editor access) modify layers and data.
+- **Enterprise plan** — **unlimited seats** per project, with centralized user management and admin controls.
+
+Collaborators receive an email invite and can join the project immediately after accepting. All collaborators see the same live project state — no version conflicts or manual file sharing needed.
+
+For a full breakdown of what each collaborator role can do, see the [Team Collaboration guide](/en/account/team-collaboration).
+
+## Embed Maps
+
+**Pro and Enterprise** plans support embedding maps directly into websites, internal dashboards, or client portals via `<iframe>`.
+
+To get your embed code, open your project and click **Share → Embed**. Copy the generated snippet and paste it into your site's HTML.
+
+A basic embed looks like this:
+
+```html
+<iframe
+  src="https://app.mapxagent.com/embed/project/YOUR_PROJECT_ID"
+  width="100%"
+  height="500"
+  frameborder="0"
+  allowfullscreen
+  title="MapX Spatial Analysis">
+</iframe>
+```
+
+Replace `YOUR_PROJECT_ID` with the ID shown in your project's share settings. Embedded maps are interactive — viewers can pan, zoom, and inspect data points without leaving your site.

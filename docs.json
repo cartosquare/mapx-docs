@@ -31,87 +31,222 @@
     }
   },
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "Documentation",
-        "groups": [
+        "language": "en",
+        "default": true,
+        "tabs": [
           {
-            "group": "Get Started",
-            "pages": [
-              "introduction",
-              "quickstart",
-              "uploading-data"
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "Get Started",
+                "pages": [
+                  "en/introduction",
+                  "en/quickstart",
+                  "en/uploading-data"
+                ]
+              },
+              {
+                "group": "Core Concepts",
+                "pages": [
+                  "en/concepts/ai-chat",
+                  "en/concepts/spatial-operations",
+                  "en/concepts/layers-and-maps"
+                ]
+              },
+              {
+                "group": "Guides",
+                "pages": [
+                  "en/guides/site-selection",
+                  "en/guides/logistics-analysis",
+                  "en/guides/real-estate",
+                  "en/guides/heatmaps",
+                  "en/guides/reports"
+                ]
+              },
+              {
+                "group": "Sharing & Export",
+                "pages": [
+                  "en/sharing/sharing-maps",
+                  "en/sharing/exporting"
+                ]
+              },
+              {
+                "group": "Plans & Account",
+                "pages": [
+                  "en/account/plans",
+                  "en/account/team-collaboration",
+                  "en/account/data-security"
+                ]
+              },
+              {
+                "group": "Help",
+                "pages": [
+                  "en/help/faq",
+                  "en/help/troubleshooting"
+                ]
+              }
             ]
           },
           {
-            "group": "Core Concepts",
-            "pages": [
-              "concepts/ai-chat",
-              "concepts/spatial-operations",
-              "concepts/layers-and-maps"
-            ]
-          },
-          {
-            "group": "Guides",
-            "pages": [
-              "guides/site-selection",
-              "guides/logistics-analysis",
-              "guides/real-estate",
-              "guides/heatmaps",
-              "guides/reports"
-            ]
-          },
-          {
-            "group": "Sharing & Export",
-            "pages": [
-              "sharing/sharing-maps",
-              "sharing/exporting"
-            ]
-          },
-          {
-            "group": "Plans & Account",
-            "pages": [
-              "account/plans",
-              "account/team-collaboration",
-              "account/data-security"
-            ]
-          },
-          {
-            "group": "Help",
-            "pages": [
-              "help/faq",
-              "help/troubleshooting"
+            "tab": "Developers",
+            "groups": [
+              {
+                "group": "Get Started",
+                "pages": [
+                  "en/developers/overview",
+                  "en/developers/authentication"
+                ]
+              },
+              {
+                "group": "API Reference",
+                "openapi": "openapi.json"
+              },
+              {
+                "group": "Guides",
+                "pages": [
+                  "en/developers/agent-tools",
+                  "en/developers/api-reference",
+                  "en/developers/mcp",
+                  "en/developers/skills"
+                ]
+              }
             ]
           }
         ]
       },
       {
-        "tab": "Developers",
-        "groups": [
+        "language": "zh",
+        "navbar": {
+          "links": [
+            {
+              "label": "支持",
+              "href": "mailto:sales@mapxagent.com"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "免费试用 MapX",
+            "href": "https://app.mapxagent.com"
+          }
+        },
+        "footer": {
+          "socials": {
+            "x": "https://x.com/mapxagent"
+          }
+        },
+        "tabs": [
           {
-            "group": "Get Started",
-            "pages": [
-              "developers/overview",
-              "developers/authentication"
+            "tab": "文档",
+            "groups": [
+              {
+                "group": "开始使用",
+                "pages": [
+                  "zh/introduction",
+                  "zh/quickstart",
+                  "zh/uploading-data"
+                ]
+              },
+              {
+                "group": "核心概念",
+                "pages": [
+                  "zh/concepts/ai-chat",
+                  "zh/concepts/spatial-operations",
+                  "zh/concepts/layers-and-maps"
+                ]
+              },
+              {
+                "group": "指南",
+                "pages": [
+                  "zh/guides/site-selection",
+                  "zh/guides/logistics-analysis",
+                  "zh/guides/real-estate",
+                  "zh/guides/heatmaps",
+                  "zh/guides/reports"
+                ]
+              },
+              {
+                "group": "分享与导出",
+                "pages": [
+                  "zh/sharing/sharing-maps",
+                  "zh/sharing/exporting"
+                ]
+              },
+              {
+                "group": "套餐与账户",
+                "pages": [
+                  "zh/account/plans",
+                  "zh/account/team-collaboration",
+                  "zh/account/data-security"
+                ]
+              },
+              {
+                "group": "帮助",
+                "pages": [
+                  "zh/help/faq",
+                  "zh/help/troubleshooting"
+                ]
+              }
             ]
           },
           {
-            "group": "API Reference",
-            "openapi": "openapi.json"
-          },
-          {
-            "group": "Guides",
-            "pages": [
-              "developers/agent-tools",
-              "developers/api-reference",
-              "developers/mcp",
-              "developers/skills"
+            "tab": "开发者",
+            "groups": [
+              {
+                "group": "开始使用",
+                "pages": [
+                  "zh/developers/overview",
+                  "zh/developers/authentication"
+                ]
+              },
+              {
+                "group": "API 参考",
+                "openapi": "openapi.json"
+              },
+              {
+                "group": "指南",
+                "pages": [
+                  "zh/developers/agent-tools",
+                  "zh/developers/api-reference",
+                  "zh/developers/mcp",
+                  "zh/developers/skills"
+                ]
+              }
             ]
           }
         ]
       }
     ]
   },
+  "redirects": [
+    { "source": "/", "destination": "/en", "permanent": true },
+    { "source": "/index", "destination": "/en", "permanent": true },
+    { "source": "/introduction", "destination": "/en/introduction", "permanent": true },
+    { "source": "/quickstart", "destination": "/en/quickstart", "permanent": true },
+    { "source": "/uploading-data", "destination": "/en/uploading-data", "permanent": true },
+    { "source": "/account/plans", "destination": "/en/account/plans", "permanent": true },
+    { "source": "/account/team-collaboration", "destination": "/en/account/team-collaboration", "permanent": true },
+    { "source": "/account/data-security", "destination": "/en/account/data-security", "permanent": true },
+    { "source": "/concepts/ai-chat", "destination": "/en/concepts/ai-chat", "permanent": true },
+    { "source": "/concepts/layers-and-maps", "destination": "/en/concepts/layers-and-maps", "permanent": true },
+    { "source": "/concepts/spatial-operations", "destination": "/en/concepts/spatial-operations", "permanent": true },
+    { "source": "/developers/agent-tools", "destination": "/en/developers/agent-tools", "permanent": true },
+    { "source": "/developers/api-reference", "destination": "/en/developers/api-reference", "permanent": true },
+    { "source": "/developers/authentication", "destination": "/en/developers/authentication", "permanent": true },
+    { "source": "/developers/mcp", "destination": "/en/developers/mcp", "permanent": true },
+    { "source": "/developers/overview", "destination": "/en/developers/overview", "permanent": true },
+    { "source": "/developers/skills", "destination": "/en/developers/skills", "permanent": true },
+    { "source": "/guides/heatmaps", "destination": "/en/guides/heatmaps", "permanent": true },
+    { "source": "/guides/logistics-analysis", "destination": "/en/guides/logistics-analysis", "permanent": true },
+    { "source": "/guides/real-estate", "destination": "/en/guides/real-estate", "permanent": true },
+    { "source": "/guides/reports", "destination": "/en/guides/reports", "permanent": true },
+    { "source": "/guides/site-selection", "destination": "/en/guides/site-selection", "permanent": true },
+    { "source": "/help/faq", "destination": "/en/help/faq", "permanent": true },
+    { "source": "/help/troubleshooting", "destination": "/en/help/troubleshooting", "permanent": true },
+    { "source": "/sharing/exporting", "destination": "/en/sharing/exporting", "permanent": true },
+    { "source": "/sharing/sharing-maps", "destination": "/en/sharing/sharing-maps", "permanent": true }
+  ],
   "footer": {
     "socials": {
       "x": "https://x.com/mapxagent"
