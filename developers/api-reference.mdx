@@ -58,6 +58,23 @@ For the complete list, read `source/api-routes.json`.
 | `.tif` / `.tiff` | Converted to a COG image layer |
 | `.txt` / `.md` / `.docx` / `.doc` / `.pdf` | Stored as a plain file (no layer) |
 
+## Capability scopes
+
+API keys grant access through capability scopes. `["*"]` (or an empty
+`scopes` array) grants all access; otherwise only the listed scopes are
+allowed.
+
+| Scope | Required by |
+| --- | --- |
+| `session` | Project list/create/get/update/delete, usage |
+| `chat` | Chat turns, ask/respond |
+| `files` | File list, upload, file content |
+| `layers` | Layer list, details, updates, style |
+| `map` | Map actions |
+| `reports` | Report save, report metadata |
+| `remote` | Live/static view URLs |
+| `keys` | API key management |
+
 ## Map actions
 
 `POST /api/v1/sessions/{id}/map/actions` accepts an array of action objects.

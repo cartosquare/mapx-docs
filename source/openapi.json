@@ -5936,7 +5936,7 @@
         ],
         "operationId": "updateLayerStyle",
         "summary": "Update a layer style",
-        "description": "Requires scope: layers. The style object is merged with the existing style; omitted keys are preserved.",
+        "description": "Requires scope: layers. Partial style update with merge semantics: the given style is merged into the layer's persisted style, so omitted top-level keys are preserved, a same-type renderer deep-merges its paint, and label/legend are merged.",
         "parameters": [
           {
             "name": "id",
@@ -5959,62 +5959,1655 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "Style object to merge. Only include the fields to change.",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "description": "Style to merge into the layer's persisted style (partial update): omitted top-level keys are preserved; a same-type renderer deep-merges paint; label/legend are merged; _meta is preserved.",
                 "properties": {
                   "renderer": {
                     "type": "object",
+                    "description": "Renderer configuration. Partial updates are supported: omitted fields (and a missing renderer.type) inherit from the existing style; a same-type renderer deep-merges paint.",
                     "properties": {
                       "type": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "single",
+                          "categorized",
+                          "graduated",
+                          "heatmap",
+                          "interpolated",
+                          "multi_field",
+                          "chart"
+                        ],
+                        "description": "Renderer type. Omit to keep the existing type."
                       },
                       "paint": {
                         "type": "object",
-                        "properties": {},
-                        "additionalProperties": {}
+                        "description": "MapLibre paint properties. Use the keys matching the layer's geometry: circle-* for point layers, line-* for line layers, fill-* for polygon layers.",
+                        "properties": {
+                          "circle-color": {
+                            "type": "string",
+                            "description": "Point fill color (CSS hex, e.g. #ff0000)."
+                          },
+                          "circle-radius": {
+                            "type": "number",
+                            "minimum": 0,
+                            "description": "Point radius in pixels."
+                          },
+                          "circle-opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Point fill opacity."
+                          },
+                          "circle-stroke-color": {
+                            "type": "string",
+                            "description": "Point outline color (CSS hex)."
+                          },
+                          "circle-stroke-width": {
+                            "type": "number",
+                            "minimum": 0,
+                            "description": "Point outline width in pixels."
+                          },
+                          "circle-stroke-opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Point outline opacity."
+                          },
+                          "line-color": {
+                            "type": "string",
+                            "description": "Line color (CSS hex)."
+                          },
+                          "line-width": {
+                            "type": "number",
+                            "minimum": 0,
+                            "description": "Line width in pixels."
+                          },
+                          "line-opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Line opacity."
+                          },
+                          "line-dasharray": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            },
+                            "description": "Line dash pattern, e.g. [4, 2]."
+                          },
+                          "fill-color": {
+                            "type": "string",
+                            "description": "Polygon fill color (CSS hex)."
+                          },
+                          "fill-opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Polygon fill opacity."
+                          },
+                          "_outline-width": {
+                            "type": "number",
+                            "minimum": 0,
+                            "description": "Fill outline width in pixels (single renderer)."
+                          },
+                          "_outline-color": {
+                            "type": "string",
+                            "description": "Fill outline color (single renderer)."
+                          },
+                          "_outline-opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Fill outline opacity (single renderer)."
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "field": {
+                        "type": "string",
+                        "description": "Feature property field to drive the renderer (categorized/graduated/interpolated)."
+                      },
+                      "categories": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "value",
+                            "paint"
+                          ],
+                          "properties": {
+                            "value": {
+                              "oneOf": [
+                                {
+                                  "type": "string",
+                                  "title": "String"
+                                },
+                                {
+                                  "type": "number",
+                                  "title": "Number"
+                                },
+                                {
+                                  "type": "boolean",
+                                  "title": "Boolean"
+                                }
+                              ],
+                              "description": "Feature property value to match."
+                            },
+                            "label": {
+                              "type": "string",
+                              "description": "Legend label."
+                            },
+                            "paint": {
+                              "type": "object",
+                              "description": "MapLibre paint properties. Use the keys matching the layer's geometry: circle-* for point layers, line-* for line layers, fill-* for polygon layers.",
+                              "properties": {
+                                "circle-color": {
+                                  "type": "string",
+                                  "description": "Point fill color (CSS hex, e.g. #ff0000)."
+                                },
+                                "circle-radius": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Point radius in pixels."
+                                },
+                                "circle-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Point fill opacity."
+                                },
+                                "circle-stroke-color": {
+                                  "type": "string",
+                                  "description": "Point outline color (CSS hex)."
+                                },
+                                "circle-stroke-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Point outline width in pixels."
+                                },
+                                "circle-stroke-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Point outline opacity."
+                                },
+                                "line-color": {
+                                  "type": "string",
+                                  "description": "Line color (CSS hex)."
+                                },
+                                "line-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Line width in pixels."
+                                },
+                                "line-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Line opacity."
+                                },
+                                "line-dasharray": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "number"
+                                  },
+                                  "description": "Line dash pattern, e.g. [4, 2]."
+                                },
+                                "fill-color": {
+                                  "type": "string",
+                                  "description": "Polygon fill color (CSS hex)."
+                                },
+                                "fill-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Polygon fill opacity."
+                                },
+                                "_outline-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Fill outline width in pixels (single renderer)."
+                                },
+                                "_outline-color": {
+                                  "type": "string",
+                                  "description": "Fill outline color (single renderer)."
+                                },
+                                "_outline-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Fill outline opacity (single renderer)."
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "description": "Category definitions (categorized)."
+                      },
+                      "default": {
+                        "type": "object",
+                        "description": "MapLibre paint properties. Use the keys matching the layer's geometry: circle-* for point layers, line-* for line layers, fill-* for polygon layers.",
+                        "properties": {
+                          "circle-color": {
+                            "type": "string",
+                            "description": "Point fill color (CSS hex, e.g. #ff0000)."
+                          },
+                          "circle-radius": {
+                            "type": "number",
+                            "minimum": 0,
+                            "description": "Point radius in pixels."
+                          },
+                          "circle-opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Point fill opacity."
+                          },
+                          "circle-stroke-color": {
+                            "type": "string",
+                            "description": "Point outline color (CSS hex)."
+                          },
+                          "circle-stroke-width": {
+                            "type": "number",
+                            "minimum": 0,
+                            "description": "Point outline width in pixels."
+                          },
+                          "circle-stroke-opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Point outline opacity."
+                          },
+                          "line-color": {
+                            "type": "string",
+                            "description": "Line color (CSS hex)."
+                          },
+                          "line-width": {
+                            "type": "number",
+                            "minimum": 0,
+                            "description": "Line width in pixels."
+                          },
+                          "line-opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Line opacity."
+                          },
+                          "line-dasharray": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            },
+                            "description": "Line dash pattern, e.g. [4, 2]."
+                          },
+                          "fill-color": {
+                            "type": "string",
+                            "description": "Polygon fill color (CSS hex)."
+                          },
+                          "fill-opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Polygon fill opacity."
+                          },
+                          "_outline-width": {
+                            "type": "number",
+                            "minimum": 0,
+                            "description": "Fill outline width in pixels (single renderer)."
+                          },
+                          "_outline-color": {
+                            "type": "string",
+                            "description": "Fill outline color (single renderer)."
+                          },
+                          "_outline-opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Fill outline opacity (single renderer)."
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "outline": {
+                        "type": "object",
+                        "properties": {
+                          "width": {
+                            "type": "number",
+                            "minimum": 0,
+                            "description": "Outline width in pixels."
+                          },
+                          "color": {
+                            "type": "string",
+                            "description": "Outline color (CSS hex)."
+                          },
+                          "opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "description": "Outline opacity."
+                          },
+                          "dash": {
+                            "type": "string",
+                            "description": "Dash pattern, e.g. \"4,2\"."
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "method": {
+                        "type": "string",
+                        "enum": [
+                          "quantile",
+                          "equal",
+                          "manual"
+                        ],
+                        "description": "Classification method (graduated)."
+                      },
+                      "ranges": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "from",
+                            "to",
+                            "paint"
+                          ],
+                          "properties": {
+                            "from": {
+                              "type": "number",
+                              "description": "Range lower bound (inclusive)."
+                            },
+                            "to": {
+                              "type": [
+                                "number",
+                                "null"
+                              ],
+                              "description": "Range upper bound (exclusive); null means open-ended."
+                            },
+                            "label": {
+                              "type": "string",
+                              "description": "Legend label."
+                            },
+                            "paint": {
+                              "type": "object",
+                              "description": "MapLibre paint properties. Use the keys matching the layer's geometry: circle-* for point layers, line-* for line layers, fill-* for polygon layers.",
+                              "properties": {
+                                "circle-color": {
+                                  "type": "string",
+                                  "description": "Point fill color (CSS hex, e.g. #ff0000)."
+                                },
+                                "circle-radius": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Point radius in pixels."
+                                },
+                                "circle-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Point fill opacity."
+                                },
+                                "circle-stroke-color": {
+                                  "type": "string",
+                                  "description": "Point outline color (CSS hex)."
+                                },
+                                "circle-stroke-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Point outline width in pixels."
+                                },
+                                "circle-stroke-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Point outline opacity."
+                                },
+                                "line-color": {
+                                  "type": "string",
+                                  "description": "Line color (CSS hex)."
+                                },
+                                "line-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Line width in pixels."
+                                },
+                                "line-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Line opacity."
+                                },
+                                "line-dasharray": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "number"
+                                  },
+                                  "description": "Line dash pattern, e.g. [4, 2]."
+                                },
+                                "fill-color": {
+                                  "type": "string",
+                                  "description": "Polygon fill color (CSS hex)."
+                                },
+                                "fill-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Polygon fill opacity."
+                                },
+                                "_outline-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Fill outline width in pixels (single renderer)."
+                                },
+                                "_outline-color": {
+                                  "type": "string",
+                                  "description": "Fill outline color (single renderer)."
+                                },
+                                "_outline-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Fill outline opacity (single renderer)."
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "description": "Numeric bins (graduated)."
+                      },
+                      "weightField": {
+                        "type": "string",
+                        "description": "Numeric field for per-point weight (heatmap)."
+                      },
+                      "radius": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Heatmap radius in pixels."
+                      },
+                      "opacity": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "description": "Heatmap opacity."
+                      },
+                      "intensity": {
+                        "type": "number",
+                        "description": "Heatmap intensity multiplier (default 1)."
+                      },
+                      "colorStops": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "value",
+                            "color"
+                          ],
+                          "properties": {
+                            "value": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1,
+                              "description": "Heatmap density 0-1 at this stop."
+                            },
+                            "color": {
+                              "type": "string",
+                              "description": "Color (CSS hex)."
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "description": "Color ramp stops, density 0-1 (heatmap)."
+                      },
+                      "interpolation": {
+                        "type": "string",
+                        "enum": [
+                          "linear",
+                          "exponential"
+                        ],
+                        "description": "Interpolation curve (interpolated)."
+                      },
+                      "base": {
+                        "type": "number",
+                        "description": "Base for exponential interpolation (default 2)."
+                      },
+                      "stops": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "value",
+                            "paint"
+                          ],
+                          "properties": {
+                            "value": {
+                              "type": "number",
+                              "description": "Input field value at this stop."
+                            },
+                            "label": {
+                              "type": "string",
+                              "description": "Legend label."
+                            },
+                            "paint": {
+                              "type": "object",
+                              "description": "MapLibre paint properties. Use the keys matching the layer's geometry: circle-* for point layers, line-* for line layers, fill-* for polygon layers.",
+                              "properties": {
+                                "circle-color": {
+                                  "type": "string",
+                                  "description": "Point fill color (CSS hex, e.g. #ff0000)."
+                                },
+                                "circle-radius": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Point radius in pixels."
+                                },
+                                "circle-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Point fill opacity."
+                                },
+                                "circle-stroke-color": {
+                                  "type": "string",
+                                  "description": "Point outline color (CSS hex)."
+                                },
+                                "circle-stroke-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Point outline width in pixels."
+                                },
+                                "circle-stroke-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Point outline opacity."
+                                },
+                                "line-color": {
+                                  "type": "string",
+                                  "description": "Line color (CSS hex)."
+                                },
+                                "line-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Line width in pixels."
+                                },
+                                "line-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Line opacity."
+                                },
+                                "line-dasharray": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "number"
+                                  },
+                                  "description": "Line dash pattern, e.g. [4, 2]."
+                                },
+                                "fill-color": {
+                                  "type": "string",
+                                  "description": "Polygon fill color (CSS hex)."
+                                },
+                                "fill-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Polygon fill opacity."
+                                },
+                                "_outline-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Fill outline width in pixels (single renderer)."
+                                },
+                                "_outline-color": {
+                                  "type": "string",
+                                  "description": "Fill outline color (single renderer)."
+                                },
+                                "_outline-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Fill outline opacity (single renderer)."
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "description": "Interpolation stops (interpolated)."
+                      },
+                      "properties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "paintKey",
+                            "field",
+                            "method"
+                          ],
+                          "properties": {
+                            "paintKey": {
+                              "type": "string",
+                              "description": "MapLibre paint key to drive, e.g. circle-radius, circle-color."
+                            },
+                            "field": {
+                              "type": "string",
+                              "description": "Feature property field name."
+                            },
+                            "method": {
+                              "type": "string",
+                              "enum": [
+                                "single",
+                                "categorized",
+                                "graduated",
+                                "interpolated"
+                              ],
+                              "description": "How to map field values to the paint key."
+                            },
+                            "value": {
+                              "oneOf": [
+                                {
+                                  "type": "string",
+                                  "title": "String"
+                                },
+                                {
+                                  "type": "number",
+                                  "title": "Number"
+                                },
+                                {
+                                  "type": "boolean",
+                                  "title": "Boolean"
+                                }
+                              ],
+                              "description": "Fixed value for method=single."
+                            },
+                            "categories": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "value",
+                                  "paint"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "oneOf": [
+                                      {
+                                        "type": "string",
+                                        "title": "String"
+                                      },
+                                      {
+                                        "type": "number",
+                                        "title": "Number"
+                                      },
+                                      {
+                                        "type": "boolean",
+                                        "title": "Boolean"
+                                      }
+                                    ],
+                                    "description": "Feature property value to match."
+                                  },
+                                  "label": {
+                                    "type": "string",
+                                    "description": "Legend label."
+                                  },
+                                  "paint": {
+                                    "type": "object",
+                                    "description": "MapLibre paint properties. Use the keys matching the layer's geometry: circle-* for point layers, line-* for line layers, fill-* for polygon layers.",
+                                    "properties": {
+                                      "circle-color": {
+                                        "type": "string",
+                                        "description": "Point fill color (CSS hex, e.g. #ff0000)."
+                                      },
+                                      "circle-radius": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Point radius in pixels."
+                                      },
+                                      "circle-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Point fill opacity."
+                                      },
+                                      "circle-stroke-color": {
+                                        "type": "string",
+                                        "description": "Point outline color (CSS hex)."
+                                      },
+                                      "circle-stroke-width": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Point outline width in pixels."
+                                      },
+                                      "circle-stroke-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Point outline opacity."
+                                      },
+                                      "line-color": {
+                                        "type": "string",
+                                        "description": "Line color (CSS hex)."
+                                      },
+                                      "line-width": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Line width in pixels."
+                                      },
+                                      "line-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Line opacity."
+                                      },
+                                      "line-dasharray": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "number"
+                                        },
+                                        "description": "Line dash pattern, e.g. [4, 2]."
+                                      },
+                                      "fill-color": {
+                                        "type": "string",
+                                        "description": "Polygon fill color (CSS hex)."
+                                      },
+                                      "fill-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Polygon fill opacity."
+                                      },
+                                      "_outline-width": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Fill outline width in pixels (single renderer)."
+                                      },
+                                      "_outline-color": {
+                                        "type": "string",
+                                        "description": "Fill outline color (single renderer)."
+                                      },
+                                      "_outline-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Fill outline opacity (single renderer)."
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "additionalProperties": false
+                              },
+                              "description": "Categories for method=categorized."
+                            },
+                            "ranges": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "from",
+                                  "to",
+                                  "paint"
+                                ],
+                                "properties": {
+                                  "from": {
+                                    "type": "number",
+                                    "description": "Range lower bound (inclusive)."
+                                  },
+                                  "to": {
+                                    "type": [
+                                      "number",
+                                      "null"
+                                    ],
+                                    "description": "Range upper bound (exclusive); null means open-ended."
+                                  },
+                                  "label": {
+                                    "type": "string",
+                                    "description": "Legend label."
+                                  },
+                                  "paint": {
+                                    "type": "object",
+                                    "description": "MapLibre paint properties. Use the keys matching the layer's geometry: circle-* for point layers, line-* for line layers, fill-* for polygon layers.",
+                                    "properties": {
+                                      "circle-color": {
+                                        "type": "string",
+                                        "description": "Point fill color (CSS hex, e.g. #ff0000)."
+                                      },
+                                      "circle-radius": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Point radius in pixels."
+                                      },
+                                      "circle-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Point fill opacity."
+                                      },
+                                      "circle-stroke-color": {
+                                        "type": "string",
+                                        "description": "Point outline color (CSS hex)."
+                                      },
+                                      "circle-stroke-width": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Point outline width in pixels."
+                                      },
+                                      "circle-stroke-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Point outline opacity."
+                                      },
+                                      "line-color": {
+                                        "type": "string",
+                                        "description": "Line color (CSS hex)."
+                                      },
+                                      "line-width": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Line width in pixels."
+                                      },
+                                      "line-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Line opacity."
+                                      },
+                                      "line-dasharray": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "number"
+                                        },
+                                        "description": "Line dash pattern, e.g. [4, 2]."
+                                      },
+                                      "fill-color": {
+                                        "type": "string",
+                                        "description": "Polygon fill color (CSS hex)."
+                                      },
+                                      "fill-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Polygon fill opacity."
+                                      },
+                                      "_outline-width": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Fill outline width in pixels (single renderer)."
+                                      },
+                                      "_outline-color": {
+                                        "type": "string",
+                                        "description": "Fill outline color (single renderer)."
+                                      },
+                                      "_outline-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Fill outline opacity (single renderer)."
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "additionalProperties": false
+                              },
+                              "description": "Ranges for method=graduated."
+                            },
+                            "stops": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "value",
+                                  "paint"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "description": "Input field value at this stop."
+                                  },
+                                  "label": {
+                                    "type": "string",
+                                    "description": "Legend label."
+                                  },
+                                  "paint": {
+                                    "type": "object",
+                                    "description": "MapLibre paint properties. Use the keys matching the layer's geometry: circle-* for point layers, line-* for line layers, fill-* for polygon layers.",
+                                    "properties": {
+                                      "circle-color": {
+                                        "type": "string",
+                                        "description": "Point fill color (CSS hex, e.g. #ff0000)."
+                                      },
+                                      "circle-radius": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Point radius in pixels."
+                                      },
+                                      "circle-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Point fill opacity."
+                                      },
+                                      "circle-stroke-color": {
+                                        "type": "string",
+                                        "description": "Point outline color (CSS hex)."
+                                      },
+                                      "circle-stroke-width": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Point outline width in pixels."
+                                      },
+                                      "circle-stroke-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Point outline opacity."
+                                      },
+                                      "line-color": {
+                                        "type": "string",
+                                        "description": "Line color (CSS hex)."
+                                      },
+                                      "line-width": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Line width in pixels."
+                                      },
+                                      "line-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Line opacity."
+                                      },
+                                      "line-dasharray": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "number"
+                                        },
+                                        "description": "Line dash pattern, e.g. [4, 2]."
+                                      },
+                                      "fill-color": {
+                                        "type": "string",
+                                        "description": "Polygon fill color (CSS hex)."
+                                      },
+                                      "fill-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Polygon fill opacity."
+                                      },
+                                      "_outline-width": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "Fill outline width in pixels (single renderer)."
+                                      },
+                                      "_outline-color": {
+                                        "type": "string",
+                                        "description": "Fill outline color (single renderer)."
+                                      },
+                                      "_outline-opacity": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1,
+                                        "description": "Fill outline opacity (single renderer)."
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "additionalProperties": false
+                              },
+                              "description": "Stops for method=interpolated."
+                            },
+                            "default": {
+                              "type": "object",
+                              "description": "MapLibre paint properties. Use the keys matching the layer's geometry: circle-* for point layers, line-* for line layers, fill-* for polygon layers.",
+                              "properties": {
+                                "circle-color": {
+                                  "type": "string",
+                                  "description": "Point fill color (CSS hex, e.g. #ff0000)."
+                                },
+                                "circle-radius": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Point radius in pixels."
+                                },
+                                "circle-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Point fill opacity."
+                                },
+                                "circle-stroke-color": {
+                                  "type": "string",
+                                  "description": "Point outline color (CSS hex)."
+                                },
+                                "circle-stroke-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Point outline width in pixels."
+                                },
+                                "circle-stroke-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Point outline opacity."
+                                },
+                                "line-color": {
+                                  "type": "string",
+                                  "description": "Line color (CSS hex)."
+                                },
+                                "line-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Line width in pixels."
+                                },
+                                "line-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Line opacity."
+                                },
+                                "line-dasharray": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "number"
+                                  },
+                                  "description": "Line dash pattern, e.g. [4, 2]."
+                                },
+                                "fill-color": {
+                                  "type": "string",
+                                  "description": "Polygon fill color (CSS hex)."
+                                },
+                                "fill-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Polygon fill opacity."
+                                },
+                                "_outline-width": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "description": "Fill outline width in pixels (single renderer)."
+                                },
+                                "_outline-color": {
+                                  "type": "string",
+                                  "description": "Fill outline color (single renderer)."
+                                },
+                                "_outline-opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1,
+                                  "description": "Fill outline opacity (single renderer)."
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "description": "Per-paint-key field mappings (multi_field)."
+                      },
+                      "chartType": {
+                        "type": "string",
+                        "enum": [
+                          "bar",
+                          "pie",
+                          "donut"
+                        ],
+                        "description": "Chart shape (chart renderer)."
+                      },
+                      "orientation": {
+                        "type": "string",
+                        "enum": [
+                          "vertical",
+                          "horizontal"
+                        ],
+                        "description": "Bar orientation (chart=bar)."
+                      },
+                      "mode": {
+                        "type": "string",
+                        "enum": [
+                          "grouped",
+                          "stacked"
+                        ],
+                        "description": "Bar mode (chart=bar)."
+                      },
+                      "width": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Chart canvas width in pixels."
+                      },
+                      "height": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Chart canvas height in pixels."
+                      },
+                      "maxBarLength": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Max bar extent in pixels (chart=bar)."
+                      },
+                      "maxRadius": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Max radius in pixels (chart=pie/donut)."
+                      },
+                      "offsetX": {
+                        "type": "number",
+                        "description": "Horizontal offset in pixels (positive = right)."
+                      },
+                      "offsetY": {
+                        "type": "number",
+                        "description": "Vertical offset in pixels (positive = down)."
+                      },
+                      "background": {
+                        "type": "string",
+                        "description": "Chart background color."
+                      },
+                      "colorField": {
+                        "description": "Bar color mapping (chart=bar).",
+                        "oneOf": [
+                          {
+                            "title": "Fixed color",
+                            "type": "object",
+                            "required": [
+                              "method",
+                              "value"
+                            ],
+                            "properties": {
+                              "method": {
+                                "type": "string",
+                                "enum": [
+                                  "single"
+                                ]
+                              },
+                              "value": {
+                                "type": "string",
+                                "description": "Fixed bar color (CSS hex)."
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          {
+                            "title": "Categorized colors",
+                            "type": "object",
+                            "required": [
+                              "method",
+                              "field",
+                              "categories"
+                            ],
+                            "properties": {
+                              "method": {
+                                "type": "string",
+                                "enum": [
+                                  "categorized"
+                                ]
+                              },
+                              "field": {
+                                "type": "string",
+                                "description": "Feature property field to categorize on."
+                              },
+                              "categories": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "required": [
+                                    "value",
+                                    "color"
+                                  ],
+                                  "properties": {
+                                    "value": {
+                                      "oneOf": [
+                                        {
+                                          "type": "string",
+                                          "title": "String"
+                                        },
+                                        {
+                                          "type": "number",
+                                          "title": "Number"
+                                        }
+                                      ]
+                                    },
+                                    "color": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                }
+                              },
+                              "default": {
+                                "type": "string",
+                                "description": "Fallback color for unmatched values."
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          {
+                            "title": "Graduated colors",
+                            "type": "object",
+                            "required": [
+                              "method",
+                              "field",
+                              "ranges"
+                            ],
+                            "properties": {
+                              "method": {
+                                "type": "string",
+                                "enum": [
+                                  "graduated"
+                                ]
+                              },
+                              "field": {
+                                "type": "string",
+                                "description": "Numeric feature property field."
+                              },
+                              "ranges": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "required": [
+                                    "from",
+                                    "to",
+                                    "color"
+                                  ],
+                                  "properties": {
+                                    "from": {
+                                      "type": "number"
+                                    },
+                                    "to": {
+                                      "type": [
+                                        "number",
+                                        "null"
+                                      ]
+                                    },
+                                    "color": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                }
+                              },
+                              "default": {
+                                "type": "string",
+                                "description": "Fallback color."
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          {
+                            "title": "Interpolated colors",
+                            "type": "object",
+                            "required": [
+                              "method",
+                              "field",
+                              "stops"
+                            ],
+                            "properties": {
+                              "method": {
+                                "type": "string",
+                                "enum": [
+                                  "interpolated"
+                                ]
+                              },
+                              "field": {
+                                "type": "string",
+                                "description": "Numeric feature property field."
+                              },
+                              "stops": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "required": [
+                                    "value",
+                                    "color"
+                                  ],
+                                  "properties": {
+                                    "value": {
+                                      "type": "number"
+                                    },
+                                    "color": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                }
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      "bars": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "field"
+                          ],
+                          "properties": {
+                            "field": {
+                              "type": "string",
+                              "description": "Feature property field for the bar height."
+                            },
+                            "label": {
+                              "type": "string",
+                              "description": "Legend label."
+                            },
+                            "color": {
+                              "type": "string",
+                              "description": "Per-bar color override (takes priority over colorField)."
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "description": "Bar height fields (chart=bar)."
+                      },
+                      "radiusMapping": {
+                        "description": "Radius mapping (chart=pie/donut).",
+                        "oneOf": [
+                          {
+                            "title": "Fixed radius",
+                            "type": "object",
+                            "required": [
+                              "method",
+                              "radius"
+                            ],
+                            "properties": {
+                              "method": {
+                                "type": "string",
+                                "enum": [
+                                  "single"
+                                ]
+                              },
+                              "radius": {
+                                "type": "number",
+                                "minimum": 0,
+                                "description": "Fixed radius in pixels."
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          {
+                            "title": "Categorized radius",
+                            "type": "object",
+                            "required": [
+                              "method",
+                              "field",
+                              "categories"
+                            ],
+                            "properties": {
+                              "method": {
+                                "type": "string",
+                                "enum": [
+                                  "categorized"
+                                ]
+                              },
+                              "field": {
+                                "type": "string"
+                              },
+                              "categories": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "required": [
+                                    "value",
+                                    "radius"
+                                  ],
+                                  "properties": {
+                                    "value": {
+                                      "oneOf": [
+                                        {
+                                          "type": "string",
+                                          "title": "String"
+                                        },
+                                        {
+                                          "type": "number",
+                                          "title": "Number"
+                                        }
+                                      ]
+                                    },
+                                    "radius": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                }
+                              },
+                              "default": {
+                                "type": "number",
+                                "minimum": 0
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          {
+                            "title": "Graduated radius",
+                            "type": "object",
+                            "required": [
+                              "method",
+                              "field",
+                              "ranges"
+                            ],
+                            "properties": {
+                              "method": {
+                                "type": "string",
+                                "enum": [
+                                  "graduated"
+                                ]
+                              },
+                              "field": {
+                                "type": "string"
+                              },
+                              "ranges": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "required": [
+                                    "from",
+                                    "to",
+                                    "radius"
+                                  ],
+                                  "properties": {
+                                    "from": {
+                                      "type": "number"
+                                    },
+                                    "to": {
+                                      "type": [
+                                        "number",
+                                        "null"
+                                      ]
+                                    },
+                                    "radius": {
+                                      "type": "number",
+                                      "minimum": 0
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                }
+                              },
+                              "default": {
+                                "type": "number",
+                                "minimum": 0
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          {
+                            "title": "Interpolated radius",
+                            "type": "object",
+                            "required": [
+                              "method",
+                              "field",
+                              "minRadius",
+                              "maxRadius"
+                            ],
+                            "properties": {
+                              "method": {
+                                "type": "string",
+                                "enum": [
+                                  "interpolated"
+                                ]
+                              },
+                              "field": {
+                                "type": "string"
+                              },
+                              "minRadius": {
+                                "type": "number",
+                                "minimum": 0
+                              },
+                              "maxRadius": {
+                                "type": "number",
+                                "minimum": 0
+                              },
+                              "default": {
+                                "type": "number",
+                                "minimum": 0
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      "radiusField": {
+                        "type": "string",
+                        "description": "Deprecated; use radiusMapping instead."
+                      },
+                      "sectors": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "field",
+                            "color"
+                          ],
+                          "properties": {
+                            "field": {
+                              "type": "string",
+                              "description": "Feature property field for the sector."
+                            },
+                            "label": {
+                              "type": "string",
+                              "description": "Legend label."
+                            },
+                            "color": {
+                              "type": "string",
+                              "description": "Sector color (CSS hex)."
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "description": "Sector definitions (chart=pie/donut)."
                       }
                     },
-                    "required": [
-                      "type"
-                    ],
-                    "additionalProperties": {}
+                    "additionalProperties": false
                   },
                   "label": {
                     "type": "object",
+                    "description": "Text annotation configuration. Partial updates are supported.",
                     "properties": {
                       "enabled": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Whether label rendering is enabled."
                       },
                       "field": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Feature property field to display as text."
                       },
                       "fontSize": {
                         "type": "number",
                         "minimum": 1,
-                        "maximum": 72
+                        "maximum": 72,
+                        "description": "Font size in pixels (default 12)."
                       },
                       "fontColor": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Text color (CSS hex, default #333333)."
+                      },
+                      "fontOpacity": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "description": "Text opacity (default 1)."
+                      },
+                      "haloColor": {
+                        "type": "string",
+                        "description": "Halo color (CSS hex, default #ffffff)."
+                      },
+                      "haloWidth": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Halo width in pixels (default 0)."
+                      },
+                      "haloBlur": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Halo blur in pixels (default 0)."
+                      },
+                      "fontFamily": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Font stack (default [\"Open Sans Regular\"])."
+                      },
+                      "allowOverlap": {
+                        "type": "boolean",
+                        "description": "Allow labels to overlap (default false)."
+                      },
+                      "textOffset": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        },
+                        "description": "Text offset from anchor in ems [x, y] (default [0, 0])."
+                      },
+                      "showValue": {
+                        "type": "boolean",
+                        "description": "Show numeric values inside/outside chart shapes."
+                      },
+                      "valuePosition": {
+                        "type": "string",
+                        "enum": [
+                          "inside",
+                          "leader"
+                        ],
+                        "description": "Value label position for charts."
                       }
                     },
-                    "additionalProperties": {}
+                    "additionalProperties": false
                   },
                   "legend": {
                     "type": "object",
+                    "description": "Legend overlay configuration.",
                     "properties": {
                       "enabled": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Whether the legend is shown."
+                      },
+                      "hiddenFields": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Field names to hide from the legend (multi_field)."
                       }
                     },
-                    "required": [
-                      "enabled"
-                    ],
                     "additionalProperties": false
                   }
                 },
-                "additionalProperties": {}
+                "additionalProperties": false
               }
             }
           }
@@ -7365,6 +8958,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "HTML report to save.",
           "content": {
             "application/json": {
               "schema": {
@@ -7373,11 +8967,13 @@
                   "title": {
                     "type": "string",
                     "minLength": 1,
-                    "maxLength": 200
+                    "maxLength": 200,
+                    "description": "Report title (1-200 characters)."
                   },
                   "html": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "description": "Complete HTML report content. Max size 2MB."
                   }
                 },
                 "required": [
@@ -7403,15 +8999,19 @@
                   ],
                   "properties": {
                     "ok": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Whether the report was saved."
                     },
                     "file_id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Report file id."
                     },
                     "url": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Report preview URL."
                     }
-                  }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -7718,30 +9318,39 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": [
+                    "data"
+                  ],
                   "properties": {
                     "data": {
                       "type": "object",
                       "properties": {
                         "id": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Report file id."
                         },
                         "fileName": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Report file name."
                         },
                         "fileType": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "File type (always \"report\")."
                         },
                         "fileSize": {
-                          "type": "integer"
+                          "type": "integer",
+                          "description": "Size in bytes."
                         },
                         "createdAt": {
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "description": "Creation time."
                         }
                       },
-                      "additionalProperties": true
+                      "additionalProperties": false
                     }
-                  }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -8644,43 +10253,51 @@
                     "type": "object",
                     "properties": {
                       "id": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "API key id."
                       },
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Display name."
                       },
                       "prefix": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Key prefix (first 8 characters of mkx_...)."
                       },
                       "scopes": {
                         "type": "array",
                         "items": {
                           "type": "string"
-                        }
+                        },
+                        "description": "Granted scopes; [\"*\"] means all access."
                       },
                       "enabled": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Whether the key is active."
                       },
                       "expiresAt": {
                         "type": [
                           "string",
                           "null"
                         ],
-                        "format": "date-time"
+                        "format": "date-time",
+                        "description": "Expiry time; null means never expires."
                       },
                       "lastUsedAt": {
                         "type": [
                           "string",
                           "null"
                         ],
-                        "format": "date-time"
+                        "format": "date-time",
+                        "description": "Last successful use; null if never used."
                       },
                       "createdAt": {
                         "type": "string",
-                        "format": "date-time"
+                        "format": "date-time",
+                        "description": "Creation time."
                       }
                     },
-                    "additionalProperties": true
+                    "additionalProperties": false
                   }
                 }
               }
@@ -8961,6 +10578,7 @@
         "description": "Requires scope: keys. The raw key is returned only once.",
         "requestBody": {
           "required": true,
+          "description": "API key configuration. The raw key is returned only once; store it immediately.",
           "content": {
             "application/json": {
               "schema": {
@@ -8969,7 +10587,8 @@
                   "name": {
                     "type": "string",
                     "minLength": 1,
-                    "maxLength": 64
+                    "maxLength": 64,
+                    "description": "API key display name (1-64 characters)."
                   },
                   "expiresAt": {
                     "anyOf": [
@@ -8981,9 +10600,11 @@
                       {
                         "type": "null"
                       }
-                    ]
+                    ],
+                    "description": "ISO 8601 expiry timestamp. Omitted or null means the key never expires."
                   },
                   "scopes": {
+                    "description": "Capability scopes. Empty array or [\"*\"] grants all access. Allowed values: session, chat, files, layers, map, reports, remote, keys.",
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -9005,54 +10626,58 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "prefix",
+                    "scopes",
+                    "enabled",
+                    "createdAt",
+                    "key"
+                  ],
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "API key id."
                     },
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Display name."
                     },
                     "prefix": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Key prefix (first 8 characters of mkx_...)."
                     },
                     "scopes": {
                       "type": "array",
                       "items": {
                         "type": "string"
-                      }
+                      },
+                      "description": "Granted scopes; [\"*\"] means all access."
                     },
                     "enabled": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Whether the key is active."
                     },
                     "expiresAt": {
                       "type": [
                         "string",
                         "null"
                       ],
-                      "format": "date-time"
-                    },
-                    "lastUsedAt": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
-                      "format": "date-time"
+                      "format": "date-time",
+                      "description": "Expiry time; null means never expires."
                     },
                     "createdAt": {
                       "type": "string",
-                      "format": "date-time"
+                      "format": "date-time",
+                      "description": "Creation time."
                     },
                     "key": {
                       "type": "string",
                       "description": "Raw API key (mkx_...). Only returned once at creation; store it immediately."
                     }
                   },
-                  "additionalProperties": true,
-                  "required": [
-                    "id",
-                    "name",
-                    "key"
-                  ]
+                  "additionalProperties": false
                 }
               }
             }
@@ -9664,12 +11289,18 @@
                           ],
                           "properties": {
                             "used": {
-                              "type": "integer"
+                              "type": "integer",
+                              "description": "AI calls used in the current period."
                             },
                             "limit": {
-                              "type": "integer"
+                              "type": [
+                                "integer",
+                                "null"
+                              ],
+                              "description": "Period limit; null means unlimited."
                             }
-                          }
+                          },
+                          "additionalProperties": false
                         },
                         "storage_bytes": {
                           "type": "object",
@@ -9679,21 +11310,29 @@
                           ],
                           "properties": {
                             "used": {
-                              "type": "integer"
+                              "type": "integer",
+                              "description": "Storage used in bytes."
                             },
                             "limit": {
-                              "type": "integer"
+                              "type": [
+                                "integer",
+                                "null"
+                              ],
+                              "description": "Storage limit in bytes; null means unlimited."
                             }
-                          }
+                          },
+                          "additionalProperties": false
                         },
                         "period": {
                           "type": "string",
                           "format": "date-time",
                           "description": "Start of the current usage period."
                         }
-                      }
+                      },
+                      "additionalProperties": false
                     }
-                  }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
