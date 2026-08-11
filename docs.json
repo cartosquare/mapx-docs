@@ -25,6 +25,11 @@
       "href": "https://app.mapxagent.com"
     }
   },
+  "api": {
+    "playground": {
+      "proxy": false
+    }
+  },
   "navigation": {
     "tabs": [
       {
