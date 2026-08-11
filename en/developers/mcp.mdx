@@ -62,6 +62,59 @@ your account, and project ownership is enforced by the backend.
 5. `mapx remote --session <id>` — print a live, shareable URL of the project.
 6. `mapx report save ./report.html --session <id>` — save an HTML report.
 
+## Command reference
+
+```bash
+mapx auth status                                   # verify the API key
+
+mapx session create --title "analysis"             # create a project; returns session_id
+mapx session list                                  # list projects
+mapx session get <id>                              # show a project
+mapx session delete <id>                           # delete a project
+
+mapx upload ./data.geojson --session <id>          # upload: GeoJSON→layer, TIFF→COG, CSV→file
+mapx files list --session <id>                     # list files
+mapx files delete <file_id> --session <id>         # delete a file and its linked layers
+mapx assets list --session <id>                    # list all data assets (layers + files)
+
+mapx layers list --session <id>                    # list layers
+mapx layers get <layer_id> --session <id>          # layer info (geometry/fields/style)
+mapx layers style <layer_id> --session <id> --file style.json
+mapx layers visible <layer_id> true --session <id>
+mapx layers rename <layer_id> "new name" --session <id>
+mapx layers delete <layer_id> --session <id>
+mapx layers move-up <layer_id> --session <id>      # move one layer up (persisted by backend)
+mapx layers move-down <layer_id> --session <id>    # move one layer down (persisted by backend)
+mapx layers reorder --session <id> --ids <id1>,<id2>,<id3>   # set the full layer order at once
+
+mapx map fly-to --session <id> --center 116.4,39.9 --zoom 11
+mapx map fit-bounds --session <id> --bounds -74.1,40.6,-73.9,40.9
+mapx map go-home --session <id>
+mapx map zoom-to-layer --session <id> --layer <layer_id>
+mapx map basemap-style --session <id> --style dark              # positron | positronWithLabels | dark | darkWithLabels
+mapx map basemap-category --session <id> --key water --color #1e3a5f
+mapx map country-mask --session <id> --code CHN                 # --code "" clears the mask
+mapx map custom-mask --session <id> --file mask.geojson         # or --geojson <json>; --clear removes it
+mapx map zoom-in --session <id> --times 2
+mapx map zoom-out --session <id>
+mapx map pan --session <id> --direction north --amount large
+mapx map state --session <id>                                   # center/zoom/basemap/masks
+mapx map add-tile-layer --session <id> --url "https://tiles.example.com/{z}/{x}/{y}.png"
+
+mapx view static --session <id>                    # static embed URL (iframe/reports)
+mapx remote --session <id>                         # live view URL (SSE-synced)
+mapx remote --session <id> --open                  # open it in the local browser
+
+mapx report save ./report.html --session <id> --title "Analysis report"
+
+mapx skill                                        # this manual
+mapx skill styles                                 # style reference (renderer schemas/paint keys/labels/legends)
+mapx skill layer-style-editing                    # style editing workflow (inspect first, incremental updates)
+mapx skill report-generation                      # report generation workflow
+```
+
+Every command accepts `--json` for machine-readable output.
+
 ## Output contract
 
 With `--json`, stdout contains a single JSON object

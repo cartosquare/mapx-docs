@@ -33,6 +33,9 @@ cp /data/xuxiang/mapx/docs-source/openapi.json openapi.json
 | `POST` | `/api/keys` | 创建个人 API key |
 | `GET` | `/api/keys` | 列出 API key |
 | `DELETE` | `/api/keys/:id` | 撤销 API key |
+| `PUT` | `/api/v1/sessions/:id/layers/order` | 一次性重排全部图层 |
+| `DELETE` | `/api/v1/sessions/:id/files/:fileId` | 删除文件及其关联图层 |
+| `GET` | `/api/v1/sessions/:id/assets` | 列出所有数据资产（图层 + 文件） |
 | `POST` | `/api/internal/action` | 向项目派发地图操作 |
 | `POST` | `/api/internal/save-layer` | 保存图层 |
 | `POST` | `/api/internal/upload-base64` | 以 base64 上传文件 |
@@ -59,8 +62,8 @@ API key 通过能力范围（capability scopes）授予访问权限。`["*"]`（
 | --- | --- |
 | `session` | 项目列表/创建/获取/更新/删除、用量 |
 | `chat` | 对话 turn、提问/回答 |
-| `files` | 文件列表、上传、文件内容 |
-| `layers` | 图层列表、详情、更新、样式 |
+| `files` | 文件列表、上传、删除、文件内容 |
+| `layers` | 图层列表、详情、更新、样式、排序 |
 | `map` | 地图操作 |
 | `reports` | 报告保存、报告元数据 |
 | `remote` | 实时/静态视图 URL |
@@ -69,6 +72,8 @@ API key 通过能力范围（capability scopes）授予访问权限。`["*"]`（
 ## 地图操作
 
 `POST /api/v1/sessions/{id}/map/actions` 接受一个操作对象数组。每个操作需要 `type`；参数取决于类型。也接受 `map.*` 前缀的旧别名（例如 `map.flyTo`）。
+
+不带 `layer_id` 的 `add_tile_layer` 会由后端持久化（按 URL 去重），并在响应中返回创建的图层 id。
 
 ### 视图与相机
 

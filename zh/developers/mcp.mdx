@@ -53,6 +53,59 @@ mapx auth status                                  # 验证（Windows：.\mapx.ex
 5. `mapx remote --session <id>`——打印项目的实时可分享 URL。
 6. `mapx report save ./report.html --session <id>`——保存 HTML 报告。
 
+## 命令速查
+
+```bash
+mapx auth status                                   # 校验 API key
+
+mapx session create --title "analysis"             # 创建项目；返回 session_id
+mapx session list                                  # 列出项目
+mapx session get <id>                              # 查看项目
+mapx session delete <id>                           # 删除项目
+
+mapx upload ./data.geojson --session <id>          # 上传：GeoJSON→图层，TIFF→COG，CSV→文件
+mapx files list --session <id>                     # 列出文件
+mapx files delete <file_id> --session <id>         # 删除文件及其关联图层
+mapx assets list --session <id>                    # 列出所有数据资产（图层 + 文件）
+
+mapx layers list --session <id>                    # 列出图层
+mapx layers get <layer_id> --session <id>          # 图层信息（几何/字段/样式）
+mapx layers style <layer_id> --session <id> --file style.json
+mapx layers visible <layer_id> true --session <id>
+mapx layers rename <layer_id> "新名称" --session <id>
+mapx layers delete <layer_id> --session <id>
+mapx layers move-up <layer_id> --session <id>      # 图层上移（后端持久化）
+mapx layers move-down <layer_id> --session <id>    # 图层下移（后端持久化）
+mapx layers reorder --session <id> --ids <id1>,<id2>,<id3>   # 一次性重排全部图层
+
+mapx map fly-to --session <id> --center 116.4,39.9 --zoom 11
+mapx map fit-bounds --session <id> --bounds -74.1,40.6,-73.9,40.9
+mapx map go-home --session <id>
+mapx map zoom-to-layer --session <id> --layer <layer_id>
+mapx map basemap-style --session <id> --style dark              # positron | positronWithLabels | dark | darkWithLabels
+mapx map basemap-category --session <id> --key water --color #1e3a5f
+mapx map country-mask --session <id> --code CHN                 # --code "" 取消遮罩
+mapx map custom-mask --session <id> --file mask.geojson         # 或 --geojson <json>；--clear 取消
+mapx map zoom-in --session <id> --times 2
+mapx map zoom-out --session <id>
+mapx map pan --session <id> --direction north --amount large
+mapx map state --session <id>                                   # 视野/底图/遮罩状态
+mapx map add-tile-layer --session <id> --url "https://tiles.example.com/{z}/{x}/{y}.png"
+
+mapx view static --session <id>                    # 静态 embed URL（iframe/报告）
+mapx remote --session <id>                         # 实时视图 URL（SSE 同步）
+mapx remote --session <id> --open                  # 在本地浏览器打开
+
+mapx report save ./report.html --session <id> --title "分析报告"
+
+mapx skill                                        # 本手册
+mapx skill styles                                 # 样式参考（renderer schema/paint keys/标注/图例）
+mapx skill layer-style-editing                    # 样式编辑工作流（先查后改、增量更新）
+mapx skill report-generation                      # 报告生成工作流
+```
+
+所有命令都支持 `--json` 输出机器可读结果。
+
 ## 输出契约
 
 使用 `--json` 时，stdout 输出单个 JSON 对象（`{"ok":true,...}` 或 `{"ok":false,"error":"..."}`）；进度信息输出到 stderr。退出码：`0` 成功、`1` 业务失败、`2` 用法错误。

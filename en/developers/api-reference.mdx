@@ -39,6 +39,9 @@ cp /data/xuxiang/mapx/docs-source/openapi.json openapi.json
 | `POST` | `/api/keys` | Create a personal API key |
 | `GET` | `/api/keys` | List API keys |
 | `DELETE` | `/api/keys/:id` | Revoke an API key |
+| `PUT` | `/api/v1/sessions/:id/layers/order` | Reorder all layers in one request |
+| `DELETE` | `/api/v1/sessions/:id/files/:fileId` | Delete a file and its linked layers |
+| `GET` | `/api/v1/sessions/:id/assets` | List all data assets (layers + files) |
 | `POST` | `/api/internal/action` | Dispatch a map action to a project |
 | `POST` | `/api/internal/save-layer` | Save a layer |
 | `POST` | `/api/internal/upload-base64` | Upload a file as base64 |
@@ -68,8 +71,8 @@ allowed.
 | --- | --- |
 | `session` | Project list/create/get/update/delete, usage |
 | `chat` | Chat turns, ask/respond |
-| `files` | File list, upload, file content |
-| `layers` | Layer list, details, updates, style |
+| `files` | File list, upload, delete, file content |
+| `layers` | Layer list, details, updates, style, reorder |
 | `map` | Map actions |
 | `reports` | Report save, report metadata |
 | `remote` | Live/static view URLs |
@@ -80,6 +83,9 @@ allowed.
 `POST /api/v1/sessions/{id}/map/actions` accepts an array of action objects.
 Each action requires a `type`; the parameters depend on the type. Legacy
 `map.*` prefixed aliases (for example `map.flyTo`) are also accepted.
+
+`add_tile_layer` sent without a `layer_id` is persisted by the backend
+(deduplicated by URL) and the created layer id is returned in the response.
 
 ### View & camera
 
