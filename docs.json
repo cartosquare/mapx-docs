@@ -91,7 +91,11 @@
             ]
           },
           {
-            "group": "Reference",
+            "group": "API Reference",
+            "openapi": "openapi.json"
+          },
+          {
+            "group": "Guides",
             "pages": [
               "developers/api-reference",
               "developers/mcp",

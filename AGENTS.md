@@ -17,6 +17,9 @@ API, MCP, and skill facts:
 - `source/mcp-tools.json` — MCP tool names and descriptions.
 - `source/skills.json` — skill index (names and descriptions).
 - `source/system-prompt.md` — the AI system prompt used by the product.
+- `openapi.json` — the OpenAPI 3.0.3 contract for the public `/api/v1` REST API.
+  It is also served live at `GET /api/v1/openapi.json` and rendered as the
+  interactive **API Reference** group in `docs.json`.
 
 Always read the relevant source file before writing or updating documentation.
 
@@ -27,6 +30,8 @@ Always read the relevant source file before writing or updating documentation.
 2. Read the relevant `source/*` files for current facts.
 3. Map changes to pages:
    - API endpoint changes → `developers/api-reference.mdx`
+   - Public REST API changes → regenerate `openapi.json` (from the MapX repo:
+     `pnpm openapi:gen`, then copy `docs-source/openapi.json` here)
    - MCP tool changes → `developers/mcp.mdx`
    - Skill changes → `developers/skills.mdx`
    - Product/feature changes → existing `guides/*.mdx` or `concepts/*.mdx`
@@ -41,6 +46,7 @@ Always read the relevant source file before writing or updating documentation.
 
    ```bash
    cp -r /data/xuxiang/mapx/docs-source/* source/
+   cp /data/xuxiang/mapx/docs-source/openapi.json openapi.json
    ```
 
 5. Add any new pages to `docs.json` navigation.

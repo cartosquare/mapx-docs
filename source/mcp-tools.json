@@ -1,0 +1,155 @@
+{
+  "generatedAt": "2026-08-11T04:08:22.131Z",
+  "tools": [
+    {
+      "name": "map_add_geojson",
+      "description": "直接添加一个 GeoJSON 对象为地图图层。适用于少量数据或 AI 构造的几何数据。需要传入 geojson 和 layer_type（fill/line/circle）。",
+      "file": "tools/crates/mapx-mcp/src/tools/data.rs"
+    },
+    {
+      "name": "map_add_tile_layer",
+      "description": "在地图上添加栅格瓦片图层（会自动持久化）。支持 XYZ 瓦片 URL、WMS 服务等，URL 中使用 {z}/{x}/{y} 占位符。图层 ID 由服务端生成并在返回中给出；修改透明度请用 map_update_layer_style 传入该 ID 与 renderer.paint[\\\"raster-opacity\\\"]。",
+      "file": "tools/crates/mapx-mcp/src/tools/data.rs"
+    },
+    {
+      "name": "map_ask_user",
+      "description": "向用户提问以细化需求或确认操作。当需要用户做出选择（如分析方法、数据维度、颜色方案）时调用。可提供预设选项供用户点击选择，也可允许自由文本回复。每次只提一个问题，选项不超过 5 个。",
+      "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
+    },
+    {
+      "name": "map_delete_file",
+      "description": "删除指定文件及其关联的所有图层。当用户说'删除XX文件'时使用。需要 file_id，可先调用 map_list_files 获取。",
+      "file": "tools/crates/mapx-mcp/src/tools/data.rs"
+    },
+    {
+      "name": "map_fit_bounds",
+      "description": "将地图缩放到指定矩形边界范围。边界格式：[west, south, east, north]。当用户说'缩放到某个范围'、'看这个区域'时使用。",
+      "file": "tools/crates/mapx-mcp/src/tools/view.rs"
+    },
+    {
+      "name": "map_fly_to",
+      "description": "飞行到指定位置。将地图中心移动到指定经纬度并设置缩放级别。当用户说'飞到北京'、'看上海'、'定位到...'、'去...'时使用。经纬度坐标格式：[lng, lat]（经度在前，纬度在后）",
+      "file": "tools/crates/mapx-mcp/src/tools/view.rs"
+    },
+    {
+      "name": "map_get_embed_url",
+      "description": "获取当前会话的地图嵌入 URL，用于在 HTML 报告中嵌入可交互地图（iframe）。返回 { url }。",
+      "file": "tools/crates/mapx-mcp/src/tools/data.rs"
+    },
+    {
+      "name": "map_get_layer_info",
+      "description": "获取图层的完整信息：几何类型（geometry_type）、当前渲染器+标注配置、可用属性字段及统计（fields，含数值范围和唯一值domain）。修改样式前必须先调用此工具。layer_id 优先使用 map_list_layers 返回的 UUID；若手头只有显示名称/文件名，可直接传入（服务端会自动按名称解析）。fields 为精简统计：最多 100 个字段，数值字段含 min/max 与 5 个分位数，字符串字段含前 10 个唯一值；需要更详细的字段分布时，请直接读取工作区数据文件自行统计。",
+      "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
+    },
+    {
+      "name": "map_get_map_state",
+      "description": "获取当前地图的完整状态，包括视野中心、缩放级别、底图风格、国家遮罩和自定义遮罩信息。在修改遮罩或底图前先调用了解当前状态。",
+      "file": "tools/crates/mapx-mcp/src/tools/view.rs"
+    },
+    {
+      "name": "map_import_file",
+      "description": "从工作目录导入 GeoJSON 文件为地图图层（同时持久化到数据库）。导入后图层使用默认样式，需要调用 map_get_layer_info 获取 geometry_type 和字段信息，再用 map_update_layer_style 设置合适的渲染样式和标注。",
+      "file": "tools/crates/mapx-mcp/src/tools/data.rs"
+    },
+    {
+      "name": "map_import_image",
+      "description": "导入 GeoTIFF 影像文件为地图瓦片图层（自动转换为 COG 并持久化）。AI 生成的 .tif/.tiff 文件直接传 file_path（无需先注册）；已上传的文件可传 file_id。file_path 与 file_id 二选一。",
+      "file": "tools/crates/mapx-mcp/src/tools/data.rs"
+    },
+    {
+      "name": "map_list_assets",
+      "description": "列出会话中所有数据资产（空间图层 + 数据文件，自动去重）。每个资产标注类型（layer/file）和名称。比 map_list_layers 更用户友好。",
+      "file": "tools/crates/mapx-mcp/src/tools/data.rs"
+    },
+    {
+      "name": "map_list_files",
+      "description": "列出会话中的所有文件（上传的数据文件和 AI 生成的中间文件）。返回 file_id、file_name、file_type、file_size、columns 等信息。",
+      "file": "tools/crates/mapx-mcp/src/tools/data.rs"
+    },
+    {
+      "name": "map_list_layers",
+      "description": "列出当前地图上的所有图层（ID、名称、类型、可见性）。使用 map_list_assets 获取包含文件信息的数据资产视图。",
+      "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
+    },
+    {
+      "name": "map_move_layer_down",
+      "description": "将图层下移一层。当用户说'把XX下移'、'XX放到下面'时使用。",
+      "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
+    },
+    {
+      "name": "map_move_layer_up",
+      "description": "将图层上移一层。当用户说'把XX上移'、'XX放到上面'时使用。",
+      "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
+    },
+    {
+      "name": "map_pan",
+      "description": "向指定方向平移地图。当用户说'往北移'、'往右看'、'往西边飞'时使用。",
+      "file": "tools/crates/mapx-mcp/src/tools/view.rs"
+    },
+    {
+      "name": "map_remove_layer",
+      "description": "从地图上移除指定图层。当用户说'删除XX图层'、'移除刚才的结果'时使用。layer_id 必须是 map_list_layers 返回的 UUID，不要用显示名称或文件名。",
+      "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
+    },
+    {
+      "name": "map_rename_layer",
+      "description": "修改图层的显示名称。当用户说'重命名图层'、'把XX改名为YY'时使用。layer_id 必须是 map_list_layers 返回的 UUID，不要用显示名称或文件名。",
+      "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
+    },
+    {
+      "name": "map_save_report",
+      "description": "保存LLM生成的HTML分析报告。仅用于 HTML 报告，不能用于注册影像或其他数据文件（GeoTIFF 请用 map_import_image 的 file_path）。先用 shell 将 HTML 写入文件（如 cat > report.html），再传 file_path。",
+      "file": "tools/crates/mapx-mcp/src/tools/data.rs"
+    },
+    {
+      "name": "map_set_basemap_category",
+      "description": "设置底图某个类别的颜色和/或可见性。支持8个类别：background, water, green, roads, buildings, aeroway, boundaries, labels。当用户说'把水系改成深蓝色'、'隐藏道路'时使用。当前底图的样式和可见性信息可以通过调用 map_get_map_state 工具查看",
+      "file": "tools/crates/mapx-mcp/src/tools/basemap.rs"
+    },
+    {
+      "name": "map_set_basemap_style",
+      "description": "切换底图样式风格。有4种可选：positron（浅灰）、positronWithLabels（浅灰+标签）、dark（深色）、darkWithLabels（深色+标签）。当用户说'换成深色底图'、'去掉底图标签'、'切换底图风格'时使用。",
+      "file": "tools/crates/mapx-mcp/src/tools/basemap.rs"
+    },
+    {
+      "name": "map_set_country_mask",
+      "description": "按国家/地区裁剪底图显示区域。只显示指定国家范围内的底图，其余区域用背景色遮盖。传空字符串取消遮罩恢复全图显示。",
+      "file": "tools/crates/mapx-mcp/src/tools/mask.rs"
+    },
+    {
+      "name": "map_set_custom_mask",
+      "description": "用自定义 GeoJSON 范围裁剪底图显示区域。传空字符串取消遮罩。",
+      "file": "tools/crates/mapx-mcp/src/tools/mask.rs"
+    },
+    {
+      "name": "map_set_layer_visibility",
+      "description": "切换图层的可见性（显示/隐藏）。当用户说'隐藏XX图层'、'显示XX图层'时使用。layer_id 必须是 map_list_layers 返回的 UUID，不要用显示名称或文件名。",
+      "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
+    },
+    {
+      "name": "map_update_layer_style",
+      "description": "修改图层渲染样式、标注和图例。调用前必须先加载 styles 技能**，查看每种 renderer 的完整 JSON schema 和示例。layer_id 必须是 map_list_layers 返回的 UUID，不要用显示名称或文件名。",
+      "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
+    },
+    {
+      "name": "map_upload_file",
+      "description": "把本地文件内容（base64）上传到当前会话并注册为数据文件。GeoJSON 会直接生成图层；CSV/TIFF 等先保存为文件，再配合 map_import_image 或 AI 读取使用。文件大小上限 50MB。",
+      "file": "tools/crates/mapx-mcp/src/tools/data.rs"
+    },
+    {
+      "name": "map_zoom_in",
+      "description": "放大地图一级。当用户说'放大'、'拉近'、'更近一点'时使用。多次缩放可使用 times 参数。",
+      "file": "tools/crates/mapx-mcp/src/tools/view.rs"
+    },
+    {
+      "name": "map_zoom_out",
+      "description": "缩小地图一级。当用户说'缩小'、'拉远'、'更远一点'时使用。多次缩放可使用 times 参数。",
+      "file": "tools/crates/mapx-mcp/src/tools/view.rs"
+    },
+    {
+      "name": "map_zoom_to_layer",
+      "description": "将地图缩放到指定图层的范围，使该图层的内容完整显示在视口内。当用户说'缩放到XX图层'、'定位到XX图层'时使用。需要知道 layer_id，可先调用 map_list_layers 获取。",
+      "file": "tools/crates/mapx-mcp/src/tools/view.rs"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+---
+title: "Skills"
+description: "Guidance documents that teach AI agents how to work with MapX."
+---
+
+MapX ships a set of Markdown skills that teach an AI agent how to edit layer
+styles, clean data, and generate reports.
+
+CLI users can load them on demand:
+
+```bash
+mapx skill
+```
+
+The current skill index is stored in `source/skills.json`. Core skills include:
+
+- `styles` — renderer JSON schemas and paint key matrices.
+- `layer-style-editing` — inspect-first, incremental style workflows.
+- `report-generation` — data analysis and HTML report workflows.
+- `data-cleaning` — converting tabular data to typed GeoJSON.

@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-08-11T04:08:22.131Z",
+  "skills": [
+    {
+      "name": "data-cleaning",
+      "description": "Guides for converting tabular data (CSV/Excel/TSV) to properly-typed GeoJSON. Covers field type inference, numeric coercion, handling missing/dirty values, and mandatory data quality reporting after import. Use this skill whenever converting CSV/Excel to GeoJSON for map visualization.",
+      "path": "skills/data-cleaning/SKILL.md"
+    },
+    {
+      "name": "gdal",
+      "description": "GDAL/OGR command-line geospatial tools reference. Use this skill anytime the user needs to convert, reproject, clip, query, analyze, or otherwise process vector or raster geodata. Instead of guessing flags, consult this skill for exact syntax and common recipes.",
+      "path": "skills/gdal/SKILL.md"
+    },
+    {
+      "name": "geocoding",
+      "description": "Geocode addresses to coordinates (forward) and coordinates to addresses (reverse) using a Python helper script. Supports free OpenStreetMap-based APIs (Nominatim, Photon) and Tianditu (天地图) for China-optimized results. Use this skill whenever the user needs to find coordinates for an address, get an address for a coordinate pair, batch-geocode a CSV/JSON file of addresses, or convert address data into GeoJSON for display on the map. Nominatim/Photon require no API key; Tianditu requires a TIANDITU_TK key.",
+      "path": "skills/geocoding/SKILL.md"
+    },
+    {
+      "name": "layer-style-editing",
+      "description": "LLM workflow for editing layer styles via MCP tools. Covers the complete flow: inspect current style, choose renderer, construct incremental updates, apply, verify. Use this skill together with the styles skill for JSON schema reference.",
+      "path": "skills/layer-style-editing/SKILL.md"
+    },
+    {
+      "name": "mapx-cli",
+      "description": "mapx-cli 技能手册",
+      "path": "skills/mapx-cli/SKILL.md"
+    },
+    {
+      "name": "overpass",
+      "description": "Query OpenStreetMap data via the Overpass API using a Python helper script. Use this skill whenever the user needs to search for OSM features, download map data by location or tags, find nearby POIs, or extract geometries from OpenStreetMap. **IMPORTANT: Always limit queries to ≤50 MB by using** `[maxsize:52428800]` and bounding boxes or tag filters to narrow scope.",
+      "path": "skills/overpass/SKILL.md"
+    },
+    {
+      "name": "qgis",
+      "description": "QGIS PyQGIS standalone scripting and Processing Toolbox algorithms reference. Use this skill whenever the user needs to run QGIS processing algorithms headlessly via Python, use the qgis_process CLI, or find algorithm IDs for vector geometry, overlay, raster, or analysis operations. Prefer qgis_process CLI over PyQGIS for simple tasks — no Python setup needed, just shell commands.",
+      "path": "skills/qgis/SKILL.md"
+    },
+    {
+      "name": "report-generation",
+      "description": "Report Generation Skill",
+      "path": "skills/report-generation/SKILL.md"
+    },
+    {
+      "name": "spatial",
+      "description": "Spatial data processing principles, algorithms, and tool selection guide. Covers coordinate reference systems, data models, core geometric algorithms (Douglas-Peucker, Haversine, ray casting, etc.), coordinate precision, and common pitfalls. Use this skill when designing spatial data pipelines, choosing between GDAL/QGIS/PostGIS for a task, or understanding how a specific algorithm works. References the gdal and qgis skills for tool-specific command syntax.",
+      "path": "skills/spatial/SKILL.md"
+    },
+    {
+      "name": "styles",
+      "description": "Complete reference for Mapx layer styles. Covers geometry types (circle/line/fill), renderer types (single/categorized/graduated/heatmap/interpolated/multi_field/chart), paint keys per geometry, label annotation, legend toggle, JSON schemas, and examples. Use this skill when modifying layer styles via map_update_layer_style or map_import_file MCP tools.",
+      "path": "skills/styles/SKILL.md"
+    },
+    {
+      "name": "tianditu",
+      "description": "Tianditu (天地图) POI search and administrative division query via HTTP API. Search for places by keyword (with spatial filters: bounding box, admin area, nearby radius) and retrieve administrative boundary polygons. Results are returned as GeoJSON for direct use with map_import_file on the map. Requires TIANDITU_TK environment variable (API key).",
+      "path": "skills/tianditu/SKILL.md"
+    }
+  ]
+}

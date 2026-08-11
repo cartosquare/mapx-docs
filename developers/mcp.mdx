@@ -1,0 +1,47 @@
+---
+title: "mapx CLI"
+description: "Drive MapX sessions, data, styles, and reports from third-party platforms with the mapx command-line client."
+---
+
+MapX exposes its agent-callable surface through the `mapx` command-line client.
+Third-party platforms (WorkBuddy, local LLM tool loops, automation scripts) can
+run the single binary to control sessions, upload data, change map styles, and
+save reports without embedding the product UI.
+
+## Install and configure
+
+```bash
+export MAPX_API_URL="https://api.mapxagent.com"   # optional
+export MAPX_API_KEY="mkx_..."                     # personal key, shown once
+mapx auth status                                  # verify
+```
+
+Every command accepts `--api-key` and `--url` overrides. The key is scoped to
+your account, and session ownership is enforced by the backend.
+
+## Typical workflow
+
+1. `mapx session create --title "analysis"` (or `mapx session list`) to get a
+   `session_id`.
+2. `mapx upload ./data.geojson --session <id>` — upload local data directly.
+3. `mapx layers list --session <id>` then `mapx layers get <layer_id> --session <id>`
+   to inspect geometry, fields, and the current style.
+4. `mapx layers style <layer_id> --session <id> --file style.json` — apply
+   incremental style changes.
+5. `mapx remote --session <id>` — print a live, shareable URL of the session.
+6. `mapx report save ./report.html --session <id>` — save an HTML report.
+
+## Output contract
+
+With `--json`, stdout contains a single JSON object
+(`{"ok":true,...}` or `{"ok":false,"error":"..."}`); progress goes to stderr.
+Exit codes: `0` success, `1` business failure, `2` usage error.
+
+## Skills
+
+Before complex tasks, print the built-in manual with `mapx skill`. The full
+skill index is stored in `source/skills.json`. See
+[Skills](/developers/skills).
+
+Note: MapX's in-product AI agent uses a private stdio MCP server. That server is
+not a public integration surface; use the CLI for external integrations.

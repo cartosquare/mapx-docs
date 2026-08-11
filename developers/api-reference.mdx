@@ -1,0 +1,43 @@
+---
+title: "API reference"
+description: "HTTP endpoints exposed by the MapX backend."
+---
+
+The interactive API reference is generated from the OpenAPI contract and
+available under the **API Reference** group in the sidebar. The contract is
+served by the API itself at `GET /api/v1/openapi.json` and stored in
+`openapi.json` at the root of this repository.
+
+The full endpoint list is generated from the source repository and stored in
+`source/api-routes.json`. If this page looks stale, regenerate the source pack:
+
+```bash
+cd /data/xuxiang/mapx
+pnpm docs:gen
+```
+
+Then sync the generated files:
+
+```bash
+cp -r /data/xuxiang/mapx/docs-source/* source/
+cp /data/xuxiang/mapx/docs-source/openapi.json openapi.json
+```
+
+## Key endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `POST` | `/api/sessions` | Create a session |
+| `GET` | `/api/sessions` | List sessions |
+| `GET` | `/api/sessions/:id` | Get session details |
+| `PATCH` | `/api/sessions/:id` | Update session metadata |
+| `GET` | `/api/sessions/:id/embed` | Get or create an embed token |
+| `POST` | `/api/keys` | Create a personal API key |
+| `GET` | `/api/keys` | List API keys |
+| `DELETE` | `/api/keys/:id` | Revoke an API key |
+| `POST` | `/api/internal/action` | Dispatch a map action to a session |
+| `POST` | `/api/internal/save-layer` | Save a layer |
+| `POST` | `/api/internal/upload-base64` | Upload a file as base64 |
+| `POST` | `/api/internal/save-report` | Save an HTML report |
+
+For the complete list, read `source/api-routes.json`.

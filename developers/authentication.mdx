@@ -1,0 +1,33 @@
+---
+title: "Authentication"
+description: "Authenticate API and MCP requests with a personal API key."
+---
+
+Create a personal API key from your MapX account. The raw key (for example
+`mkx_...`) is shown only once, so save it immediately.
+
+The backend stores only a SHA-256 hash of the key. If a key is leaked, revoke it
+from your account and create a new one.
+
+## API requests
+
+Send the key as a bearer token:
+
+```bash
+curl https://api.mapxagent.com/api/sessions \
+  -H "Authorization: Bearer mkx_..."
+```
+
+## CLI requests
+
+Configure the CLI with the same personal key:
+
+```bash
+export MAPX_API_URL="https://api.mapxagent.com"
+export MAPX_API_KEY="mkx_..."
+mapx auth status
+```
+
+Every command also accepts `--api-key` and `--url` overrides. All operations
+are scoped to the account that owns the key, and session ownership is enforced
+by the backend.

@@ -1,0 +1,545 @@
+{
+  "generatedAt": "2026-08-11T04:08:22.131Z",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/admin/logs",
+      "file": "admin.ts",
+      "router": "adminRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/me",
+      "file": "admin.ts",
+      "router": "adminRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/usage",
+      "file": "admin.ts",
+      "router": "adminRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/users",
+      "file": "admin.ts",
+      "router": "adminRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/admin/users/:id",
+      "file": "admin.ts",
+      "router": "adminRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/users/:id/usage",
+      "file": "admin.ts",
+      "router": "adminRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/api-keys",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/api-keys",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/api-keys/:keyId",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/billing/checkout",
+      "file": "billing.ts",
+      "router": "billingRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/billing/portal",
+      "file": "billing.ts",
+      "router": "billingRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/embed/:token",
+      "file": "embed-public.ts",
+      "router": "embedPublicRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/embed/:token/events",
+      "file": "embed-public.ts",
+      "router": "embedPublicRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/embed/file-content-stream",
+      "file": "embed-public.ts",
+      "router": "embedPublicRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/files/:sessionId/:filename",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/action",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/ask-user",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/delete-file",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/delete-layer",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/get-embed-url",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/get-layer-info",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/get-remote-url",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/import-file",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/import-image",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/list-assets",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/list-files",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/list-layers",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/map-state",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/record-usage",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/rename-layer",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/save-layer",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/save-report",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/set-layer-visibility",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/update-layer-style",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/upload-base64",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/keys",
+      "file": "keys.ts",
+      "router": "keyRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/keys",
+      "file": "keys.ts",
+      "router": "keyRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/keys/:id",
+      "file": "keys.ts",
+      "router": "keyRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/keys/verify",
+      "file": "keys.ts",
+      "router": "keyRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/openapi.json",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/samples",
+      "file": "samples.ts",
+      "router": "sampleRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/screenshots/:filename",
+      "file": "screenshot.ts",
+      "router": "screenshotRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/sessions/:id",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/ask/respond",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/chat",
+      "file": "chat.ts",
+      "router": "chatRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/embed",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id/embed",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/export",
+      "file": "project.ts",
+      "router": "projectRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/export-manifest",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/file-content",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/file-content-stream",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/file-preview",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/files",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/files",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/files/:fileId/content",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/import-project",
+      "file": "project.ts",
+      "router": "projectRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/import-sample",
+      "file": "samples.ts",
+      "router": "sampleRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layers",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id/layers",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/sessions/:id/layers/:layerId",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layers/:layerId",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id/layers/:layerId",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/:id/layers/:layerId/style",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/map",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/map/actions",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/messages",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/messages",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id/messages/:msgId/feedback",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/remote-url",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/report",
+      "file": "report.ts",
+      "router": "reportRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/report/:fileId/share",
+      "file": "report.ts",
+      "router": "reportRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/report/:filename",
+      "file": "report.ts",
+      "router": "reportRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/reports",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/reports/:fileId",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/respond",
+      "file": "chat.ts",
+      "router": "chatRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/screenshot",
+      "file": "screenshot.ts",
+      "router": "screenshotRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/share",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/shares",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/sessions/:id/shares/:sharedUserId",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/title",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/upload",
+      "file": "upload.ts",
+      "router": "uploadRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/upload/chunk",
+      "file": "upload.ts",
+      "router": "uploadRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/migrate",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/share/report/:token",
+      "file": "report.ts",
+      "router": "reportRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/usage",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/user/profile",
+      "file": "user.ts",
+      "router": "userRoutes"
+    }
+  ]
+}
