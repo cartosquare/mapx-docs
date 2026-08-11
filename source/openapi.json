@@ -3956,27 +3956,36 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
-                    },
-                    "fileName": {
-                      "type": "string"
-                    },
-                    "fileType": {
-                      "type": "string"
-                    },
-                    "fileSize": {
-                      "type": "integer"
-                    },
-                    "columns": {
-                      "type": "array",
-                      "items": {}
-                    },
-                    "createdAt": {
                       "type": "string",
-                      "format": "date-time"
+                      "description": "Layer id created for GeoJSON uploads."
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Display name."
+                    },
+                    "fileId": {
+                      "type": "string",
+                      "description": "Uploaded file id."
+                    },
+                    "addedToMap": {
+                      "type": "boolean",
+                      "description": "Whether the file was automatically added as a layer."
+                    },
+                    "featureCount": {
+                      "type": "integer",
+                      "description": "Feature count for GeoJSON uploads."
+                    },
+                    "geometryType": {
+                      "type": "string",
+                      "description": "Detected geometry type (circle/line/fill) for GeoJSON uploads."
+                    },
+                    "style": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "description": "Layer style applied to the new layer."
                     }
                   },
-                  "additionalProperties": true
+                  "additionalProperties": false
                 }
               }
             }
@@ -6307,7 +6316,7 @@
         ],
         "operationId": "dispatchMapActions",
         "summary": "Dispatch map actions",
-        "description": "Requires scope: map. Applies actions (fly-to, add/remove layer, style changes) to the live project.",
+        "description": "Requires scope: map. Applies a list of map actions to the live project, in order. Supported action types: fly_to, jump_to, fit_bounds, go_home, zoom_in, zoom_out, pan, zoom_to_layer, add_geojson_layer, add_tile_layer, add_cog_layer, remove_layer, rename_layer, set_layer_visibility, move_layer_up, move_layer_down, update_layer_style, set_basemap_style, set_basemap_category, set_country_mask, set_custom_mask, clear_layers. Each action's parameters are described in the actions schema below.",
         "parameters": [
           {
             "name": "id",
@@ -6325,20 +6334,729 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "actions": {
-                    "minItems": 1,
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {},
-                      "additionalProperties": {}
-                    }
-                  }
-                },
                 "required": [
                   "actions"
                 ],
+                "properties": {
+                  "actions": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "Map actions to apply in order. Each item must have a type; see the oneOf variants for supported types and parameters.",
+                    "items": {
+                      "oneOf": [
+                        {
+                          "title": "fly_to",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "center"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "fly_to"
+                              ]
+                            },
+                            "center": {
+                              "type": "array",
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              },
+                              "description": "[lng, lat]. Required."
+                            },
+                            "zoom": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 22,
+                              "description": "Zoom level (default: current + 1)."
+                            },
+                            "bearing": {
+                              "type": "number",
+                              "description": "Rotation in degrees (default 0)."
+                            },
+                            "pitch": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 85,
+                              "description": "Pitch in degrees (default 0)."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Fly to a map center."
+                        },
+                        {
+                          "title": "jump_to",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "center"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "jump_to"
+                              ]
+                            },
+                            "center": {
+                              "type": "array",
+                              "minItems": 2,
+                              "maxItems": 2,
+                              "items": {
+                                "type": "number"
+                              },
+                              "description": "[lng, lat]. Required."
+                            },
+                            "zoom": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 22,
+                              "description": "Zoom level (default: current)."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Jump to a map center without animation."
+                        },
+                        {
+                          "title": "fit_bounds",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "bbox"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "fit_bounds"
+                              ]
+                            },
+                            "bbox": {
+                              "type": "array",
+                              "minItems": 4,
+                              "maxItems": 4,
+                              "items": {
+                                "type": "number"
+                              },
+                              "description": "[west, south, east, north]. Required."
+                            },
+                            "padding": {
+                              "type": "number",
+                              "minimum": 0,
+                              "description": "Padding in pixels (default 50)."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Fit the map viewport to a bounding box."
+                        },
+                        {
+                          "title": "go_home",
+                          "type": "object",
+                          "required": [
+                            "type"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "go_home"
+                              ]
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Reset the map to the default world view."
+                        },
+                        {
+                          "title": "zoom_in",
+                          "type": "object",
+                          "required": [
+                            "type"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "zoom_in"
+                              ]
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Zoom in one level."
+                        },
+                        {
+                          "title": "zoom_out",
+                          "type": "object",
+                          "required": [
+                            "type"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "zoom_out"
+                              ]
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Zoom out one level."
+                        },
+                        {
+                          "title": "pan",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "direction"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "pan"
+                              ]
+                            },
+                            "direction": {
+                              "type": "string",
+                              "enum": [
+                                "north",
+                                "south",
+                                "east",
+                                "west",
+                                "northeast",
+                                "northwest",
+                                "southeast",
+                                "southwest"
+                              ],
+                              "description": "Pan direction. Required."
+                            },
+                            "amount": {
+                              "type": "string",
+                              "enum": [
+                                "small",
+                                "medium",
+                                "large"
+                              ],
+                              "description": "Pan distance (default medium)."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Pan the map in a direction."
+                        },
+                        {
+                          "title": "zoom_to_layer",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "layer_id"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "zoom_to_layer"
+                              ]
+                            },
+                            "layer_id": {
+                              "type": "string",
+                              "description": "Layer UUID or id. Required."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Zoom to a layer's extent."
+                        },
+                        {
+                          "title": "add_geojson_layer",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "layer_id"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "add_geojson_layer"
+                              ]
+                            },
+                            "layer_id": {
+                              "type": "string",
+                              "description": "Layer UUID or id. Required."
+                            },
+                            "geojson": {
+                              "type": "object",
+                              "additionalProperties": true,
+                              "description": "Inline GeoJSON FeatureCollection. Either this or file_id is required."
+                            },
+                            "file_id": {
+                              "type": "string",
+                              "description": "Uploaded file id to stream from the server. Either this or geojson is required."
+                            },
+                            "session_id": {
+                              "type": "string",
+                              "description": "Project UUID owning the file (required when streaming by file_id)."
+                            },
+                            "file_path": {
+                              "type": "string",
+                              "description": "Server-side file path (alternative to file_id)."
+                            },
+                            "layer_type": {
+                              "type": "string",
+                              "description": "Geometry type hint: circle / line / fill."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "Display name for the layer."
+                            },
+                            "columns": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "additionalProperties": true
+                              },
+                              "description": "Column metadata."
+                            },
+                            "style": {
+                              "type": "object",
+                              "additionalProperties": true,
+                              "description": "Layer style object (renderer / label / legend)."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Add a GeoJSON layer from inline data or a server file."
+                        },
+                        {
+                          "title": "add_tile_layer",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "url",
+                            "layer_id"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "add_tile_layer"
+                              ]
+                            },
+                            "url": {
+                              "type": "string",
+                              "format": "uri",
+                              "description": "XYZ tile URL template (with {z}/{x}/{y}). Required."
+                            },
+                            "layer_id": {
+                              "type": "string",
+                              "description": "Layer UUID or id. Required."
+                            },
+                            "layer_name": {
+                              "type": "string",
+                              "description": "Display name."
+                            },
+                            "attribution": {
+                              "type": "string",
+                              "description": "Tile attribution text."
+                            },
+                            "opacity": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1,
+                              "description": "Raster opacity (default 1)."
+                            },
+                            "min_zoom": {
+                              "type": "number",
+                              "minimum": 0,
+                              "description": "Minimum zoom (default 0)."
+                            },
+                            "max_zoom": {
+                              "type": "number",
+                              "minimum": 0,
+                              "description": "Maximum zoom (default 22)."
+                            },
+                            "tile_size": {
+                              "type": "number",
+                              "minimum": 16,
+                              "description": "Tile size in pixels (default 256)."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Add a raster tile layer."
+                        },
+                        {
+                          "title": "add_cog_layer",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "url",
+                            "layer_id"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "add_cog_layer"
+                              ]
+                            },
+                            "url": {
+                              "type": "string",
+                              "description": "COG tile URL. Required."
+                            },
+                            "layer_id": {
+                              "type": "string",
+                              "description": "Layer UUID or id. Required."
+                            },
+                            "layer_name": {
+                              "type": "string",
+                              "description": "Display name."
+                            },
+                            "opacity": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1,
+                              "description": "Raster opacity (default 1)."
+                            },
+                            "min_zoom": {
+                              "type": "number",
+                              "minimum": 0,
+                              "description": "Minimum zoom (default 0)."
+                            },
+                            "max_zoom": {
+                              "type": "number",
+                              "minimum": 0,
+                              "description": "Maximum zoom (default 22)."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Add a Cloud-Optimized GeoTIFF layer."
+                        },
+                        {
+                          "title": "remove_layer",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "layer_id"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "remove_layer"
+                              ]
+                            },
+                            "layer_id": {
+                              "type": "string",
+                              "description": "Layer UUID or id. Required."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Remove a layer and its source."
+                        },
+                        {
+                          "title": "rename_layer",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "layer_id",
+                            "name"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "rename_layer"
+                              ]
+                            },
+                            "layer_id": {
+                              "type": "string",
+                              "description": "Layer UUID or id. Required."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "New display name. Required."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Rename a layer."
+                        },
+                        {
+                          "title": "set_layer_visibility",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "layer_id",
+                            "visible"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "set_layer_visibility"
+                              ]
+                            },
+                            "layer_id": {
+                              "type": "string",
+                              "description": "Layer UUID or id. Required."
+                            },
+                            "visible": {
+                              "type": "boolean",
+                              "description": "Whether the layer is visible. Required."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Show or hide a layer."
+                        },
+                        {
+                          "title": "move_layer_up",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "layer_id"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "move_layer_up"
+                              ]
+                            },
+                            "layer_id": {
+                              "type": "string",
+                              "description": "Layer UUID or id. Required."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Move a layer up in draw order."
+                        },
+                        {
+                          "title": "move_layer_down",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "layer_id"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "move_layer_down"
+                              ]
+                            },
+                            "layer_id": {
+                              "type": "string",
+                              "description": "Layer UUID or id. Required."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Move a layer down in draw order."
+                        },
+                        {
+                          "title": "update_layer_style",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "layer_id",
+                            "style"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "update_layer_style"
+                              ]
+                            },
+                            "layer_id": {
+                              "type": "string",
+                              "description": "Layer UUID or id. Required."
+                            },
+                            "style": {
+                              "type": "object",
+                              "additionalProperties": true,
+                              "description": "New style object. Required."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Replace a layer's style."
+                        },
+                        {
+                          "title": "set_basemap_style",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "style"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "set_basemap_style"
+                              ]
+                            },
+                            "style": {
+                              "type": "string",
+                              "enum": [
+                                "positron",
+                                "positronWithLabels",
+                                "dark",
+                                "darkWithLabels"
+                              ],
+                              "description": "Basemap style id. Required."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Switch the basemap style."
+                        },
+                        {
+                          "title": "set_basemap_category",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "category_key"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "set_basemap_category"
+                              ]
+                            },
+                            "category_key": {
+                              "type": "string",
+                              "enum": [
+                                "background",
+                                "water",
+                                "green",
+                                "roads",
+                                "buildings",
+                                "aeroway",
+                                "boundaries",
+                                "labels"
+                              ],
+                              "description": "Basemap category. Required."
+                            },
+                            "color": {
+                              "type": "string",
+                              "description": "CSS color value (e.g. #1e3a5f)."
+                            },
+                            "visible": {
+                              "type": "boolean",
+                              "description": "Whether the category is visible."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Override a basemap category's color or visibility."
+                        },
+                        {
+                          "title": "set_country_mask",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "country_code"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "set_country_mask"
+                              ]
+                            },
+                            "country_code": {
+                              "type": "string",
+                              "description": "ISO 3166-1 alpha-3 country code (e.g. CHN). Required."
+                            },
+                            "visible": {
+                              "type": "boolean",
+                              "description": "Whether the mask is shown."
+                            },
+                            "color": {
+                              "type": "string",
+                              "description": "Mask color override (hex)."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Show or hide a country mask."
+                        },
+                        {
+                          "title": "set_custom_mask",
+                          "type": "object",
+                          "required": [
+                            "type"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "set_custom_mask"
+                              ]
+                            },
+                            "geojson": {
+                              "type": "string",
+                              "description": "Raw GeoJSON string with a Polygon/MultiPolygon geometry."
+                            },
+                            "color": {
+                              "type": "string",
+                              "description": "Mask color override (hex)."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Set or clear a custom polygon mask (geojson null clears it)."
+                        },
+                        {
+                          "title": "file_generated",
+                          "type": "object",
+                          "required": [
+                            "type",
+                            "file_id",
+                            "file_name"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "file_generated"
+                              ]
+                            },
+                            "file_id": {
+                              "type": "string",
+                              "description": "Generated file id. Required."
+                            },
+                            "file_name": {
+                              "type": "string",
+                              "description": "Display name. Required."
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Human-readable summary."
+                            },
+                            "url": {
+                              "type": "string",
+                              "description": "Preview URL."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Notify the UI that a file/report was generated (backend-emitted)."
+                        },
+                        {
+                          "title": "clear_layers",
+                          "type": "object",
+                          "required": [
+                            "type"
+                          ],
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "clear_layers"
+                              ]
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Remove all AI-created layers."
+                        }
+                      ]
+                    }
+                  }
+                },
                 "additionalProperties": false
               }
             }

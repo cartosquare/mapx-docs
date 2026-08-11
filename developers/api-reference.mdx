@@ -45,3 +45,50 @@ cp /data/xuxiang/mapx/docs-source/openapi.json openapi.json
 | `POST` | `/api/internal/save-report` | Save an HTML report |
 
 For the complete list, read `source/api-routes.json`.
+
+## Map actions
+
+`POST /api/v1/sessions/{id}/map/actions` accepts an array of action objects.
+Each action requires a `type`; the parameters depend on the type. Legacy
+`map.*` prefixed aliases (for example `map.flyTo`) are also accepted.
+
+### View & camera
+
+| Type | Required | Optional | Description |
+| --- | --- | --- | --- |
+| `fly_to` | `center` | `zoom`, `bearing`, `pitch` | Fly to a map center |
+| `jump_to` | `center` | `zoom` | Jump to a center without animation |
+| `fit_bounds` | `bbox` | `padding` | Fit the viewport to a bounding box |
+| `go_home` | — | — | Reset to the default world view |
+| `zoom_in` / `zoom_out` | — | — | Zoom one level |
+| `pan` | `direction` | `amount` | Pan in a direction |
+| `zoom_to_layer` | `layer_id` | — | Zoom to a layer's extent |
+
+### Layers
+
+| Type | Required | Optional | Description |
+| --- | --- | --- | --- |
+| `add_geojson_layer` | `layer_id`, one of `geojson` / `file_id` | `session_id`, `file_path`, `layer_type`, `name`, `columns`, `style` | Add a GeoJSON layer from inline data or a server file |
+| `add_tile_layer` | `url`, `layer_id` | `layer_name`, `attribution`, `opacity`, `min_zoom`, `max_zoom`, `tile_size` | Add a raster tile layer |
+| `add_cog_layer` | `url`, `layer_id` | `layer_name`, `opacity`, `min_zoom`, `max_zoom` | Add a Cloud-Optimized GeoTIFF layer |
+| `remove_layer` | `layer_id` | — | Remove a layer and its source |
+| `rename_layer` | `layer_id`, `name` | — | Rename a layer |
+| `set_layer_visibility` | `layer_id`, `visible` | — | Show or hide a layer |
+| `move_layer_up` / `move_layer_down` | `layer_id` | — | Reorder a layer |
+| `update_layer_style` | `layer_id`, `style` | — | Replace a layer's style |
+
+### Basemap & masks
+
+| Type | Required | Optional | Description |
+| --- | --- | --- | --- |
+| `set_basemap_style` | `style` | — | Switch the basemap style |
+| `set_basemap_category` | `category_key` | `color`, `visible` | Override a basemap category |
+| `set_country_mask` | `country_code` | `visible`, `color` | Show or hide a country mask |
+| `set_custom_mask` | — | `geojson`, `color` | Set or clear a custom polygon mask |
+
+### System & notifications
+
+| Type | Required | Optional | Description |
+| --- | --- | --- | --- |
+| `file_generated` | `file_id`, `file_name` | `description`, `url` | Notify the UI that a file/report was generated (backend-emitted) |
+| `clear_layers` | — | — | Remove all AI-created layers |
