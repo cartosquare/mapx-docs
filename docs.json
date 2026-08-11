@@ -102,6 +102,7 @@
           {
             "group": "Guides",
             "pages": [
+              "developers/agent-tools",
               "developers/api-reference",
               "developers/mcp",
               "developers/skills"

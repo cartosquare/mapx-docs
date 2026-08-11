@@ -13,10 +13,38 @@ as `mapx session create`) keep that technical name.
 
 ## Install and configure
 
+Download the binary for your platform from OSS (the `latest` alias points to
+the newest release).
+
+Unix (Linux/macOS):
+
+```bash
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m)
+case "$ARCH" in
+  x86_64|amd64) ARCH=x86_64 ;;
+  aarch64|arm64) ARCH=aarch64 ;;
+  *) echo "unsupported architecture: $ARCH" >&2; exit 1 ;;
+esac
+curl -fsSL -o mapx "https://mapx.oss-cn-hongkong.aliyuncs.com/skill/mapx-cli/mapx-cli-${OS}-${ARCH}-latest"
+chmod +x mapx
+./mapx --help
+```
+
+Windows (PowerShell):
+
+```powershell
+$arch = if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64") { "aarch64" } else { "x86_64" }
+Invoke-WebRequest -Uri "https://mapx.oss-cn-hongkong.aliyuncs.com/skill/mapx-cli/mapx-cli-windows-$arch-latest.exe" -OutFile "mapx.exe"
+.\mapx.exe --help
+```
+
+Then configure the API key:
+
 ```bash
 export MAPX_API_URL="https://api.mapxagent.com"   # optional
 export MAPX_API_KEY="mkx_..."                     # personal key, shown once
-mapx auth status                                  # verify
+mapx auth status                                  # verify (Windows: .\mapx.exe auth status)
 ```
 
 Every command accepts `--api-key` and `--url` overrides. The key is scoped to
