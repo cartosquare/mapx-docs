@@ -100,15 +100,12 @@
                             "properties": {
                               "center": {
                                 "description": "Map center as [lng, lat].",
+                                "minItems": 2,
+                                "maxItems": 2,
                                 "type": "array",
-                                "items": [
-                                  {
-                                    "type": "number"
-                                  },
-                                  {
-                                    "type": "number"
-                                  }
-                                ]
+                                "items": {
+                                  "type": "number"
+                                }
                               },
                               "zoom": {
                                 "description": "Map zoom level, 0-22.",
@@ -134,6 +131,7 @@
                                     "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                                   },
                                   "categories": {
+                                    "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels. Omitted categories keep their built-in defaults.",
                                     "type": "object",
                                     "additionalProperties": {
                                       "type": "object",
@@ -149,19 +147,17 @@
                                       },
                                       "additionalProperties": false,
                                       "description": "Per-category color and visibility override."
-                                    },
-                                    "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
+                                    }
                                   }
                                 },
                                 "required": [
-                                  "style",
-                                  "categories"
+                                  "style"
                                 ],
                                 "additionalProperties": false,
                                 "description": "Basemap style and per-category overrides."
                               },
                               "countryMask": {
-                                "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                                "description": "Inverted-polygon mask that hides the basemap outside a country. Omitted or null means no country mask.",
                                 "anyOf": [
                                   {
                                     "type": "object",
@@ -196,7 +192,7 @@
                                 ]
                               },
                               "customMask": {
-                                "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                                "description": "Custom polygon mask built from arbitrary GeoJSON. Omitted or null means no custom mask.",
                                 "anyOf": [
                                   {
                                     "type": "object",
@@ -506,12 +502,14 @@
         "description": "Requires scope: session.",
         "requestBody": {
           "required": true,
+          "description": "All fields are optional; an empty object creates a session with default title and map state.",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "title": {
+                    "description": "Session title. Optional; defaults to \"New Session\" when omitted or empty.",
                     "type": "string",
                     "maxLength": 200
                   },
@@ -520,15 +518,12 @@
                     "properties": {
                       "center": {
                         "description": "Map center as [lng, lat].",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "type": "array",
-                        "items": [
-                          {
-                            "type": "number"
-                          },
-                          {
-                            "type": "number"
-                          }
-                        ]
+                        "items": {
+                          "type": "number"
+                        }
                       },
                       "zoom": {
                         "description": "Map zoom level, 0-22.",
@@ -554,6 +549,7 @@
                             "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                           },
                           "categories": {
+                            "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels. Omitted categories keep their built-in defaults.",
                             "type": "object",
                             "additionalProperties": {
                               "type": "object",
@@ -569,19 +565,17 @@
                               },
                               "additionalProperties": false,
                               "description": "Per-category color and visibility override."
-                            },
-                            "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
+                            }
                           }
                         },
                         "required": [
-                          "style",
-                          "categories"
+                          "style"
                         ],
                         "additionalProperties": false,
                         "description": "Basemap style and per-category overrides."
                       },
                       "countryMask": {
-                        "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                        "description": "Inverted-polygon mask that hides the basemap outside a country. Omitted or null means no country mask.",
                         "anyOf": [
                           {
                             "type": "object",
@@ -616,7 +610,7 @@
                         ]
                       },
                       "customMask": {
-                        "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                        "description": "Custom polygon mask built from arbitrary GeoJSON. Omitted or null means no custom mask.",
                         "anyOf": [
                           {
                             "type": "object",
@@ -642,10 +636,30 @@
                       }
                     },
                     "additionalProperties": false,
-                    "description": "Current map viewport and basemap state."
+                    "description": "Initial map state. All fields optional. Omitted center/zoom/bearing/pitch default to [0, 0], 2, 0, 0; omitted basemap defaults to { style: \"positron\", categories: {} }."
                   }
                 },
-                "additionalProperties": false
+                "additionalProperties": false,
+                "example": {
+                  "title": "门店分析",
+                  "mapState": {
+                    "center": [
+                      0,
+                      0
+                    ],
+                    "zoom": 2,
+                    "bearing": 0,
+                    "pitch": 0,
+                    "basemap": {
+                      "style": "positron",
+                      "categories": {
+                        "water": {
+                          "visible": false
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -670,15 +684,12 @@
                       "properties": {
                         "center": {
                           "description": "Map center as [lng, lat].",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "type": "array",
-                          "items": [
-                            {
-                              "type": "number"
-                            },
-                            {
-                              "type": "number"
-                            }
-                          ]
+                          "items": {
+                            "type": "number"
+                          }
                         },
                         "zoom": {
                           "description": "Map zoom level, 0-22.",
@@ -704,6 +715,7 @@
                               "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                             },
                             "categories": {
+                              "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels. Omitted categories keep their built-in defaults.",
                               "type": "object",
                               "additionalProperties": {
                                 "type": "object",
@@ -719,19 +731,17 @@
                                 },
                                 "additionalProperties": false,
                                 "description": "Per-category color and visibility override."
-                              },
-                              "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
+                              }
                             }
                           },
                           "required": [
-                            "style",
-                            "categories"
+                            "style"
                           ],
                           "additionalProperties": false,
                           "description": "Basemap style and per-category overrides."
                         },
                         "countryMask": {
-                          "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                          "description": "Inverted-polygon mask that hides the basemap outside a country. Omitted or null means no country mask.",
                           "anyOf": [
                             {
                               "type": "object",
@@ -766,7 +776,7 @@
                           ]
                         },
                         "customMask": {
-                          "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                          "description": "Custom polygon mask built from arbitrary GeoJSON. Omitted or null means no custom mask.",
                           "anyOf": [
                             {
                               "type": "object",
@@ -1054,15 +1064,12 @@
                       "properties": {
                         "center": {
                           "description": "Map center as [lng, lat].",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "type": "array",
-                          "items": [
-                            {
-                              "type": "number"
-                            },
-                            {
-                              "type": "number"
-                            }
-                          ]
+                          "items": {
+                            "type": "number"
+                          }
                         },
                         "zoom": {
                           "description": "Map zoom level, 0-22.",
@@ -1088,6 +1095,7 @@
                               "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                             },
                             "categories": {
+                              "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels. Omitted categories keep their built-in defaults.",
                               "type": "object",
                               "additionalProperties": {
                                 "type": "object",
@@ -1103,19 +1111,17 @@
                                 },
                                 "additionalProperties": false,
                                 "description": "Per-category color and visibility override."
-                              },
-                              "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
+                              }
                             }
                           },
                           "required": [
-                            "style",
-                            "categories"
+                            "style"
                           ],
                           "additionalProperties": false,
                           "description": "Basemap style and per-category overrides."
                         },
                         "countryMask": {
-                          "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                          "description": "Inverted-polygon mask that hides the basemap outside a country. Omitted or null means no country mask.",
                           "anyOf": [
                             {
                               "type": "object",
@@ -1150,7 +1156,7 @@
                           ]
                         },
                         "customMask": {
-                          "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                          "description": "Custom polygon mask built from arbitrary GeoJSON. Omitted or null means no custom mask.",
                           "anyOf": [
                             {
                               "type": "object",
@@ -1479,15 +1485,12 @@
                     "properties": {
                       "center": {
                         "description": "Map center as [lng, lat].",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "type": "array",
-                        "items": [
-                          {
-                            "type": "number"
-                          },
-                          {
-                            "type": "number"
-                          }
-                        ]
+                        "items": {
+                          "type": "number"
+                        }
                       },
                       "zoom": {
                         "description": "Map zoom level, 0-22.",
@@ -1513,6 +1516,7 @@
                             "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                           },
                           "categories": {
+                            "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels. Omitted categories keep their built-in defaults.",
                             "type": "object",
                             "additionalProperties": {
                               "type": "object",
@@ -1528,19 +1532,17 @@
                               },
                               "additionalProperties": false,
                               "description": "Per-category color and visibility override."
-                            },
-                            "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
+                            }
                           }
                         },
                         "required": [
-                          "style",
-                          "categories"
+                          "style"
                         ],
                         "additionalProperties": false,
                         "description": "Basemap style and per-category overrides."
                       },
                       "countryMask": {
-                        "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                        "description": "Inverted-polygon mask that hides the basemap outside a country. Omitted or null means no country mask.",
                         "anyOf": [
                           {
                             "type": "object",
@@ -1575,7 +1577,7 @@
                         ]
                       },
                       "customMask": {
-                        "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                        "description": "Custom polygon mask built from arbitrary GeoJSON. Omitted or null means no custom mask.",
                         "anyOf": [
                           {
                             "type": "object",
@@ -1640,15 +1642,12 @@
                       "properties": {
                         "center": {
                           "description": "Map center as [lng, lat].",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "type": "array",
-                          "items": [
-                            {
-                              "type": "number"
-                            },
-                            {
-                              "type": "number"
-                            }
-                          ]
+                          "items": {
+                            "type": "number"
+                          }
                         },
                         "zoom": {
                           "description": "Map zoom level, 0-22.",
@@ -1674,6 +1673,7 @@
                               "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                             },
                             "categories": {
+                              "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels. Omitted categories keep their built-in defaults.",
                               "type": "object",
                               "additionalProperties": {
                                 "type": "object",
@@ -1689,19 +1689,17 @@
                                 },
                                 "additionalProperties": false,
                                 "description": "Per-category color and visibility override."
-                              },
-                              "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
+                              }
                             }
                           },
                           "required": [
-                            "style",
-                            "categories"
+                            "style"
                           ],
                           "additionalProperties": false,
                           "description": "Basemap style and per-category overrides."
                         },
                         "countryMask": {
-                          "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                          "description": "Inverted-polygon mask that hides the basemap outside a country. Omitted or null means no country mask.",
                           "anyOf": [
                             {
                               "type": "object",
@@ -1736,7 +1734,7 @@
                           ]
                         },
                         "customMask": {
-                          "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                          "description": "Custom polygon mask built from arbitrary GeoJSON. Omitted or null means no custom mask.",
                           "anyOf": [
                             {
                               "type": "object",
@@ -2253,15 +2251,12 @@
                   "properties": {
                     "center": {
                       "description": "Map center as [lng, lat].",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "type": "array",
-                      "items": [
-                        {
-                          "type": "number"
-                        },
-                        {
-                          "type": "number"
-                        }
-                      ]
+                      "items": {
+                        "type": "number"
+                      }
                     },
                     "zoom": {
                       "description": "Map zoom level, 0-22.",
@@ -2287,6 +2282,7 @@
                           "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                         },
                         "categories": {
+                          "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels. Omitted categories keep their built-in defaults.",
                           "type": "object",
                           "additionalProperties": {
                             "type": "object",
@@ -2302,19 +2298,17 @@
                             },
                             "additionalProperties": false,
                             "description": "Per-category color and visibility override."
-                          },
-                          "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
+                          }
                         }
                       },
                       "required": [
-                        "style",
-                        "categories"
+                        "style"
                       ],
                       "additionalProperties": false,
                       "description": "Basemap style and per-category overrides."
                     },
                     "countryMask": {
-                      "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                      "description": "Inverted-polygon mask that hides the basemap outside a country. Omitted or null means no country mask.",
                       "anyOf": [
                         {
                           "type": "object",
@@ -2349,7 +2343,7 @@
                       ]
                     },
                     "customMask": {
-                      "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                      "description": "Custom polygon mask built from arbitrary GeoJSON. Omitted or null means no custom mask.",
                       "anyOf": [
                         {
                           "type": "object",
