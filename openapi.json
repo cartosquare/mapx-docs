@@ -3911,7 +3911,7 @@
         ],
         "operationId": "uploadFile",
         "summary": "Upload a file",
-        "description": "Requires scope: files. Multipart upload; supported types are GeoJSON/JSON, CSV/Excel, and GeoTIFF.",
+        "description": "Requires scope: files. Multipart upload. Supported extensions: .csv, .geojson, .json, .xlsx, .xls, .txt, .md, .docx, .doc, .pdf, .tif, .tiff. GeoJSON/JSON are added as layers directly; CSV/Excel are converted to GeoJSON layers; TIFF is converted to a COG image layer; text/document files are stored as plain files. Max size: 50MB (configurable via UPLOAD_MAX_SIZE_MB).",
         "parameters": [
           {
             "name": "id",
@@ -3936,7 +3936,7 @@
                   "file": {
                     "type": "string",
                     "format": "binary",
-                    "description": "File to upload."
+                    "description": "File to upload. Supported extensions: .csv, .geojson, .json, .xlsx, .xls, .txt, .md, .docx, .doc, .pdf, .tif, .tiff."
                   }
                 }
               }

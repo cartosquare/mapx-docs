@@ -46,6 +46,18 @@ cp /data/xuxiang/mapx/docs-source/openapi.json openapi.json
 
 For the complete list, read `source/api-routes.json`.
 
+## Supported upload types
+
+`POST /api/v1/sessions/{id}/files` accepts the following file types (max
+50MB per file, configurable via `UPLOAD_MAX_SIZE_MB`):
+
+| Extension | Handling |
+| --- | --- |
+| `.geojson` / `.json` | Added directly as a map layer |
+| `.csv` / `.xlsx` / `.xls` | Converted to a GeoJSON layer |
+| `.tif` / `.tiff` | Converted to a COG image layer |
+| `.txt` / `.md` / `.docx` / `.doc` / `.pdf` | Stored as a plain file (no layer) |
+
 ## Map actions
 
 `POST /api/v1/sessions/{id}/map/actions` accepts an array of action objects.
