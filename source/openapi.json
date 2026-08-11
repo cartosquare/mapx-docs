@@ -9563,7 +9563,7 @@
                             }
                           },
                           "additionalProperties": false,
-                          "description": "Switch the basemap style."
+                          "description": "Switch the basemap style. The selection is persisted by the backend and broadcast to live viewers."
                         },
                         {
                           "title": "set_basemap_category",
@@ -9603,7 +9603,7 @@
                             }
                           },
                           "additionalProperties": false,
-                          "description": "Override a basemap category's color or visibility."
+                          "description": "Override a basemap category's color or visibility. Persisted by the backend."
                         },
                         {
                           "title": "set_country_mask",
@@ -9633,7 +9633,7 @@
                             }
                           },
                           "additionalProperties": false,
-                          "description": "Show or hide a country mask."
+                          "description": "Show or hide a country mask. Persisted by the backend."
                         },
                         {
                           "title": "set_custom_mask",
@@ -9658,7 +9658,7 @@
                             }
                           },
                           "additionalProperties": false,
-                          "description": "Set or clear a custom polygon mask (geojson null clears it)."
+                          "description": "Set or clear a custom polygon mask (geojson null clears it). Persisted by the backend."
                         },
                         {
                           "title": "file_generated",
