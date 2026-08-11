@@ -126,7 +126,8 @@
                                 "type": "object",
                                 "properties": {
                                   "style": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                                   },
                                   "categories": {
                                     "type": "object",
@@ -134,14 +135,17 @@
                                       "type": "object",
                                       "properties": {
                                         "color": {
+                                          "description": "CSS color value, e.g. #1e3a5f or rgba(...). Setting a color makes the category visible.",
                                           "type": "string"
                                         },
                                         "visible": {
+                                          "description": "Whether the category is visible.",
                                           "type": "boolean"
                                         }
                                       },
                                       "additionalProperties": {}
-                                    }
+                                    },
+                                    "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                                   }
                                 },
                                 "required": [
@@ -475,7 +479,8 @@
                         "type": "object",
                         "properties": {
                           "style": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                           },
                           "categories": {
                             "type": "object",
@@ -483,14 +488,17 @@
                               "type": "object",
                               "properties": {
                                 "color": {
+                                  "description": "CSS color value, e.g. #1e3a5f or rgba(...). Setting a color makes the category visible.",
                                   "type": "string"
                                 },
                                 "visible": {
+                                  "description": "Whether the category is visible.",
                                   "type": "boolean"
                                 }
                               },
                               "additionalProperties": {}
-                            }
+                            },
+                            "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                           }
                         },
                         "required": [
@@ -554,7 +562,8 @@
                           "type": "object",
                           "properties": {
                             "style": {
-                              "type": "string"
+                              "type": "string",
+                              "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                             },
                             "categories": {
                               "type": "object",
@@ -562,14 +571,17 @@
                                 "type": "object",
                                 "properties": {
                                   "color": {
+                                    "description": "CSS color value, e.g. #1e3a5f or rgba(...). Setting a color makes the category visible.",
                                     "type": "string"
                                   },
                                   "visible": {
+                                    "description": "Whether the category is visible.",
                                     "type": "boolean"
                                   }
                                 },
                                 "additionalProperties": {}
-                              }
+                              },
+                              "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                             }
                           },
                           "required": [
@@ -867,7 +879,8 @@
                           "type": "object",
                           "properties": {
                             "style": {
-                              "type": "string"
+                              "type": "string",
+                              "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                             },
                             "categories": {
                               "type": "object",
@@ -875,14 +888,17 @@
                                 "type": "object",
                                 "properties": {
                                   "color": {
+                                    "description": "CSS color value, e.g. #1e3a5f or rgba(...). Setting a color makes the category visible.",
                                     "type": "string"
                                   },
                                   "visible": {
+                                    "description": "Whether the category is visible.",
                                     "type": "boolean"
                                   }
                                 },
                                 "additionalProperties": {}
-                              }
+                              },
+                              "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                             }
                           },
                           "required": [
@@ -1221,7 +1237,8 @@
                         "type": "object",
                         "properties": {
                           "style": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                           },
                           "categories": {
                             "type": "object",
@@ -1229,14 +1246,17 @@
                               "type": "object",
                               "properties": {
                                 "color": {
+                                  "description": "CSS color value, e.g. #1e3a5f or rgba(...). Setting a color makes the category visible.",
                                   "type": "string"
                                 },
                                 "visible": {
+                                  "description": "Whether the category is visible.",
                                   "type": "boolean"
                                 }
                               },
                               "additionalProperties": {}
-                            }
+                            },
+                            "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                           }
                         },
                         "required": [
@@ -1311,7 +1331,8 @@
                           "type": "object",
                           "properties": {
                             "style": {
-                              "type": "string"
+                              "type": "string",
+                              "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                             },
                             "categories": {
                               "type": "object",
@@ -1319,14 +1340,17 @@
                                 "type": "object",
                                 "properties": {
                                   "color": {
+                                    "description": "CSS color value, e.g. #1e3a5f or rgba(...). Setting a color makes the category visible.",
                                     "type": "string"
                                   },
                                   "visible": {
+                                    "description": "Whether the category is visible.",
                                     "type": "boolean"
                                   }
                                 },
                                 "additionalProperties": {}
-                              }
+                              },
+                              "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                             }
                           },
                           "required": [
@@ -1853,7 +1877,8 @@
                       "type": "object",
                       "properties": {
                         "style": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Basemap style ID. Allowed values: positron (light), positronWithLabels (light with labels), dark (dark), darkWithLabels (dark with labels)."
                         },
                         "categories": {
                           "type": "object",
@@ -1861,14 +1886,17 @@
                             "type": "object",
                             "properties": {
                               "color": {
+                                "description": "CSS color value, e.g. #1e3a5f or rgba(...). Setting a color makes the category visible.",
                                 "type": "string"
                               },
                               "visible": {
+                                "description": "Whether the category is visible.",
                                 "type": "boolean"
                               }
                             },
                             "additionalProperties": {}
-                          }
+                          },
+                          "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                         }
                       },
                       "required": [
