@@ -99,6 +99,7 @@
                             "type": "object",
                             "properties": {
                               "center": {
+                                "description": "Map center as [lng, lat].",
                                 "type": "array",
                                 "items": [
                                   {
@@ -110,14 +111,17 @@
                                 ]
                               },
                               "zoom": {
+                                "description": "Map zoom level, 0-22.",
                                 "type": "number",
                                 "minimum": 0,
                                 "maximum": 22
                               },
                               "bearing": {
+                                "description": "Map rotation in degrees.",
                                 "type": "number"
                               },
                               "pitch": {
+                                "description": "Map pitch in degrees, 0-85.",
                                 "type": "number",
                                 "minimum": 0,
                                 "maximum": 85
@@ -143,7 +147,8 @@
                                           "type": "boolean"
                                         }
                                       },
-                                      "additionalProperties": {}
+                                      "additionalProperties": false,
+                                      "description": "Per-category color and visibility override."
                                     },
                                     "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                                   }
@@ -152,10 +157,72 @@
                                   "style",
                                   "categories"
                                 ],
-                                "additionalProperties": {}
+                                "additionalProperties": false,
+                                "description": "Basemap style and per-category overrides."
+                              },
+                              "countryMask": {
+                                "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                                "anyOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "countryCode": {
+                                        "type": "string",
+                                        "description": "ISO 3166-1 alpha-3 country code, e.g. CHN."
+                                      },
+                                      "countryName": {
+                                        "type": "string",
+                                        "description": "Country display name."
+                                      },
+                                      "visible": {
+                                        "type": "boolean",
+                                        "description": "Whether the country mask is shown."
+                                      },
+                                      "color": {
+                                        "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "countryCode",
+                                      "countryName",
+                                      "visible"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              },
+                              "customMask": {
+                                "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                                "anyOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "geojson": {
+                                        "type": "string",
+                                        "description": "Raw GeoJSON string containing a Polygon or MultiPolygon geometry."
+                                      },
+                                      "color": {
+                                        "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "geojson"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
                               }
                             },
-                            "additionalProperties": {}
+                            "additionalProperties": false,
+                            "description": "Current map viewport and basemap state."
                           },
                           "createdAt": {
                             "type": "string",
@@ -452,6 +519,7 @@
                     "type": "object",
                     "properties": {
                       "center": {
+                        "description": "Map center as [lng, lat].",
                         "type": "array",
                         "items": [
                           {
@@ -463,14 +531,17 @@
                         ]
                       },
                       "zoom": {
+                        "description": "Map zoom level, 0-22.",
                         "type": "number",
                         "minimum": 0,
                         "maximum": 22
                       },
                       "bearing": {
+                        "description": "Map rotation in degrees.",
                         "type": "number"
                       },
                       "pitch": {
+                        "description": "Map pitch in degrees, 0-85.",
                         "type": "number",
                         "minimum": 0,
                         "maximum": 85
@@ -496,7 +567,8 @@
                                   "type": "boolean"
                                 }
                               },
-                              "additionalProperties": {}
+                              "additionalProperties": false,
+                              "description": "Per-category color and visibility override."
                             },
                             "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                           }
@@ -505,10 +577,72 @@
                           "style",
                           "categories"
                         ],
-                        "additionalProperties": {}
+                        "additionalProperties": false,
+                        "description": "Basemap style and per-category overrides."
+                      },
+                      "countryMask": {
+                        "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "countryCode": {
+                                "type": "string",
+                                "description": "ISO 3166-1 alpha-3 country code, e.g. CHN."
+                              },
+                              "countryName": {
+                                "type": "string",
+                                "description": "Country display name."
+                              },
+                              "visible": {
+                                "type": "boolean",
+                                "description": "Whether the country mask is shown."
+                              },
+                              "color": {
+                                "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "countryCode",
+                              "countryName",
+                              "visible"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "customMask": {
+                        "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "geojson": {
+                                "type": "string",
+                                "description": "Raw GeoJSON string containing a Polygon or MultiPolygon geometry."
+                              },
+                              "color": {
+                                "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "geojson"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
                       }
                     },
-                    "additionalProperties": {}
+                    "additionalProperties": false,
+                    "description": "Current map viewport and basemap state."
                   }
                 },
                 "additionalProperties": false
@@ -535,6 +669,7 @@
                       "type": "object",
                       "properties": {
                         "center": {
+                          "description": "Map center as [lng, lat].",
                           "type": "array",
                           "items": [
                             {
@@ -546,14 +681,17 @@
                           ]
                         },
                         "zoom": {
+                          "description": "Map zoom level, 0-22.",
                           "type": "number",
                           "minimum": 0,
                           "maximum": 22
                         },
                         "bearing": {
+                          "description": "Map rotation in degrees.",
                           "type": "number"
                         },
                         "pitch": {
+                          "description": "Map pitch in degrees, 0-85.",
                           "type": "number",
                           "minimum": 0,
                           "maximum": 85
@@ -579,7 +717,8 @@
                                     "type": "boolean"
                                   }
                                 },
-                                "additionalProperties": {}
+                                "additionalProperties": false,
+                                "description": "Per-category color and visibility override."
                               },
                               "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                             }
@@ -588,10 +727,72 @@
                             "style",
                             "categories"
                           ],
-                          "additionalProperties": {}
+                          "additionalProperties": false,
+                          "description": "Basemap style and per-category overrides."
+                        },
+                        "countryMask": {
+                          "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "countryCode": {
+                                  "type": "string",
+                                  "description": "ISO 3166-1 alpha-3 country code, e.g. CHN."
+                                },
+                                "countryName": {
+                                  "type": "string",
+                                  "description": "Country display name."
+                                },
+                                "visible": {
+                                  "type": "boolean",
+                                  "description": "Whether the country mask is shown."
+                                },
+                                "color": {
+                                  "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "countryCode",
+                                "countryName",
+                                "visible"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "customMask": {
+                          "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "geojson": {
+                                  "type": "string",
+                                  "description": "Raw GeoJSON string containing a Polygon or MultiPolygon geometry."
+                                },
+                                "color": {
+                                  "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "geojson"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
                         }
                       },
-                      "additionalProperties": {}
+                      "additionalProperties": false,
+                      "description": "Current map viewport and basemap state."
                     },
                     "updatedAt": {
                       "type": "string",
@@ -852,6 +1053,7 @@
                       "type": "object",
                       "properties": {
                         "center": {
+                          "description": "Map center as [lng, lat].",
                           "type": "array",
                           "items": [
                             {
@@ -863,14 +1065,17 @@
                           ]
                         },
                         "zoom": {
+                          "description": "Map zoom level, 0-22.",
                           "type": "number",
                           "minimum": 0,
                           "maximum": 22
                         },
                         "bearing": {
+                          "description": "Map rotation in degrees.",
                           "type": "number"
                         },
                         "pitch": {
+                          "description": "Map pitch in degrees, 0-85.",
                           "type": "number",
                           "minimum": 0,
                           "maximum": 85
@@ -896,7 +1101,8 @@
                                     "type": "boolean"
                                   }
                                 },
-                                "additionalProperties": {}
+                                "additionalProperties": false,
+                                "description": "Per-category color and visibility override."
                               },
                               "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                             }
@@ -905,10 +1111,72 @@
                             "style",
                             "categories"
                           ],
-                          "additionalProperties": {}
+                          "additionalProperties": false,
+                          "description": "Basemap style and per-category overrides."
+                        },
+                        "countryMask": {
+                          "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "countryCode": {
+                                  "type": "string",
+                                  "description": "ISO 3166-1 alpha-3 country code, e.g. CHN."
+                                },
+                                "countryName": {
+                                  "type": "string",
+                                  "description": "Country display name."
+                                },
+                                "visible": {
+                                  "type": "boolean",
+                                  "description": "Whether the country mask is shown."
+                                },
+                                "color": {
+                                  "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "countryCode",
+                                "countryName",
+                                "visible"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "customMask": {
+                          "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "geojson": {
+                                  "type": "string",
+                                  "description": "Raw GeoJSON string containing a Polygon or MultiPolygon geometry."
+                                },
+                                "color": {
+                                  "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "geojson"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
                         }
                       },
-                      "additionalProperties": {}
+                      "additionalProperties": false,
+                      "description": "Current map viewport and basemap state."
                     },
                     "createdAt": {
                       "type": "string",
@@ -1210,6 +1478,7 @@
                     "type": "object",
                     "properties": {
                       "center": {
+                        "description": "Map center as [lng, lat].",
                         "type": "array",
                         "items": [
                           {
@@ -1221,14 +1490,17 @@
                         ]
                       },
                       "zoom": {
+                        "description": "Map zoom level, 0-22.",
                         "type": "number",
                         "minimum": 0,
                         "maximum": 22
                       },
                       "bearing": {
+                        "description": "Map rotation in degrees.",
                         "type": "number"
                       },
                       "pitch": {
+                        "description": "Map pitch in degrees, 0-85.",
                         "type": "number",
                         "minimum": 0,
                         "maximum": 85
@@ -1254,7 +1526,8 @@
                                   "type": "boolean"
                                 }
                               },
-                              "additionalProperties": {}
+                              "additionalProperties": false,
+                              "description": "Per-category color and visibility override."
                             },
                             "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                           }
@@ -1263,10 +1536,72 @@
                           "style",
                           "categories"
                         ],
-                        "additionalProperties": {}
+                        "additionalProperties": false,
+                        "description": "Basemap style and per-category overrides."
+                      },
+                      "countryMask": {
+                        "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "countryCode": {
+                                "type": "string",
+                                "description": "ISO 3166-1 alpha-3 country code, e.g. CHN."
+                              },
+                              "countryName": {
+                                "type": "string",
+                                "description": "Country display name."
+                              },
+                              "visible": {
+                                "type": "boolean",
+                                "description": "Whether the country mask is shown."
+                              },
+                              "color": {
+                                "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "countryCode",
+                              "countryName",
+                              "visible"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "customMask": {
+                        "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "geojson": {
+                                "type": "string",
+                                "description": "Raw GeoJSON string containing a Polygon or MultiPolygon geometry."
+                              },
+                              "color": {
+                                "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "geojson"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
                       }
                     },
-                    "additionalProperties": {}
+                    "additionalProperties": false,
+                    "description": "Current map viewport and basemap state."
                   },
                   "thumbnailUrl": {
                     "anyOf": [
@@ -1304,6 +1639,7 @@
                       "type": "object",
                       "properties": {
                         "center": {
+                          "description": "Map center as [lng, lat].",
                           "type": "array",
                           "items": [
                             {
@@ -1315,14 +1651,17 @@
                           ]
                         },
                         "zoom": {
+                          "description": "Map zoom level, 0-22.",
                           "type": "number",
                           "minimum": 0,
                           "maximum": 22
                         },
                         "bearing": {
+                          "description": "Map rotation in degrees.",
                           "type": "number"
                         },
                         "pitch": {
+                          "description": "Map pitch in degrees, 0-85.",
                           "type": "number",
                           "minimum": 0,
                           "maximum": 85
@@ -1348,7 +1687,8 @@
                                     "type": "boolean"
                                   }
                                 },
-                                "additionalProperties": {}
+                                "additionalProperties": false,
+                                "description": "Per-category color and visibility override."
                               },
                               "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                             }
@@ -1357,10 +1697,72 @@
                             "style",
                             "categories"
                           ],
-                          "additionalProperties": {}
+                          "additionalProperties": false,
+                          "description": "Basemap style and per-category overrides."
+                        },
+                        "countryMask": {
+                          "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "countryCode": {
+                                  "type": "string",
+                                  "description": "ISO 3166-1 alpha-3 country code, e.g. CHN."
+                                },
+                                "countryName": {
+                                  "type": "string",
+                                  "description": "Country display name."
+                                },
+                                "visible": {
+                                  "type": "boolean",
+                                  "description": "Whether the country mask is shown."
+                                },
+                                "color": {
+                                  "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "countryCode",
+                                "countryName",
+                                "visible"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "customMask": {
+                          "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "geojson": {
+                                  "type": "string",
+                                  "description": "Raw GeoJSON string containing a Polygon or MultiPolygon geometry."
+                                },
+                                "color": {
+                                  "description": "Mask color override (hex), e.g. #1e3a5f.",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "geojson"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
                         }
                       },
-                      "additionalProperties": {}
+                      "additionalProperties": false,
+                      "description": "Current map viewport and basemap state."
                     },
                     "updatedAt": {
                       "type": "string",
@@ -1850,6 +2252,7 @@
                   "type": "object",
                   "properties": {
                     "center": {
+                      "description": "Map center as [lng, lat].",
                       "type": "array",
                       "items": [
                         {
@@ -1861,14 +2264,17 @@
                       ]
                     },
                     "zoom": {
+                      "description": "Map zoom level, 0-22.",
                       "type": "number",
                       "minimum": 0,
                       "maximum": 22
                     },
                     "bearing": {
+                      "description": "Map rotation in degrees.",
                       "type": "number"
                     },
                     "pitch": {
+                      "description": "Map pitch in degrees, 0-85.",
                       "type": "number",
                       "minimum": 0,
                       "maximum": 85
@@ -1894,7 +2300,8 @@
                                 "type": "boolean"
                               }
                             },
-                            "additionalProperties": {}
+                            "additionalProperties": false,
+                            "description": "Per-category color and visibility override."
                           },
                           "description": "Basemap category overrides. Allowed keys: background, water, green, roads, buildings, aeroway, boundaries, labels."
                         }
@@ -1903,10 +2310,72 @@
                         "style",
                         "categories"
                       ],
-                      "additionalProperties": {}
+                      "additionalProperties": false,
+                      "description": "Basemap style and per-category overrides."
+                    },
+                    "countryMask": {
+                      "description": "Inverted-polygon mask that hides the basemap outside a country.",
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "countryCode": {
+                              "type": "string",
+                              "description": "ISO 3166-1 alpha-3 country code, e.g. CHN."
+                            },
+                            "countryName": {
+                              "type": "string",
+                              "description": "Country display name."
+                            },
+                            "visible": {
+                              "type": "boolean",
+                              "description": "Whether the country mask is shown."
+                            },
+                            "color": {
+                              "description": "Mask color override (hex), e.g. #1e3a5f.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "countryCode",
+                            "countryName",
+                            "visible"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "customMask": {
+                      "description": "Custom polygon mask built from arbitrary GeoJSON.",
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "geojson": {
+                              "type": "string",
+                              "description": "Raw GeoJSON string containing a Polygon or MultiPolygon geometry."
+                            },
+                            "color": {
+                              "description": "Mask color override (hex), e.g. #1e3a5f.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "geojson"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     }
                   },
-                  "additionalProperties": {}
+                  "additionalProperties": false,
+                  "description": "Current map viewport and basemap state."
                 }
               }
             }
