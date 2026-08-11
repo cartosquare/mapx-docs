@@ -8975,7 +8975,7 @@
         ],
         "operationId": "dispatchMapActions",
         "summary": "Dispatch map actions",
-        "description": "Requires scope: map. Applies a list of map actions to the live project, in order. Supported action types: fly_to, jump_to, fit_bounds, go_home, zoom_in, zoom_out, pan, zoom_to_layer, add_geojson_layer, add_tile_layer, add_cog_layer, remove_layer, rename_layer, set_layer_visibility, move_layer_up, move_layer_down, update_layer_style, set_basemap_style, set_basemap_category, set_country_mask, set_custom_mask, clear_layers. Each action's parameters are described in the actions schema below.",
+        "description": "Requires scope: map. Applies a list of map actions to the live project, in order. Supported action types: fly_to, jump_to, fit_bounds, go_home, zoom_in, zoom_out, pan, zoom_to_layer, add_geojson_layer, add_tile_layer, add_cog_layer, remove_layer, rename_layer, set_layer_visibility, move_layer_up, move_layer_down, update_layer_style, set_basemap_style, set_basemap_category, set_country_mask, set_custom_mask, clear_layers. add_tile_layer without a layer_id is persisted by the backend (deduplicated by URL) and the created layer is returned in the response. Each action's parameters are described in the actions schema below.",
         "parameters": [
           {
             "name": "id",
@@ -9728,12 +9728,28 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "ok"
-                  ],
                   "properties": {
                     "ok": {
                       "type": "boolean"
+                    },
+                    "dispatched": {
+                      "type": "integer",
+                      "description": "Number of actions dispatched."
+                    },
+                    "layers": {
+                      "type": "array",
+                      "description": "Layers created by the dispatched actions (e.g. add_tile_layer sent without a layer_id).",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "layer_id": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     }
                   }
                 }
