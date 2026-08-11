@@ -3615,10 +3615,6 @@
                           "fileSize": {
                             "type": "integer"
                           },
-                          "columns": {
-                            "type": "array",
-                            "items": {}
-                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -7737,10 +7733,6 @@
                         },
                         "fileSize": {
                           "type": "integer"
-                        },
-                        "columns": {
-                          "type": "array",
-                          "items": {}
                         },
                         "createdAt": {
                           "type": "string",
