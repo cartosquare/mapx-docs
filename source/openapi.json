@@ -83,6 +83,10 @@
                       "type": "array",
                       "items": {
                         "type": "object",
+                        "required": [
+                          "id",
+                          "title"
+                        ],
                         "properties": {
                           "id": {
                             "type": "string",
@@ -149,12 +153,55 @@
                             },
                             "additionalProperties": {}
                           },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
                           "updatedAt": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "forkedFromSessionId": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "isFork": {
+                            "type": "boolean"
+                          },
+                          "sharedByUser": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "email": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          "layerCount": {
+                            "type": "integer"
+                          },
+                          "fileCount": {
+                            "type": "integer"
                           }
                         },
-                        "additionalProperties": true
+                        "additionalProperties": false
                       }
                     },
                     "meta": {
@@ -777,6 +824,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": [
+                    "id",
+                    "title"
+                  ],
                   "properties": {
                     "id": {
                       "type": "string",
@@ -843,12 +894,63 @@
                       },
                       "additionalProperties": {}
                     },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
                     "updatedAt": {
                       "type": "string",
                       "format": "date-time"
+                    },
+                    "forkedFromSessionId": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "isFork": {
+                      "type": "boolean"
+                    },
+                    "sharedByUser": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "email": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "layers": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    },
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
                     }
                   },
-                  "additionalProperties": true
+                  "additionalProperties": false
                 }
               }
             }
