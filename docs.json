@@ -79,6 +79,26 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Developers",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "developers/overview",
+              "developers/authentication"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "developers/api-reference",
+              "developers/mcp",
+              "developers/skills"
+            ]
+          }
+        ]
       }
     ]
   },
