@@ -57,6 +57,8 @@ mapx auth status                                  # 验证（Windows：.\mapx.ex
 
 ```bash
 mapx auth status                                   # 校验 API key
+mapx auth login <mkx_...>                          # 本地保存 API key（~/.mapx/config.json）
+mapx auth logout                                   # 删除本地保存的 API key
 
 mapx session create --title "analysis"             # 创建项目；返回 session_id
 mapx session list                                  # 列出项目

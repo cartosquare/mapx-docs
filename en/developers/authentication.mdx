@@ -3,8 +3,9 @@ title: "Authentication"
 description: "Authenticate API and MCP requests with a personal API key."
 ---
 
-Create a personal API key from your MapX account. The raw key (for example
-`mkx_...`) is shown only once, so save it immediately.
+Create a personal API key from your MapX account by opening
+`https://app.mapxagent.com?open=api-keys` (or app → Profile/Account → API Keys).
+The raw key (for example `mkx_...`) is shown only once, so save it immediately.
 
 The backend stores only a SHA-256 hash of the key. If a key is leaked, revoke it
 from your account and create a new one.
@@ -20,7 +21,16 @@ curl https://api.mapxagent.com/api/sessions \
 
 ## CLI requests
 
-Configure the CLI with the same personal key:
+Save the key locally once, then let the CLI reuse it:
+
+```bash
+mapx auth login <mkx_...>
+mapx auth status
+```
+
+`mapx auth login` stores the key in `~/.mapx/config.json` (0600 permissions);
+`mapx auth logout` removes it. Environment variables remain supported as a
+fallback:
 
 ```bash
 export MAPX_API_URL="https://api.mapxagent.com"
@@ -28,6 +38,6 @@ export MAPX_API_KEY="mkx_..."
 mapx auth status
 ```
 
-Every command also accepts `--api-key` and `--url` overrides. All operations
-are scoped to the account that owns the key, and project ownership is enforced
-by the backend.
+Every command also accepts `--api-key` and `--url` overrides. All operations are
+scoped to the account that owns the key, and project ownership is enforced by
+the backend.

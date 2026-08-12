@@ -66,6 +66,8 @@ your account, and project ownership is enforced by the backend.
 
 ```bash
 mapx auth status                                   # verify the API key
+mapx auth login <mkx_...>                          # save the API key locally (~/.mapx/config.json)
+mapx auth logout                                   # remove the locally saved API key
 
 mapx session create --title "analysis"             # create a project; returns session_id
 mapx session list                                  # list projects

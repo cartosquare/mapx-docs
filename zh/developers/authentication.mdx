@@ -3,7 +3,7 @@ title: "身份认证"
 description: "用个人 API key 对 API 和 CLI 请求进行身份认证。"
 ---
 
-从你的 MapX 账号创建个人 API key。原始 key（例如 `mkx_...`）只显示一次，请立即保存。
+从你的 MapX 账号创建个人 API key：打开 `https://app.mapxagent.com?open=api-keys`（或应用内 Profile/账户 → API Keys）。原始 key（例如 `mkx_...`）只显示一次，请立即保存。
 
 后端只存储 key 的 SHA-256 哈希。如果 key 泄露，请从账号中撤销并创建新的。
 
@@ -18,7 +18,14 @@ curl https://api.mapxagent.com/api/sessions \
 
 ## CLI 请求
 
-用同一个个人 key 配置 CLI：
+本地保存一次 key，之后 CLI 自动复用：
+
+```bash
+mapx auth login <mkx_...>
+mapx auth status
+```
+
+`mapx auth login` 会把 key 存到 `~/.mapx/config.json`（0600 权限）；`mapx auth logout` 删除它。环境变量仍可作为备选：
 
 ```bash
 export MAPX_API_URL="https://api.mapxagent.com"

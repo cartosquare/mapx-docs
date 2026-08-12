@@ -18,7 +18,7 @@ description: "给任何 LLM 代理一个链接：它下载 mapx skill、安装 C
 这个 skill 文件是自包含的。它说明如何：
 
 - 为 Linux、macOS 或 Windows 下载对应的 `mapx` 二进制；
-- 设置 `MAPX_API_KEY`（以及可选的 `MAPX_API_URL`）；
+- 用 `mapx auth login <mkx_...>` 本地保存 key（或回退到 `MAPX_API_KEY` 环境变量）；
 - 用 `mapx auth status` 验证配置；
 - 使用项目、图层、样式、地图控制、视图 URL 和报告相关命令；
 - 用 `mapx skill styles`、`mapx skill layer-style-editing` 或 `mapx skill report-generation` 按需加载主题手册。
@@ -29,14 +29,18 @@ description: "给任何 LLM 代理一个链接：它下载 mapx skill、安装 C
 
 ## 获取 API key
 
-在 MapX 应用的 **Profile** 面板中创建个人 API key。完整 key 只显示一次，请立即保存。key 以 `mkx_` 开头。
+让用户打开 `https://app.mapxagent.com?open=api-keys`，创建 API key 并复制 `mkx_...` 值（只显示一次）。然后保存：
+
+```bash
+mapx auth login <mkx_...>
+mapx auth status
+```
 
 ## 验证集成
 
 让代理确认连接：
 
 ```bash
-export MAPX_API_KEY="mkx_..."
 mapx auth status
 ```
 

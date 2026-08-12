@@ -22,7 +22,8 @@ and follow its instructions to install the mapx CLI and configure your API key.
 The skill file is self-contained. It explains how to:
 
 - download the right `mapx` binary for Linux, macOS, or Windows;
-- set `MAPX_API_KEY` (and optional `MAPX_API_URL`);
+- save the key locally with `mapx auth login <mkx_...>` (or fall back to the
+  `MAPX_API_KEY` environment variable);
 - verify the setup with `mapx auth status`;
 - use commands for projects, layers, styles, map control, view URLs, and
   reports;
@@ -37,15 +38,19 @@ to be followed directly from the context.
 
 ## Get an API key
 
-Create a personal API key in the **Profile** panel of the MapX app. The full
-key is shown only once, so save it immediately. Keys start with `mkx_`.
+Ask the user to open `https://app.mapxagent.com?open=api-keys`, create an API
+key, and copy the `mkx_...` value (shown only once). Then save it:
+
+```bash
+mapx auth login <mkx_...>
+mapx auth status
+```
 
 ## Verify the integration
 
 Ask the agent to confirm the connection:
 
 ```bash
-export MAPX_API_KEY="mkx_..."
 mapx auth status
 ```
 
