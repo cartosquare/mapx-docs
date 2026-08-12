@@ -4,7 +4,13 @@ sidebarTitle: "Upload Data"
 description: "Learn how to upload CSV, GeoJSON, and Excel files to MapX. Covers automatic location column detection, column naming tips, and fixing common import errors."
 ---
 
-MapX accepts **CSV, GeoJSON, and Excel** files and is designed to work with data exactly as it comes out of your existing tools — no reformatting required in most cases. When you upload a file, MapX scans it automatically, identifies the columns that contain location information, and renders your data on the map canvas within seconds.
+MapX accepts **CSV, GeoJSON, Excel, and GeoTIFF** files. **CSV, GeoJSON, and
+Excel** are general-purpose data formats — they carry attributes and location
+columns that MapX auto-detects. **GeoTIFF and Shapefile** are GIS-specific
+formats: GeoTIFF is rendered as a raster image layer on the map, and Shapefile
+support is planned. When you upload a tabular file, MapX scans it automatically,
+identifies the columns that contain location information, and renders your data
+on the map canvas within seconds.
 
 ## Supported File Formats
 
@@ -13,6 +19,8 @@ MapX accepts **CSV, GeoJSON, and Excel** files and is designed to work with data
 | **CSV** | `.csv` | Latitude/longitude columns are auto-detected by header name. Address columns are supported and geocoded automatically on Basic plans and above. |
 | **GeoJSON** | `.geojson`, `.json` | Point, LineString, and Polygon geometry types are all supported. Properties are imported as attribute columns available for styling and filtering. |
 | **Excel** | `.xlsx`, `.xls` | The first sheet is imported. Latitude/longitude or address columns are auto-detected using the same rules as CSV. Additional sheets are ignored. |
+| **GeoTIFF** | `.tif`, `.tiff` | GIS-specific. Uploaded as a raster image layer on the map. |
+| **Shapefile** | `.shp`, `.zip` | GIS-specific. Support is planned — not yet available for upload. |
 
 ## How Auto-Detection Works
 
@@ -68,21 +76,3 @@ For the fastest and most reliable auto-detection, use one of the following stand
 
   Geocoding uses the column names listed in the [Column Naming Tips](#column-naming-tips) section. Each address lookup counts as one AI prompt against your monthly allowance. Free plan users can manually convert addresses to coordinates using a free tool like [geocod.io](https://geocod.io) or Google Sheets before uploading.
 </Accordion>
-
-## Data Size & Performance
-
-MapX uses GPU-accelerated WebGL rendering, which means even large datasets stay smooth and interactive:
-
-- **100,000+ data points** rendered at a stable **60 fps** in the browser.
-- **No row limits** on any plan.
-- **Max 50 MB per file** on all plans (configurable via `UPLOAD_MAX_SIZE_MB`).
-  Dataset size is bounded by your plan's storage: Free 200 MB, Basic 5 GB,
-  Pro 20 GB, Enterprise dedicated.
-- Files are stored server-side and streamed to the browser when they exceed a
-  small inline threshold; TIFF files are converted to COG for tiled loading.
-
-For best performance with datasets above 50,000 rows, ensure your file does not contain unnecessary columns — trimming unused fields before upload reduces parse time and memory usage.
-
-<Warning>
-  **Do not upload sensitive personal data to public projects.** Any project set to **Public** visibility can be viewed by anyone with the link, including all uploaded attribute data. If your dataset contains personal identifiers (names, email addresses, phone numbers, etc.), keep the project set to **Private** or remove those columns before uploading.
-</Warning>

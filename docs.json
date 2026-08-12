@@ -52,17 +52,10 @@
                 "pages": [
                   "en/concepts/ai-chat",
                   "en/concepts/spatial-operations",
-                  "en/concepts/layers-and-maps"
-                ]
-              },
-              {
-                "group": "Guides",
-                "pages": [
-                  "en/guides/site-selection",
-                  "en/guides/logistics-analysis",
-                  "en/guides/real-estate",
-                  "en/guides/heatmaps",
-                  "en/guides/reports"
+                  "en/concepts/layers",
+                  "en/concepts/basemap",
+                  "en/concepts/files",
+                  "en/concepts/reports"
                 ]
               },
               {
@@ -73,10 +66,15 @@
                 ]
               },
               {
+                "group": "Integration",
+                "pages": [
+                  "en/integration/agent-tools"
+                ]
+              },
+              {
                 "group": "Plans & Account",
                 "pages": [
                   "en/account/plans",
-                  "en/account/team-collaboration",
                   "en/account/data-security"
                 ]
               },
@@ -104,12 +102,9 @@
                 "openapi": "openapi.json"
               },
               {
-                "group": "Guides",
+                "group": "Client",
                 "pages": [
-                  "en/developers/agent-tools",
-                  "en/developers/api-reference",
-                  "en/developers/mcp",
-                  "en/developers/skills"
+                  "en/developers/mapx-cli"
                 ]
               }
             ]
@@ -153,17 +148,10 @@
                 "pages": [
                   "zh/concepts/ai-chat",
                   "zh/concepts/spatial-operations",
-                  "zh/concepts/layers-and-maps"
-                ]
-              },
-              {
-                "group": "指南",
-                "pages": [
-                  "zh/guides/site-selection",
-                  "zh/guides/logistics-analysis",
-                  "zh/guides/real-estate",
-                  "zh/guides/heatmaps",
-                  "zh/guides/reports"
+                  "zh/concepts/layers",
+                  "zh/concepts/basemap",
+                  "zh/concepts/files",
+                  "zh/concepts/reports"
                 ]
               },
               {
@@ -174,10 +162,15 @@
                 ]
               },
               {
+                "group": "集成",
+                "pages": [
+                  "zh/integration/agent-tools"
+                ]
+              },
+              {
                 "group": "套餐与账户",
                 "pages": [
                   "zh/account/plans",
-                  "zh/account/team-collaboration",
                   "zh/account/data-security"
                 ]
               },
@@ -205,12 +198,9 @@
                 "openapi": "openapi.json"
               },
               {
-                "group": "指南",
+                "group": "客户端",
                 "pages": [
-                  "zh/developers/agent-tools",
-                  "zh/developers/api-reference",
-                  "zh/developers/mcp",
-                  "zh/developers/skills"
+                  "zh/developers/mapx-cli"
                 ]
               }
             ]
@@ -226,22 +216,27 @@
     { "source": "/quickstart", "destination": "/en/quickstart", "permanent": true },
     { "source": "/uploading-data", "destination": "/en/uploading-data", "permanent": true },
     { "source": "/account/plans", "destination": "/en/account/plans", "permanent": true },
-    { "source": "/account/team-collaboration", "destination": "/en/account/team-collaboration", "permanent": true },
     { "source": "/account/data-security", "destination": "/en/account/data-security", "permanent": true },
     { "source": "/concepts/ai-chat", "destination": "/en/concepts/ai-chat", "permanent": true },
-    { "source": "/concepts/layers-and-maps", "destination": "/en/concepts/layers-and-maps", "permanent": true },
+    { "source": "/concepts/layers-and-maps", "destination": "/en/concepts/layers", "permanent": true },
+    { "source": "/concepts/layers", "destination": "/en/concepts/layers", "permanent": true },
+    { "source": "/concepts/basemap", "destination": "/en/concepts/basemap", "permanent": true },
+    { "source": "/concepts/files", "destination": "/en/concepts/files", "permanent": true },
+    { "source": "/concepts/reports", "destination": "/en/concepts/reports", "permanent": true },
     { "source": "/concepts/spatial-operations", "destination": "/en/concepts/spatial-operations", "permanent": true },
-    { "source": "/developers/agent-tools", "destination": "/en/developers/agent-tools", "permanent": true },
+    { "source": "/developers/agent-tools", "destination": "/en/integration/agent-tools", "permanent": true },
+    { "source": "/integration/agent-tools", "destination": "/en/integration/agent-tools", "permanent": true },
     { "source": "/developers/api-reference", "destination": "/en/developers/api-reference", "permanent": true },
     { "source": "/developers/authentication", "destination": "/en/developers/authentication", "permanent": true },
-    { "source": "/developers/mcp", "destination": "/en/developers/mcp", "permanent": true },
+    { "source": "/developers/mcp", "destination": "/en/developers/mapx-cli", "permanent": true },
+    { "source": "/developers/mapx-cli", "destination": "/en/developers/mapx-cli", "permanent": true },
     { "source": "/developers/overview", "destination": "/en/developers/overview", "permanent": true },
     { "source": "/developers/skills", "destination": "/en/developers/skills", "permanent": true },
-    { "source": "/guides/heatmaps", "destination": "/en/guides/heatmaps", "permanent": true },
-    { "source": "/guides/logistics-analysis", "destination": "/en/guides/logistics-analysis", "permanent": true },
-    { "source": "/guides/real-estate", "destination": "/en/guides/real-estate", "permanent": true },
-    { "source": "/guides/reports", "destination": "/en/guides/reports", "permanent": true },
-    { "source": "/guides/site-selection", "destination": "/en/guides/site-selection", "permanent": true },
+    { "source": "/guides/heatmaps", "destination": "/en/concepts/spatial-operations", "permanent": true },
+    { "source": "/guides/logistics-analysis", "destination": "/en/concepts/spatial-operations", "permanent": true },
+    { "source": "/guides/real-estate", "destination": "/en/concepts/spatial-operations", "permanent": true },
+    { "source": "/guides/reports", "destination": "/en/concepts/reports", "permanent": true },
+    { "source": "/guides/site-selection", "destination": "/en/concepts/spatial-operations", "permanent": true },
     { "source": "/help/faq", "destination": "/en/help/faq", "permanent": true },
     { "source": "/help/troubleshooting", "destination": "/en/help/troubleshooting", "permanent": true },
     { "source": "/sharing/exporting", "destination": "/en/sharing/exporting", "permanent": true },

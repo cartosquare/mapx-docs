@@ -12,12 +12,12 @@ MapX supports multiple export formats designed for different downstream use case
 |---|---|---|---|---|
 | PNG map export | ✓ (watermark) | ✓ (no watermark) | ✓ | ✓ |
 | HTML report | ✓ (basic) | ✓ (basic) | ✓ (branded) | ✓ (white-label) |
-| CSV / GeoJSON data download | ✓ | ✓ | ✓ | ✓ |
+| CSV / GeoJSON data download | ✗ | ✓ | ✓ | ✓ |
 | Custom export formats | ✗ | ✗ | ✓ | ✓ |
 | Scheduled exports | ✗ | ✗ | ✗ | ✓ |
 
 <Note>
-  Downloading your raw and analyzed data (CSV / GeoJSON) is available on **every plan** — your data always stays yours, regardless of subscription tier.
+  Downloading your raw and analyzed data (CSV / GeoJSON) requires **Basic or higher**. Free users can view and analyze their data but cannot download it as CSV or GeoJSON.
 </Note>
 
 ## Exporting a PNG
@@ -58,14 +58,16 @@ You can download this enriched dataset at any time as:
 - **CSV** — for spreadsheet tools, BI platforms, or further processing
 - **GeoJSON** — for GIS tools (QGIS, ArcGIS, Mapbox, etc.) that consume spatial formats
 
-To download, click **Export → Download Data** and choose your preferred format.
+Each layer in the data panel has a **download button** on the right side of its row. Click it to download that layer's data as CSV or GeoJSON.
 
 ## Report Export
 
 MapX can generate a one-click **HTML report** summarizing your map, key findings, and AI analysis narrative — ready to share with clients or embed in internal documentation.
 
+Generated reports appear in the data panel under **Reports**. Each report row has an **export button** on the right — click it to download the HTML report file.
+
 - **Free / Basic**: standard MapX-branded report template
 - **Pro**: branded reports (custom title, logo, colors)
 - **Enterprise**: fully white-labeled reports with no MapX branding
 
-For a full walkthrough of the report builder, see the [Reports guide](/en/guides/reports).
+For a full walkthrough of the report builder, see [Reports](/en/concepts/reports).

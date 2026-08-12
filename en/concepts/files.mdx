@@ -1,0 +1,48 @@
+---
+title: "Files in a MapX Project"
+sidebarTitle: "Files"
+description: "How MapX stores the datasets and generated data in your project — and how to reference, preview, and delete files."
+---
+
+Every project in MapX holds files — the datasets you upload and the data the AI generates while working with them. Files are stored server-side with the project, so the same data is available whenever you reopen the project.
+
+## What Counts as a File
+
+- **Uploaded data** — CSV, Excel, GeoJSON/JSON, text documents, PDFs, Word documents, and GeoTIFF images. See [Supported File Formats](/en/uploading-data#supported-file-formats) for the full list.
+- **AI-generated data** — datasets the AI creates during analysis, such as cleaned copies or intermediate results.
+
+Reports are **not** data files. A report is an AI-generated HTML document that packages your maps, charts, and insights — it has its own **Reports** section in the data panel and is covered on the [Reports](/en/concepts/reports) page.
+
+## Files vs. Layers
+
+Files and layers are related but different:
+
+- A **file** is the stored data in your project.
+- A **layer** is a file rendered on the map.
+
+When you upload tabular or vector data, MapX auto-detects the location columns and renders it as a layer. The file remains in the project as the source of that layer. Analysis results (buffers, heatmaps, spatial joins, scored sites) also appear as layers, with their underlying data stored as files.
+
+In the data panel:
+
+- Layers appear under **My Layers**.
+- Files that are not currently rendered as layers appear under **Data Files**.
+- Reports appear in their own **Reports** section, separate from data files.
+
+## Managing Files
+
+In the **Data Files** section of the data panel, each file shows its name and size. You can:
+
+- **Reference a file in chat** — click the **@** button to insert the file name into the chat input, then ask the AI to read, clean, analyze, or display it.
+- **Delete a file** — click the delete icon and confirm. Deleting a file also removes any layers created from it. Files shared into your project (shared originals) can't be deleted.
+
+<Note>
+  Deleting a file is permanent and also deletes the layers derived from it. Export or download anything you still need before deleting.
+</Note>
+
+## Viewing File Contents
+
+MapX stores file contents server-side and streams them to the browser as needed, so large datasets stay responsive. To inspect a file, reference it in chat with the **@** button and ask the AI to summarize or show it. When the AI works with a file, it can return a file card in the conversation with a preview — CSV, Excel, GeoJSON/JSON, and text files are all previewable.
+
+## File Sources
+
+Each file records whether it was uploaded or AI-generated, so MapX can keep track of original source data and derived outputs separately. AI-generated data files are stored in the project just like uploaded files and follow the same storage rules.

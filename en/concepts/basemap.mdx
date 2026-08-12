@@ -1,0 +1,76 @@
+---
+title: "Choosing and Customizing the Basemap"
+sidebarTitle: "Basemap"
+description: "Choose between light and dark basemap styles, switch between labeled and unlabeled variants, and customize category colors and visibility per project."
+---
+
+The basemap is the background map that provides geographic context for your data layers. MapX offers four basemap styles:
+
+| Style | Appearance | Best for |
+|---|---|---|
+| **Light** | Minimal light-gray streets | Day-to-day analysis, data-dense maps, printed reports |
+| **Light with labels** | Light style plus place labels | Context-rich analysis, urban planning |
+| **Dark** | Dark background | Presentations, heatmaps, bright color schemes |
+| **Dark with labels** | Dark style plus place labels | Presentations and reports that need place names |
+
+The default basemap follows your interface theme: projects using the light theme start with **Light**, and projects using the dark theme start with **Dark**. You can switch at any time — the choice is saved with the project.
+
+## Switching the Basemap
+
+To switch basemaps:
+
+- In the **Layers panel**, expand the **Basemap** section and pick a style from the dropdown.
+- Or type your preference in the AI chat:
+
+```text
+Switch to the dark basemap
+```
+
+```text
+Show this on the light basemap with labels
+```
+
+Basemap changes apply immediately and don't affect your data or analysis layers.
+
+## Customizing Basemap Categories
+
+Each basemap style is organized into categories: **Background**, **Water**, **Green areas**, **Roads**, **Buildings**, **Aeroway**, **Boundaries**, and **Labels**. For each category you can:
+
+- **Change the color** — e.g., recolor water or roads to match your analysis.
+- **Toggle visibility** — hide a category entirely (for example, hide labels for a cleaner export).
+
+Category customizations are saved with the project and reapplied whenever the project is opened. You can also make these changes through the AI chat — for example, *"make the water blue"* or *"hide the building labels"*.
+
+## Masking the Map
+
+Masks hide everything outside a region you define — both the basemap and your data layers outside the boundary are covered, keeping the view focused on one country or a custom area. Masks are saved with the project, reapplied after basemap switches, and only one mask can be active at a time.
+
+### Country Mask
+
+The quickest way to focus a map on one country is the country mask. In the **Layers panel**, expand **Basemap** and choose a country from the **Country** dropdown — or select **None** to remove the mask. You can also set it from the AI chat:
+
+```text
+Show only Brazil
+```
+
+```text
+Mask everything except Germany
+```
+
+### Custom Mask
+
+For an arbitrary area — a province, metro region, or catchment zone — use a custom mask defined by a Polygon or MultiPolygon GeoJSON. There's no separate dropdown for it; describe the area in the AI chat and provide the geometry:
+
+```text
+Mask the map to this area: {"type":"Polygon","coordinates":[[[116.3,39.9],[116.6,39.9],[116.6,40.1],[116.3,40.1],[116.3,39.9]]]}
+```
+
+Setting a custom mask clears any active country mask, and selecting a country clears the custom mask. To remove a mask, ask the AI to clear it or — for a country mask — select **None** in the Country dropdown.
+
+<Note>
+  A mask only changes what is visible on the map — it doesn't delete or modify your data. Your layers and their attributes remain intact.
+</Note>
+
+<Tip>
+  Dark basemaps make heatmaps and bright color scales pop — they're the best choice for slide decks, stakeholder presentations, and exported report covers. Switch to a dark style before generating a report for a polished, professional look.
+</Tip>

@@ -1,10 +1,10 @@
 ---
 title: "MapX Data Security: Storage, Privacy, and Access Control"
 sidebarTitle: "Security"
-description: "Learn how MapX stores and protects your location data, controls access to your projects, and keeps your analysis private when you need it."
+description: "Learn how MapX stores and protects your location data. Projects are private by default, and access is only granted when you explicitly share."
 ---
 
-When you upload data to MapX, **you control who can see it**. MapX is built around the principle that your spatial data — your customer locations, site surveys, operational data — belongs to you. This page explains how MapX stores your data, who can access it, and what you should consider when working with sensitive datasets.
+When you upload data to MapX, **you control who can see it**. MapX is built around the principle that your spatial data — your customer locations, site surveys, operational data — belongs to you. Every project is private by default, and access is only granted when you explicitly share it. This page explains how MapX stores your data, who can access it, and what you should consider when working with sensitive datasets.
 
 ## Data Storage
 
@@ -17,12 +17,13 @@ MapX retains your files and project data as long as your account is active. Ente
 
 ## Access Control
 
-You control the visibility of every project independently:
+All MapX projects are **private by default**. Your projects and data are never publicly visible, listed, or discoverable — there is no public project setting. Access is granted only through explicit actions you take:
 
-- **Public projects** are visible to anyone who has the link — no MapX account required. Public projects are indexed by their link only; they are not listed in any public directory.
-- **Private projects** (Pro and Enterprise) require the viewer to be authenticated and explicitly invited. Only collaborators you have added — or users with a valid private link you have generated — can access private projects.
+- **Project sharing** — you invite specific users by email. Only invited collaborators can open the project.
+- **Embed links** — you enable embedding and share the token-protected link. Anyone with the link can view the embedded map.
+- **Report links** — you generate a share link for a report. Anyone with the link can view that report.
 
-You can change a project's visibility at any time in **Project Settings → Visibility**. Switching a project from public to private immediately revokes access for anyone who hasn't been explicitly invited.
+You can revoke access at any time: remove a collaborator from Project Share, disable embedding, or stop sharing report links. Nothing is exposed unless you actively share it.
 
 ## Data Sharing
 
@@ -35,15 +36,13 @@ You can change a project's visibility at any time in **Project Settings → Visi
 ## Sensitive Data Guidance
 
 <Warning>
-  Do not upload data containing **personal identifiers** — such as customer names, national ID numbers, phone numbers, email addresses, or financial records — into **public projects**. Public projects can be viewed by anyone with the link.
-
-  Always use **private projects** (Pro or Enterprise) for datasets that include personally identifiable information (PII) or that are subject to data protection regulations (GDPR, HIPAA, CCPA, etc.).
+  Projects are always private, but anyone you share a project with — or anyone who receives an embed or report link — can view the data included in it. If your dataset contains **personal identifiers** (customer names, ID numbers, phone numbers, email addresses, financial records) or is subject to data protection regulations (GDPR, HIPAA, CCPA, etc.), only share it with people you trust and review what each link exposes before sending it.
 </Warning>
 
 If you are unsure whether your dataset contains sensitive information, err on the side of caution and set the project to private before uploading.
 
 <Tip>
-  Use private projects for any client or confidential data — it takes one click in project settings and ensures only invited collaborators can access your analysis.
+  Every project is private by default, so your analysis is never exposed unless you share it. Share only with the people who need to see it.
 </Tip>
 
 ## Enterprise Security
@@ -55,4 +54,4 @@ Organizations with stricter compliance requirements should consider the Enterpri
 - **Dedicated storage** — your data is fully isolated at the infrastructure level
 - **Custom data retention policies** — configure how long MapX retains files and project history to match your internal or regulatory requirements
 
-To discuss Enterprise security options or request a security review, contact [sales@mapxagent.com](mailto:sales@mapxagent.com).
+To discuss Enterprise security options or request a security review, contact [support@mapxagent.com](mailto:support@mapxagent.com).

@@ -1,14 +1,14 @@
 ---
-title: "Working with Map Layers, Basemaps, and Styling in MapX"
-sidebarTitle: "Layers & Maps"
-description: "Manage multiple data layers, change basemaps, adjust colors and opacity, and customize your map's appearance for presentations and exports."
+title: "Working with Map Layers in MapX"
+sidebarTitle: "Layers"
+description: "Manage multiple data layers in a MapX project — toggle visibility, reorder, rename, delete, and style each layer independently."
 ---
 
 MapX uses a layer-based canvas — the same mental model as design tools like Figma or Photoshop, applied to geographic data. Every dataset you upload and every analysis you run produces a named layer that sits on top of a basemap. Layers can be stacked, toggled, reordered, and individually styled, giving you precise control over what your map communicates and how it looks.
 
 ## The Layers Panel
 
-The Layers panel, accessible on the left side of the map canvas, lists every active layer in your project. Each uploaded file (CSV, GeoJSON, Excel) and each analysis result (buffer zones, heatmaps, spatial joins, scored sites) appears as its own entry.
+The Layers panel, accessible on the left side of the map canvas, lists every active layer in your project. Each uploaded file (CSV, GeoJSON, Excel, GeoTIFF) and each analysis result (buffer zones, heatmaps, spatial joins, scored sites) appears as its own entry.
 
 From the Layers panel you can:
 
@@ -19,29 +19,6 @@ From the Layers panel you can:
 - **Open layer settings** — click a layer to access its styling options (see [Styling Layers](#styling-layers) below).
 
 You can also manage layers through the AI chat. Prompts like *"hide the competitor layer"* or *"move the heatmap below the store points"* are fully supported.
-
-## Basemap Options
-
-The basemap is the background map that provides geographic context for your data layers. MapX offers four basemap styles:
-
-| Basemap | Best for |
-|---|---|
-| **Light** | Day-to-day analysis, data-dense maps, printed reports |
-| **Dark** | Presentations, heatmaps, neon/bright color schemes |
-| **Satellite** | Site analysis, land-use review, terrain context |
-| **Streets** | Navigation context, proximity analysis, urban planning |
-
-To switch basemaps, either open the **Settings panel** (the gear icon, top right of the canvas) and select from the Basemap dropdown, or type your preference in the AI chat:
-
-```text
-Switch to the dark basemap
-```
-
-```text
-Show this on a satellite background
-```
-
-Basemap changes apply immediately and don't affect your data or analysis layers.
 
 ## Styling Layers
 
@@ -90,11 +67,3 @@ Show my store locations sized by revenue, competitor locations in red, and a hea
 ```
 
 MapX will create and stack the layers automatically. You can then fine-tune each one from the Layers panel.
-
-<Tip>
-  Dark basemaps make heatmaps and bright color scales pop — they're the best choice for slide decks, stakeholder presentations, and exported report covers. Switch to dark mode before generating a report for a polished, professional look.
-</Tip>
-
-<Note>
-  Custom brand colors, logo overlays, and white-labeled export themes are available on **Pro** and **Enterprise** plans. If you're on a Free or Basic plan, exports use MapX's default styling. [See pricing →](https://mapxagent.com/#pricing)
-</Note>
