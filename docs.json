@@ -4,13 +4,13 @@
   "name": "MapX",
   "colors": {
     "primary": "#006BCB",
-    "light": "#F2A33C",
-    "dark": "#B45309"
+    "light": "#3D8BFF",
+    "dark": "#0055A5"
   },
-  "favicon": "https://media.brand.dev/a33af33c-a6f2-423b-a9e7-53d5b0f6b96a.svg",
+  "favicon": "/favicon.svg",
   "logo": {
-    "light": "https://media.brand.dev/722e5f9e-d838-478a-ae9b-c12bb53e6139.png",
-    "dark": "https://media.brand.dev/722e5f9e-d838-478a-ae9b-c12bb53e6139.png"
+    "light": "/logo.png",
+    "dark": "/logo-dark.png"
   },
   "navbar": {
     "links": [
