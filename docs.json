@@ -3,9 +3,9 @@
   "theme": "luma",
   "name": "MapX",
   "colors": {
-    "primary": "#1b6cda",
-    "light": "#bcc483",
-    "dark": "#8cbe9c"
+    "primary": "#006BCB",
+    "light": "#F2A33C",
+    "dark": "#B45309"
   },
   "favicon": "https://media.brand.dev/a33af33c-a6f2-423b-a9e7-53d5b0f6b96a.svg",
   "logo": {
