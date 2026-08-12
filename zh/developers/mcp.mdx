@@ -90,7 +90,7 @@ mapx map zoom-in --session <id> --times 2
 mapx map zoom-out --session <id>
 mapx map pan --session <id> --direction north --amount large
 mapx map state --session <id>                                   # 视野/底图/遮罩状态
-mapx map add-tile-layer --session <id> --url "https://tiles.example.com/{z}/{x}/{y}.png"
+mapx map add-tile-layer --session <id> --tile-url "https://tiles.example.com/{z}/{x}/{y}.png"
 
 mapx view static --session <id>                    # 静态 embed URL（iframe/报告）
 mapx remote --session <id>                         # 实时视图 URL（SSE 同步）

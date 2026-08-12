@@ -99,7 +99,7 @@ mapx map zoom-in --session <id> --times 2
 mapx map zoom-out --session <id>
 mapx map pan --session <id> --direction north --amount large
 mapx map state --session <id>                                   # center/zoom/basemap/masks
-mapx map add-tile-layer --session <id> --url "https://tiles.example.com/{z}/{x}/{y}.png"
+mapx map add-tile-layer --session <id> --tile-url "https://tiles.example.com/{z}/{x}/{y}.png"
 
 mapx view static --session <id>                    # static embed URL (iframe/reports)
 mapx remote --session <id>                         # live view URL (SSE-synced)
