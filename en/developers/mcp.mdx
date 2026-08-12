@@ -59,7 +59,7 @@ your account, and project ownership is enforced by the backend.
    to inspect geometry, fields, and the current style.
 4. `mapx layers style <layer_id> --session <id> --file style.json` — apply
    incremental style changes.
-5. `mapx remote --session <id>` — print a live, shareable URL of the project.
+5. `mapx view live --session <id>` — print a live, shareable URL of the project.
 6. `mapx report save ./report.html --session <id>` — save an HTML report.
 
 ## Command reference
@@ -102,8 +102,8 @@ mapx map state --session <id>                                   # center/zoom/ba
 mapx map add-tile-layer --session <id> --tile-url "https://tiles.example.com/{z}/{x}/{y}.png"
 
 mapx view static --session <id>                    # static embed URL (iframe/reports)
-mapx remote --session <id>                         # live view URL (SSE-synced)
-mapx remote --session <id> --open                  # open it in the local browser
+mapx view live --session <id>                      # live view URL (SSE-synced)
+mapx view live --session <id> --open               # open it in the local browser
 
 mapx report save ./report.html --session <id> --title "Analysis report"
 
