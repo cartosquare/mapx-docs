@@ -48,10 +48,10 @@ mapx auth status                                  # 验证（Windows：.\mapx.ex
 ## 典型工作流
 
 1. `mapx session create --title "analysis"`（或 `mapx session list`）获取 `session_id`（项目 ID）。
-2. `mapx upload ./data.geojson --session <id>`——直接上传本地数据。
-3. `mapx layers list --session <id>`，然后 `mapx layers get <layer_id> --session <id>` 查看几何、字段和当前样式。
-4. `mapx layers style <layer_id> --session <id> --file style.json`——应用增量样式修改。
-5. `mapx view live --session <id>`——打印项目的实时可分享 URL。
+2. `mapx view live --session <id>`——项目创建后立即打开实时地图。命令返回 `live_view_url`（SSE 同步的实时视图）。如果 agent 平台能渲染网页，把该 URL 加载到 agent 界面中，让用户实时看到地图变化（例如 WorkBuddy）；如果 agent 无法渲染网页，改用 `mapx view live --session <id> --open`，在用户默认浏览器中打开实时地图。
+3. `mapx upload ./data.geojson --session <id>`——直接上传本地数据。
+4. `mapx layers list --session <id>`，然后 `mapx layers get <layer_id> --session <id>` 查看几何、字段和当前样式。
+5. `mapx layers style <layer_id> --session <id> --file style.json`——应用增量样式修改。
 6. `mapx report save ./report.html --session <id>`——保存 HTML 报告。
 
 ## 命令速查
@@ -96,8 +96,8 @@ mapx map state --session <id>                                   # 视野/底图/
 mapx map add-tile-layer --session <id> --tile-url "https://tiles.example.com/{z}/{x}/{y}.png"
 
 mapx view static --session <id>                    # 静态 embed URL（iframe/报告）
-mapx view live --session <id>                      # 实时视图 URL（SSE 同步）
-mapx view live --session <id> --open               # 在本地浏览器打开
+mapx view live --session <id>                      # 打印实时视图 URL；agent 平台支持渲染网页时（如 WorkBuddy）在 agent 界面中加载
+mapx view live --session <id> --open               # agent 无法渲染网页时，在默认浏览器中打开实时地图
 
 mapx report save ./report.html --session <id> --title "分析报告"
 

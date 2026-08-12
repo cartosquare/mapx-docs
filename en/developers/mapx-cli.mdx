@@ -55,12 +55,18 @@ your account, and project ownership is enforced by the backend.
 
 1. `mapx session create --title "analysis"` (or `mapx session list`) to get a
    `session_id` (the project id).
-2. `mapx upload ./data.geojson --session <id>` — upload local data directly.
-3. `mapx layers list --session <id>` then `mapx layers get <layer_id> --session <id>`
+2. `mapx view live --session <id>` — open the live map as soon as the project
+   exists. The command returns a `live_view_url` (an SSE-synced live view). If
+   the agent platform can render web pages, load that URL in the agent UI so
+   the user can watch the map update in real time (for example, WorkBuddy). If
+   the agent cannot render web pages, use
+   `mapx view live --session <id> --open` to open the live map in the user's
+   default browser instead.
+3. `mapx upload ./data.geojson --session <id>` — upload local data directly.
+4. `mapx layers list --session <id>` then `mapx layers get <layer_id> --session <id>`
    to inspect geometry, fields, and the current style.
-4. `mapx layers style <layer_id> --session <id> --file style.json` — apply
+5. `mapx layers style <layer_id> --session <id> --file style.json` — apply
    incremental style changes.
-5. `mapx view live --session <id>` — print a live, shareable URL of the project.
 6. `mapx report save ./report.html --session <id>` — save an HTML report.
 
 ## Command reference
@@ -105,8 +111,8 @@ mapx map state --session <id>                                   # center/zoom/ba
 mapx map add-tile-layer --session <id> --tile-url "https://tiles.example.com/{z}/{x}/{y}.png"
 
 mapx view static --session <id>                    # static embed URL (iframe/reports)
-mapx view live --session <id>                      # live view URL (SSE-synced)
-mapx view live --session <id> --open               # open it in the local browser
+mapx view live --session <id>                      # print the live view URL; load it in the agent UI when the platform can render web pages (e.g. WorkBuddy)
+mapx view live --session <id> --open               # open the live map in the default browser when the agent cannot render web pages
 
 mapx report save ./report.html --session <id> --title "Analysis report"
 
