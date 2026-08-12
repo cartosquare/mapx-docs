@@ -21,27 +21,41 @@ cp -r /data/xuxiang/mapx/docs-source/* source/
 cp /data/xuxiang/mapx/docs-source/openapi.json openapi.json
 ```
 
-## 关键端点
+## 公开 API 端点
 
 | 方法 | 路径 | 用途 |
 | --- | --- | --- |
-| `POST` | `/api/sessions` | 创建项目 |
-| `GET` | `/api/sessions` | 列出项目 |
-| `GET` | `/api/sessions/:id` | 获取项目详情 |
-| `PATCH` | `/api/sessions/:id` | 更新项目元数据 |
-| `GET` | `/api/sessions/:id/embed` | 获取或创建嵌入 token |
-| `POST` | `/api/keys` | 创建个人 API key |
-| `GET` | `/api/keys` | 列出 API key |
-| `DELETE` | `/api/keys/:id` | 撤销 API key |
-| `PUT` | `/api/v1/sessions/:id/layers/order` | 一次性重排全部图层 |
-| `DELETE` | `/api/v1/sessions/:id/files/:fileId` | 删除文件及其关联图层 |
-| `GET` | `/api/v1/sessions/:id/assets` | 列出所有数据资产（图层 + 文件） |
-| `POST` | `/api/internal/action` | 向项目派发地图操作 |
-| `POST` | `/api/internal/save-layer` | 保存图层 |
-| `POST` | `/api/internal/upload-base64` | 以 base64 上传文件 |
-| `POST` | `/api/internal/save-report` | 保存 HTML 报告 |
+| `GET` | `/api/v1/sessions` | 列出项目 |
+| `POST` | `/api/v1/sessions` | 创建项目 |
+| `GET` | `/api/v1/sessions/{id}` | 获取项目详情 |
+| `PATCH` | `/api/v1/sessions/{id}` | 部分更新项目 |
+| `DELETE` | `/api/v1/sessions/{id}` | 删除项目 |
+| `GET` | `/api/v1/sessions/{id}/map` | 获取项目地图状态 |
+| `POST` | `/api/v1/sessions/{id}/chat` | 开始一次 AI 对话 |
+| `POST` | `/api/v1/sessions/{id}/ask/respond` | 回答待处理的 AI 提问 |
+| `GET` | `/api/v1/sessions/{id}/files` | 列出项目文件 |
+| `POST` | `/api/v1/sessions/{id}/files` | 上传文件 |
+| `GET` | `/api/v1/sessions/{id}/files/{fileId}/content` | 获取文件内容 |
+| `DELETE` | `/api/v1/sessions/{id}/files/{fileId}` | 删除文件 |
+| `GET` | `/api/v1/sessions/{id}/assets` | 列出所有数据资产 |
+| `GET` | `/api/v1/sessions/{id}/layers` | 列出项目图层 |
+| `GET` | `/api/v1/sessions/{id}/layers/{layerId}` | 获取图层详情 |
+| `PATCH` | `/api/v1/sessions/{id}/layers/{layerId}` | 重命名图层或修改可见性 |
+| `DELETE` | `/api/v1/sessions/{id}/layers/{layerId}` | 删除图层 |
+| `PUT` | `/api/v1/sessions/{id}/layers/order` | 一次性重排全部图层 |
+| `PUT` | `/api/v1/sessions/{id}/layers/{layerId}/style` | 更新图层样式 |
+| `POST` | `/api/v1/sessions/{id}/map/actions` | 派发地图操作 |
+| `POST` | `/api/v1/sessions/{id}/reports` | 保存 HTML 报告 |
+| `GET` | `/api/v1/sessions/{id}/reports/{fileId}` | 获取报告元数据 |
+| `POST` | `/api/v1/sessions/{id}/live-view-url` | 获取项目实时视图 URL |
+| `POST` | `/api/v1/sessions/{id}/static-view-url` | 获取项目静态嵌入 URL |
+| `GET` | `/api/v1/api-keys` | 列出 API key |
+| `POST` | `/api/v1/api-keys` | 创建 API key |
+| `DELETE` | `/api/v1/api-keys/{keyId}` | 撤销 API key |
+| `GET` | `/api/v1/verify` | 校验 API key |
+| `GET` | `/api/v1/usage` | 获取当前套餐用量 |
 
-完整列表见 `source/api-routes.json`。
+请求/响应 schema 见侧边栏交互式 **API Reference** 组（由 OpenAPI 契约生成）。`/api/internal/*` 属于平台内部接口，不属于公开 API，这里不列出。
 
 ## 支持的上传类型
 

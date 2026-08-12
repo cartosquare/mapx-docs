@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-11T10:24:34.852Z",
+  "generatedAt": "2026-08-12T05:36:18.720Z",
   "skills": [
     {
       "name": "data-cleaning",
@@ -23,7 +23,7 @@
     },
     {
       "name": "mapx-cli",
-      "description": "mapx-cli 技能手册",
+      "description": "mapx-cli Skill Manual",
       "path": "skills/mapx-cli/SKILL.md"
     },
     {
@@ -48,7 +48,7 @@
     },
     {
       "name": "styles",
-      "description": "Complete reference for Mapx layer styles. Covers geometry types (circle/line/fill), renderer types (single/categorized/graduated/heatmap/interpolated/multi_field/chart), paint keys per geometry, label annotation, legend toggle, JSON schemas, and examples. Use this skill when modifying layer styles via map_update_layer_style or map_import_file MCP tools.",
+      "description": "Complete reference for Mapx layer styles. Covers geometry types (circle/line/fill, plus raster for COG layers), renderer types (single/categorized/graduated/heatmap/interpolated/multi_field/chart, plus rgb/color/hillshade for raster layers), paint keys per geometry, label annotation, legend toggle, JSON schemas, and examples. Use this skill when modifying layer styles via map_update_layer_style or map_import_file MCP tools.",
       "path": "skills/styles/SKILL.md"
     },
     {

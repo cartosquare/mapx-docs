@@ -74,9 +74,12 @@ For the fastest and most reliable auto-detection, use one of the following stand
 MapX uses GPU-accelerated WebGL rendering, which means even large datasets stay smooth and interactive:
 
 - **100,000+ data points** rendered at a stable **60 fps** in the browser.
-- **No row limits** on paid plans (Basic, Pro, Enterprise).
-- **Free plan** supports files up to 10 MB and 25,000 rows per dataset.
-- Very large files (500 MB+) are automatically streamed and tiled server-side to maintain browser performance.
+- **No row limits** on any plan.
+- **Max 50 MB per file** on all plans (configurable via `UPLOAD_MAX_SIZE_MB`).
+  Dataset size is bounded by your plan's storage: Free 200 MB, Basic 5 GB,
+  Pro 20 GB, Enterprise dedicated.
+- Files are stored server-side and streamed to the browser when they exceed a
+  small inline threshold; TIFF files are converted to COG for tiled loading.
 
 For best performance with datasets above 50,000 rows, ensure your file does not contain unnecessary columns — trimming unused fields before upload reduces parse time and memory usage.
 

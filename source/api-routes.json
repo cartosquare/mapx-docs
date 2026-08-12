@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-11T10:24:34.852Z",
+  "generatedAt": "2026-08-12T05:36:18.720Z",
   "endpoints": [
     {
       "method": "GET",
@@ -178,6 +178,12 @@
     {
       "method": "POST",
       "path": "/api/internal/rename-layer",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/reorder-layers",
       "file": "internal.ts",
       "router": "internalRoutes"
     },
@@ -500,6 +506,12 @@
       "router": "v1Routes"
     },
     {
+      "method": "GET",
+      "path": "/sessions/:id/assets",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
       "method": "POST",
       "path": "/sessions/:id/chat",
       "file": "v1.ts",
@@ -514,6 +526,12 @@
     {
       "method": "POST",
       "path": "/sessions/:id/files",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/sessions/:id/files/:fileId",
       "file": "v1.ts",
       "router": "v1Routes"
     },
@@ -550,6 +568,12 @@
     {
       "method": "PUT",
       "path": "/sessions/:id/layers/:layerId/style",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "PUT",
+      "path": "/sessions/:id/layers/order",
       "file": "v1.ts",
       "router": "v1Routes"
     },
@@ -592,6 +616,12 @@
     {
       "method": "GET",
       "path": "/usage",
+      "file": "v1.ts",
+      "router": "v1Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/verify",
       "file": "v1.ts",
       "router": "v1Routes"
     }

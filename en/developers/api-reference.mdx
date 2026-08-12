@@ -27,27 +27,44 @@ cp -r /data/xuxiang/mapx/docs-source/* source/
 cp /data/xuxiang/mapx/docs-source/openapi.json openapi.json
 ```
 
-## Key endpoints
+## Public API endpoints
 
 | Method | Path | Purpose |
 | --- | --- | --- |
-| `POST` | `/api/sessions` | Create a project |
-| `GET` | `/api/sessions` | List projects |
-| `GET` | `/api/sessions/:id` | Get project details |
-| `PATCH` | `/api/sessions/:id` | Update project metadata |
-| `GET` | `/api/sessions/:id/embed` | Get or create an embed token |
-| `POST` | `/api/keys` | Create a personal API key |
-| `GET` | `/api/keys` | List API keys |
-| `DELETE` | `/api/keys/:id` | Revoke an API key |
-| `PUT` | `/api/v1/sessions/:id/layers/order` | Reorder all layers in one request |
-| `DELETE` | `/api/v1/sessions/:id/files/:fileId` | Delete a file and its linked layers |
-| `GET` | `/api/v1/sessions/:id/assets` | List all data assets (layers + files) |
-| `POST` | `/api/internal/action` | Dispatch a map action to a project |
-| `POST` | `/api/internal/save-layer` | Save a layer |
-| `POST` | `/api/internal/upload-base64` | Upload a file as base64 |
-| `POST` | `/api/internal/save-report` | Save an HTML report |
+| `GET` | `/api/v1/sessions` | List projects |
+| `POST` | `/api/v1/sessions` | Create a project |
+| `GET` | `/api/v1/sessions/{id}` | Get a project |
+| `PATCH` | `/api/v1/sessions/{id}` | Partially update a project |
+| `DELETE` | `/api/v1/sessions/{id}` | Delete a project |
+| `GET` | `/api/v1/sessions/{id}/map` | Get the project map state |
+| `POST` | `/api/v1/sessions/{id}/chat` | Start an AI chat turn |
+| `POST` | `/api/v1/sessions/{id}/ask/respond` | Answer a pending AI question |
+| `GET` | `/api/v1/sessions/{id}/files` | List project files |
+| `POST` | `/api/v1/sessions/{id}/files` | Upload a file |
+| `GET` | `/api/v1/sessions/{id}/files/{fileId}/content` | Get file content |
+| `DELETE` | `/api/v1/sessions/{id}/files/{fileId}` | Delete a file |
+| `GET` | `/api/v1/sessions/{id}/assets` | List all data assets |
+| `GET` | `/api/v1/sessions/{id}/layers` | List project layers |
+| `GET` | `/api/v1/sessions/{id}/layers/{layerId}` | Get layer details |
+| `PATCH` | `/api/v1/sessions/{id}/layers/{layerId}` | Rename a layer or change its visibility |
+| `DELETE` | `/api/v1/sessions/{id}/layers/{layerId}` | Delete a layer |
+| `PUT` | `/api/v1/sessions/{id}/layers/order` | Reorder all layers in one request |
+| `PUT` | `/api/v1/sessions/{id}/layers/{layerId}/style` | Update a layer style |
+| `POST` | `/api/v1/sessions/{id}/map/actions` | Dispatch map actions |
+| `POST` | `/api/v1/sessions/{id}/reports` | Save an HTML report |
+| `GET` | `/api/v1/sessions/{id}/reports/{fileId}` | Get report metadata |
+| `POST` | `/api/v1/sessions/{id}/live-view-url` | Get the live view URL for a project |
+| `POST` | `/api/v1/sessions/{id}/static-view-url` | Get the static embed URL for a project |
+| `GET` | `/api/v1/api-keys` | List API keys |
+| `POST` | `/api/v1/api-keys` | Create an API key |
+| `DELETE` | `/api/v1/api-keys/{keyId}` | Revoke an API key |
+| `GET` | `/api/v1/verify` | Verify the API key |
+| `GET` | `/api/v1/usage` | Get current plan usage |
 
-For the complete list, read `source/api-routes.json`.
+For request/response schemas, use the interactive **API Reference** group in
+the sidebar, generated from the OpenAPI contract. Platform-internal endpoints
+under `/api/internal/*` are not part of the public API and are intentionally
+not listed here.
 
 ## Supported upload types
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-11T10:24:34.852Z",
+  "generatedAt": "2026-08-12T05:36:18.720Z",
   "tools": [
     {
       "name": "map_add_geojson",
@@ -97,6 +97,11 @@
       "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
     },
     {
+      "name": "map_reorder_layers",
+      "description": "按给定顺序一次性重排所有图层。传入完整的图层 UUID 数组（第一个为最上层），后端原子持久化并广播到平台与 live 页。当用户要求'把XX放到最上面/最下面'、'按XX顺序排列图层'、'一次性调整多个图层顺序'时使用；单步上移/下移仍用 map_move_layer_up / map_move_layer_down。",
+      "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
+    },
+    {
       "name": "map_save_report",
       "description": "保存LLM生成的HTML分析报告。仅用于 HTML 报告，不能用于注册影像或其他数据文件（GeoTIFF 请用 map_import_image 的 file_path）。先用 shell 将 HTML 写入文件（如 cat > report.html），再传 file_path。",
       "file": "tools/crates/mapx-mcp/src/tools/data.rs"
@@ -128,7 +133,7 @@
     },
     {
       "name": "map_update_layer_style",
-      "description": "修改图层渲染样式、标注和图例。调用前必须先加载 styles 技能**，查看每种 renderer 的完整 JSON schema 和示例。layer_id 必须是 map_list_layers 返回的 UUID，不要用显示名称或文件名。",
+      "description": "修改图层渲染样式、标注和图例。调用前必须先加载 styles 技能**，查看每种 renderer 的完整 JSON schema 和示例。layer_id 必须是 map_list_layers 返回的 UUID，不要用显示名称或文件名。栅格图层（COG，geometry_type=raster）可使用 rgb/color/hillshade 渲染器。",
       "file": "tools/crates/mapx-mcp/src/tools/layers.rs"
     },
     {
