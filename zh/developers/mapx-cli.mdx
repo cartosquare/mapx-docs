@@ -49,7 +49,7 @@ mapx auth status                                  # 验证（Windows：.\mapx.ex
 
 1. `mapx session create --title "analysis"`（或 `mapx session list`）获取 `session_id`（项目 ID）。
 2. `mapx view live --session <id>`——项目创建后立即打开实时地图。命令返回 `live_view_url`（SSE 同步的实时视图）。如果 agent 平台能渲染网页，把该 URL 加载到 agent 界面中，让用户实时看到地图变化（例如 WorkBuddy）；如果 agent 无法渲染网页，改用 `mapx view live --session <id> --open`，在用户默认浏览器中打开实时地图。
-3. `mapx upload ./data.geojson --session <id>`——直接上传本地数据。
+3. `mapx upload ./data.geojson --session <id>`——直接上传本地数据。该命令只接受 GeoJSON（矢量）和 GeoTIFF（栅格）文件。如果源数据是 CSV/Excel，先识别经纬度列，把数据转换为 GeoJSON，再上传生成的 `.geojson` 文件。
 4. `mapx layers list --session <id>`，然后 `mapx layers get <layer_id> --session <id>` 查看几何、字段和当前样式。
 5. `mapx layers style <layer_id> --session <id> --file style.json`——应用增量样式修改。
 6. `mapx report save ./report.html --session <id>`——保存 HTML 报告。
@@ -66,7 +66,7 @@ mapx session list                                  # 列出项目
 mapx session get <id>                              # 查看项目
 mapx session delete <id>                           # 删除项目
 
-mapx upload ./data.geojson --session <id>          # 上传：GeoJSON→图层，TIFF→COG，CSV→文件
+mapx upload ./data.geojson --session <id>          # 上传：GeoJSON（矢量）→图层，GeoTIFF（栅格）→COG；CSV/Excel 需先转为 GeoJSON
 mapx files list --session <id>                     # 列出文件
 mapx files delete <file_id> --session <id>         # 删除文件及其关联图层
 mapx assets list --session <id>                    # 列出所有数据资产（图层 + 文件）

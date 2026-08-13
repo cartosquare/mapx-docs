@@ -63,6 +63,9 @@ your account, and project ownership is enforced by the backend.
    `mapx view live --session <id> --open` to open the live map in the user's
    default browser instead.
 3. `mapx upload ./data.geojson --session <id>` — upload local data directly.
+   The command accepts only GeoJSON (vector) and GeoTIFF (raster) files. For
+   CSV/Excel sources, identify the latitude/longitude columns, convert the data
+   to GeoJSON, then upload the resulting `.geojson` file.
 4. `mapx layers list --session <id>` then `mapx layers get <layer_id> --session <id>`
    to inspect geometry, fields, and the current style.
 5. `mapx layers style <layer_id> --session <id> --file style.json` — apply
@@ -81,7 +84,7 @@ mapx session list                                  # list projects
 mapx session get <id>                              # show a project
 mapx session delete <id>                           # delete a project
 
-mapx upload ./data.geojson --session <id>          # upload: GeoJSON→layer, TIFF→COG, CSV→file
+mapx upload ./data.geojson --session <id>          # upload: GeoJSON (vector)→layer, GeoTIFF (raster)→COG; CSV/Excel must be converted to GeoJSON first
 mapx files list --session <id>                     # list files
 mapx files delete <file_id> --session <id>         # delete a file and its linked layers
 mapx assets list --session <id>                    # list all data assets (layers + files)
