@@ -8,9 +8,9 @@ MapX accepts **CSV, GeoJSON, Excel, and GeoTIFF** files. **CSV, GeoJSON, and
 Excel** are general-purpose data formats — they carry attributes and location
 columns that MapX auto-detects. **GeoTIFF and Shapefile** are GIS-specific
 formats: GeoTIFF is rendered as a raster image layer on the map, and Shapefile
-support is planned. When you upload a tabular file, MapX scans it automatically,
-identifies the columns that contain location information, and renders your data
-on the map canvas within seconds.
+is converted to a vector layer (points, lines, or polygons). When you upload a
+tabular file, MapX scans it automatically, identifies the columns that contain
+location information, and renders your data on the map canvas within seconds.
 
 ## Supported File Formats
 
@@ -20,7 +20,22 @@ on the map canvas within seconds.
 | **GeoJSON** | `.geojson`, `.json` | Point, LineString, and Polygon geometry types are all supported. Properties are imported as attribute columns available for styling and filtering. |
 | **Excel** | `.xlsx`, `.xls` | The first sheet is imported. Latitude/longitude or address columns are auto-detected using the same rules as CSV. Additional sheets are ignored. |
 | **GeoTIFF** | `.tif`, `.tiff` | GIS-specific. Uploaded as a raster image layer on the map. |
-| **Shapefile** | `.shp`, `.zip` | GIS-specific. Support is planned — not yet available for upload. |
+| **Shapefile** | `.shp/.shx/.dbf` (+ optional `.prj`, `.cpg`, etc.), or `.zip` | GIS-specific. Select all files with the same prefix, or upload a zip. Missing `.prj` is treated as WGS84. |
+
+## Uploading a Shapefile
+
+A Shapefile is defined by several files that share the same prefix and must be
+uploaded together:
+
+- **Required**: `.shp` (geometry), `.shx` (index), `.dbf` (attributes)
+- **Optional**: `.prj` (coordinate system), `.cpg` (character encoding), plus
+  spatial/attribute index files (`.sbn`, `.sbx`, `.qix`, etc.)
+
+Select all of these files at once — MapX groups them into a single upload and
+shows an error if a required file is missing. You can also package the files
+into a `.zip` and upload that. If the `.prj` file is absent, MapX assumes WGS84
+(EPSG:4326); attribute encoding is read from `.cpg` when present. The geometry
+is reprojected to WGS84 and added to the map as a regular vector layer.
 
 ## How Auto-Detection Works
 

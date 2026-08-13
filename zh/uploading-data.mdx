@@ -4,7 +4,7 @@ sidebarTitle: "上传数据"
 description: "学习如何向 MapX 上传 CSV、GeoJSON 和 Excel 文件，包括自动位置列识别、列命名建议和常见导入错误修复。"
 ---
 
-MapX 支持 **CSV、GeoJSON、Excel 和 GeoTIFF** 文件。**CSV、GeoJSON 和 Excel** 是通用领域数据格式——包含可被 MapX 自动识别的属性与位置列。**GeoTIFF 和 Shapefile** 是 GIS 领域专用格式：GeoTIFF 会以栅格影像图层的形式渲染到地图上，Shapefile 支持正在规划中。上传表格类文件后，MapX 会自动扫描、识别包含位置信息的列，并在几秒内把数据渲染到地图上。
+MapX 支持 **CSV、GeoJSON、Excel、GeoTIFF 和 Shapefile** 文件。**CSV、GeoJSON 和 Excel** 是通用领域数据格式——包含可被 MapX 自动识别的属性与位置列。**GeoTIFF 和 Shapefile** 是 GIS 领域专用格式：GeoTIFF 会以栅格影像图层的形式渲染到地图上，Shapefile 会转换为矢量图层（点/线/面）。上传表格类文件后，MapX 会自动扫描、识别包含位置信息的列，并在几秒内把数据渲染到地图上。
 
 ## 支持的文件格式
 
@@ -14,7 +14,16 @@ MapX 支持 **CSV、GeoJSON、Excel 和 GeoTIFF** 文件。**CSV、GeoJSON 和 E
 | **GeoJSON** | `.geojson`, `.json` | 支持点、线和面几何类型。属性会作为可用于样式和筛选的字段导入。 |
 | **Excel** | `.xlsx`, `.xls` | 导入第一个工作表。使用与 CSV 相同的规则自动识别经纬度或地址列，其余工作表忽略。 |
 | **GeoTIFF** | `.tif`, `.tiff` | GIS 领域专用。以栅格影像图层的形式上传并展示在地图上。 |
-| **Shapefile** | `.shp`, `.zip` | GIS 领域专用。支持正在规划中，暂不能上传。 |
+| **Shapefile** | `.shp/.shx/.dbf`（可含 `.prj`、`.cpg` 等），或 `.zip` | GIS 领域专用。选择同前缀的全部文件一起上传，或上传 zip 压缩包；缺少 `.prj` 时按 WGS84 处理。 |
+
+## 上传 Shapefile
+
+Shapefile 由多个**相同前缀**的文件组成，必须一起上传：
+
+- **必需**：`.shp`（几何）、`.shx`（索引）、`.dbf`（属性）
+- **可选**：`.prj`（坐标系）、`.cpg`（字符编码），以及空间/属性索引文件（`.sbn`、`.sbx`、`.qix` 等）
+
+一次框选这些文件即可——MapX 会把它们合并为一条上传项，缺少必需文件时会明确提示。也可以把文件打包成 `.zip` 上传。缺少 `.prj` 时按 WGS84（EPSG:4326）处理；属性编码在存在 `.cpg` 时按其指定读取。几何会重投影到 WGS84，并以普通矢量图层（点/线/面）的形式添加到地图。
 
 ## 自动识别的工作原理
 
