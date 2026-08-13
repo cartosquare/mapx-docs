@@ -10,19 +10,19 @@ MapX supports multiple export formats designed for different downstream use case
 
 | Export Type | Free | Basic | Pro | Enterprise |
 |---|---|---|---|---|
-| PNG map export | ✓ (watermark) | ✓ (no watermark) | ✓ | ✓ |
-| HTML report | ✓ (basic) | ✓ (basic) | ✓ (branded) | ✓ (white-label) |
+| High resolution static map PNG export | ✓ (watermark) | ✓ (no watermark) | ✓ | ✓ |
+| Online hosted report sharing | ✓ | ✓ | ✓ | ✓ |
 | CSV / GeoJSON data download | ✗ | ✓ | ✓ | ✓ |
-| Custom export formats | ✗ | ✗ | ✓ | ✓ |
+| Project manifest export | — | ✓ | ✓ | ✓ |
 | Scheduled exports | ✗ | ✗ | ✗ | ✓ |
 
 <Note>
   Downloading your raw and analyzed data (CSV / GeoJSON) requires **Basic or higher**. Free users can view and analyze their data but cannot download it as CSV or GeoJSON.
 </Note>
 
-## Exporting a PNG
+## Exporting a High Resolution Static Map PNG
 
-PNG export captures the current state of your map canvas as a static image, including all visible layers, labels, and AI-generated overlays.
+High resolution static map PNG export captures the current state of your map canvas as a static image, including all visible layers, labels, and AI-generated overlays.
 
 **Steps:**
 
@@ -42,7 +42,7 @@ PNG export captures the current state of your map canvas as a static image, incl
 </Steps>
 
 <Note>
-  Free plan PNG exports include a **MapX watermark** in the bottom corner. Upgrade to Basic or higher to remove it.
+  Free plan high resolution static map PNG exports include a **MapX watermark** in the bottom corner. Upgrade to Basic or higher to remove it.
 </Note>
 
 ## Downloading Your Data
@@ -71,3 +71,23 @@ Generated reports appear in the data panel under **Reports**. Each report row ha
 - **Enterprise**: fully white-labeled reports with no MapX branding
 
 For a full walkthrough of the report builder, see [Reports](/en/concepts/reports).
+
+## Exporting a Project Manifest
+
+A project manifest packages your project's **map state and layer configuration** — basemap settings, layer styles, labels, legends, and visibility — into a single `manifest.json` file inside a zip archive. It's a lightweight way to back up or transfer how your project is styled and arranged.
+
+**Steps:**
+
+<Steps>
+  <Step title="Open Project Settings">
+    In your workspace, open the **Settings** panel (gear icon).
+  </Step>
+  <Step title="Click Export Manifest">
+    Find the **Export Manifest** section and click the export button.
+  </Step>
+  <Step title="Download">
+    Your browser downloads a `<project>-manifest.zip` containing `manifest.json`.
+  </Step>
+</Steps>
+
+Project manifest export is available on **Basic and above**.
