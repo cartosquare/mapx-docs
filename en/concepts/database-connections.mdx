@@ -1,0 +1,39 @@
+---
+title: "Database connections"
+sidebarTitle: "Database connections"
+description: "Connect MapX to an external PostgreSQL or MySQL database so the AI can query it read-only and import results as map layers."
+---
+
+A database connection links MapX to an external PostgreSQL or MySQL database. Once connected, the AI can inspect the schema, run read-only queries, and import tables or query results as map layers — no data export required.
+
+## Add a connection
+
+1. Open **Data sources** in the dashboard.
+2. Add a connection with host, port, database name, username, and password.
+3. Choose SSL mode (`disable` or `require`) and test the connection.
+
+Passwords are encrypted at rest and never returned by the API. Runtime access happens server-side, so credentials never enter the AI sandbox.
+
+## Query in chat
+
+After connecting, ask the AI to explore the database in plain language:
+
+- "List the tables in my analytics database."
+- "Show the columns of the `orders` table."
+- "Count orders per region for the last 30 days."
+
+The AI inspects the schema, then runs read-only SQL. Queries are restricted to read-only operations — writes are rejected.
+
+## Import as a map layer
+
+When a table has spatial columns (PostGIS geometry or MySQL spatial types), you can import it directly as a map layer. Non-spatial query results can be visualized as well.
+
+## Managing connections
+
+Each connection shows its status (`active` or `failed`) and the last check time. You can disable a connection to stop the AI from using it, or re-test it after changing credentials.
+
+<Warning>
+  Database connections grant the AI read access to the connected database. Only connect databases you are authorized to read, and keep credentials limited to read-only users where possible.
+</Warning>
+
+See [MCP connections](/en/concepts/mcp) for how the AI executes these operations.

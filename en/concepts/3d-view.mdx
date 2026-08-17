@@ -1,0 +1,58 @@
+---
+title: "Viewing your map in 3D"
+sidebarTitle: "3D View"
+description: "Tilt the map into a 3D perspective, render layers as columns, paths, arcs, or extruded areas, and control each layer's 3D style."
+---
+
+MapX can tilt the map into a 3D perspective, turning flat point, line, and area layers into columns, paths, arcs, and extruded surfaces. The 3D view is a different way to look at the same data — switch back to 2D at any time without losing your 2D styling.
+
+## Switch between 2D and 3D
+
+Use the 3D toggle in the top-right toolbar to tilt the map to a 60-degree pitch. Your view mode is saved with the project, so reopening it returns to the same 2D or 3D view.
+
+```text Example prompt
+switch to 3D view
+```
+
+```text Example prompt
+go back to 2D
+```
+
+## How layers render in 3D
+
+By default, each layer's 3D appearance is derived automatically from its 2D style:
+
+- **Point layers** render as 3D columns.
+- **Line layers** render as elevated paths (or arcs and animated trips).
+- **Area layers** render as extruded polygons.
+
+Open a layer's style editor and use the **3D style** section to override the automatic projection. You can set:
+
+- for columns — color or a color ramp, height (or a height field), radius, and opacity;
+- for paths, arcs, and trips — color, width, opacity, and arc height or trip time field;
+- for extruded areas — fill color, height (or a height field), and opacity.
+
+```text Example prompt
+show population as columns in 3D, colored by district
+```
+
+```text Example prompt
+make the roads into blue arcs
+```
+
+## Hexagon aggregation
+
+Point layers can be aggregated into a hexagon grid (H3). In 2D the hexagons render as a flat grid; in 3D they are extruded into cells. Set the resolution, the color and height fields, and the aggregation method (sum, average, minimum, maximum, or count).
+
+```text Example prompt
+aggregate the points into hexagons and extrude them by total sales
+```
+
+## Labels in 3D
+
+Labels stay visible in 3D. Point layers are labeled above their column, and line layers are labeled at the midpoint of each line.
+
+## Notes
+
+- 2D and 3D styles are independent: changing the 3D appearance does not change how the layer looks in 2D, and vice versa.
+- Switching back to 2D restores each layer's original 2D style automatically.

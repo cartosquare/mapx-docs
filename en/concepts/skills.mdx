@@ -1,0 +1,27 @@
+---
+title: "Skills"
+sidebarTitle: "Skills"
+description: "Skills are instruction packs you upload so the MapX AI follows your team's specialized workflows."
+---
+
+Skills are instruction packs that teach the AI how to do specialized work correctly. Each skill is a `SKILL.md` file with step-by-step guidance, exact commands, and rules for a specific task. When a task matches a skill, the AI loads it and follows it.
+
+## Upload your own skills
+
+You can add your own skills so the AI applies your team's conventions and workflows:
+
+1. Open **Skills** in the dashboard.
+2. Upload a `SKILL.md` file with a name and description.
+3. Enable it — enabled skills are loaded into every conversation turn.
+
+Write skills the same way you would brief a colleague: what the task is, which steps to follow, which commands or formats to use, and what to avoid. Disable a skill at any time to stop it from loading.
+
+## How the AI uses skills
+
+Skills load automatically. When a task matches an enabled skill's name or description, the AI reads the skill before acting.
+
+<Note>
+  Skill content is part of the AI's instructions, not a separate database. Uploaded skills must follow the `SKILL.md` format with clear, actionable guidance.
+</Note>
+
+See [MCP connections](/en/concepts/mcp) for how the AI executes map operations, and [Knowledge bases](/en/concepts/knowledge-bases) for giving the AI retrievable documents.

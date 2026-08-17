@@ -53,9 +53,16 @@
                   "en/concepts/ai-chat",
                   "en/concepts/spatial-operations",
                   "en/concepts/layers",
+                  "en/concepts/3d-view",
+                  "en/concepts/layer-editing",
                   "en/concepts/basemap",
                   "en/concepts/files",
-                  "en/concepts/reports"
+                  "en/concepts/reports",
+                  "en/concepts/charts",
+                  "en/concepts/mcp",
+                  "en/concepts/skills",
+                  "en/concepts/knowledge-bases",
+                  "en/concepts/database-connections"
                 ]
               },
               {
@@ -75,6 +82,7 @@
                 "group": "Plans & Account",
                 "pages": [
                   "en/account/plans",
+                  "en/account/credits",
                   "en/account/data-security"
                 ]
               },
@@ -148,10 +156,17 @@
                 "pages": [
                   "zh/concepts/ai-chat",
                   "zh/concepts/spatial-operations",
-                  "zh/concepts/layers",
+      "zh/concepts/layers",
+      "zh/concepts/3d-view",
+      "zh/concepts/layer-editing",
                   "zh/concepts/basemap",
                   "zh/concepts/files",
-                  "zh/concepts/reports"
+                  "zh/concepts/reports",
+                  "zh/concepts/charts",
+                  "zh/concepts/mcp",
+                  "zh/concepts/skills",
+                  "zh/concepts/knowledge-bases",
+                  "zh/concepts/database-connections"
                 ]
               },
               {
@@ -171,6 +186,7 @@
                 "group": "套餐与账户",
                 "pages": [
                   "zh/account/plans",
+                  "zh/account/credits",
                   "zh/account/data-security"
                 ]
               },

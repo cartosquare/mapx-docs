@@ -1,0 +1,62 @@
+---
+title: "MapX credits: how AI usage is billed"
+sidebarTitle: "Credits"
+description: "MapX bills AI usage in credits based on actual token consumption. Learn how credits are calculated, what each plan includes, and how to top up."
+---
+
+MapX charges AI usage in **credits**. Every AI turn consumes credits based on the actual tokens the model processes — not on a fixed per-question fee. Your plan includes a monthly credit allowance, and you can top up when you need more.
+
+## Monthly credit allowance
+
+| Plan | Monthly credits |
+|---|---|
+| Free | 300 |
+| Basic | 3,000 |
+| Pro | 12,000 |
+| Business (team) | 150,000 shared by the owner and up to 4 members |
+
+Unused allowance resets at the start of each billing month. Your plan's credit allowance is separate from any credits you top up.
+
+## How a turn consumes credits
+
+When you send a message, the AI processes three kinds of tokens, each priced differently:
+
+| Token type | Price per 1M tokens |
+|---|---|
+| Input (uncached) | $0.445 |
+| Cached input | $0.015 |
+| Output | $1.334 |
+
+The cost is converted to credits at **100 credits per USD** and rounded to the nearest whole credit:
+
+```text
+credits = (uncached input × $0.445 + cached input × $0.015 + output × $1.334) / 1M × 100
+```
+
+In practice this means:
+
+- A short, direct question costs a few credits.
+- Long analyses, large files, or long conversations cost more because they process more tokens.
+- Reusing context from earlier in the conversation is cheaper — cached input tokens cost about 3% of uncached input.
+
+You can see your allowance, usage, and balance on the **Plans** page in the dashboard. When your balance runs out, MapX pauses the chat and prompts you to top up.
+
+## Top-up packages
+
+Top-up credits never expire and are used after your monthly plan allowance:
+
+| Package | Price |
+|---|---|
+| 1,000 credits | $10 |
+| 5,000 credits | $50 |
+| 10,000 credits | $95 |
+
+## Business team pools
+
+The Business plan is a team plan. The owner and up to 4 members share one credit pool of 150,000 credits per month. Every member's turns draw from the same pool, so usage across the team counts together.
+
+<Info>
+  Credit pricing and top-up packages are configuration constants on the server. They can change; this page reflects the current defaults.
+</Info>
+
+See [Plans](/en/account/plans) for a full feature comparison across plans.

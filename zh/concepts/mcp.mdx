@@ -1,0 +1,29 @@
+---
+title: "MCP 连接"
+sidebarTitle: "MCP"
+description: "如何通过模型上下文协议（MCP）把你自己搭建的外部工具连接到 MapX。"
+---
+
+MapX 支持**模型上下文协议（Model Context Protocol，MCP）**——一种把 AI 模型连接到外部工具的标准协议。你可以连接自己的 MCP 服务器，让 AI 在对话中调用你的内部工具。
+
+## 自定义 MCP 服务器
+
+你可以连接自己的 MCP 服务器，让 AI 在对话中使用你的内部工具：
+
+1. 打开仪表盘的**MCP 连接**。
+2. 通过 URL（Streamable HTTP）或本地命令添加服务器。
+3. 测试连接，然后启用你想开放的工具。
+
+AI 会在每一轮对话中加载已启用的工具。Bearer token、请求头等机密信息加密存储，API 不会返回。
+
+你也可以单独禁用某个工具。被禁用的工具绝不会提供给 AI。
+
+## 在对话中使用 MCP
+
+已连接的工具会自动工作。直接描述目标——「用我的天气接口查每家门店的天气」——AI 会调用工具、读取结果并继续分析。
+
+<Note>
+  MCP 连接是可选项。不配置 MCP 也能使用 MapX 核心的地图、图层和分析功能。
+</Note>
+
+如果想把外部 LLM 代理接入 MapX，见[Agent 工具](/zh/integration/agent-tools)。

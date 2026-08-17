@@ -1,0 +1,30 @@
+---
+title: "MCP connections"
+sidebarTitle: "MCP"
+description: "How to connect your own external tools to MapX through the Model Context Protocol (MCP)."
+---
+
+MapX supports the **Model Context Protocol (MCP)**, a standard way to connect an AI model to external tools. You can connect your own MCP servers so the AI can call your internal tools during a conversation.
+
+## Custom MCP servers
+
+You can connect your own MCP servers so the AI can use your internal tools during a conversation:
+
+1. Open **MCP connections** in the dashboard.
+2. Add a server by URL (Streamable HTTP) or by local command.
+3. Test the connection, then enable the tools you want to expose.
+
+The AI loads the enabled tools into each conversation turn. Secrets such as bearer tokens or header values are stored encrypted and never returned by the API.
+
+You can also disable individual tools. A disabled tool is never offered to the AI.
+
+## Using MCP in chat
+
+Connected tools work automatically. Ask for the outcome — "use my weather API to check conditions at each store" — and the AI calls the tool, reads the result, and continues.
+
+<Note>
+  MCP connections are optional. You do not need to set one up to use MapX's
+  core map, layer, and analysis features.
+</Note>
+
+See [Agent tools](/en/integration/agent-tools) to connect external LLM agents to MapX instead.

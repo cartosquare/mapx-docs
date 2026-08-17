@@ -120,9 +120,6 @@ mapx view live --session <id> --open               # open the live map in the de
 mapx report save ./report.html --session <id> --title "Analysis report"
 
 mapx skill                                        # this manual
-mapx skill styles                                 # style reference (renderer schemas/paint keys/labels/legends)
-mapx skill layer-style-editing                    # style editing workflow (inspect first, incremental updates)
-mapx skill report-generation                      # report generation workflow
 mapx skill list                                   # list available topics
 ```
 
@@ -136,9 +133,6 @@ Exit codes: `0` success, `1` business failure, `2` usage error.
 
 ## Skills
 
-Before complex tasks, print the built-in manual with `mapx skill`. The full
+Before complex tasks, print the command manual with `mapx skill`. The full
 skill index is stored in `source/skills.json`. See
 [Skills](/en/developers/skills).
-
-Note: MapX's in-product AI agent uses a private stdio MCP server. That server is
-not a public integration surface; use the CLI for external integrations.

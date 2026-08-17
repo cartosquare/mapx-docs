@@ -1,0 +1,53 @@
+---
+title: "Editing Layers"
+sidebarTitle: "Layer editing"
+description: "Inspect and edit layer attributes and geometry directly in MapX — update cells, add fields, delete rows, and reshape features."
+---
+
+MapX lets you edit a layer's data and geometry without leaving the browser. Open
+the attribute table from a layer in the Layers panel, inspect the rows, and make
+changes that are written back to the layer's source.
+
+## Open the attribute table
+
+In the Layers panel, find the layer you want to edit and click the table icon.
+The table opens at the bottom of the workspace, showing one row per feature.
+Click a row to highlight the corresponding feature on the map; click it again
+to clear the highlight.
+
+## Edit attributes
+
+- **Edit a cell** — click a value, change it, then press Enter or click away.
+  Numbers and booleans are validated against the column type.
+- **Add a field** — use the add-field control in the table header, choose a
+  name, type (string, number, or boolean), and an optional default value.
+- **Delete a field** — remove a column you no longer need. Fields that are used
+  by the layer's style or labels cannot be deleted until you remove that use.
+- **Delete a row** — click the row's delete button and confirm. The feature is
+  removed from the layer.
+
+## Edit geometry
+
+Click the pencil button on a row to enter geometry editing. MapX shows the
+feature's vertices on the map:
+
+- **Move a vertex** — drag it to a new position.
+- **Add a vertex** — click a midpoint on a line or polygon edge.
+- **Delete a vertex** — double-click a vertex (lines keep at least 2 points,
+  polygon rings keep at least 3).
+- **Move a point feature** — drag the point marker to its new location.
+
+Use **Save** to commit the geometry, or **Cancel** to discard the changes. The
+selection highlight is restored when you cancel, and updated to the new
+geometry when you save.
+
+## Editing limits
+
+Layers with up to 10,000 features and 20 MB are fully editable. Larger layers
+open in read-only preview mode (up to 100,000 features and 200 MB) so you can
+still browse rows and highlight features, but not modify them.
+
+<Note>
+  Edits are written immediately when you save an action; there is no undo
+  stack. Review your changes before confirming a delete.
+</Note>

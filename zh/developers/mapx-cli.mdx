@@ -102,9 +102,6 @@ mapx view live --session <id> --open               # agent 无法渲染网页时
 mapx report save ./report.html --session <id> --title "分析报告"
 
 mapx skill                                        # 本手册
-mapx skill styles                                 # 样式参考（renderer schema/paint keys/标注/图例）
-mapx skill layer-style-editing                    # 样式编辑工作流（先查后改、增量更新）
-mapx skill report-generation                      # 报告生成工作流
 mapx skill list                                   # 列出可用主题
 ```
 
@@ -116,6 +113,4 @@ mapx skill list                                   # 列出可用主题
 
 ## 技能
 
-执行复杂任务前，用 `mapx skill` 打印内置手册。完整技能索引存储在 `source/skills.json` 中。见[技能](/zh/developers/skills)。
-
-注意：MapX 产品内的 AI 代理使用私有 stdio MCP 服务器。该服务器不是公开集成面；外部集成请使用 CLI。
+执行复杂任务前，用 `mapx skill` 打印命令手册。完整技能索引存储在 `source/skills.json` 中。见[技能](/zh/developers/skills)。

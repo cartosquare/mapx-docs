@@ -3,7 +3,7 @@ title: "技能"
 description: "教 AI 代理如何使用 MapX 的指导文档。"
 ---
 
-MapX 提供一组 Markdown 技能，教 AI 代理如何编辑图层样式、清洗数据和生成报告——既可用于产品内 AI，也可用于独立的 `mapx` CLI。
+MapX 提供一组 Markdown 指导文档，供 AI 代理使用。CLI 用户可以按需加载：
 
 CLI 用户可以按需加载：
 
@@ -11,12 +11,4 @@ CLI 用户可以按需加载：
 mapx skill
 ```
 
-当前技能索引存储在 `source/skills.json` 中。核心技能包括：
-
-- `mapx-cli`——第三方代理手册：安装 CLI、完成认证，并驱动项目、图层、样式、地图、视图和报告。
-- `styles`——渲染器 JSON schema 和 paint key 矩阵。
-- `layer-style-editing`——先查后改、增量修改的样式工作流。
-- `report-generation`——数据分析和 HTML 报告工作流。
-- `data-cleaning`——把表格数据转换为带类型的 GeoJSON。
-
-产品内代理还会使用平台侧技能（`gdal`、`geocoding`、`overpass`、`qgis`、`spatial`、`tianditu`）处理地理数据工具；完整列表见 `source/skills.json`，这些技能不面向第三方客户端。
+当前技能索引存储在 `source/skills.json` 中。
