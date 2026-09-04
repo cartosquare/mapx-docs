@@ -1,10 +1,10 @@
 ---
 title: "Database connections"
 sidebarTitle: "Database connections"
-description: "Connect MapX to an external PostgreSQL or MySQL database so the AI can query it read-only and import results as map layers."
+description: "Connect MapX to an external PostgreSQL or MySQL database to query data in chat, import results as layers, or turn PostGIS spatial tables into live map layers."
 ---
 
-A database connection links MapX to an external PostgreSQL or MySQL database. Once connected, the AI can inspect the schema, run read-only queries, and import tables or query results as map layers — no data export required.
+A database connection links MapX to an external PostgreSQL or MySQL database. Once connected, the AI can inspect the schema and run read-only queries, you can import results as map layers, and PostGIS spatial tables can become live layers on the map — no data export required.
 
 ## Add a connection
 
@@ -27,6 +27,17 @@ The AI inspects the schema, then runs read-only SQL. Queries are restricted to r
 ## Import as a map layer
 
 When a table has spatial columns (PostGIS geometry or MySQL spatial types), you can import it directly as a map layer. Non-spatial query results can be visualized as well.
+
+## Use a PostGIS table as a live layer
+
+If your PostgreSQL database uses PostGIS, you can take a spatial table and put it straight on the map as a layer. Choose the table, and MapX renders it like any other layer — style it by attribute, filter it, run analysis on it, and keep it in sync with the database: when the underlying table changes, the layer updates too.
+
+Live PostGIS layers behave like the rest of your layers:
+
+- **Edit in place** — open the attribute table or edit geometry, and changes are written back to the database immediately. See [Editing layers](/en/concepts/layer-editing).
+- **View in 3D** — database layers support the same columns, raised paths, and extruded areas as uploaded data. See [3D view](/en/concepts/3d-view).
+
+MySQL connections keep their existing behavior: the AI can query them read-only and import query results or spatial tables as map layers, but live database-backed layers are a PostgreSQL (PostGIS) feature.
 
 ## Managing connections
 

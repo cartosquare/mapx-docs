@@ -26,6 +26,10 @@ By default, each layer's 3D appearance is derived automatically from its 2D styl
 - **Line layers** render as elevated paths (or arcs and animated trips).
 - **Area layers** render as extruded polygons.
 
+Database layers work in 3D too. Layers backed by a PostGIS database use the
+same columns, raised paths, and extruded areas as uploaded data, and large
+layers appear progressively on screen while they load.
+
 Open a layer's style editor and use the **3D style** section to override the automatic projection. You can set:
 
 - for columns — color or a color ramp, height (or a height field), radius, and opacity;
@@ -50,7 +54,7 @@ aggregate the points into hexagons and extrude them by total sales
 
 ## Labels in 3D
 
-Labels stay visible in 3D. Point layers are labeled above their column, and line layers are labeled at the midpoint of each line.
+Labels stay visible in 3D. Point layers are labeled above their column, and line layers are labeled at the midpoint of each line. MapX spaces labels apart so they avoid overlapping where possible.
 
 ## Notes
 

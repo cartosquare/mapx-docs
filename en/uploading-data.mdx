@@ -4,13 +4,16 @@ sidebarTitle: "Upload Data"
 description: "Learn how to upload CSV, GeoJSON, and Excel files to MapX. Covers automatic location column detection, column naming tips, and fixing common import errors."
 ---
 
-MapX accepts **CSV, GeoJSON, Excel, and GeoTIFF** files. **CSV, GeoJSON, and
-Excel** are general-purpose data formats — they carry attributes and location
-columns that MapX auto-detects. **GeoTIFF and Shapefile** are GIS-specific
-formats: GeoTIFF is rendered as a raster image layer on the map, and Shapefile
-is converted to a vector layer (points, lines, or polygons). When you upload a
-tabular file, MapX scans it automatically, identifies the columns that contain
-location information, and renders your data on the map canvas within seconds.
+MapX accepts **CSV, GeoJSON, Excel, GeoTIFF, Shapefile, and text documents**
+(TXT, Markdown, Word, and PDF). **CSV, GeoJSON, and Excel** are
+general-purpose data formats — they carry attributes and location columns that
+MapX auto-detects. **GeoTIFF and Shapefile** are GIS-specific formats: GeoTIFF
+is rendered as a raster image layer on the map, and Shapefile is converted to a
+vector layer (points, lines, or polygons). **Text and document files** do not
+become map layers — MapX reads them as source material the AI can analyze, for
+example when generating a report. When you upload a tabular file, MapX scans it
+automatically, identifies the columns that contain location information, and
+renders your data on the map canvas within seconds.
 
 ## Supported File Formats
 
@@ -21,6 +24,21 @@ location information, and renders your data on the map canvas within seconds.
 | **Excel** | `.xlsx`, `.xls` | The first sheet is imported. Latitude/longitude or address columns are auto-detected using the same rules as CSV. Additional sheets are ignored. |
 | **GeoTIFF** | `.tif`, `.tiff` | GIS-specific. Uploaded as a raster image layer on the map. |
 | **Shapefile** | `.shp/.shx/.dbf` (+ optional `.prj`, `.cpg`, etc.), or `.zip` | GIS-specific. Select all files with the same prefix, or upload a zip. Missing `.prj` is treated as WGS84. |
+| **Text / Markdown** | `.txt`, `.md` | Document. Read by the AI for analysis and reports; not rendered as a map layer. |
+| **Word** | `.docx` | Document. Read by the AI for analysis and reports; not rendered as a map layer. |
+| **PDF** | `.pdf` | Document. Read by the AI for analysis and reports; not rendered as a map layer. |
+
+Large aerial or satellite images (GeoTIFF) render as a smooth, zoomable raster
+layer, and you can restyle the color bands on the fly.
+
+## Uploads run in the background
+
+Uploads process in the background and show their progress in the upload queue —
+you can keep working while a file converts or imports. When an upload finishes,
+MapX zooms the map to fit the new layer.
+
+Paid plans can upload single files up to **20 GB**. Uploads are queued, so you
+can add several files at once; each file is processed in order.
 
 ## Uploading a Shapefile
 

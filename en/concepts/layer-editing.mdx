@@ -6,7 +6,11 @@ description: "Inspect and edit layer attributes and geometry directly in MapX �
 
 MapX lets you edit a layer's data and geometry without leaving the browser. Open
 the attribute table from a layer in the Layers panel, inspect the rows, and make
-changes that are written back to the layer's source.
+changes that are written back to the layer's source. Editing works for layers
+you uploaded as GeoJSON files and for PostGIS database layers alike.
+
+Changes save immediately: each edit you finish is committed on the spot — there
+is no separate "start editing" session to begin or end.
 
 ## Open the attribute table
 
@@ -17,8 +21,11 @@ to clear the highlight.
 
 ## Edit attributes
 
+- **Edit a row** — click the **Edit feature** button on a row to enter its edit
+  state. Only values you actually change are written back when you finish.
 - **Edit a cell** — click a value, change it, then press Enter or click away.
-  Numbers and booleans are validated against the column type.
+  The change is saved immediately. Numbers and booleans are validated against
+  the column type.
 - **Add a field** — use the add-field control in the table header, choose a
   name, type (string, number, or boolean), and an optional default value.
 - **Delete a field** — remove a column you no longer need. Fields that are used
@@ -31,15 +38,23 @@ to clear the highlight.
 Click the pencil button on a row to enter geometry editing. MapX shows the
 feature's vertices on the map:
 
-- **Move a vertex** — drag it to a new position.
-- **Add a vertex** — click a midpoint on a line or polygon edge.
+- **Move a vertex** — drag it to a new position; the shape previews live as you
+  drag.
+- **Add a vertex** — click a midpoint handle on a line or polygon edge.
 - **Delete a vertex** — double-click a vertex (lines keep at least 2 points,
   polygon rings keep at least 3).
 - **Move a point feature** — drag the point marker to its new location.
 
-Use **Save** to commit the geometry, or **Cancel** to discard the changes. The
-selection highlight is restored when you cancel, and updated to the new
-geometry when you save.
+Use **Save** to commit the geometry, or **Cancel** to discard the changes. If
+you try to leave the table, switch features, or delete the feature while a
+geometry edit is still unsaved, MapX asks you to **Save**, **Discard**, or
+**Cancel** first.
+
+## Editing with others
+
+If someone else changes the same feature while you are editing it, MapX keeps
+the latest version and asks you to apply your change again — your edit is not
+silently lost.
 
 ## Editing limits
 
@@ -48,6 +63,6 @@ open in read-only preview mode (up to 100,000 features and 200 MB) so you can
 still browse rows and highlight features, but not modify them.
 
 <Note>
-  Edits are written immediately when you save an action; there is no undo
-  stack. Review your changes before confirming a delete.
+  Every edit is saved as soon as you finish it, and there is no undo stack.
+  Review your changes before confirming a delete.
 </Note>
