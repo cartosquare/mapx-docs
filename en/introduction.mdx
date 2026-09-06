@@ -1,48 +1,83 @@
 ---
-title: "MapX: AI-Powered Maps and Spatial Analysis Made Easy"
+title: "MapX: AI-Powered Spatial Data Exploration"
 sidebarTitle: "Introduction"
-description: "MapX is a browser-based spatial analysis platform. Upload your data, type a question, and get an interactive map in seconds — no GIS software required."
+description: "MapX is a browser-based, AI-driven spatial data exploration platform. Bring in data, ask questions in plain language, and get interactive maps, charts, and professional reports in seconds — no GIS software required."
 ---
 
-Traditional spatial analysis tools like ArcGIS and QGIS are powerful — but they demand weeks of training, expensive licences, and complex desktop installations just to answer a basic location question. MapX replaces that entire workflow with a browser-based AI chat interface: upload your data, type what you want to know, and get an interactive, shareable map in seconds. It is built for analysts, planners, and business teams who need GIS-grade answers without becoming GIS experts.
+Traditional spatial analysis tools such as ArcGIS and QGIS are powerful, yet they demand desktop installation, licences, and weeks of training just to answer a basic location question. MapX moves spatial analysis into the browser and replaces that workflow with an AI conversation: bring your data in, describe what you want to know, and MapX selects and runs the right spatial operation, then renders the result as an interactive map layer.
+
+MapX is more than a question-to-map tool. It is a workspace that covers the whole analysis journey — data access, spatial analysis, visualization, charts, reports, sharing, and collaboration — all inside one project. It is built for analysts, planners, and business teams who need GIS-grade results without becoming GIS experts, and it opens the same capabilities to developers through the REST API, CLI, MCP, and skills.
+
+![MapX workspace with store locations colored by category and the layers panel open](/images/introduction/hero-workspace.jpg)
 
 ## What You Can Do with MapX
 
 <CardGroup cols={2}>
-  <Card title="AI Chat Analysis" icon="wand-magic-sparkles" href="/en/concepts/ai-chat">
-    Ask spatial questions in plain English — buffers, overlays, spatial joins, heatmaps, and site scoring — and get visual results instantly. No query language or scripting needed.
+  <Card title="AI Chat Analysis" icon="message-bot" href="/en/concepts/ai-chat">
+    Ask spatial questions in plain English — buffers, overlays, spatial joins, heatmaps, site scoring — and MapX picks the right operation and renders the result in seconds. Keep asking follow-ups to refine the analysis; no query language or scripting required.
   </Card>
-  <Card title="Data Upload" icon="cloud-arrow-up" href="/en/uploading-data">
-    Import CSV, GeoJSON, and Excel files in seconds. MapX auto-detects latitude/longitude and address columns so you can skip manual data prep entirely.
+  <Card title="Data Access & Connections" icon="cloud-arrow-up" href="/en/uploading-data">
+    Import CSV, Excel, GeoJSON, Shapefile, and GeoTIFF files, plus text, Word, and PDF documents for analysis. MapX auto-detects latitude/longitude columns and geocodes addresses on Basic and above, processes uploads in the background, and accepts single files up to 20 GB on paid plans. You can also connect [PostgreSQL and MySQL databases](/en/concepts/database-connections) and turn PostGIS tables into live layers.
   </Card>
-  <Card title="Map Visualization" icon="layer-group" href="/en/quickstart">
-    Render 100,000+ data points at 60 fps using GPU-accelerated WebGL. Style by any column, switch between point, heatmap, and choropleth views with a single prompt.
+  <Card title="Layers, Styles & 3D" icon="layer-group" href="/en/concepts/layers">
+    Manage every dataset and analysis result as a named layer. Style by any field with colors, labels, symbols, and transparency, then switch points, lines, and polygons into 3D columns, elevated paths, or extruded surfaces with one click. Large layers stream in progressively, so interaction stays smooth.
   </Card>
-  <Card title="Report Export" icon="file-export" href="/en/concepts/reports">
-    Generate a self-contained HTML report — complete with interactive maps, charts, and AI-written insights — with one click. Share a link or download for offline use.
+  <Card title="Charts & Reports" icon="file-export" href="/en/concepts/reports">
+    Generate charts from layers and files, pin them to the map, and export them. Package an analysis into a self-contained HTML report with interactive maps, charts, and AI-written insights, then share it by link or download it.
+  </Card>
+  <Card title="Sharing & Collaboration" icon="share-2" href="/en/sharing/sharing-maps">
+    Hand results to anyone who needs them: share report links, embed an interactive map on a website, generate social-ready images, or open project access to team members.
+  </Card>
+  <Card title="Open Ecosystem" icon="code" href="/en/developers/overview">
+    Integrate MapX into your own product through the REST API and mapx CLI. Connect external tools over MCP, upload skills to codify team workflows, and add knowledge bases so the AI answers from your own material.
   </Card>
 </CardGroup>
 
+## From Question to Deliverable
+
+A typical MapX workflow runs from raw data to a client-ready deliverable:
+
+<Steps>
+  <Step title="Bring in data">
+    Upload files or connect a database. MapX detects location columns and renders a layer in seconds. See [uploading data](/en/uploading-data) and [database connections](/en/concepts/database-connections).
+  </Step>
+  <Step title="Ask your question">
+    Describe your goal — filter, buffer, overlay, score, or visualize — and MapX executes it. Follow up to refine the result. See [AI chat](/en/concepts/ai-chat) and [spatial operations](/en/concepts/spatial-operations).
+  </Step>
+  <Step title="Polish the presentation">
+    Adjust styles, labels, and transparency, switch between 2D and 3D, and generate charts that pin to the map. See [layers](/en/concepts/layers), [3D view](/en/concepts/3d-view), and [charts](/en/concepts/charts).
+
+    ![Store points rendered as 3D columns in MapX](/images/introduction/3d-layers.jpg)
+  </Step>
+  <Step title="Deliver the result">
+    Generate a report, share a link or an embed, export an image, or hand access to a team member. See [reports](/en/concepts/reports) and [sharing](/en/sharing/sharing-maps).
+
+    ![MapX HTML report preview with executive summary and an interactive store map](/images/introduction/report-delivery.png)
+  </Step>
+</Steps>
+
 ## Who Uses MapX
 
-**Site selection analysts** use MapX to score candidate locations against catchment demographics, competitor proximity, and infrastructure access — work that previously required a dedicated GIS team.
+**Site selection analysts** score candidate locations against catchment demographics, competitor distance, and infrastructure access — work that previously required a dedicated GIS team.
 
-**Real estate teams** overlay planning boundaries, transport links, and market data to qualify leads, build pitch decks, and answer client questions on the fly during meetings.
+**Real estate teams** overlay planning boundaries, transport links, and market data to qualify leads, prepare presentation materials, and answer location questions on the spot.
 
-**Logistics planners** optimise delivery zones, flag coverage gaps, and model the impact of adding or removing depot locations without writing a single line of code.
+**Logistics planners** optimize delivery areas, flag coverage gaps, and model the impact of adding or removing depots — without writing a single line of code.
 
-**Energy and environmental consultants** combine satellite-derived land-use layers with asset registers and regulatory boundaries to run impact assessments and produce regulator-ready maps in minutes rather than days.
+**Energy and environmental consultants** combine imagery and land-use layers with asset registers and regulatory boundaries for impact assessments, and deliver maps and reports in minutes instead of days.
 
-## How MapX Compares
+## MapX vs. Traditional GIS
 
-| | **MapX** | **Traditional GIS (ArcGIS / QGIS)** |
+| | MapX | Traditional GIS (ArcGIS / QGIS) |
 |---|---|---|
-| **Setup time** | Zero — runs in the browser | Hours to days (install, licence, configure) |
-| **Learning curve** | Minimal — plain-English prompts | Steep — requires formal GIS training |
-| **Cost** | Free tier available; paid plans from \$29/mo | ArcGIS licences from ~\$700/yr per seat |
-| **Analysis speed** | Seconds via AI chat | Minutes to hours of manual toolchain work |
-| **Collaboration** | Share a link or publish HTML report instantly | Requires file exports or enterprise portal setup |
+| **Setup** | Runs in the browser — nothing to install | Desktop installation, licences, and configuration |
+| **Learning curve** | Plain-language prompts | Formal GIS training required |
+| **Analysis speed** | Seconds through conversation | Manual toolchains — minutes to hours |
+| **Data access** | Multi-format uploads plus PostgreSQL / MySQL / PostGIS connections | Mostly desktop file imports |
+| **Delivery & collaboration** | Links, embeds, reports, and project sharing | File exports and manual distribution |
+| **Open capabilities** | REST API, CLI, MCP, and skills | Desktop scripting and plugins |
+| **Cost** | Free tier; paid plans from $29/mo | Traditional desktop licences typically cost hundreds of dollars per seat per year |
 
 <Tip>
-  The best way to understand MapX is to try it. Head to the [Quickstart](/en/quickstart) guide and run your first spatial analysis in under 30 seconds — no credit card required.
+  The fastest way to understand MapX is to try it. Open the [Quickstart](/en/quickstart) guide and complete your first spatial analysis in under a minute — no credit card required.
 </Tip>

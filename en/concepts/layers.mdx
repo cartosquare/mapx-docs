@@ -1,55 +1,71 @@
 ---
 title: "Working with Map Layers in MapX"
 sidebarTitle: "Layers"
-description: "Manage multiple data layers in a MapX project — toggle visibility, reorder, rename, delete, and style each layer independently."
+description: "Manage every layer in a MapX project — toggle visibility, filter and search, reorder, batch-manage, and style each layer independently."
 ---
 
-MapX uses a layer-based canvas — the same mental model as design tools like Figma or Photoshop, applied to geographic data. Every dataset you upload and every analysis you run produces a named layer that sits on top of a basemap. Layers can be stacked, toggled, reordered, and individually styled, giving you precise control over what your map communicates and how it looks.
+MapX uses a layer-based canvas — the same mental model as design tools like Figma or Photoshop, applied to geographic data. Every dataset you upload, every analysis you run, and every online or database source you connect produces a named layer that sits on top of a basemap. Layers can be stacked, toggled, reordered, and individually styled, giving you precise control over what your map communicates and how it looks.
 
 ## The Layers Panel
 
-The Layers panel, accessible on the left side of the map canvas, lists every active layer in your project. Each uploaded file (CSV, GeoJSON, Excel, GeoTIFF) and each analysis result (buffer zones, heatmaps, spatial joins, scored sites) appears as its own entry.
+The **Layers** panel lists every active layer in your project. Each uploaded file (CSV, GeoJSON, Excel, Shapefile), each analysis result (buffer zones, heatmaps, spatial joins, scored sites), and each connected source (online layers, imagery, PostGIS tables) appears as its own entry.
 
-From the Layers panel you can:
+Use the toolbar to find and manage layers:
 
-- **Toggle visibility** — click the eye icon to show or hide a layer without deleting it.
-- **Reorder layers** — drag layers up or down to control which ones render on top. This matters when polygons or heatmaps overlap point layers.
-- **Rename layers** — double-click a layer name to give it a meaningful label (e.g., *"Q3 Store Locations"* instead of *"upload_2"*).
-- **Delete layers** — remove a layer from the canvas when it's no longer needed.
-- **Open layer settings** — click a layer to access its styling options (see [Styling Layers](#styling-layers) below).
+- **Search** — filter layers by name or source file name.
+- **Source filters** — switch between All, User Uploaded, AI Generated, and Online.
+- **Visible only** — hide the list to layers currently shown on the map.
+
+From each layer row you can:
+
+- **Toggle visibility** — show or hide the layer without deleting it.
+- **Open the style editor** — click a layer to style it (see [Styling Layers](#styling-layers)).
+- **Open the row actions menu** — download the layer data (paid plans), delete the layer, and more.
+
+![Layers panel showing the demo stores layer with search and source filters](/images/concepts/layers-panel.png)
 
 You can also manage layers through the AI chat. Prompts like *"hide the competitor layer"* or *"move the heatmap below the store points"* are fully supported.
 
+### Batch operations
+
+Enter **Select** mode to work with several layers at once: select or clear all, show or hide the selected layers, download them together (paid plans), or delete them after confirmation.
+
 ## Styling Layers
 
-MapX gives you fine-grained control over how each layer looks. Open a layer's settings by clicking it in the Layers panel or by asking the AI chat to make a change.
+Open a layer's style editor by clicking it in the Layers panel or by asking the AI chat to make a change. Styles applied in the editor and styles applied through chat stay in sync.
 
-### Color by Column
+### Renderers
 
-Assign colors based on a data attribute rather than using a single flat color. MapX supports two color scale types:
+Depending on the layer type, the style editor offers renderers such as:
 
-- **Categorical** — each unique value in a text column (e.g., region, store type) gets a distinct color. Useful for comparing discrete categories at a glance.
-- **Continuous** — numeric values (e.g., revenue, score, density) are mapped to a gradient from low to high. Useful for communicating magnitude.
+- **Single color** — one flat color for the whole layer.
+- **Categorized** — each unique value in a field (e.g., region or store type) gets its own color and legend entry.
+- **Graduated and continuous scales** — numeric values (revenue, score, density) mapped to color steps or a gradient.
+- **Heatmap, interpolated, and multi-field renderers** — density, surface-like interpolation, and combining several numeric fields into one color.
+- **Chart and label layers** — markers that display charts or attribute labels on the map.
+
+Raster and tile layers get their own imagery controls (e.g., color bands for GeoTIFF imagery and transparency for tile layers).
+
+### Color, Size, Symbols, and Labels
+
+- **Color by field** — choose the field and scale for categorical, graduated, or continuous coloring.
+- **Size by field** — scale point radius by a numeric column to add a second visual dimension.
+- **Symbols** — pick symbols from the built-in gallery or upload your own; categorized and graduated renderers can assign a different symbol to each class or range.
+- **Labels** — show text labels for points, lines, polygons, and charts, with configurable fields and styling.
+- **Opacity** — adjust layer transparency (0–100%) so underlying layers stay readable.
+- **Legend** — toggle the on-map legend for your layer.
 
 ```text Example prompt
 Color the store points by region using a categorical scale
 ```
 
 ```text Example prompt
-Use a blue-to-red gradient to show revenue across all locations
+Size the points by monthly foot traffic and label the top 20 stores
 ```
 
-### Point Size
+### 3D Styles
 
-Scale point radius by a numeric column to add a second visual dimension to your map. Large points draw the eye to high-value locations; small points recede.
-
-```text Example prompt
-Size the points by monthly foot traffic
-```
-
-### Opacity
-
-Adjust a layer's opacity (0–100%) to let underlying layers show through. This is especially useful when stacking a polygon layer (e.g., buffer zones or census tracts) on top of point data — setting the polygon layer to 40–60% opacity keeps both layers readable.
+The style editor includes a 3D section for layers rendered in 3D view — for example column height for point layers, elevation for paths, and extrusion for polygons. See [3D View](/en/concepts/3d-view) for how 2D and 3D styles relate.
 
 ## Multi-Layer Analysis
 
@@ -63,7 +79,7 @@ One of MapX's most powerful capabilities is combining multiple layers in a singl
 To build this view, upload each dataset separately and issue a series of prompts — or describe the full picture at once:
 
 ```text
-Show my store locations sized by revenue, competitor locations in red, and a heatmap of population density underneath. Add 1km buffer zones around my stores.
+Show my store locations sized by revenue, competitor locations in red, and a heatmap of population density underneath. Add 1 km buffer zones around my stores.
 ```
 
-MapX will create and stack the layers automatically. You can then fine-tune each one from the Layers panel.
+MapX creates and stacks the layers automatically. You can then fine-tune each one from the Layers panel. For editing features and attributes directly, see [Layer Editing](/en/concepts/layer-editing).

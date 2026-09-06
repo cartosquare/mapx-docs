@@ -1,10 +1,10 @@
 ---
 title: "Quickstart: Upload Data and Build Your First MapX Map"
 sidebarTitle: "Quickstart"
-description: "Learn how to upload a dataset, run your first spatial analysis, and export a map in under a minute using MapX's AI chat interface."
+description: "Learn how to upload a dataset, run your first spatial analysis, and polish or share the result in under a minute using MapX's AI chat interface."
 ---
 
-This guide walks you through the complete MapX workflow from a blank screen to a shareable interactive map. By the end you will have created a project, uploaded a dataset, run your first AI-powered spatial query, and exported the result — all in under a minute.
+This guide walks you through the complete MapX workflow from a blank screen to a polished, shareable result. By the end you will have created a project, uploaded a dataset, run your first AI-powered spatial query, and styled or shared the result — all in under a minute.
 
 <Steps>
   <Step title="Create your free account">
@@ -13,43 +13,47 @@ This guide walks you through the complete MapX workflow from a blank screen to a
     ![Sign up with your email or GitHub account](/images/quickstart/sign-up.png)
   </Step>
   <Step title="Create a new project">
-    Click **New Project** and choose how to start:
+    On the dashboard, open **New Project** and choose how to start:
 
     - **Blank project** — an empty workspace you build up from scratch.
-    - **Sample project** — load one of the built-in sample datasets to explore MapX.
-    - **Upload data** — pick local files (CSV, GeoJSON, Excel, etc.); a project is created and you land in the workspace.
+    - **Sample data** — explore MapX with a built-in sample dataset.
+    - **Upload files** — pick local files (CSV, Excel, GeoJSON, Shapefile, GeoTIFF, and more); a project is created and you land in the workspace.
     - **Import project** — restore a previously exported project bundle (`.zip` / `.mapx.zip`).
 
     You can add more data or adjust settings later from the project workspace.
 
-    ![Choose a blank, sample, upload, or import project](/images/quickstart/new-project.png)
+    ![Choose a blank, sample-data, upload, or import project](/images/quickstart/new-project.png)
   </Step>
   <Step title="Upload your data">
-    Drag and drop a **CSV**, **GeoJSON**, or **Excel** file onto the upload zone, or click **Browse files** to select one. MapX will:
-    1. Scan your column headers and automatically identify latitude/longitude or address columns.
-    2. Show a preview of detected location columns for you to confirm or correct.
-    3. Render your data points on the map canvas within seconds.
+    Drag and drop files onto the upload area, or click **Upload Data** and select them. MapX supports **CSV, Excel, GeoJSON, Shapefile, and GeoTIFF** files, plus text, Word, and PDF documents that the AI can read for analysis.
 
-    Not sure what format to use? See [Uploading Data](/en/uploading-data) for full details on supported formats and column naming conventions.
+    For table files, MapX scans the column headers, automatically detects latitude/longitude or address columns, and shows a preview so you can confirm the mapping before data is rendered on the map. Uploads run in the background — you can keep working while files convert, and paid plans support single files up to **20 GB**.
 
-    ![Upload a CSV, GeoJSON, or Excel file](/images/quickstart/upload-data.png)
+    Not sure what format to use? See [Uploading Data](/en/uploading-data) for the full list of supported formats and column naming conventions.
+
+    ![Uploaded GeoJSON file rendered on the map with a completed upload queue](/images/quickstart/upload-data.jpg)
   </Step>
   <Step title="Ask your first question">
-    Click the **AI Chat** panel and type a question in plain English. A simple starting prompt is:
+    In the **Chat** panel, type a question in plain English. A simple starting prompt is:
 
     > "Show locations on a map, color points by [column name]"
 
-    MapX will interpret your request, apply the spatial operation, and update the map in real time. You can follow up with refinements like *"zoom to the top 20 by revenue"* or *"add a 1 km buffer around each point"* — the AI maintains context across the conversation.
+    MapX interprets your request, applies the right spatial operation, and updates the map in real time. Follow up to refine the result — *"zoom to the top 20 by revenue"* or *"add a 1 km buffer around each point"* — and the AI keeps the whole conversation in context. Type `/` to reference layers, files, data sources, and other assets directly.
 
-    ![Type a spatial question in the AI chat](/images/quickstart/ask-question.png)
+    Learn how to get the most out of prompts in [AI Chat](/en/concepts/ai-chat), and see the supported operations in [Spatial Operations](/en/concepts/spatial-operations).
+
+    ![Ask a spatial question in the AI chat and see store points colored by category](/images/quickstart/ask-question.jpg)
   </Step>
-  <Step title="Export or share your map">
-    When you are happy with the result, choose one of the following:
-    - **Download PNG** — exports a static image of the current map view.
-    - **Generate Report** — produces a standalone HTML file with interactive maps, charts, and AI-written narrative insights. Click **Download** or **Copy share link** to distribute it.
-    - **Copy share link** — anyone with the link can view the live interactive map. Your project stays private by default; you can revoke or disable sharing at any time.
+  <Step title="Polish and deliver the result">
+    Once you are happy with the map, you can refine the presentation and hand it over:
 
-    ![Share or export your map](/images/quickstart/share-export.png)
+    - **Style layers** — adjust colors, labels, transparency, and renderers through the chat or the [layer style editor](/en/concepts/layers).
+    - **Switch 2D/3D and save your view** — turn points, lines, and polygons into 3D columns, elevated paths, or extruded surfaces with one click, then save the camera position. See [3D View](/en/concepts/3d-view).
+    - **Add charts** — ask for a bar, line, or pie chart and pin it to the map as visual evidence. See [Charts](/en/concepts/charts).
+    - **Generate a report** — create a self-contained HTML report with interactive maps, charts, and AI-written insights, preview it on a canvas, then download it or share a link. See [Reports](/en/concepts/reports).
+    - **Share your work** — deliver report links, embed an interactive map on a website, generate a social-ready image, or open access to teammates. See [Sharing](/en/sharing/sharing-maps). You can also export a static PNG from the **Share** panel.
+
+    ![Share panel with report, embed, social image, and project sharing options](/images/quickstart/share-export.png)
   </Step>
 </Steps>
 

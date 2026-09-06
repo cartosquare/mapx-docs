@@ -1,48 +1,83 @@
 ---
-title: "MapX：让地图与空间分析变得简单"
+title: "MapX：AI 驱动的空间数据探索平台"
 sidebarTitle: "产品介绍"
-description: "MapX 是一个基于浏览器的空间分析平台。上传数据、输入问题，几秒内获得交互式地图，无需安装任何 GIS 软件。"
+description: "MapX 是基于浏览器的 AI 空间数据探索平台：接入数据、用自然语言提问，几秒内获得可交互地图、图表与专业报告，无需安装 GIS 软件。"
 ---
 
-ArcGIS 和 QGIS 等传统空间分析工具功能强大，但仅仅回答一个基本的位置问题，就需要数周培训、昂贵的许可证和复杂的桌面安装。MapX 用基于浏览器的 AI 对话界面取代了整个流程：上传数据、输入你想知道的内容，几秒内得到一张可交互、可分享的地图。它面向需要 GIS 级答案、却不想成为 GIS 专家的分析师、规划师和业务团队。
+ArcGIS 和 QGIS 这类传统空间分析工具功能强大，但为了回答一个基本的位置问题，你需要先安装桌面软件、购买授权，再花数周学习图层、投影与工具栏。MapX 把空间分析带进浏览器，用 AI 对话取代这套流程：接入你的数据、描述你想知道的内容，MapX 会自动选择并执行合适的空间操作，把结果渲染成可交互的地图图层。
+
+MapX 不止是"一问一图"的工具。它是一个覆盖分析全程的工作台——数据接入、空间分析、可视化、图表、报告、分享与协作都在同一个项目中完成。它面向需要 GIS 级答案、却不想成为 GIS 专家的分析师、规划师与业务团队，也通过 REST API、CLI、MCP 与技能把同样的能力开放给开发者。
+
+![MapX 工作区：地图上的门店按类别着色，图层面板已展开](/images/introduction/hero-workspace.jpg)
 
 ## 你能用 MapX 做什么
 
 <CardGroup cols={2}>
-  <Card title="AI 对话分析" icon="wand-magic-sparkles" href="/zh/concepts/ai-chat">
-    用自然语言提出空间问题——缓冲区、叠加、空间连接、热力图、选址评分——立即获得可视化结果，无需查询语言或脚本。
+  <Card title="AI 对话分析" icon="message-bot" href="/zh/concepts/ai-chat">
+    用自然语言提问——缓冲区、叠加、空间连接、热力图、选址评分——MapX 会自动选择并执行合适的空间操作，几秒内把结果渲染为地图图层。你可以持续追问、逐步精修，无需查询语言或脚本。
   </Card>
-  <Card title="数据上传" icon="cloud-arrow-up" href="/zh/uploading-data">
-    几秒内导入 CSV、GeoJSON 和 Excel 文件。MapX 自动识别经纬度与地址列，省去手动数据预处理。
+  <Card title="数据接入与连接" icon="cloud-arrow-up" href="/zh/uploading-data">
+    导入 CSV、Excel、GeoJSON、Shapefile 与 GeoTIFF 文件，也可以上传 Word、PDF 等文档作为分析素材。MapX 自动识别经纬度列，地址列可自动地理编码（Basic 及以上）；上传在后台进行，付费套餐单文件上限 20 GB。你还可以连接 [PostgreSQL / MySQL 数据库](/zh/concepts/database-connections)，把 PostGIS 表变成实时图层。
   </Card>
-  <Card title="地图可视化" icon="layer-group" href="/zh/quickstart">
-    使用 GPU 加速的 WebGL 以 60 fps 渲染 10 万+ 数据点。按任意字段着色，用一句提示词在点、热力图和分级统计图之间切换。
+  <Card title="图层、样式与 3D" icon="layer-group" href="/zh/concepts/layers">
+    每个数据集与每次分析结果都是一个可命名图层。按任意字段着色、添加标注与符号、调整透明度；点、线、面可一键切换为 3D 柱体、抬升路径或挤出多边形。大图层渐进流式加载，交互保持流畅。
   </Card>
-  <Card title="报告导出" icon="file-export" href="/zh/concepts/reports">
-    一键生成自包含的 HTML 报告——包含交互式地图、图表和 AI 撰写的洞察。分享链接或下载离线使用。
+  <Card title="图表与报告" icon="file-export" href="/zh/concepts/reports">
+    基于图层和文件生成图表，钉在地图上对照，并导出分享。一键把分析打包成包含交互式地图、图表与 AI 洞察的自包含 HTML 报告，通过链接分享或下载交付。
+  </Card>
+  <Card title="分享与协作" icon="share-2" href="/zh/sharing/sharing-maps">
+    把成果交给任何需要的人：分享报告链接、把交互式地图嵌入网站、生成社交分享图片，或向团队成员开放项目访问权限。
+  </Card>
+  <Card title="开放生态" icon="code" href="/zh/developers/overview">
+    通过 REST API 与 mapx CLI 把 MapX 集成进自己的产品；用 MCP 连接外部工具，上传技能固化团队工作流，建立知识库让 AI 基于你的资料作答。
   </Card>
 </CardGroup>
+
+## 从问题到交付物
+
+一次典型的 MapX 工作流，从原始数据开始，到可直接交付的成果结束：
+
+<Steps>
+  <Step title="接入数据">
+    上传文件或连接数据库。MapX 自动识别坐标列，几秒内渲染出图层。见[上传数据](/zh/uploading-data)与[数据库连接](/zh/concepts/database-connections)。
+  </Step>
+  <Step title="提出问题">
+    描述你的目标——筛选、缓冲区、叠加、评分或可视化——MapX 随即执行，你可以追问精修结果。见[AI 对话](/zh/concepts/ai-chat)与[空间操作](/zh/concepts/spatial-operations)。
+  </Step>
+  <Step title="打磨呈现">
+    调整样式、标注与透明度，在 2D 与 3D 之间切换，并生成可钉在地图上的图表。见[图层](/zh/concepts/layers)、[3D 视角](/zh/concepts/3d-view)与[图表](/zh/concepts/charts)。
+
+    ![MapX 将门店点渲染为 3D 柱体](/images/introduction/3d-layers.jpg)
+  </Step>
+  <Step title="交付成果">
+    生成报告、分享链接或嵌入代码、导出图片，或把项目访问权限交给团队成员。见[报告](/zh/concepts/reports)与[分享](/zh/sharing/sharing-maps)。
+
+    ![MapX 报告预览：包含执行摘要与交互式门店地图](/images/introduction/report-delivery.png)
+  </Step>
+</Steps>
 
 ## 谁在使用 MapX
 
 **选址分析师**用 MapX 根据客群画像、竞品距离和基础设施可达性为候选位置评分——这些工作过去需要一个专门的 GIS 团队。
 
-**房地产团队**叠加规划边界、交通线路和市场数据，用于筛选线索、制作提案材料，并在会议中实时回答客户问题。
+**房地产团队**叠加规划边界、交通线路与市场数据，用于筛选线索、准备提案材料，并在现场快速回答位置相关的问题。
 
 **物流规划师**优化配送区域、标记覆盖缺口、模拟增加或撤销仓库的影响，全程无需编写一行代码。
 
-**能源与环保顾问**把卫星衍生的土地利用图层与资产台账、监管边界结合，进行影响评估，几分钟内产出可交付的监管级地图，而不是几天。
+**能源与环保顾问**把影像与土地利用图层和资产台账、监管边界结合进行影响评估，几分钟产出可交付的地图与报告，而不是几天。
 
-## MapX 与传统工具对比
+## MapX 与传统 GIS 工具对比
 
 | | **MapX** | **传统 GIS（ArcGIS / QGIS）** |
 |---|---|---|
-| **部署时间** | 零——浏览器即用 | 数小时到数天（安装、授权、配置） |
-| **学习曲线** | 极低——自然语言提问 | 陡峭——需要正式 GIS 培训 |
-| **成本** | 免费版可用；付费版 \$29/月起 | ArcGIS 授权约 \$700/年/人起 |
-| **分析速度** | AI 对话，几秒完成 | 手动工具链，数分钟到数小时 |
-| **协作** | 一键分享链接或发布 HTML 报告 | 需要文件导出或企业门户配置 |
+| **使用方式** | 浏览器即用，无需安装 | 桌面安装、授权与配置 |
+| **学习曲线** | 自然语言提问即可 | 需要正式的 GIS 培训 |
+| **分析速度** | 对话式，几秒出结果 | 手动工具链，通常数分钟到数小时 |
+| **数据接入** | 多格式上传 + PostgreSQL / MySQL / PostGIS 连接 | 以桌面端文件导入为主 |
+| **交付与协作** | 链接、嵌入、报告与项目共享 | 文件导出与人工分发 |
+| **开放能力** | REST API、CLI、MCP 与技能 | 以桌面脚本和插件为主 |
+| **成本** | 免费版可用；付费套餐 \$29/月起 | 传统桌面授权通常每席位数百美元/年起 |
 
 <Tip>
-  理解 MapX 最好的方式是亲自尝试。打开[快速上手](/zh/quickstart)指南，30 秒内完成你的第一次空间分析——无需信用卡。
+  理解 MapX 最快的方式是亲自尝试。打开[快速上手](/zh/quickstart)指南，不到一分钟完成你的第一次空间分析——无需信用卡。
 </Tip>
