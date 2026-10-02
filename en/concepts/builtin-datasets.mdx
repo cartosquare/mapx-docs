@@ -1,0 +1,86 @@
+---
+title: "Built-in datasets"
+sidebarTitle: "Built-in datasets"
+description: "MapX ships a curated catalog of global datasets — terrain, water, climate, hazards, population, facilities and boundaries — that you can add to any project without uploading anything."
+keywords: ["built-in data", "catalog", "global datasets", "worldpop", "overture", "sample data", "data licensing"]
+---
+
+The built-in catalog is a curated set of global datasets already prepared for analysis. Instead of finding, downloading, and cleaning a worldwide raster or boundary file, you add the entry to your project and start working — fields are typed, styles are set, attribution and licence are attached, and the layer behaves exactly like an upload.
+
+![The Datasets catalog in the top menu, with topic filters on the left and dataset details on the right](/images/concepts/builtin-datasets.png)
+
+## Where to find it
+
+Open the top menu and choose **Datasets**. The same catalog is one click away from the empty state of the **Data** panel, which links to built-in data and scenarios.
+
+The catalog is organized as:
+
+| Kind | What it is |
+|---|---|
+| **Dataset** | A single prepared layer — one raster, one vector layer, or a table — such as a DEM, a river network, or an administrative boundary set |
+| **Scenario** | A bundle of datasets for a study area, with questions to start from. See [Scenarios](/en/concepts/scenarios) |
+
+## Browse and filter
+
+The filter rail on the left narrows the catalog by **topic**, **industry**, and **purpose**, and the search box matches names and scenarios:
+
+- **Topics** — terrain & land surface, water & watersheds, climate & ecology, hazards & environmental quality, population & settlements, facilities & transport, economy & industry, boundaries & governance.
+- **Industry** — vertical catalogues that package datasets with the method and the data a sector needs. Urban & rural planning is the first of these; see [Scenarios](/en/concepts/scenarios) for the six planning scenarios it ships with.
+- **Purpose** — suitability evaluation, carrying capacity, life circle and facility coverage, facility siting, urban growth monitoring, land-use conflict screening.
+
+## Read the entry before adding it
+
+Selecting an entry shows everything you need to judge whether it fits your analysis:
+
+| Section | What it tells you |
+|---|---|
+| Source and attribution | Who produced the data and how to credit it |
+| Licence and status | The licence terms, plus whether the entry is ready, still pending data, or under licence review |
+| Refresh cadence | How often the upstream source updates |
+| Geometry and size | Point, line, polygon, raster, H3 grid or table, with feature counts or raster dimensions |
+| Field notes | What each column or raster band means, in words |
+| Region previews | City-sized subsets you can add instead of the global file |
+| Suggested prompts | Example questions that work with this data |
+| Analysis tools | The analysis tools this dataset is commonly used with |
+
+![A dataset detail view with source, licence, field notes, region previews and related analysis tools](/images/concepts/builtin-dataset-detail.png)
+
+## Add data to a project
+
+<Steps>
+  <Step title="Open the project">
+    Built-in data is added to the project you are working in, so open or create a workspace first.
+  </Step>
+
+  <Step title="Pick the entry and the extent">
+    Some entries are global and heavy. If the entry offers **region previews**, choose the city or region you need — the layer covers your study area at a fraction of the size.
+  </Step>
+
+  <Step title="Choose Add">
+    The entry is imported as a normal layer: it appears in the layer list with its default style, legend, and attribution. Scenarios use **Use scenario** instead, which imports every layer in the bundle at once.
+  </Step>
+
+  <Step title="Style, analyse, report">
+    From here the layer is like any other. Restyle it in [Layers](/en/concepts/layers), run an [analysis](/en/concepts/analysis) on it, or include it in a [report](/en/concepts/reports).
+  </Step>
+</Steps>
+
+<Info>
+Added datasets count against your plan's storage. Global rasters and dense building footprints are the large ones — add a region preview when you only need one city.
+</Info>
+
+## Entries that are not ready yet
+
+The catalog is honest about availability. An entry can be listed while it is still being prepared, and the platform tells you which case you are in:
+
+- **Planned / data pending** — the entry is registered but its payload is not published yet. It cannot be added.
+- **Licence review** — the upstream licence is being verified; the entry stays visible but disabled.
+- **Region preview only** — the global file is too large to serve, so only regional subsets are offered.
+- **Retired** — the entry was removed; historical projects that already used it keep their layers.
+
+## Related
+
+- [Scenarios](/en/concepts/scenarios) — datasets bundled with a study area and a method
+- [Analysis](/en/concepts/analysis) — what to do with a dataset once it is on the map
+- [Files](/en/concepts/files) — how uploaded files are stored and managed
+- [Data security](/en/account/data-security) — where project data lives

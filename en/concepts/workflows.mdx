@@ -1,0 +1,96 @@
+---
+title: "Workflows and plans"
+sidebarTitle: "Workflows"
+description: "MapX turns a multi-step analysis into a plan you approve, a graph you can watch, and a reusable workflow you can run on new data."
+keywords: ["workflow", "plan mode", "plan", "DAG", "reusable analysis", "approval", "team assets"]
+---
+
+MapX has two related ideas for multi-step work:
+
+- A **plan** belongs to one project. The AI researches the question, writes a plan document, and waits for your approval before anything runs.
+- A **workflow** is a published plan turned into a reusable asset: the same steps, with typed input slots instead of hard-coded layers, runnable on other data and shareable with your team.
+
+![The Workflows catalog, listing published workflows with their inputs and step counts](/images/concepts/workflows.png)
+
+## Plan first, then run
+
+Planning is on by default in the chat input. When you describe a goal, MapX does not start editing the map immediately:
+
+<Steps>
+  <Step title="Describe the goal">
+    Write what you want to know, not which tool to use — for example, *"Assess where new schools are needed across this city."*
+  </Step>
+
+  <Step title="The AI researches">
+    It inspects the layers in your project, checks fields and coverage, may ask clarifying questions, and can run small probes to confirm that the data supports the question.
+  </Step>
+
+  <Step title="Review the plan">
+    You get a plan document: the question, the data it will use, the method and thresholds, the steps, the outputs, the estimated cost, and what happens after approval. Nothing has been executed yet.
+  </Step>
+
+  <Step title="Approve or revise">
+    Approve it as-is, or send changes back — for example a different study area or threshold. Sending changes back re-plans rather than editing the running work.
+  </Step>
+
+  <Step title="Watch the execution">
+    After approval the AI executes the plan step by step. Each step is a tool run from the [analysis](/en/concepts/analysis) catalog, so its result is a real layer, table, or chart — not a narrative claim.
+  </Step>
+</Steps>
+
+A plan is tied to the project it was written for, and it is not re-runnable as-is: to repeat the work on other data, fork it into a new plan or publish it as a workflow.
+
+## Publish a workflow
+
+Publishing turns an approved plan into a reusable asset:
+
+- **Input slots** replace the layers the plan was written against. The workflow declares what it needs — for example a point layer of candidates and a polygon layer of zones.
+- **Steps** stay fixed, so the method is reproducible; only the data changes.
+- **Team sharing** is optional: share the workflow so team members can run it, while only you can edit it.
+
+## Run a published workflow
+
+<Steps>
+  <Step title="Open the catalog">
+    Top menu → **Workflows** lists your saved workflows with their tags, input slots, and step counts. The dashboard has the same library outside a project.
+  </Step>
+
+  <Step title="Bind the inputs">
+    For each input slot, pick a layer from the current project. Slots are typed, so a slot that expects polygons only offers polygon layers.
+  </Step>
+
+  <Step title="Run">
+    Choose **Run**. The execution appears as a graph, one node per step, with a live state per node: **executed**, **running**, and **not executed** (with skipped steps marked). A counter shows how many steps are done.
+  </Step>
+
+  <Step title="Read the results">
+    Finished steps publish their layers, tables, and reports into the project, where you can open, style, and share them like any other result.
+  </Step>
+</Steps>
+
+## Where runs live
+
+| Where | What you see |
+|---|---|
+| Right rail → **Plans** | Plans for the current project and the recent runs of each |
+| Top menu → **Workflows** | Saved workflows, ready to run on new data |
+| Dashboard → **Workflows** | The team library, including shared workflows |
+
+![The Plans panel: each plan shows its status, step and input counts, deliverables, and recent runs](/images/concepts/workflow-plans.png)
+
+## When a step fails
+
+A workflow run reports the failing step and offers to **retry that step**; steps that already succeeded are not recomputed. Opening the step's run detail shows the same reason and next step the analysis ledger shows — for example an input budget that was exceeded, a missing field, or data the tool cannot use.
+
+Some workflows pause on a **human confirmation** step: the run waits for your answer before continuing. This is how a workflow keeps a judgement call — accepting an unbound input, approving a threshold — visible instead of burying it in code.
+
+<Note>
+Deterministic steps (the analysis tools) do not consume AI credits; AI decision steps and the planning conversation do. See [Credits](/en/account/credits).
+</Note>
+
+## Related
+
+- [AI chat](/en/concepts/ai-chat) — how plan mode fits into a conversation
+- [Analysis](/en/concepts/analysis) — the tools a plan is built from
+- [Scenarios](/en/concepts/scenarios) — start from a prepared study area instead of a blank project
+- [Reports](/en/concepts/reports) — package a finished run as a deliverable

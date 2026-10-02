@@ -1,0 +1,70 @@
+---
+title: "Scenarios"
+sidebarTitle: "Scenarios"
+description: "A MapX scenario is a ready-made starting point: a study area, its prepared datasets, a method, and questions you can ask straight away."
+keywords: ["scenario", "playbook", "sample project", "suitability", "life circle", "facility siting", "urban growth"]
+---
+
+A scenario bundles everything a piece of spatial analysis needs before you type anything: a **study area**, the prepared datasets for it, a **method** that maps onto the platform's analysis tools, and **suggested questions** that work with that data. Opening one turns an empty project into a project that is ready to answer a real question.
+
+![The Scenarios catalog in the top menu, one card per built-in study area](/images/concepts/scenarios.png)
+
+## The six built-in scenarios
+
+| Scenario | Study area | Layers | What it answers |
+|---|---|---|---|
+| Development Suitability Baseline | Nairobi | 8 | Which land is buildable once ecology, slope and flood constraints are applied |
+| Carrying Capacity Assessment | Jakarta | 6 | How much development the water, climate and flood-hazard constraints allow |
+| 15-minute Life Circle Coverage | Jakarta | 7 | Who is covered by schools, clinics and green space within walking distance — and who is not |
+| Public Facility Siting | Dar es Salaam | 7 | Where coverage gaps are, and which candidate sites close them |
+| Urban Growth Monitor | Hanoi | 7 | How fast, in which direction, and how compactly the built-up area is expanding |
+| Land-use Conflict Screening | Kigali | 8 | Where development collides with ecological space, steep slopes and riverbanks |
+
+Every scenario is built from the [built-in datasets](/en/concepts/builtin-datasets) catalog, so each layer arrives typed, styled, and with its source, licence, and attribution attached.
+
+## Where to find them
+
+- **Top menu → Scenarios** — the catalog, filterable and searchable alongside datasets.
+- **New project screen** — the scenario picker offers the same six scenarios when you start from scratch.
+- **Empty chat** — the workspace chat offers scenarios before the first message.
+
+## Open a scenario
+
+<Steps>
+  <Step title="Pick a scenario">
+    Open the catalog and select a card. The detail view lists the study area, the datasets included, the questions it is designed for, and the analysis tools behind it.
+  </Step>
+
+  <Step title="Open it in your project">
+    Choose **Open scenario**. Every layer in the bundle is imported into the current project with its default style, legend, and attribution — no upload and no configuration.
+  </Step>
+
+  <Step title="Use a suggested question">
+    The scenario ships with starter questions written for that study area. Click one to load it into the chat box, then send it, or edit it first. The AI recognises the scenario's layers, so the question works without further setup.
+  </Step>
+
+  <Step title="Refine and deliver">
+    Follow up in chat to adjust scope or thresholds, then export the result as a [report](/en/concepts/reports) or share the map. See [Analysis](/en/concepts/analysis) for what each step produces.
+  </Step>
+</Steps>
+
+<Note>
+If a project already contains the scenario's layers, MapX asks before adding them again — the second import adds another layer set rather than replacing what you already styled.
+</Note>
+
+## Scenario, dataset, or workflow?
+
+| You want to… | Use |
+|---|---|
+| Add one layer to a project you already set up | [Built-in dataset](/en/concepts/builtin-datasets) |
+| Start a realistic analysis with data and a study area already in place | **Scenario** |
+| Re-run the same method on other data, repeatedly | [Workflow](/en/concepts/workflows) |
+
+Scenarios are the fastest way to see the platform work end to end, and a good way to learn prompt patterns: each one documents the questions it was designed for, and the analysis chain behind them.
+
+## Related
+
+- [Built-in datasets](/en/concepts/builtin-datasets) — the catalog scenarios are assembled from
+- [Analysis](/en/concepts/analysis) — the tools a scenario's method uses
+- [Workflows and plans](/en/concepts/workflows) — make your own repeatable version of a scenario
+- [Reports](/en/concepts/reports) — turn a finished scenario run into a deliverable
