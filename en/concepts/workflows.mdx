@@ -14,29 +14,9 @@ MapX has two related ideas for multi-step work:
 
 ## Plan first, then run
 
-Planning is on by default in the chat input. When you describe a goal, MapX does not start editing the map immediately:
+Planning is on by default in the chat input: the AI researches read-only, writes a plan document for you to review, and executes only after you approve. Approval happens on the **decision card** in the chat — the same card that lets you send a revision or abandon the plan, and it stays in the conversation afterwards as a record.
 
-<Steps>
-  <Step title="Describe the goal">
-    Write what you want to know, not which tool to use — for example, *"Assess where new schools are needed across this city."*
-  </Step>
-
-  <Step title="The AI researches">
-    It inspects the layers in your project, checks fields and coverage, may ask clarifying questions, and can run small probes to confirm that the data supports the question.
-  </Step>
-
-  <Step title="Review the plan">
-    You get a plan document: the question, the data it will use, the method and thresholds, the steps, the outputs, the estimated cost, and what happens after approval. Nothing has been executed yet.
-  </Step>
-
-  <Step title="Approve or revise">
-    Approve it as-is, or send changes back — for example a different study area or threshold. Sending changes back re-plans rather than editing the running work.
-  </Step>
-
-  <Step title="Watch the execution">
-    After approval the AI executes the plan step by step. Each step is a tool run from the [analysis](/en/concepts/analysis) catalog, so its result is a real layer, table, or chart — not a narrative claim.
-  </Step>
-</Steps>
+The full lifecycle — clarifying questions, the read-only research phase, the seven-chapter document, the decision card and the plan statuses — has its own page: [Plan mode](/en/concepts/plan-mode). Each executed step is a tool run from the [analysis](/en/concepts/analysis) catalog, so results are real layers, tables and charts.
 
 A plan is tied to the project it was written for, and it is not re-runnable as-is: to repeat the work on other data, fork it into a new plan or publish it as a workflow.
 

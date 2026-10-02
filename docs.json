@@ -51,6 +51,7 @@
                 "group": "Core Concepts",
                 "pages": [
                   "en/concepts/ai-chat",
+                  "en/concepts/plan-mode",
                   "en/concepts/analysis",
                   "en/concepts/builtin-datasets",
                   "en/concepts/scenarios",
@@ -158,6 +159,7 @@
                 "group": "核心概念",
                 "pages": [
                   "zh/concepts/ai-chat",
+                  "zh/concepts/plan-mode",
                   "zh/concepts/analysis",
                   "zh/concepts/builtin-datasets",
                   "zh/concepts/scenarios",
@@ -240,6 +242,7 @@
     { "source": "/account/plans", "destination": "/en/account/plans", "permanent": true },
     { "source": "/account/data-security", "destination": "/en/account/data-security", "permanent": true },
     { "source": "/concepts/ai-chat", "destination": "/en/concepts/ai-chat", "permanent": true },
+    { "source": "/concepts/plan-mode", "destination": "/en/concepts/plan-mode", "permanent": true },
     { "source": "/concepts/layers-and-maps", "destination": "/en/concepts/layers", "permanent": true },
     { "source": "/concepts/layers", "destination": "/en/concepts/layers", "permanent": true },
     { "source": "/concepts/basemap", "destination": "/en/concepts/basemap", "permanent": true },

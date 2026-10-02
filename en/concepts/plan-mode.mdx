@@ -1,0 +1,118 @@
+---
+title: "Plan mode"
+sidebarTitle: "Plan mode"
+description: "Plan mode makes MapX research first and act only after you approve: clarifying questions, a read-only study, a plan document you review, and a decision card that starts execution."
+keywords: ["plan mode", "plan", "approval", "research", "clarifying questions", "plan document", "read-only"]
+---
+
+Plan mode is the switch in the chat input, and it is **on by default**. While it is on, MapX does not touch your project until you approve a plan: it asks what it needs to know, studies your data read-only, writes the plan, and stops. Turn it off and the AI acts immediately.
+
+![The Plan mode toggle in the chat input row, next to the reasoning level and send button](/images/concepts/plan-mode-toggle.png)
+
+## What changes while it is on
+
+| | Plan mode on | Plan mode off |
+|---|---|---|
+| The AI can | read your layers and files, describe analysis tools, ask questions, write the plan | do anything its tools allow |
+| The AI cannot | import or download data, create layers, charts or reports, run analysis or workflows | — |
+| Your project | stays unchanged until you approve | changes while the AI works |
+| What you get | a plan document and a decision card | a direct result |
+
+The read-only rule is enforced on the server, not just in the prompt: a planning turn that tries to write gets `plan_readonly`. Data the plan needs is **declared** in the plan — source, location, size, licence — and fetched during execution, after approval.
+
+## The flow
+
+<Steps>
+  <Step title="Describe the goal">
+    Say what you want to know, not which tool to use — for example, *"Which parts of this scenic area are ecologically most sensitive, and which can take moderate use?"*
+  </Step>
+
+  <Step title="Answer the questions">
+    MapX asks the questions that would change the plan — usually three or more, in a single card covering study area, method, precision, budget and deliverables. Each question carries a **recommended** option first, and the card shows an answer window. If the window closes unanswered, the plan continues with those recommended defaults and lists them as assumptions.
+  </Step>
+
+  <Step title="The AI researches">
+    It inventories the data already in the project, checks coordinate systems, fields, extent and size, validates parameters against the analysis templates it intends to use, and records its assertions. Nothing lands in your project: no layers, charts, reports or runs. Scratch files from this phase stay under `.plan-research/` and cannot be imported.
+  </Step>
+
+  <Step title="Read the plan">
+    The plan is a document, not a paragraph in the chat: seven chapters covering objective, data, method, quality checks, risks, deliverables and acceptance. It is versioned, and each chapter is marked with where its content comes from.
+  </Step>
+
+  <Step title="Decide">
+    A decision card appears in the chat. Approving it starts a new turn that fetches any declared data, runs the workflow, and delivers layers, tables and reports.
+  </Step>
+</Steps>
+
+## The decision card
+
+The decision card in the chat is the **only** place a plan can be approved. You see the plan's name, status, step count, input slots and estimated runtime, and these actions:
+
+| Action | What happens |
+|---|---|
+| **Run this plan** | Approves the plan and starts the execution turn |
+| **Run with fresh context** | Same approval, but execution runs in a new thread — useful when the research conversation is long |
+| **Send revision** | Re-researches the same plan from your comment and produces a new version; a new card comes back to you |
+| **Abandon this plan** | Archives the plan. Nothing already in your project is deleted, and the plan stays visible for audit |
+| **Accept unbound and approve** | Appears only when a required input has no data source yet; approving records the risk instead of blocking |
+| **View plan details** | Opens the plan workbench for reading — approval itself always stays on the chat card |
+
+After you decide, the card stays in the conversation as a read-only record, so the history of what was approved, revised or abandoned remains visible.
+
+![A decision card waiting for approval: run, run with fresh context, abandon, or send a revision](/images/concepts/plan-decision-card.png)
+
+## The plan document
+
+The plan is rendered in the workbench and can be copied as Markdown. Its seven chapters are:
+
+| Chapter | What it holds |
+|---|---|
+| Objective and scope | The business question, the study area, and the clarifications it is based on |
+| Data and inputs | Input slots with their bindings, declared data to fetch, and data checks |
+| Method and pipeline | Why this method, and the step table: step, operator, inputs, outputs |
+| Quality checks | Static checks, trial-run evidence, and sanity assertions |
+| Risks and limitations | Gaps that need your decision, assumed defaults, and known limits |
+| Deliverables | The layers, tables, charts and reports the run will produce |
+| Execution and acceptance | What happens after approval, and how the result is judged |
+
+Every chapter is labelled **system evidence**, **AI judgement**, or **evidence + judgement**, so you can tell what came from your data and what the AI inferred.
+
+![The plan workbench: chapters on the left, the plan document, and the step graph](/images/concepts/plan-workbench.png)
+
+## Plan statuses
+
+A plan moves through four statuses:
+
+| Status | Meaning |
+|---|---|
+| **Drafting** | Research and drafting in progress; no decision yet |
+| **Reviewing** | It passed the readiness gate and is waiting for your approval |
+| **Approved** | You approved a specific version; that snapshot is what executes |
+| **Archived** | Abandoned or superseded; kept for audit, no longer actionable |
+
+Editing an approved plan sends it back to **reviewing** and clears the approval, so a changed plan can never run on the old approval.
+
+## When MapX blocks the plan
+
+The gate is deliberate: a plan that cannot run is not shown as ready. The blocks you will see most often:
+
+| What you see | What it means | What to do |
+|---|---|---|
+| Research incomplete | Fewer than three clarified questions | Answer the questions, or let the defaults stand |
+| A required input has no data source | Nothing is bound and nothing is declared for that slot | Bind a layer, declare where the data comes from, or accept the risk explicitly |
+| Acquisition details incomplete | A declared download is missing its location, licence or size | Add the missing details, or accept the risk |
+| Compilation failed | A step refers to a template or parameter that does not exist | Send a revision so the step is corrected |
+| `plan_readonly` | The planning turn tried to write to your project | Nothing to do — the write is refused by design; the data belongs in the plan's declarations |
+
+## Turning it off
+
+Plan mode is a per-session setting, saved with the project. Approving a plan switches it off for that session, so follow-up questions act immediately; turn it back on when you want another plan.
+
+Keep it **on** for analysis you will act on — anything with thresholds, budgets, or a deliverable someone else will read. Turn it **off** for quick, reversible work: a style tweak, a lookup, a visual experiment.
+
+## Related
+
+- [AI chat](/en/concepts/ai-chat) — how prompts and turns work
+- [Workflows and plans](/en/concepts/workflows) — publish an approved plan as a reusable workflow and run it on new data
+- [Analysis](/en/concepts/analysis) — the tools a plan is built from
+- [Scenarios](/en/concepts/scenarios) — start from a prepared study area instead of a blank project
