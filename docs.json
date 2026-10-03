@@ -58,7 +58,6 @@
                   "en/concepts/workflows",
                   "en/concepts/layers",
                   "en/concepts/3d-view",
-                  "en/concepts/layer-editing",
                   "en/concepts/basemap",
                   "en/concepts/files",
                   "en/concepts/reports",
@@ -166,7 +165,6 @@
                   "zh/concepts/workflows",
                   "zh/concepts/layers",
                   "zh/concepts/3d-view",
-                  "zh/concepts/layer-editing",
                   "zh/concepts/basemap",
                   "zh/concepts/files",
                   "zh/concepts/reports",
@@ -234,6 +232,8 @@
     ]
   },
   "redirects": [
+    { "source": "/en/concepts/layer-editing", "destination": "/en/concepts/layers", "permanent": true },
+    { "source": "/zh/concepts/layer-editing", "destination": "/zh/concepts/layers", "permanent": true },
     { "source": "/", "destination": "/en", "permanent": true },
     { "source": "/index", "destination": "/en", "permanent": true },
     { "source": "/introduction", "destination": "/en/introduction", "permanent": true },

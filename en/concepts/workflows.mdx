@@ -40,13 +40,38 @@ Publishing turns an approved plan into a reusable asset:
   </Step>
 
   <Step title="Run">
-    Choose **Run**. The execution appears as a graph, one node per step, with a live state per node: **executed**, **running**, and **not executed** (with skipped steps marked). A counter shows how many steps are done.
+    Choose **Run**. The execution opens as a graph of the steps, with a live state and a running counter for each. See [The workflow graph](#the-workflow-graph) below for how to read and steer it.
   </Step>
 
   <Step title="Read the results">
     Finished steps publish their layers, tables, and reports into the project, where you can open, style, and share them like any other result.
   </Step>
 </Steps>
+
+## The workflow graph
+
+A run opens as a directed graph rather than a list: one node per step, and an edge wherever a step consumes another step's output. Edges are labelled with what travels along them, so you can see which steps feed which, and where one result branches into several downstream steps. Solid edges carry data; dashed edges are execution-order dependencies or an input slot waiting for data.
+
+Every node shows the step's intent and the operator that runs it — Raster Calculator, Euclidean Distance, Clip, Buffer Analysis, and so on — so the same picture doubles as documentation of the method.
+
+![The workflow graph for a finished run — 42 of 42 steps done, each node showing its operator, with the plan card alongside](/images/concepts/workflow-graph.png)
+
+Node states are live while the run proceeds, using the legend above the canvas:
+
+- **Done** — the step finished and published its output.
+- **Running** — the step the engine is working on right now; edges out of it animate as results land.
+- **Pending** — not reached yet. Steps that were deliberately skipped are marked **Skipped**.
+- **Failed** — the step stopped with an error.
+
+The counter above the canvas reads *42/42 steps done*, and appends *n failed* if any step failed.
+
+### Reading and steering a run
+
+- **Click a node** to open the inspector: intent, operator, parameters, inputs, and artifacts, plus status, duration, credits, and iteration count — or the error and a **Retry step** button when it failed.
+- **Human gate nodes** wait for you. The inspector shows the question, an answer box, and **Cancel run**.
+- **A node with no data bound yet** shows **Awaiting data** and offers a shortcut to pick a layer from the current project or from the built-in catalog.
+- **Pan and zoom** — drag to pan, scroll to zoom, Shift+drag to box-select several nodes; **Esc** returns you to the map.
+- Switch between **Plan document** and **Workflow** to read the plan text you approved and the graph of the same steps.
 
 ## Where runs live
 

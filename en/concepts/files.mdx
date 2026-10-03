@@ -22,6 +22,8 @@ Files and layers are related but different:
 
 When you upload tabular or vector data, MapX detects the location columns and renders it as a layer; the file remains in the project as the source of that layer. Analysis results (buffers, heatmaps, spatial joins, scored sites) also become layers. GeoTIFF imagery becomes a raster layer. Documents never become layers — the AI reads them as source material for analysis and reports.
 
+Files bound to a layer leave the Data panel and appear as the layer's source in the Layers panel, where you can open its attribute table to edit rows, fields, or geometry — see [Editing data and geometry](/en/concepts/layers#editing-data-and-geometry).
+
 The workspace organizes these resources into separate panels:
 
 - **Layers** — everything currently rendered on the map, including layer source files and analysis results. See [Layers](/en/concepts/layers).
@@ -33,7 +35,7 @@ The workspace organizes these resources into separate panels:
 Each file row shows a format icon and name, plus the format, size, time, and provenance (uploaded or AI-generated). Use the toolbar to find what you need:
 
 - **Search** — filter by file name.
-- **Type filters** — switch between All, Table, Document, Text, and Other.
+- **Type filters** — switch between All, Table, Document, Text, and Other; each chip shows how many files of that kind the project holds.
 - **Sort** — by newest, name, or size.
 
 From the Data panel you can:
@@ -44,7 +46,7 @@ From the Data panel you can:
 - **Download files** — single downloads are available on paid plans.
 - **Batch manage** — enter Select mode to download or delete several files at once.
 
-![Data panel listing a CSV, a JSON file, and a Markdown document with type filters](/images/concepts/data-panel.png)
+![Data panel listing AI-generated CSV tables with their format, size, date, and provenance](/images/concepts/data-panel.png)
 
 ## Previewing Files
 
@@ -56,7 +58,9 @@ Previews are tailored to the file type:
 - **TXT, Markdown, and JSON** — rendered as text with a visible row or item count when content is truncated.
 - **PDF and Word documents** — read-only previews of the pages.
 
-![Tabular preview of a CSV file in the preview canvas showing 10 rows](/images/concepts/file-preview.png)
+![Tabular preview of a CSV file in the preview canvas, one row per record with a header row](/images/concepts/file-preview-table.png)
+
+![Text preview of a Markdown document in the preview canvas, rendering its headings, lists, and tables](/images/concepts/file-preview.png)
 
 File contents are stored server-side and streamed to the browser as needed, so large files stay responsive. When the AI works with a file, it can return a file card in the conversation with the same preview.
 

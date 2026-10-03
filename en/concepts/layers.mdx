@@ -1,10 +1,12 @@
 ---
-title: "Working with Map Layers in MapX"
+title: "Working with Layers in MapX"
 sidebarTitle: "Layers"
-description: "Manage every layer in a MapX project — toggle visibility, filter and search, reorder, batch-manage, and style each layer independently."
+description: "Manage, style, and edit every layer in a MapX project — toggle visibility, filter and search, reorder, batch-manage, restyle, and edit attributes or geometry directly."
 ---
 
 MapX uses a layer-based canvas — the same mental model as design tools like Figma or Photoshop, applied to geographic data. Every dataset you upload, every analysis you run, and every online or database source you connect produces a named layer that sits on top of a basemap. Layers can be stacked, toggled, reordered, and individually styled, giving you precise control over what your map communicates and how it looks.
+
+This page covers the full lifecycle of a layer: finding and organizing it, styling it, and editing the data behind it.
 
 ## The Layers Panel
 
@@ -19,10 +21,10 @@ Use the toolbar to find and manage layers:
 From each layer row you can:
 
 - **Toggle visibility** — show or hide the layer without deleting it.
-- **Open the style editor** — click a layer to style it (see [Styling Layers](#styling-layers)).
-- **Open the row actions menu** — download the layer data (paid plans), delete the layer, and more.
+- **Open the style editor** — click a layer to style it (see [Styling layers](#styling-layers)).
+- **Open the row actions menu** (`⋯`) — open the attribute table (see [Editing data and geometry](#editing-data-and-geometry)), zoom to the layer, rename it, download its data (paid plans), delete it, and more.
 
-![Layers panel showing the demo stores layer with search and source filters](/images/concepts/layers-panel.png)
+![Layers panel listing every layer on the map, with search, source filters, and per-row visibility toggles](/images/concepts/layers-panel.png)
 
 You can also manage layers through the AI chat. Prompts like *"hide the competitor layer"* or *"move the heatmap below the store points"* are fully supported.
 
@@ -33,6 +35,8 @@ Enter **Select** mode to work with several layers at once: select or clear all, 
 ## Styling Layers
 
 Open a layer's style editor by clicking it in the Layers panel or by asking the AI chat to make a change. Styles applied in the editor and styles applied through chat stay in sync.
+
+![Style editor for the stream network layer: renderer, field, per-category colors, and label and legend controls](/images/concepts/layer-style-editor.png)
 
 ### Renderers
 
@@ -67,6 +71,50 @@ Size the points by monthly foot traffic and label the top 20 stores
 
 The style editor includes a 3D section for layers rendered in 3D view — for example column height for point layers, elevation for paths, and extrusion for polygons. See [3D View](/en/concepts/3d-view) for how 2D and 3D styles relate.
 
+## Editing data and geometry
+
+MapX lets you edit a layer's data and geometry without leaving the browser. Open the attribute table from a layer in the Layers panel, inspect the rows, and make changes that are written back to the layer's source. Editing works for layers you uploaded as GeoJSON files and for PostGIS database layers alike.
+
+Changes save immediately: each edit you finish is committed on the spot — there is no separate "start editing" session to begin or end.
+
+### Open the attribute table
+
+In the Layers panel, open the layer's row actions menu (`⋯`) and choose **Attribute table**. The table opens at the bottom of the workspace, showing one row per feature. Click a row to highlight the corresponding feature on the map; click it again to clear the highlight.
+
+![Attribute table open below the map, showing one row per feature with add-field and per-row edit controls](/images/concepts/attribute-table.png)
+
+### Edit attributes
+
+- **Edit a row** — click the **Edit feature** button on a row to enter its edit state. Only values you actually change are written back when you finish.
+- **Edit a cell** — click a value, change it, then press Enter or click away. The change is saved immediately. Numbers and booleans are validated against the column type.
+- **Add a field** — use the add-field control in the table header; choose a name, type (string, number, or boolean), and an optional default value.
+- **Delete a field** — remove a column you no longer need. Fields that are used by the layer's style or labels cannot be deleted until you remove that use.
+- **Delete a row** — click the row's delete button and confirm. The feature is removed from the layer.
+
+### Edit geometry
+
+Click the pencil button on a row to enter geometry editing. MapX shows the feature's vertices on the map:
+
+- **Move a vertex** — drag it to a new position; the shape previews live as you drag.
+- **Add a vertex** — click a midpoint handle on a line or polygon edge.
+- **Delete a vertex** — double-click a vertex (lines keep at least 2 points, polygon rings keep at least 3).
+- **Move a point feature** — drag the point marker to its new location.
+
+Use **Save** to commit the geometry, or **Cancel** to discard the changes. If you try to leave the table, switch features, or delete the feature while a geometry edit is still unsaved, MapX asks you to **Save**, **Discard**, or **Cancel** first.
+
+### Editing with others
+
+If someone else changes the same feature while you are editing it, MapX keeps the latest version and asks you to apply your change again — your edit is not silently lost.
+
+### Editing limits
+
+Layers with up to 10,000 features and 20 MB are fully editable. Larger layers open in read-only preview mode (up to 100,000 features and 200 MB) so you can still browse rows and highlight features, but not modify them.
+
+<Note>
+  Every edit is saved as soon as you finish it, and there is no undo stack.
+  Review your changes before confirming a delete.
+</Note>
+
 ## Multi-Layer Analysis
 
 One of MapX's most powerful capabilities is combining multiple layers in a single view. A typical multi-layer map might include:
@@ -82,4 +130,4 @@ To build this view, upload each dataset separately and issue a series of prompts
 Show my store locations sized by revenue, competitor locations in red, and a heatmap of population density underneath. Add 1 km buffer zones around my stores.
 ```
 
-MapX creates and stacks the layers automatically. You can then fine-tune each one from the Layers panel. For editing features and attributes directly, see [Layer Editing](/en/concepts/layer-editing).
+MapX creates and stacks the layers automatically. You can then fine-tune each one from the Layers panel, and edit the underlying data straight from the attribute table.
