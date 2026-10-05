@@ -701,11 +701,11 @@ a { color: #006bcb; text-decoration: none; }
 .toc-page { font-variant-numeric: tabular-nums; color: #334155; font-size: 10pt; }
 
 /* Sections -------------------------------------------------------- */
-h2.section {
+h1.section, h2.section {
   font-size: 15pt; line-height: 1.35; margin: 8mm 0 4mm;
   color: #0b1f36; break-after: avoid; position: relative; padding-left: 5mm;
 }
-h2.section .sec-mark {
+h1.section .sec-mark, h2.section .sec-mark {
   position: absolute; left: 0; top: 1.2mm; bottom: 1.2mm; width: 1.6mm;
   background: var(--accent, #006bcb); border-radius: 1mm;
 }
@@ -796,7 +796,7 @@ ol.steps li:not(:last-child)::before {
 .chapter-opener { break-after: page; }
 .kicker {
   font-size: 9pt; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--accent, #006bcb); font-weight: 700; margin-bottom: 4mm;
+  color: var(--accent, #006bcb); font-weight: 700; margin: 0 0 4mm;
 }
 .chapter-opener h1 {
   font-size: 28pt; line-height: 1.16; margin: 0 0 3mm; color: #0b1f36;
@@ -909,7 +909,7 @@ async function renderChapter(scenario, lang) {
   <section class="chapter" style="--accent:${scenario.accent}">
     <div class="sheet chapter-opener">
       <div class="kicker">${lang === "zh" ? `${ui.scenarioWord} ${String(scenario.num).padStart(2, "0")} · ` : ""}SCENARIO ${String(scenario.num).padStart(2, "0")}</div>
-      <h1>${scenario[lang].title} <span class="h1city">${scenario[lang].city}</span></h1>
+      <h1>${scenario[lang].title}&nbsp;<span class="h1city">${scenario[lang].city}</span></h1>
       <p class="lede">${renderInline(scenario[lang].lede)}</p>
       <figure class="hero"><img src="${hero}" alt=""><figcaption>${renderInline(imageBlock ? imageBlock.alt : "")}</figcaption></figure>
       <div class="glance">
@@ -1025,12 +1025,12 @@ ${renderColophon(lang)}
 ${renderToc(lang, pageMap)}
 <section class="sheet foreword page-break" style="--accent:#006BCB">
   <div class="kicker">FOREWORD</div>
-  <h2 class="section"><span class="sec-mark"></span>${ui.forewordLabel}</h2>
+  <h1 class="section"><span class="sec-mark"></span>${ui.forewordLabel}</h1>
   ${forewordHtml}
 </section>
 ${chapterHtml.join("\n")}
 <section class="sheet appendix page-start" style="--accent:#006BCB">
-  <div class="kicker">APPENDIX A</div>
+  <h1 class="kicker">APPENDIX A</h1>
   ${appendixHtml}
 </section>
 ${renderBackCoverSync(lang)}
@@ -1118,11 +1118,40 @@ async function renderPdf(html, outPath, lang) {
     await page.setContent(html, { waitUntil: "load", timeout: 180000 });
     await page.evaluate(() => document.fonts.ready);
     await page.emulateMedia({ media: "print" });
+    // Chromium's PDF outline drops the space at every soft wrap inside a
+    // heading, so keep chapter titles on one line and shrink them to fit.
+    const overflowingTitles = await page.evaluate(() => {
+      // The screen viewport is wider than the 210mm page, so measure the
+      // natural text width against the @page content box (210mm - 2 x 17mm).
+      const pageContentWidthPx = (176 / 25.4) * 96;
+      const minSizePx = (21 * 96) / 72;
+      const range = document.createRange();
+      const overflows = [];
+      for (const heading of document.querySelectorAll(".chapter-opener h1")) {
+        heading.style.whiteSpace = "nowrap";
+        let sizePx = Number.parseFloat(getComputedStyle(heading).fontSize);
+        const textWidth = () => {
+          range.selectNodeContents(heading);
+          return range.getBoundingClientRect().width;
+        };
+        while (textWidth() > pageContentWidthPx - 1 && sizePx > minSizePx) {
+          sizePx = Math.max(minSizePx, sizePx - 0.5);
+          heading.style.fontSize = `${sizePx}px`;
+        }
+        if (textWidth() > pageContentWidthPx - 1) overflows.push(heading.textContent.trim());
+      }
+      return overflows;
+    });
+    for (const title of overflowingTitles) {
+      console.warn(`warning: chapter title still overflows the page width (${lang}): ${title}`);
+    }
     await page.pdf({
       path: outPath,
       printBackground: true,
       margin: { top: "0mm", bottom: "0mm", left: "0mm", right: "0mm" },
       preferCSSPageSize: true,
+      tagged: true,
+      outline: true,
     });
   } finally {
     await browser.close();
