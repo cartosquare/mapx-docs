@@ -1,0 +1,101 @@
+---
+title: "15-minute Life Circle Coverage · Jakarta"
+sidebarTitle: "15-minute Life Circle Coverage"
+description: "Audit who can reach a school, a clinic and a park within an 800 m walk in central Jakarta, rank the neighbourhoods with the biggest shortfall, and score accessibility."
+keywords: ["15-minute life circle", "life circle", "walking distance", "service area", "accessibility", "2SFCA", "Jakarta", "scenario"]
+---
+
+15-minute Life Circle Coverage measures the daily-life side of planning: **who can reach a school, a clinic and a park on foot**, and which neighbourhoods carry the largest shortfall. It is the MapX version of a 15-minute life-circle audit, and it deliberately reports two rulers — coverage and accessibility — instead of a single score.
+
+![The Jakarta life-circle run as delivered: three neighbourhood shortfall ramps, ADM4 boundaries and the pinned three-class comparison heatmap](/images/scenarios/15min-life-circle-coverage.jpg)
+
+## What the scenario ships
+
+Seven prepared layers cover Jakarta, with the study focused on Kota Jakarta Pusat (central Jakarta) in the example run.
+
+| Layer | Data | Role in the study |
+|---|---|---|
+| Education facilities | OSM education POIs (7,470 city-wide) | Schools that supply the education circle |
+| Health facilities | Healthsites.io (2,447 city-wide) | Clinics and hospitals that supply the health circle |
+| Road network | Overture transportation | The walking network used for service areas |
+| Administrative boundaries | 46 kecamatan (ADM3) | District framing and attribution |
+| Green space and parks | OSM green polygons (3,942) | Source of the destination-park set |
+| Neighbourhood boundaries | kelurahan (ADM4); 44 in the study area, 1.09 km² average | The evaluation unit that is ranked and named |
+| Population | WorldPop, 100 m | Residents at risk of being outside a circle |
+
+All layers come from the [built-in datasets](/en/concepts/builtin-datasets) catalog with styles and attribution attached.
+
+## How the study works
+
+| Stage | Question | What MapX runs | Output |
+|---|---|---|---|
+| 1. Coverage audit | How much of each neighbourhood is outside the walk? | Select features, Overlay clip/dissolve/erase, Network service area at 800 m, Zonal statistics, Field calculator | Shortfall layer per class with `gap_sum` and a share-of-residents column |
+| 2. Service mix and balance | Which neighbourhoods lack one, two or all three classes? | Zonal summary chaining, Overlay dissolve/erase | Neighbourhood summary table with population, coverage count 0–3 and three shortfall columns |
+| 3. Accessibility diagnosis | Where is access hardest, even inside the circle? | 2SFCA accessibility, Top N ranking, Label anchors, Charts | Top-10 shortfall boards, per-class accessibility scores and a pinned heatmap |
+
+**One radius makes the classes comparable.** All three classes use an 800 m network walk, the upper end of the 15-minute life-circle standard (GB 50180-2018, 800–1000 m). A class-standard sensitivity — schools 800 m, clinics 1000 m, parks 500 m — is available as a documented variant.
+
+**The park definition is a decision, not a detail.** The shipped green layer contains road verges, golf fairways and tiny slivers. The scenario keeps `leisure = park` polygons of at least 0.5 ha and uses one centroid per park (33 destination parks in the study area). Relaxing that definition changes the answer dramatically, so the definition is printed in the report.
+
+**Coverage and accessibility answer different questions.** The shortfall layer says whether residents can walk there; the 2SFCA score says how much supply there is per resident within reach. When they disagree, that disagreement is the finding.
+
+## Platform capabilities
+
+- **[Plan mode](/en/concepts/plan-mode)** asks the four decisions that matter — scope, radius, capacity assumption and deliverables — then freezes the rest.
+- **[Network analysis](/en/concepts/analysis)** builds the walking service areas; overlay and zonal tools turn them into neighbourhood-level numbers.
+- **[Charts](/en/concepts/charts)** include per-class rankings, a grouped bar with a log axis and a heatmap, which can be pinned to the map while you pan.
+- **[Layer styling](/en/concepts/layers)** keeps three semi-transparent ramps readable at once, with the ADM4 boundary and labels on top.
+- **[Reports](/en/concepts/reports)** carry the radius, the park definition, the ranking tables and the caveats.
+
+## Run it
+
+<Steps>
+  <Step title="Open the scenario">
+    Open **15-minute Life Circle Coverage** from the catalog. Seven layers import and the camera flies to Jakarta (106.85, -6.21).
+  </Step>
+
+  <Step title="Send the suggested question">
+    *"Run a 15-minute life-circle diagnosis for central Jakarta (Jakpus): check the walking service areas of schools, clinics and parks, find coverage gaps and imbalanced districts, and name the areas to prioritise; deliver coverage layers, charts and a report."*
+  </Step>
+
+  <Step title="Answer the four clarifications">
+    The plan asks for the study unit and facility classes (kelurahan plus all three classes by default), the walking radius (uniform 800 m), the 2SFCA supply assumption (default capacity 1, a pure supply/demand ratio) and the report language. Nothing else needs re-asking.
+  </Step>
+
+  <Step title="Approve the plan">
+    After approval the run executes as a plan graph: filter the study area, clip the three facility classes, build the 800 m service areas, erase them from the neighbourhoods and aggregate the results.
+  </Step>
+
+  <Step title="Check the supply side before reading conclusions">
+    The run reports how many facilities entered each class. On the shipped data the study area should show roughly 601 education points, 234 health points and 33 parks; a count of one where hundreds entered means a broken chain, not a finding.
+  </Step>
+</Steps>
+
+## What the example run produced
+
+The measured central-Jakarta run delivered:
+
+- three neighbourhood shortfall ramps (schools in purple, clinics in teal, parks in orange) sharing one 0/10/25/50/75/100% break scale, with the ADM4 boundary above them — exactly four visible deliverable layers;
+- a 44-row neighbourhood summary table carrying population, coverage count 0–3 and the three shortfall columns;
+- per-class top-10 boards and 2SFCA accessibility layers, hidden by default;
+- five charts: three per-class rankings, one grouped bar over the worst neighbourhoods, and a pinned heatmap comparing all three classes per kelurahan;
+- a report naming the radius, the park definition and the priority neighbourhoods.
+
+The measured contrast is the lesson: the same 33 parks cover about **32%** of residents through the road network, while a straight-line ring from the park boundary suggests about **56%**. Widening the definition to every `leisure = park` polygon with no size filter takes the straight-line reading to about **92%**, against **49%** for the same 33 parks — the definition is the biggest lever of all. Straight-line proximity overstates walking access; both the definition and the network matter.
+
+## Read the results with care
+
+- **Coverage is a network distance.** When the mapped street network is incomplete, the gap is overestimated; the report says so.
+- **A park is represented by its centroid.** The 800 m distance is measured to the park's centre, an accepted approximation when gate data is unavailable.
+- **Blank means inside the circle.** In the shortfall layers, unshaded neighbourhoods are covered — they are not missing data.
+- **`cov_count` counts intersection, not full coverage.** A neighbourhood that a circle only clips counts as covered; quote the covered area when a borderline case matters.
+- **Capacity is not modelled.** The 2SFCA score uses a default capacity of 1, so it ranks within a class only; cross-class comparison uses the shortfall population.
+- **The answer is neighbourhood-level.** "Where inside one kelurahan should we build?" is the [Public Facility Siting](/en/concepts/scenarios/public-facility-siting) scenario.
+
+## Related
+
+- [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work
+- [Public Facility Siting](/en/concepts/scenarios/public-facility-siting) — turns the gaps into candidate sites
+- [Carrying Capacity Assessment](/en/concepts/scenarios/carrying-capacity-assessment) — the same city, read through environmental constraints
+- [Analysis](/en/concepts/analysis) — service areas, accessibility and zonal statistics
+- [Charts](/en/concepts/charts) — ranking boards and pinned comparison views

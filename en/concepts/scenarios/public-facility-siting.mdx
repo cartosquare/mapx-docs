@@ -1,0 +1,96 @@
+---
+title: "Public Facility Siting · Dar es Salaam"
+sidebarTitle: "Public Facility Siting"
+description: "Diagnose school and clinic coverage in Dar es Salaam, measure the unserved demand, then compare candidate sites and recommend where to build with a maximum-coverage model."
+keywords: ["facility siting", "location allocation", "MCLP", "k-median", "maximum coverage", "school planning", "clinic planning", "Dar es Salaam", "scenario"]
+---
+
+Public Facility Siting answers the last mile of public-service planning: **given what already exists, where should the next schools and clinics go?** The scenario runs the full arc — coverage diagnosis, demand gap, candidate screening and siting comparison — and reports how many currently unserved residents each recommended site would bring within reach.
+
+![The Dar es Salaam run as delivered: ward shortfall boards, demand/supply quadrants and ranked MCLP sites for schools and clinics](/images/scenarios/public-facility-siting.jpg)
+
+## What the scenario ships
+
+Seven layers cover the Dar es Salaam region. The watercourse layer starts hidden; it exists so the 30 m river setback can be applied to candidate sites.
+
+| Layer | Data | Role in the study |
+|---|---|---|
+| Education facilities | OSM education POIs (2,223) | Raw supply for the school analysis |
+| Health facilities | Healthsites.io (1,463) | Raw supply for the clinic analysis |
+| Road network | OSM roads (102,464 lines) | Walking/driving network for service areas and site snapping |
+| Watercourses | OSM waterways (11,160 lines, hidden) | 30 m riparian setback applied to candidates |
+| Ward boundaries | OCHA COD-AB ADM3 (90 wards, 1,667 km²) | Shortfall ranking, candidate scope and balance checks |
+| Building footprints | Overture (481,681 polygons) | Built-up intensity screen for candidate cells |
+| Population | WorldPop, 100 m | Demand and coverage weights |
+
+## How the study works
+
+| Stage | Question | What MapX runs | Output |
+|---|---|---|---|
+| 1. Coverage diagnosis | Who is outside the standard today? | Select features (class screen), Overlay clip, Service area (800 m schools / 1000 m clinics), Overlay erase, Zonal statistics, Top N | Ward shortfall layer and a top-10 board per class |
+| 2. Demand gap | Where is demand high and supply low? | Grid at 500 m, Zonal statistics, Quadrant (median split), 1 km demand grid | Pressure quadrants (diagnostic) and the unserved-population demand layer |
+| 3. Siting comparison | Which new sites serve the most people? | Grid inside the worst wards, Overlay erase (30 m corridor), Zonal statistics/summary, Centroid points, Location-covering (MCLP), Location-allocation (k-median) | Recommended sites, the efficiency comparison, marginal coverage curve and residual gaps |
+
+**The supply set is narrowed before anything is measured.** Of 2,223 education points, 1,312 are schools — kindergartens, colleges and universities are not school supply for a walking-radius question. Of 1,463 health points, only 363 are clinics, hospitals or doctors; **1,020 entries (69.7%) are pharmacies** and are excluded. Without that screen, a "clinic" analysis is really a pharmacy map.
+
+**Candidates are a shortlist, not the whole city.** The scenario ranks the 90 wards by unserved population, keeps the ten worst, lays a 500 m grid inside them, removes the 30 m river corridor, drops cells that are already built out (building footprint share above 30%) and then caps the survivors by residential population. The ladder for large windows is documented; the physical filters are never relaxed to fit a budget.
+
+**Two models, one recommendation.** The primary model is maximum coverage (MCLP): place *k* sites so the most unserved people fall within the standard radius. A k-median run with the same candidates and demand is reported alongside as the efficiency comparison — it minimises travel, but it is not the recommendation.
+
+## Platform capabilities
+
+- **[Network analysis](/en/concepts/analysis)** runs `service_area`, `location_covering` and `location_allocation`, with the platform's scale guard reporting the effective candidate limit before submission.
+- **[Plan mode](/en/concepts/plan-mode)** records the supply-set definitions, the radius per class, the demand basis and the `k` as plan assumptions.
+- **[Charts](/en/concepts/charts)** plot the marginal coverage curve so you can see whether the fourth or fifth site still earns its place.
+- **[Reports](/en/concepts/reports)** carry the before/after coverage pair and every disclosure listed below.
+
+## Run it
+
+<Steps>
+  <Step title="Open the scenario">
+    Open **Public Facility Siting** from the catalog. Seven layers import and the camera flies to Dar es Salaam (39.21, -6.79).
+  </Step>
+
+  <Step title="Send the suggested question">
+    *"Run a public-facility siting study for Dar es Salaam: diagnose the coverage and demand gaps of existing schools and clinics, then compare candidate sites for new facilities and recommend where to build; deliver layers, charts and a report."*
+  </Step>
+
+  <Step title="Confirm the decisions">
+    The plan asks which facility class you are adding, the study area (the whole region or named wards), the primary model (MCLP by default, with k-median as the comparison), the number of sites (`k`, default 5), the service radius and the report language.
+  </Step>
+
+  <Step title="Approve and read the scale note">
+    The submit response states the effective candidate limit and which axis binds it — candidates, demand points or runtime. If the shortlist exceeds it, the documented ladder coarsens the grid or shrinks the ward set; it never drops the feasibility filters.
+  </Step>
+
+  <Step title="Compare the models and deliver">
+    Read the marginal coverage curve, name the worst wards that received no site, then export the report or share the map with the recommended sites.
+  </Step>
+</Steps>
+
+## What the example run produced
+
+On the shipped Dar es Salaam data, the measured run delivered:
+
+- **90 wards** as the screening and reporting unit, with the status-quo service areas at 800 m for schools and 1000 m for clinics;
+- supply counts of **1,312 schools (1,305 inside the study area)** and **363 clinics (362 inside)**, with the excluded pharmacy share stated in the report;
+- **five recommended school sites and five recommended clinic sites** (k = 5) placed only inside the worst ten wards, with their service areas and the residual gaps after siting;
+- the k-median comparison sites, a ward balance table naming wards with no site, and a marginal coverage curve;
+- a before/after population pair: unserved residents at the start versus residents brought within reach by the new sites.
+
+## Read the results with care
+
+- **Capacity is not modelled.** The clinic layer has no bed or staff counts and the school layer has a capacity value on only 15 of 2,223 features, so the run is plain maximum coverage; the report writes "capacity not modelled".
+- **Coverage is binary.** "Within 800 m of a school" is not "able to enrol". Run the 2SFCA crowding branch if you need a supply-per-resident reading.
+- **Construction intensity is footprint share only.** Only 34 of 481,681 building footprints carry a height value, so never infer floors or population capacity from the building layer.
+- **A recommended site is a candidate-cell optimum.** Land ownership, zoning and site access still need a field check.
+- **Fairness is not optimised.** MCLP maximises the total; the ward balance table exists so wards that received nothing are named rather than hidden.
+- **The ward layer is the 2018 administrative vintage.** Dar es Salaam is still the three-council structure in this release; do not describe it as the current five-municipality structure.
+
+## Related
+
+- [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work
+- [15-minute Life Circle Coverage](/en/concepts/scenarios/15min-life-circle-coverage) — the coverage audit that motivates siting
+- [Urban Growth Monitor](/en/concepts/scenarios/urban-growth-monitor) — where growth is heading, for forward-looking siting
+- [Analysis](/en/concepts/analysis) — network and overlay tools, scale guards and run semantics
+- [Reports](/en/concepts/reports) — assembling the siting package

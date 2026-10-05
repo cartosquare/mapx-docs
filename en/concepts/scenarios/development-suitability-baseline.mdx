@@ -1,0 +1,100 @@
+---
+title: "Development Suitability Baseline · Nairobi"
+sidebarTitle: "Development Suitability Baseline"
+description: "Screen ecological, terrain and flood constraints in Nairobi, grade the remaining land, estimate carrying capacity and propose a development boundary with tiered controls."
+keywords: ["development suitability", "suitability evaluation", "carrying capacity", "Nairobi", "ecological constraint", "slope", "flood hazard", "development boundary", "scenario"]
+---
+
+Development Suitability Baseline answers the first question of any growth plan: **where can this city build, and how much can it hold** once ecological, terrain and flood constraints are respected. It follows the two-part appraisal logic used in Chinese territorial planning — hard constraints first, suitability and carrying capacity second, boundary and tiered controls last.
+
+![The Nairobi scenario as delivered: development control tiers drawn over ecological protection areas, protected areas and the 50 m riparian buffer](/images/scenarios/development-suitability-baseline.jpg)
+
+## What the scenario ships
+
+Opening the scenario imports eight prepared layers for the Nairobi window. Every layer comes from the [built-in datasets](/en/concepts/builtin-datasets) catalog with its default style, legend, source, licence and attribution attached.
+
+| Layer | Data | Role in the study |
+|---|---|---|
+| Road network | 52,642 OSM lines | Existing urban skeleton; reference for the boundary and for infill versus new growth |
+| Watercourses | 718 OSM lines | Source of the 50 m riparian buffer |
+| Administrative boundaries | 26 ADM3 units (geoBoundaries) | Attribution, summary tables and map labels |
+| Protected area constraints | 379 Overture features across Kenya | Part of the ecological exclusion |
+| DEM | Copernicus DEM GLO-30, 30 m (1,459–1,954 m) | Slope classes |
+| Land cover | Esri Sentinel-2 2020, 10 m, 9 classes (57% built-up) | Ecological classes and the existing built-up surface |
+| Flood hazard | WRI Aqueduct, 1 km | Flood avoidance line |
+| Population | GHS-POP, 1 km | Current population reference for the capacity comparison (hidden by default) |
+
+The layer order is the display order: points, then lines, then polygons, then rasters. All eight stay in the project for follow-up questions; only the surfaces you see in the legend above are styled as deliverables.
+
+## How the study works
+
+The method is a chain of three planning questions. Each one maps onto deterministic [analysis](/en/concepts/analysis) tools, so every number in the report can be traced back to a run.
+
+| Stage | Question | What MapX runs | Output |
+|---|---|---|---|
+| 1. Screen the hard constraints | Which land is off-limits? | Slope, Reclassify, Buffer, Raster calculator, Overlay erase, Raster class area, Zonal statistics | Ecological protection mask and its polygons, the 50 m riparian buffer, constraint-area tables |
+| 2. Grade and size what remains | How suitable is the remaining land, and how many people can it carry? | Weighted overlay (equal weights by default), Reclassify, Grid at 1 km, Zonal statistics | Suitability classes 1–4, population per evaluation cell, class-area and capacity tables |
+| 3. Propose the boundary | Where should the development boundary run, and what tiers apply? | Raster to polygons, Overlay erase and dissolve, Zonal summary, Label anchors | Development control tiers (priority / managed / restricted), charts and a written report |
+
+**The constraint definitions are explicit.** Ecological protection is the union of protected areas, the water, tree and flooded-vegetation land-cover classes, and the 50 m watercourse buffer; slope is split at 8°, 15° and 25°; flood is an avoidance line, not a suitability score. Suitability is then graded 1–4 over the land that survives those exclusions.
+
+**The capacity estimate is a planning convention.** Carrying capacity is derived at 100 m² of urban construction land per person. The report states the assumption; it is an estimate, not a measured capacity.
+
+## Platform capabilities
+
+- **[Plan mode](/en/concepts/plan-mode)** turns the request into a reviewable plan: the AI asks about the study area, which constraints are hard, and the report audience before anything runs.
+- **[Analysis tools](/en/concepts/analysis)** do the computation: slope and reclassification, raster calculator masks, buffering, weighted overlay, 1 km grids, zonal statistics and polygon conversion.
+- **[Layer styling](/en/concepts/layers)** gives the control tiers human category labels; the constraint layers stay translucent so the tiers remain readable.
+- **[Charts](/en/concepts/charts)** and a Word **[report](/en/concepts/reports)** package the class areas, the constraint breakdown and the capacity ranking for delivery.
+
+## Run it
+
+<Steps>
+  <Step title="Open the scenario">
+    Go to **Scenarios** in the top menu, select **Development Suitability Baseline** and choose **Open scenario**. Eight layers land in the project and the camera flies to Nairobi (36.82, -1.29).
+  </Step>
+
+  <Step title="Send the suggested question">
+    The scenario ships one starter prompt: *"Run a development-suitability study for Nairobi: screen the ecological, terrain and flood constraints, grade buildable land and carrying capacity, then propose a development boundary with tiered controls; deliver layers, charts and a report."* Edit it if your study area or constraints differ.
+  </Step>
+
+  <Step title="Answer the plan clarifications">
+    Plan mode asks three things: the study area and admin unit, which constraints count as hard for this city, whether the ecological mask is a hard exclusion (the default) or a graded factor, and the report language. Everything else — grid size, slope thresholds, class breaks — is stated as an assumption.
+  </Step>
+
+  <Step title="Review and approve the plan">
+    Read the plan document, adjust any step, then approve it. Each step runs as a deterministic tool with its own status, time and result; the run graph shows how the layers feed each other.
+  </Step>
+
+  <Step title="Refine and deliver">
+    Turn on the population layer to compare present-day population with the estimated capacity, restyle the tiers, then export the report or share the map.
+  </Step>
+</Steps>
+
+## What the example run produced
+
+On the shipped Nairobi window, the final run delivered a map with three development control tiers, the ecological protection polygons, protected areas and the riparian buffer, plus:
+
+- four suitability classes of **0.4 / 4.2 / 446 / 83.6 km²** after hard exclusions;
+- a constraint breakdown of **105.5 km²** protected areas, **40.4 km²** riparian buffer, **39.1 km²** ecological composite, **5 km²** flood avoidance area and **0.04 km²** steep slope (≥25°);
+- a capacity ranking by sub-county — Kasarani, Langata and Embakasi East lead the estimate;
+- three charts (buildable land by class, constraints screened, capacity by sub-county) and one report.
+
+Numbers depend on the study window and the thresholds you approve; the example run is the sanity baseline, not a fixed answer.
+
+## Read the results with care
+
+- **Flood is an avoidance constraint here.** The shipped 1 km flood raster has only a few valid cells in this window; treat it as a "keep clear of the floodplain" line. A graded flood factor needs a different dataset.
+- **Capacity is an estimate at 100 m² per person.** Report it as a planning assumption, never as measured capacity.
+- **Population never enters the suitability score.** It is a present-day reference for comparing what exists with what the land could hold.
+- **The ecological mask is a product of its inputs.** It uses protected areas plus three land-cover classes and a 50 m buffer; grass and shrub are deliberately excluded, and local statutory boundaries should replace the country-wide preview when you have them.
+- **Equal weights are the default composite.** If you want AHP or expert weights, run the weighted overlay as a documented sensitivity variant and compare the class tables.
+
+## Related
+
+- [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work
+- [Carrying Capacity Assessment](/en/concepts/scenarios/carrying-capacity-assessment) — the companion study for water, climate and flood constraints
+- [Land-use Conflict Screening](/en/concepts/scenarios/landuse-conflict-screening) — the same constraint logic applied to built-up land
+- [Built-in datasets](/en/concepts/builtin-datasets) — where every layer comes from
+- [Analysis](/en/concepts/analysis) — the tools behind each step
+- [Reports](/en/concepts/reports) — how the deliverable is assembled and exported

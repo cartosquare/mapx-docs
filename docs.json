@@ -54,7 +54,6 @@
                   "en/concepts/plan-mode",
                   "en/concepts/analysis",
                   "en/concepts/builtin-datasets",
-                  "en/concepts/scenarios",
                   "en/concepts/workflows",
                   "en/concepts/layers",
                   "en/concepts/3d-view",
@@ -66,6 +65,24 @@
                   "en/concepts/skills",
                   "en/concepts/knowledge-bases",
                   "en/concepts/database-connections"
+                ]
+              },
+              {
+                "group": "Scenarios",
+                "pages": [
+                  "en/concepts/scenarios",
+                  {
+                    "group": "Built-in scenarios",
+                    "expanded": false,
+                    "pages": [
+                      "en/concepts/scenarios/development-suitability-baseline",
+                      "en/concepts/scenarios/carrying-capacity-assessment",
+                      "en/concepts/scenarios/15min-life-circle-coverage",
+                      "en/concepts/scenarios/public-facility-siting",
+                      "en/concepts/scenarios/urban-growth-monitor",
+                      "en/concepts/scenarios/landuse-conflict-screening"
+                    ]
+                  }
                 ]
               },
               {
@@ -161,7 +178,6 @@
                   "zh/concepts/plan-mode",
                   "zh/concepts/analysis",
                   "zh/concepts/builtin-datasets",
-                  "zh/concepts/scenarios",
                   "zh/concepts/workflows",
                   "zh/concepts/layers",
                   "zh/concepts/3d-view",
@@ -173,6 +189,24 @@
                   "zh/concepts/skills",
                   "zh/concepts/knowledge-bases",
                   "zh/concepts/database-connections"
+                ]
+              },
+              {
+                "group": "场景",
+                "pages": [
+                  "zh/concepts/scenarios",
+                  {
+                    "group": "内置场景",
+                    "expanded": false,
+                    "pages": [
+                      "zh/concepts/scenarios/development-suitability-baseline",
+                      "zh/concepts/scenarios/carrying-capacity-assessment",
+                      "zh/concepts/scenarios/15min-life-circle-coverage",
+                      "zh/concepts/scenarios/public-facility-siting",
+                      "zh/concepts/scenarios/urban-growth-monitor",
+                      "zh/concepts/scenarios/landuse-conflict-screening"
+                    ]
+                  }
                 ]
               },
               {

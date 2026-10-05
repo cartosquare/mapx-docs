@@ -1,0 +1,101 @@
+---
+title: "Carrying Capacity Assessment · Jakarta"
+sidebarTitle: "Carrying Capacity Assessment"
+description: "Assess how terrain, wetness, flood depth and rainfall constrain Jakarta's growth, grade carrying capacity, and flag the districts where pressure is highest."
+keywords: ["carrying capacity", "resource and environmental carrying capacity", "Jakarta", "flood", "rainfall", "wetness", "limiting factor", "overload", "scenario"]
+---
+
+Carrying Capacity Assessment asks how much development a city can absorb before its water, climate and hazard constraints become the binding limit. For Jakarta — a low, flat delta city with frequent waterlogging — the study reads four constraints together, grades the result, and separates "constrained land" from "land under pressure".
+
+![The Jakarta scenario as delivered: carrying-capacity classes 1–4, overload cells and the constraint-composition chart](/images/scenarios/carrying-capacity-assessment.jpg)
+
+## What the scenario ships
+
+Six prepared layers cover the Jakarta window. The rasters except rainfall start hidden so the class raster stays readable; turn them on when you want to inspect a single factor.
+
+| Layer | Data | Role in the study |
+|---|---|---|
+| River network | OSM waterways | Drainage and flood corridor |
+| Administrative boundaries | 46 kecamatan (OCHA COD-AB ADM3); 44 on the mainland | Study-area definition, attribution and district labels |
+| Precipitation | CHIRPS, ~5.35 km | Rainfall membership (waterlogging constraint) |
+| Population | WorldPop, 100 m (hidden) | Exposure and pressure axis |
+| Flood hazard | WRI Aqueduct, ~900 m (hidden) | Flood-depth membership |
+| Terrain | SRTM, 30 m (hidden) | Slope and topographic wetness |
+
+All six come from the [built-in datasets](/en/concepts/builtin-datasets) catalog, with source, licence and attribution attached.
+
+## How the study works
+
+The design follows the "shortest stave" reading of carrying capacity: the most limiting factor decides the class, not the average.
+
+| Stage | Question | What MapX runs | Output |
+|---|---|---|---|
+| 1. Build the capacity classes | Which factor limits each place, and how strongly? | Slope, Topographic wetness index, Fuzzy membership, Raster calculator (`minimum`), Focal statistics repair, Euclidean distance, Reclassify | Four-class carrying-capacity raster with the 300 m drainage-corridor adjustment |
+| 2. Diagnose pressure | Where is low capacity combined with high population? | Grid at 1 km, Zonal statistics, Quadrant (median split) | Overload cells, population per cell, district pressure table |
+| 3. Explain and mitigate | Which constraint dominates, and what should each district do? | Raster class area, Zonal statistics, Charts, Report | Class-area and dominant-constraint tables, mounted pressure chart and report |
+
+**Four memberships feed the composite.** Slope is scored from 0–25°, wetness from the measured TWI range (6.08–9.28), flood depth from 0–3 m and rainfall from 1770–2521 mm inside the study area. Rainfall is a *waterlogging* constraint: more rain means a stronger limitation, not a bigger resource.
+
+**Gaps are repaired, not hidden.** The flood raster stops at its model domain and the wetness index is undefined on perfectly flat cells. Both are filled from their own neighbourhood mean and reported as a data repair; a coverage floor of 99% of the study area is the acceptance check.
+
+**Population is the pressure axis.** It enters the overload quadrant and the capacity estimate, never the suitability composite — a crowded district is not thereby an unsuitable one.
+
+## Platform capabilities
+
+- **[Plan mode](/en/concepts/plan-mode)** fixes the study reading (mainland versus full administrative extent) and the composite rule before the run.
+- **[Analysis tools](/en/concepts/analysis)** cover fuzzy membership functions, raster algebra, focal-statistics repair, terrain and wetness indices, grids and zonal statistics in one chain.
+- **[Charts](/en/concepts/charts)** mount the "which constraint decides the class" donut on the map canvas.
+- **[Reports](/en/concepts/reports)** carry the threshold table, the coverage and repair table, the class shares and the district pressure list.
+
+## Run it
+
+<Steps>
+  <Step title="Open the scenario">
+    Choose **Carrying Capacity Assessment** in the scenario catalog. Six layers import and the camera flies to Jakarta (106.85, -6.21).
+  </Step>
+
+  <Step title="Send the suggested question">
+    *"Run a resource-and-environment carrying-capacity study for Jakarta: assess how water, climate and flood constraints limit growth, flag overloaded areas, then recommend measures by dominant constraint; deliver layers, charts and a report."*
+  </Step>
+
+  <Step title="Confirm the method">
+    The plan asks whether to read the main-city extent or the full administrative area including the offshore islands, whether to use the strict `minimum` composite (the default) or a compensating fuzzy gamma when a class degenerates, and which numbers the report should quote.
+  </Step>
+
+  <Step title="Approve and watch the run">
+    After approval, each step runs as a deterministic analysis. The plan graph shows the four membership rasters feeding the limiting-factor composite and the pressure quadrant.
+  </Step>
+
+  <Step title="Read the failure modes in the result">
+    Every class should be non-empty and the delivered raster should cover at least 99% of the study area. If a class collapses, the documented fix is to calibrate the membership scale or run the gamma variant — not to renumber the classes.
+  </Step>
+</Steps>
+
+## What the example run produced
+
+On the shipped Jakarta window, the measured run delivered:
+
+- **99.1%** coverage of the study area after repairing both input gaps (91.9% before the repair), with the NoData patches reduced from thousands of speckles to a small remainder;
+- four non-empty classes of roughly **11 / 23 / 25 / 41%** of the study area, where class 4 is the most constrained;
+- a dominant-constraint reading of **wetness 57%**, **rainfall 33%**, with flood depth and slope accounting for the remainder;
+- overload cells bringing together low capacity and high population, plus the per-district pressure table;
+- one report and a mounted constraint-composition chart.
+
+The population column should total the study-area population within about ±10% of the published census figure; a much larger sum points to a unit or resolution bug rather than a finding.
+
+## Read the results with care
+
+- **Rainfall is a constraint, not a resource.** The scenario treats wetter as more limiting, following the waterlogging reading used in territorial appraisal.
+- **Population is never a suitability factor.** It is exposure and pressure only.
+- **The 300 m drainage corridor is an analysis default.** It degrades cells inside the corridor and must be labelled as an assumption.
+- **Two gaps are repaired and disclosed.** Never impute zero — zero falsely asserts "no flood". The report names what was filled and how much area it affected.
+- **Land subsidence is out of scope.** The catalog ships no subsidence dataset, so the report says "subsidence not modelled" instead of substituting another raster.
+- **Rainfall resolution is coarse.** At ~5.35 km it is a background constraint; quote it as such.
+
+## Related
+
+- [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work
+- [Development Suitability Baseline](/en/concepts/scenarios/development-suitability-baseline) — the companion suitability study for Nairobi
+- [Land-use Conflict Screening](/en/concepts/scenarios/landuse-conflict-screening) — constraint logic applied to built-up land
+- [Analysis](/en/concepts/analysis) — fuzzy overlay, raster calculator and statistics tools
+- [Built-in datasets](/en/concepts/builtin-datasets) — where every layer comes from

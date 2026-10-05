@@ -1,0 +1,96 @@
+---
+title: "Urban Growth Monitor · Hanoi"
+sidebarTitle: "Urban Growth Monitor"
+description: "Reconstruct Hanoi's built-up expansion phase by phase, measure how much is infill versus outward growth, and connect growth to population and night lights."
+keywords: ["urban growth", "built-up expansion", "landscape expansion index", "LEI", "infill", "sprawl", "night lights", "Hanoi", "scenario"]
+---
+
+Urban Growth Monitor asks three questions a growth-management plan needs to answer: **how fast is the city expanding, where is it going, and is the growth compact or sprawling?** It reconstructs the expansion phase by phase, separates infill from edge and outlying growth, and overlays population and night lights to find where growth and activity disagree.
+
+![The Hanoi run as delivered: infill, edge and outlying expansion forms over the built-up raster, with population and night-light quadrants](/images/scenarios/urban-growth-monitor.jpg)
+
+## What the scenario ships
+
+Seven layers cover the Hanoi window. Only the built-up area is visible by default; the rest are context and analysis inputs.
+
+| Layer | Data | Role in the study |
+|---|---|---|
+| Road network | OSM roads (hidden) | Test whether new built-up land follows the main axes |
+| Watercourses | OSM waterways, 2,565 lines (hidden) | River corridors as a growth constraint |
+| Administrative boundaries | 50 ADM3 units (hidden) | Attribution and cross tables |
+| Built-up area | GHSL 2020 density, max 7,967 m²/cell (visible) | Growth-intensity backdrop |
+| Built-up history | WSF Evolution 1985–2015 build year, 733k valid cells (hidden) | The phase and form source |
+| Population | WorldPop 2020 (hidden) | Demand and activity axis |
+| Night lights | VIIRS, December 2017 median, 611 m (hidden) | Economic-activity proxy |
+
+## How the study works
+
+| Stage | Question | What MapX runs | Output |
+|---|---|---|---|
+| 1. Reconstruct the expansion | How much built-up land was added in each period? | Expansion metrics (`periodBreaks` 1990 / 2000 / 2010 / 2015), Raster class area, Land change matrix | Phase table with new area, annual growth, intensity and compactness; built-year cross table |
+| 2. Measure the form | Is new growth infill, edge expansion or outlying? | Landscape expansion index on two built-up masks, Raster to polygons, Mean centre, Standard deviational ellipse, Directional distribution, Buffer and zonal summary | Infill / edge / outlying layer, centre shift and ellipse, share of new built-up near roads and waterways |
+| 3. Connect to activity | Where do population and night lights diverge? | Grid at 1 km, Zonal statistics, Quadrant (median split) | Population × night-light quadrants and the growth-management targets |
+
+**Form is measured with the landscape expansion index (LEI), not density.** Density cannot tell a dense low-rise extension from a dense infill block; the LEI separates them by how much of a new patch touches the earlier built-up area. The scenario uses the ≤1990 and ≤2015 masks (one-cell neighbourhood, 50% threshold, four-cell minimum patch) and reports the shares with those parameters attached.
+
+**The centre and the ellipse describe direction.** The gravity centre and its standard deviational ellipse are computed per phase, so the report can say how far and in which direction the city's mass moved, and whether it stretched along one axis.
+
+**Population and night lights are read together.** Cells with high population but low night light are the classic mismatch — a growth-management priority rather than a success story.
+
+## Platform capabilities
+
+- **[Analysis tools](/en/concepts/analysis)** include expansion metrics and the landscape expansion index, which are built for this kind of multi-epoch reading.
+- **[3D view](/en/concepts/3d-view)** is optional: the built-up density raster can be extruded for a quick sense of the vertical story.
+- **[Charts](/en/concepts/charts)** combine a dual-axis bar-and-line chart, a donut for the form shares and a bar for the quadrant distribution.
+- **[Reports](/en/concepts/reports)** carry the phase table, the form and centre numbers, and the year-mismatch caveat.
+
+## Run it
+
+<Steps>
+  <Step title="Open the scenario">
+    Open **Urban Growth Monitor** from the catalog. Seven layers import and the camera flies to Hanoi (105.83, 21.03) on a dark basemap.
+  </Step>
+
+  <Step title="Send the suggested question">
+    *"Run an urban-growth monitoring study for Hanoi: reconstruct the staged expansion of built-up land, analyse its speed, direction and intensity, flag the main growth-management issues with boundary guidance; deliver layers, charts and a report."*
+  </Step>
+
+  <Step title="Confirm the reading">
+    The plan asks for the study area and admin level, whether the expansion reading covers the whole city or a ring around the centre, the two mask years (defaults ≤1990 and ≤2015), and the numbers to quote in the report.
+  </Step>
+
+  <Step title="Approve and read the phase table">
+    After approval, the run publishes the phase metrics first, then the LEI form layer and the population/night-light quadrants. Quote the infill share with its neighbourhood and mask parameters.
+  </Step>
+
+  <Step title="Use the findings">
+    The quadrant layer names the cells to steer; the form layer shows whether policy should focus on infill capacity or on servicing outward growth.
+  </Step>
+</Steps>
+
+## What the example run produced
+
+On the shipped Hanoi window (1985–2015), the measured run delivered:
+
+- four phases of **193.0 / 147.8 / 252.4 / 66.8 km²** of new built-up land, summing to the 660.0 km² in the raster;
+- **+467.0 km²** of new built-up land between 1991 and 2015, against a 469.1 km² LEI total — a 0.4% difference between the two area conventions that the report states;
+- expansion forms of **2.1% infill, 27.4% edge expansion and 70.5% outlying**, i.e. a city growing mostly outward in the measured period;
+- a gravity centre that moved from (105.8186, 21.0301) to (105.8114, 21.0133) — about **2.0 km south-southwest** — while the 1σ major axis grew from 9.58 km to 11.06 km;
+- population/night-light quadrants of **1,311 / 657 / 657 / 1,310** cells out of 3,935 (medians: 932.6 residents, 1.96 night-light units);
+- 2,181 new built-up patches with a mean size of 239 cells (21.5 ha), plus three charts and a report.
+
+## Read the results with care
+
+- **The sources have different reference years.** Build year is ≤2015, built-up density and population are 2020, night lights are December 2017. Any cross-source regression is a trend indication only.
+- **Only one land-cover vintage is shipped.** Do not claim which land-use category was converted into built-up land.
+- **Compactness is a per-pixel shape metric.** A raster mask's staircase edge dominates its perimeter; compare it only within the same raster and resolution, never across cities.
+- **LEI depends on its parameters.** Quote the neighbourhood size, threshold and mask years with the infill/edge/outlying shares. Cells on the raster edge are counted as non-built, so the boundary band skews towards edge and outlying.
+- **"New patches" are clusters of a class mask.** The 2,181 whole-new-built patches (mean 21.5 ha) are the number to quote for patch structure.
+
+## Related
+
+- [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work
+- [Development Suitability Baseline](/en/concepts/scenarios/development-suitability-baseline) — where growth can be steered
+- [Public Facility Siting](/en/concepts/scenarios/public-facility-siting) — siting the services that follow growth
+- [Charts](/en/concepts/charts) — dual-axis, donut and ranking views
+- [Reports](/en/concepts/reports) — packaging the growth-management reading

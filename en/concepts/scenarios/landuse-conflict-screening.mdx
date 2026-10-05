@@ -1,0 +1,97 @@
+---
+title: "Land-use Conflict Screening · Kigali"
+sidebarTitle: "Land-use Conflict Screening"
+description: "Find where Kigali's development presses on ecological space, steep slopes and riverbanks, grade the conflicts, and turn them into remediation priorities."
+keywords: ["land-use conflict", "ecological constraint", "steep slope", "waterway setback", "protected area", "Kigali", "scenario"]
+---
+
+Land-use Conflict Screening checks whether a hilly city's built-up land collides with the constraints it should respect: **ecological space, steep slopes, riverbanks and protected areas**. It reports each conflict family on its own and then a de-duplicated union, so one patch cannot be counted twice, and it ends with remediation priorities instead of a single "risk score".
+
+![The Kigali run as delivered: ecological space with the three conflict families and the worst-patch board](/images/scenarios/landuse-conflict-screening.jpg)
+
+## What the scenario ships
+
+Eight layers cover the Kigali window. Only land cover is visible by default; the other layers are analysis inputs and cross-checks.
+
+| Layer | Data | Role in the study |
+|---|---|---|
+| Watercourses | OSM waterways, 416 lines (hidden) | 30 m setback corridor |
+| Administrative boundaries | 8 ADM3 units (hidden) | Study area, attribution and labels |
+| Protected area constraints | Overture, 14 features in Rwanda; 1 inside the city (hidden) | Background and cross-check for ecological space |
+| Building footprints | Overture, 644,665 polygons (hidden) | Context layer; not used as the development surface (see below) |
+| Land cover | ESA WorldCover 2021, 10 m, 11 classes (visible) | Ecological classes and the built-up surface |
+| Terrain | SRTM 30 m, clipped to the city (hidden) | Slope classes |
+| Surface water | JRC Global Surface Water, 0–99% frequency (hidden) | Water presence cross-check |
+| Population | GHSL, 100 m (hidden) | Exposed population per assessment cell |
+
+## How the study works
+
+| Stage | Question | What MapX runs | Output |
+|---|---|---|---|
+| 1. Identify the conflicts | Where does built-up land meet each constraint? | Raster calculator, Raster to polygons, Overlay clip, Euclidean distance (100 m / 30 m), Buffer, Slope, Reclassify | Ecological-space mask, steep-slope classes and the four conflict families |
+| 2. Grade and prioritise | Which conflicts matter most, and where do they cluster? | Append features, Zonal summary on a 500 m grid, Top N patch ranking, Label anchors | Conflict area per cell, exposed population, worst-patch board |
+| 3. Remediate | What should be done per type and severity? | Select features, Zonal statistics, Charts, Report | Remediation table, charts and a compliance report |
+
+**Ecological space is a composite, because the protected layer is nearly empty here.** Inside the city, the protected-area layer contains a single unnamed feature of about 0.09 km². The working definition is therefore the trees, shrub, water and wetland land-cover classes (WorldCover 10 / 20 / 80 / 90), with protected areas kept as a background cross-check and the 30 m waterway corridor as a separate constraint.
+
+**Development is read from the built-up land-cover class, not from building footprints.** The shipped footprint layer has 644,665 polygons; clipping, intersecting and aggregating it were all measured over the platform's step budget on this data. The runnable surface is the built-up class of the same 10 m land-cover raster, and the report states the substitution and the measured reason.
+
+**Conflict families are reported per type plus a union.** A patch can sit on a steep slope *and* inside the waterway setback. The scenario reports each family's area, then the de-duplicated union — never a naive sum presented as "total conflicts".
+
+## Platform capabilities
+
+- **[Analysis tools](/en/concepts/analysis)** combine raster algebra, distance thresholds, buffers, overlays and zonal aggregation in one chain.
+- **[Plan mode](/en/concepts/plan-mode)** records the ecological-space definition, the development surface and the union rule as explicit assumptions.
+- **[Layer styling](/en/concepts/layers)** gives each constraint family its own hue so four translucent layers stay readable together.
+- **[Reports](/en/concepts/reports)** carry the definitions, the per-type and union areas, and the remediation table.
+
+## Run it
+
+<Steps>
+  <Step title="Open the scenario">
+    Open **Land-use Conflict Screening** from the catalog. Eight layers import and the camera flies to Kigali (30.06, -1.94).
+  </Step>
+
+  <Step title="Send the suggested question">
+    *"Screen land-use conflicts for Kigali: find development encroaching on ecological space, steep slopes or riverbanks, grade conflicts by severity, locate hotspots and recommend fixes; deliver layers, charts and a report."*
+  </Step>
+
+  <Step title="Confirm the definitions">
+    The plan asks which constraint types count as conflicts (all four by default), whether the development surface may be the built-up land-cover class (the runnable default), and how the families should be combined — per type plus a union.
+  </Step>
+
+  <Step title="Approve and read the per-type numbers">
+    After approval, the run vectorises the ecological patches, builds each conflict mask, and aggregates them onto the 500 m grid with population.
+  </Step>
+
+  <Step title="Treat an empty family as a finding">
+    A constraint family with zero features is a legitimate result. Report "0 patches" and what it means; do not tune parameters to force a non-empty layer.
+  </Step>
+</Steps>
+
+## What the example run produced
+
+On the shipped Kigali window, the measured run delivered:
+
+- an ecological-space layer of **1,387 patches / 270.1 km²** (patches of at least 1 ha), with the city mask applied to the vectorised patches rather than to the raster;
+- a terrain layer clipped from the country-wide DEM to **435 × 436** cells before slope analysis;
+- the four conflict families as separate layers — development on ≥25° slopes (8 cells / 0.046 km² in the measured run), inside the 30 m waterway setback, within 100 m of ecological space, and inside protected areas (no built-up land inside the in-city protected feature);
+- a 500 m grid with conflict area and exposed population, plus a worst-patch board;
+- a report with the per-type and union areas and the remediation guidance.
+
+## Read the results with care
+
+- **The in-city protected layer is nearly empty.** It cannot carry the ecological definition alone; the composite and the cross-check are both reported.
+- **No building height, no volume.** The footprint layer carries a height value on almost none of its features, and on this data it falls outside the step budget — the report says development is read from land cover.
+- **No slope-stability data.** Do not output a landslide risk class; the scenario gives "steep slope + setback + foundation treatment" guidance instead.
+- **Report areas per type plus a union.** One developed patch can hit several constraints; a sum would double-count it.
+- **The 100 m encroachment band is an analysis default.** It expresses "development pressing on ecological space" because one reference year cannot contain a cell that is both built-up and ecological.
+- **Surface-water frequency is classed before use.** Raw 0–99% frequency is not a binary constraint.
+
+## Related
+
+- [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work
+- [Development Suitability Baseline](/en/concepts/scenarios/development-suitability-baseline) — the same constraints used to screen buildable land
+- [Carrying Capacity Assessment](/en/concepts/scenarios/carrying-capacity-assessment) — constraint logic for water and climate
+- [Analysis](/en/concepts/analysis) — raster algebra, distance and overlay tools
+- [Built-in datasets](/en/concepts/builtin-datasets) — where every layer comes from
