@@ -468,7 +468,7 @@ const FOREWORD = {
 
 ## 本手册收录什么
 
-本手册收录 MapX 内置的六个城乡规划场景。每个场景一章，结构一致：它回答的规划问题、自带的数据、研究怎么做、用到的平台能力、运行场景的步骤、一次示例运行的产出，以及读结果时必须交代的边界。
+本手册收录 MapX 内置的六个城乡规划场景。每个场景一章，结构一致：它回答的规划问题、自带的数据、研究怎么做、用到的平台能力、运行场景的步骤、一次示例运行的产出。
 
 | 场景 | 研究区 | 图层 | 回答什么 |
 |---|---|---|---|
@@ -499,7 +499,7 @@ A scenario bundles everything a piece of spatial analysis needs before you type 
 
 ## What this handbook covers
 
-This handbook collects the six built-in urban and rural planning scenarios in MapX. Each scenario has one chapter, and every chapter follows the same structure: the planning question, the data it ships, how the study works, the platform capabilities it uses, how to run it, what one example run produced, and the limits to state when you read the results.
+This handbook collects the six built-in urban and rural planning scenarios in MapX. Each scenario has one chapter, and every chapter follows the same structure: the planning question, the data it ships, how the study works, the platform capabilities it uses, how to run it, and what one example run produced.
 
 | Scenario | Study area | Layers | What it answers |
 |---|---|---|---|
@@ -857,8 +857,8 @@ function renderColophon(lang) {
     .join("");
   const lead =
     lang === "zh"
-      ? "这本手册把 MapX 内置的六个城乡规划场景整理成可独立阅读的章节：每章给出研究设计、数据构成、方法与平台能力、运行步骤，以及一次示例运行的产出与边界。"
-      : "This handbook turns the six built-in urban and rural planning scenarios in MapX into self-contained chapters: study design, data, methods and platform capabilities, how to run the scenario, and what one example run produced — with the limits stated.";
+      ? "这本手册把 MapX 内置的六个城乡规划场景整理成可独立阅读的章节：每章给出研究设计、数据构成、方法与平台能力、运行步骤，以及一次示例运行的产出。"
+      : "This handbook turns the six built-in urban and rural planning scenarios in MapX into self-contained chapters: study design, data, methods and platform capabilities, how to run the scenario, and what one example run produced.";
   const licence =
     lang === "zh"
       ? "本书内容与截图来自 MapX 文档站与产品内置场景；地图图层版权与署名见各场景入口数据集。示例数字仅用于说明交付物形态。"

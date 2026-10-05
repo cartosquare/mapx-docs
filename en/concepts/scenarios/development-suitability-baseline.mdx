@@ -89,14 +89,6 @@ A finished run hands back a named, reusable set of deliverables instead of a sin
 
 The layer names follow the run language, but the deliverable set is stable enough to plan a handover around.
 
-## Read the results with care
-
-- **Flood is an avoidance constraint here.** The shipped 1 km flood raster has only a few valid cells in this window; treat it as a "keep clear of the floodplain" line. A graded flood factor needs a different dataset.
-- **Capacity is an estimate at 100 m² per person.** Report it as a planning assumption, never as measured capacity.
-- **Population never enters the suitability score.** It is a present-day reference for comparing what exists with what the land could hold.
-- **The ecological mask is a product of its inputs.** It uses protected areas plus three land-cover classes and a 50 m buffer; grass and shrub are deliberately excluded, and local statutory boundaries should replace the country-wide preview when you have them.
-- **Equal weights are the default composite.** If you want AHP or expert weights, run the weighted overlay as a documented sensitivity variant and compare the class tables.
-
 ## Related
 
 - [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work

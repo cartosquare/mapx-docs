@@ -86,15 +86,6 @@ A finished run hands back a named, reusable set of deliverables instead of a sin
 
 The layer names follow the run language, but the deliverable set is stable enough to plan a handover around.
 
-## Read the results with care
-
-- **Capacity is not modelled.** The clinic layer has no bed or staff counts and the school layer has a capacity value on only 15 of 2,223 features, so the run is plain maximum coverage; the report writes "capacity not modelled".
-- **Coverage is binary.** "Within 800 m of a school" is not "able to enrol". Run the 2SFCA crowding branch if you need a supply-per-resident reading.
-- **Construction intensity is footprint share only.** Only 34 of 481,681 building footprints carry a height value, so never infer floors or population capacity from the building layer.
-- **A recommended site is a candidate-cell optimum.** Land ownership, zoning and site access still need a field check.
-- **Fairness is not optimised.** MCLP maximises the total; the ward balance table exists so wards that received nothing are named rather than hidden.
-- **The ward layer is the 2018 administrative vintage.** Dar es Salaam is still the three-council structure in this release; do not describe it as the current five-municipality structure.
-
 ## Related
 
 - [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work

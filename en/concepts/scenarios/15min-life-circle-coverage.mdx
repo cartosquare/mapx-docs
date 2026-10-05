@@ -88,15 +88,6 @@ A finished run hands back a named, reusable set of deliverables instead of a sin
 
 The layer names follow the run language, but the deliverable set is stable enough to plan a handover around.
 
-## Read the results with care
-
-- **Coverage is a network distance.** When the mapped street network is incomplete, the gap is overestimated; the report says so.
-- **A park is represented by its centroid.** The 800 m distance is measured to the park's centre, an accepted approximation when gate data is unavailable.
-- **Blank means inside the circle.** In the shortfall layers, unshaded neighbourhoods are covered — they are not missing data.
-- **`cov_count` counts intersection, not full coverage.** A neighbourhood that a circle only clips counts as covered; quote the covered area when a borderline case matters.
-- **Capacity is not modelled.** The 2SFCA score uses a default capacity of 1, so it ranks within a class only; cross-class comparison uses the shortfall population.
-- **The answer is neighbourhood-level.** "Where inside one kelurahan should we build?" is the [Public Facility Siting](/en/concepts/scenarios/public-facility-siting) scenario.
-
 ## Related
 
 - [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work

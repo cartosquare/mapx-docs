@@ -86,14 +86,6 @@ A finished run hands back a named, reusable set of deliverables instead of a sin
 
 The layer names follow the run language, but the deliverable set is stable enough to plan a handover around.
 
-## Read the results with care
-
-- **The sources have different reference years.** Build year is ≤2015, built-up density and population are 2020, night lights are December 2017. Any cross-source regression is a trend indication only.
-- **Only one land-cover vintage is shipped.** Do not claim which land-use category was converted into built-up land.
-- **Compactness is a per-pixel shape metric.** A raster mask's staircase edge dominates its perimeter; compare it only within the same raster and resolution, never across cities.
-- **LEI depends on its parameters.** Quote the neighbourhood size, threshold and mask years with the infill/edge/outlying shares. Cells on the raster edge are counted as non-built, so the boundary band skews towards edge and outlying.
-- **"New patches" are clusters of a class mask.** For patch structure, quote the whole-new-built patch count from your run (2,181 patches, mean 21.5 ha, in the example run).
-
 ## Related
 
 - [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work
