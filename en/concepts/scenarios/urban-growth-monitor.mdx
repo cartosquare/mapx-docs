@@ -37,49 +37,54 @@ Seven layers cover the Hanoi window. Only the built-up area is visible by defaul
 
 **Population and night lights are read together.** Cells with high population but low night light are the classic mismatch — a growth-management priority rather than a success story.
 
-## Platform capabilities
-
-- **[Analysis tools](/en/concepts/analysis)** include expansion metrics and the landscape expansion index, which are built for this kind of multi-epoch reading.
-- **[3D view](/en/concepts/3d-view)** is optional: the built-up density raster can be extruded for a quick sense of the vertical story.
-- **[Charts](/en/concepts/charts)** combine a dual-axis bar-and-line chart, a donut for the form shares and a bar for the quadrant distribution.
-- **[Reports](/en/concepts/reports)** carry the phase table, the form and centre numbers, and the year-mismatch caveat.
-
 ## Run it
 
-<Steps>
-  <Step title="Open the scenario">
-    Open **Urban Growth Monitor** from the catalog. Seven layers import and the camera flies to Hanoi (105.83, 21.03) on a dark basemap.
-  </Step>
+The screenshots below come from this scenario's reference workspace. Each step names the platform surface it uses, so you can follow the same path in your own project.
 
-  <Step title="Send the suggested question">
-    *"Run an urban-growth monitoring study for Hanoi: reconstruct the staged expansion of built-up land, analyse its speed, direction and intensity, flag the main growth-management issues with boundary guidance; deliver layers, charts and a report."*
-  </Step>
+### 1. Open the scenario
 
-  <Step title="Confirm the reading">
-    The plan asks for the study area and admin level, whether the expansion reading covers the whole city or a ring around the centre, the two mask years (defaults ≤1990 and ≤2015), and the numbers to quote in the report.
-  </Step>
+Open **Scenarios** in the top menu, select this card and choose **Open scenario**. The whole bundle imports at once: every layer keeps its default style, legend, source and attribution, and the camera flies to the study area. Use the **Layers** panel to switch layers on and off before you type anything.
 
-  <Step title="Approve and read the phase table">
-    After approval, the run publishes the phase metrics first, then the LEI form layer and the population/night-light quadrants. Quote the infill share with its neighbourhood and mask parameters.
-  </Step>
+![The Hanoi growth scenario opened in the workspace, with the imported layers, the dark basemap and the chat panel](/images/scenarios/steps/urban-growth-monitor/chat.jpg)
 
-  <Step title="Use the findings">
-    The quadrant layer names the cells to steer; the form layer shows whether policy should focus on infill capacity or on servicing outward growth.
-  </Step>
-</Steps>
+### 2. Ask the suggested question and review the plan
+
+The suggested question is: *"Run an urban-growth monitoring study for Hanoi: reconstruct the staged expansion of built-up land, analyse its speed, direction and intensity, flag the main growth-management issues with boundary guidance; deliver layers, charts and a report."* [Plan mode](/en/concepts/plan-mode) confirms the study area, the two mask years used for the form measurement and the report numbers before anything runs.
+
+![The plan workbench for Hanoi: the approved plan and the recorded method decisions](/images/scenarios/steps/urban-growth-monitor/plan.jpg)
+
+### 3. Approve the plan and run the analysis
+
+The run chains deterministic [analysis](/en/concepts/analysis) tools: the phased expansion metrics, the landscape expansion index between the two built-up masks, polygon conversion for the form layer, the gravity centre and standard deviational ellipse, and the 1 km grid with population and night-light quadrants.
+
+![The analysis graph for this scenario: each node is a deterministic operator, with inputs, parameters and artifacts available on click](/images/scenarios/steps/urban-growth-monitor/workflow.jpg)
+
+### 4. Style the result on the map
+
+The expansion-form layer keeps three human-readable classes on the dark basemap, with the quadrant grid and district labels as light references; the layer style editor is where the hue family and label halo are set.
+
+![The layer style editor open on a scenario deliverable: renderer, colours, outline, label field and legend controls](/images/scenarios/steps/urban-growth-monitor/style.jpg)
+
+### 5. Turn the result into charts and a report
+
+The run produces a dual-axis growth chart, a form-composition donut and a quadrant distribution. All are **[charts](/en/concepts/charts)** you can restyle or pin, and the **[report](/en/concepts/reports)** records the phase table, the form shares and the year-mismatch caveats.
+
+![A chart from this scenario opened in the chart editor, with its type, colours and data settings](/images/scenarios/steps/urban-growth-monitor/chart.jpg)
+
+![The scenario report opened in the report canvas, with an executive summary, figures and embedded maps](/images/scenarios/steps/urban-growth-monitor/report.jpg)
 
 ## Example output
 
-<Note>The values below come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return — your window, parameters and data updates will change them.</Note>
+<Note>The screenshots above come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return.</Note>
 
-In one example run on the shipped Hanoi data, the deliverables were:
+A finished run hands back a named, reusable set of deliverables instead of a single map:
 
-- four phases of **193.0 / 147.8 / 252.4 / 66.8 km²** of new built-up land, summing to the 660.0 km² in the raster;
-- **+467.0 km²** of new built-up land between 1991 and 2015, against a 469.1 km² LEI total — a 0.4% difference between the two area conventions that the report states;
-- expansion forms of **2.1% infill, 27.4% edge expansion and 70.5% outlying** — in that example, most new built-up land was outlying;
-- a gravity centre that moved from (105.8186, 21.0301) to (105.8114, 21.0133) — about **2.0 km south-southwest** — while the 1σ major axis grew from 9.58 km to 11.06 km;
-- population/night-light quadrants of **1,311 / 657 / 657 / 1,310** cells out of 3,935 (medians: 932.6 residents, 1.96 night-light units);
-- 2,181 new built-up patches with a mean size of 239 cells (21.5 ha), plus three charts and a report.
+- **Layers** — the expansion-form layer (infill, edge, outlying), the population and night-light quadrant grid, the phase rasters as context and a labelled district reference.
+- **Tables** — the phase metrics (new area, annual growth, intensity, compactness, centre and ellipse) and the built-year cross table.
+- **Charts** — the phase growth chart, the expansion-form donut and the quadrant distribution.
+- **Report** — the growth-monitoring document with the phase definitions and the reference-year caveats.
+
+The layer names follow the run language, but the deliverable set is stable enough to plan a handover around.
 
 ## Read the results with care
 

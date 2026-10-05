@@ -40,50 +40,54 @@ The design follows the "shortest stave" reading of carrying capacity: the most l
 
 **Population is the pressure axis.** It enters the overload quadrant and the capacity estimate, never the suitability composite — a crowded district is not thereby an unsuitable one.
 
-## Platform capabilities
-
-- **[Plan mode](/en/concepts/plan-mode)** fixes the study reading (mainland versus full administrative extent) and the composite rule before the run.
-- **[Analysis tools](/en/concepts/analysis)** cover fuzzy membership functions, raster algebra, focal-statistics repair, terrain and wetness indices, grids and zonal statistics in one chain.
-- **[Charts](/en/concepts/charts)** mount the "which constraint decides the class" donut on the map canvas.
-- **[Reports](/en/concepts/reports)** carry the threshold table, the coverage and repair table, the class shares and the district pressure list.
-
 ## Run it
 
-<Steps>
-  <Step title="Open the scenario">
-    Choose **Carrying Capacity Assessment** in the scenario catalog. Six layers import and the camera flies to Jakarta (106.85, -6.21).
-  </Step>
+The screenshots below come from this scenario's reference workspace. Each step names the platform surface it uses, so you can follow the same path in your own project.
 
-  <Step title="Send the suggested question">
-    *"Run a resource-and-environment carrying-capacity study for Jakarta: assess how water, climate and flood constraints limit growth, flag overloaded areas, then recommend measures by dominant constraint; deliver layers, charts and a report."*
-  </Step>
+### 1. Open the scenario
 
-  <Step title="Confirm the method">
-    The plan asks whether to read the main-city extent or the full administrative area including the offshore islands, whether to use the strict `minimum` composite (the default) or a compensating fuzzy gamma when a class degenerates, and which numbers the report should quote.
-  </Step>
+Open **Scenarios** in the top menu, select this card and choose **Open scenario**. The whole bundle imports at once: every layer keeps its default style, legend, source and attribution, and the camera flies to the study area. Use the **Layers** panel to switch layers on and off before you type anything.
 
-  <Step title="Approve and watch the run">
-    After approval, each step runs as a deterministic analysis. The plan graph shows the four membership rasters feeding the limiting-factor composite and the pressure quadrant.
-  </Step>
+![The Jakarta carrying-capacity scenario opened in the workspace, with the imported layers, the map and the chat panel](/images/scenarios/steps/carrying-capacity-assessment/chat.jpg)
 
-  <Step title="Read the failure modes in the result">
-    Check that every class is non-empty and that the delivered raster covers at least 99% of the study area — that is the method's acceptance floor, not a promise about your numbers. If a class collapses, the documented fix is to calibrate the membership scale or run the gamma variant — not to renumber the classes.
-  </Step>
-</Steps>
+### 2. Ask the suggested question and review the plan
+
+The suggested question is: *"Run a resource-and-environment carrying-capacity study for Jakarta: assess how water, climate and flood constraints limit growth, flag overloaded areas, then recommend measures by dominant constraint; deliver layers, charts and a report."* [Plan mode](/en/concepts/plan-mode) asks how to read the study extent, whether to use the strict limiting-factor rule or the compensating variant, and which numbers the report should quote — then writes the plan document with its data inputs, method, quality checks, risks and deliverables.
+
+![The plan workbench for Jakarta: the approved plan, the recorded method decisions and the evidence markers](/images/scenarios/steps/carrying-capacity-assessment/plan.jpg)
+
+### 3. Approve the plan and run the analysis
+
+The run chains deterministic [analysis](/en/concepts/analysis) tools: slope and topographic wetness, fuzzy membership for each limiting factor, focal-statistics repair for the two disclosed input gaps, the limiting-factor composite (shortest stave), the 300 m drainage corridor, the 1 km grid, zonal statistics and the pressure quadrant.
+
+![The analysis graph for this scenario: each node is a deterministic operator, with inputs, parameters and artifacts available on click](/images/scenarios/steps/carrying-capacity-assessment/workflow.jpg)
+
+### 4. Style the result on the map
+
+The carrying classes use a reversed blue ramp so the most constrained land is the darkest; the overload cells sit on top in orange, and district labels come from an anchor layer instead of the boundary polygons.
+
+![The layer style editor open on a scenario deliverable: renderer, colours, outline, label field and legend controls](/images/scenarios/steps/carrying-capacity-assessment/style.jpg)
+
+### 5. Turn the result into charts and a report
+
+The constraint-composition chart answers which factor decides each class, and the district charts rank the pressure. Both are **[charts](/en/concepts/charts)** you can restyle or pin, and the **[report](/en/concepts/reports)** collects the threshold table, the coverage statement and the class shares in one document.
+
+![A chart from this scenario opened in the chart editor, with its type, colours and data settings](/images/scenarios/steps/carrying-capacity-assessment/chart.jpg)
+
+![The scenario report opened in the report canvas, with an executive summary, figures and embedded maps](/images/scenarios/steps/carrying-capacity-assessment/report.jpg)
 
 ## Example output
 
-<Note>The values below come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return — your window, parameters and data updates will change them.</Note>
+<Note>The screenshots above come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return.</Note>
 
-In one example run on the shipped Jakarta data, the deliverables were:
+A finished run hands back a named, reusable set of deliverables instead of a single map:
 
-- **99.1%** coverage of the study area after repairing both input gaps (91.9% before the repair), with the NoData patches reduced from thousands of speckles to a small remainder;
-- four non-empty classes of roughly **11 / 23 / 25 / 41%** of the study area, where class 4 is the most constrained;
-- a dominant-constraint reading of **wetness 57%**, **rainfall 33%**, with flood depth and slope accounting for the remainder;
-- overload cells bringing together low capacity and high population, plus the per-district pressure table;
-- one report and a mounted constraint-composition chart.
+- **Layers** — the four-class carrying-capacity raster with the drainage-corridor adjustment, the overload cells, the 1 km population grid and the district label layer.
+- **Tables** — the class-area table with its admin cross table, the dominant-constraint table and the district pressure list.
+- **Charts** — the constraint-composition chart and the pressure ranking, editable and ready to pin.
+- **Report** — the assessment document with the threshold table, the data-repair statement and the five acceptance checks.
 
-The population column should total the study-area population within about ±10% of the published census figure; a much larger sum points to a unit or resolution bug rather than a finding.
+The layer names follow the run language, but the deliverable set is stable enough to plan a handover around.
 
 ## Read the results with care
 

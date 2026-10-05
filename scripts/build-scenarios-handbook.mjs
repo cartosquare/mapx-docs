@@ -806,7 +806,14 @@ ol.steps li:not(:last-child)::before {
 figure.hero { margin: 0 0 6mm; break-inside: avoid; }
 figure.hero img { width: 100%; border-radius: 1.6mm; display: block; }
 figure.hero figcaption { font-size: 8pt; color: #64748b; margin-top: 1.6mm; }
-figure.inline-figure { break-inside: avoid; }
+figure.inline-figure { margin: 2mm 0 5mm; break-inside: avoid; }
+figure.inline-figure img {
+  width: 100%; display: block; border-radius: 1.6mm;
+  border: 0.25mm solid #e2e8f0;
+}
+figure.inline-figure figcaption {
+  font-size: 8pt; color: #64748b; margin-top: 1.6mm; line-height: 1.5;
+}
 .glance { border: 0.3mm solid #e2e8f0; border-radius: 1.6mm; overflow: hidden; break-inside: avoid; }
 .glance-title {
   background: #f8fafc; padding: 2.4mm 4mm; font-size: 8.5pt; font-weight: 700;
@@ -889,8 +896,13 @@ async function renderChapter(scenario, lang) {
     "utf8",
   );
   const blocks = parseBlocks(stripFrontmatter(source));
+  for (const block of blocks) {
+    if (block.type === "image") {
+      block.src = await imageDataUri(block.src.replace(/^\//, ""));
+    }
+  }
   const imageBlock = blocks.find((block) => block.type === "image");
-  const hero = imageBlock ? await imageDataUri(imageBlock.src.replace(/^\//, "")) : "";
+  const hero = imageBlock ? imageBlock.src : "";
   const rendered = renderBlocksWithExample(blocks.filter((b) => b !== imageBlock), ui);
 
   return `

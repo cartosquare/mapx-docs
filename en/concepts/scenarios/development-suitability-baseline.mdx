@@ -40,47 +40,54 @@ The method is a chain of three planning questions. Each one maps onto determinis
 
 **The capacity estimate is a planning convention.** Carrying capacity is derived at 100 m² of urban construction land per person. The report states the assumption; it is an estimate, not a measured capacity.
 
-## Platform capabilities
-
-- **[Plan mode](/en/concepts/plan-mode)** turns the request into a reviewable plan: the AI asks about the study area, which constraints are hard, and the report audience before anything runs.
-- **[Analysis tools](/en/concepts/analysis)** do the computation: slope and reclassification, raster calculator masks, buffering, weighted overlay, 1 km grids, zonal statistics and polygon conversion.
-- **[Layer styling](/en/concepts/layers)** gives the control tiers human category labels; the constraint layers stay translucent so the tiers remain readable.
-- **[Charts](/en/concepts/charts)** and a Word **[report](/en/concepts/reports)** package the class areas, the constraint breakdown and the capacity ranking for delivery.
-
 ## Run it
 
-<Steps>
-  <Step title="Open the scenario">
-    Go to **Scenarios** in the top menu, select **Development Suitability Baseline** and choose **Open scenario**. Eight layers land in the project and the camera flies to Nairobi (36.82, -1.29).
-  </Step>
+The screenshots below come from this scenario's reference workspace. Each step names the platform surface it uses, so you can follow the same path in your own project.
 
-  <Step title="Send the suggested question">
-    The scenario ships one starter prompt: *"Run a development-suitability study for Nairobi: screen the ecological, terrain and flood constraints, grade buildable land and carrying capacity, then propose a development boundary with tiered controls; deliver layers, charts and a report."* Edit it if your study area or constraints differ.
-  </Step>
+### 1. Open the scenario
 
-  <Step title="Answer the plan clarifications">
-    Plan mode asks three things: the study area and admin unit, which constraints count as hard for this city, whether the ecological mask is a hard exclusion (the default) or a graded factor, and the report language. Everything else — grid size, slope thresholds, class breaks — is stated as an assumption.
-  </Step>
+Open **Scenarios** in the top menu, select this card and choose **Open scenario**. The whole bundle imports at once: every layer keeps its default style, legend, source and attribution, and the camera flies to the study area. Use the **Layers** panel to switch layers on and off before you type anything.
 
-  <Step title="Review and approve the plan">
-    Read the plan document, adjust any step, then approve it. Each step runs as a deterministic tool with its own status, time and result; the run graph shows how the layers feed each other.
-  </Step>
+![The Nairobi scenario opened in the workspace: the imported layers, the map and the chat panel ready for the suggested question](/images/scenarios/steps/development-suitability-baseline/chat.jpg)
 
-  <Step title="Refine and deliver">
-    Turn on the population layer to compare present-day population with the estimated capacity, restyle the tiers, then export the report or share the map.
-  </Step>
-</Steps>
+### 2. Ask the suggested question and review the plan
+
+The scenario ships one suggested question: *"Run a development-suitability study for Nairobi: screen the ecological, terrain and flood constraints, grade buildable land and carrying capacity, then propose a development boundary with tiered controls; deliver layers, charts and a report."* [Plan mode](/en/concepts/plan-mode) turns it into a reviewable plan: the AI asks which admin units and constraints to use and whether the ecological mask is a hard exclusion, then writes the plan document — objective and scope, data inputs, method and pipeline, quality checks, risks, deliverables and execution. Every section is marked as **system evidence** or **evidence + judgement**, and the assumptions are listed before anything runs.
+
+![The plan workbench for Nairobi: the approved plan document, its seven sections and the recorded clarifications and decisions](/images/scenarios/steps/development-suitability-baseline/plan.jpg)
+
+### 3. Approve the plan and run the analysis
+
+Approving the plan starts a chain of deterministic [analysis](/en/concepts/analysis) tools: slope and reclassification, raster calculator masks for the ecological protection area, buffering along waterways, overlay erase for the hard exclusions, the 1 km evaluation grid and zonal statistics. The **Analysis** ledger keeps the operator, inputs, parameters, status and result layer of every run, so each number in the report can be traced back to a step.
+
+![The analysis ledger for Nairobi: every operator run with its input, parameters, elapsed time and result layer](/images/scenarios/steps/development-suitability-baseline/analysis.jpg)
+
+### 4. Style the result on the map
+
+The layers arrive styled, and the **layer style editor** lets you change the renderer, colours, opacity, outline, labels and legend without writing code. Here the development control tiers keep human-readable class names, labels come from an anchor layer, and the constraint layers stay translucent so the tiers remain the strongest signal.
+
+![The layer style editor open on a scenario deliverable: renderer, colours, outline, label field and legend controls](/images/scenarios/steps/development-suitability-baseline/style.jpg)
+
+### 5. Turn the result into charts and a report
+
+Any result can become a **[chart](/en/concepts/charts)** — donut, pie, bar, heatmap, combo and more — with palettes, axis options and the choice to pin it to the map. The **[report](/en/concepts/reports)** canvas then combines the map, the charts and the tables into one document you can preview, revise and export; the same run can also produce a Word report for a formal submission.
+
+![A chart from this scenario opened in the chart editor, with its type, colours and data settings](/images/scenarios/steps/development-suitability-baseline/chart.jpg)
+
+![The scenario report opened in the report canvas, with an executive summary, figures and embedded maps](/images/scenarios/steps/development-suitability-baseline/report.jpg)
 
 ## Example output
 
-<Note>The values below come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return — your window, parameters and data updates will change them.</Note>
+<Note>The screenshots above come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return.</Note>
 
-In one example run on the shipped Nairobi data, the deliverables were a map with three development control tiers, the ecological protection polygons, protected areas and the riparian buffer, plus:
+A finished run hands back a named, reusable set of deliverables instead of a single map:
 
-- four suitability classes of **0.4 / 4.2 / 446 / 83.6 km²** after hard exclusions;
-- a constraint breakdown of **105.5 km²** protected areas, **40.4 km²** riparian buffer, **39.1 km²** ecological composite, **5 km²** flood avoidance area and **0.04 km²** steep slope (≥25°);
-- a capacity ranking by sub-county — Kasarani, Langata and Embakasi East lead the estimate;
-- three charts (buildable land by class, constraints screened, capacity by sub-county) and one report.
+- **Layers** — the buildable-land result, the suitability classes and the development control tiers, plus the constraint layers (ecological protection, protected areas, riparian buffer) as styled, legend-ready map layers.
+- **Tables** — class areas with an admin cross table, the population per evaluation cell, and the district-level summary.
+- **Charts** — the class-area composition, the constraints screened and the capacity ranking, each editable and pinnable.
+- **Report** — an assessment document that combines the map, the figures and the threshold table, ready to share or export.
+
+The layer names follow the run language, but the deliverable set is stable enough to plan a handover around.
 
 ## Read the results with care
 
