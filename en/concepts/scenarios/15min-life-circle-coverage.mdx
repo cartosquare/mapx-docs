@@ -11,7 +11,7 @@ keywords: ["15-minute life circle", "life circle", "walking distance", "service 
 
 ## What the scenario ships
 
-Seven prepared layers cover Jakarta, with the study focused on Kota Jakarta Pusat (central Jakarta) in the example run.
+Seven prepared layers cover Jakarta; the scenario's default study window is Kota Jakarta Pusat (central Jakarta).
 
 | Layer | Data | Role in the study |
 |---|---|---|
@@ -35,7 +35,7 @@ All layers come from the [built-in datasets](/en/concepts/builtin-datasets) cata
 
 **One radius makes the classes comparable.** All three classes use an 800 m network walk, the upper end of the 15-minute life-circle standard (GB 50180-2018, 800–1000 m). A class-standard sensitivity — schools 800 m, clinics 1000 m, parks 500 m — is available as a documented variant.
 
-**The park definition is a decision, not a detail.** The shipped green layer contains road verges, golf fairways and tiny slivers. The scenario keeps `leisure = park` polygons of at least 0.5 ha and uses one centroid per park (33 destination parks in the study area). Relaxing that definition changes the answer dramatically, so the definition is printed in the report.
+**The park definition is a decision, not a detail.** The shipped green layer contains road verges, golf fairways and tiny slivers. The scenario keeps `leisure = park` polygons of at least 0.5 ha and uses one centroid per park (with the default definition and the shipped data, 33 destination parks in the study area). Relaxing that definition changes the answer dramatically, so the definition is printed in the report.
 
 **Coverage and accessibility answer different questions.** The shortfall layer says whether residents can walk there; the 2SFCA score says how much supply there is per resident within reach. When they disagree, that disagreement is the finding.
 
@@ -67,13 +67,15 @@ All layers come from the [built-in datasets](/en/concepts/builtin-datasets) cata
   </Step>
 
   <Step title="Check the supply side before reading conclusions">
-    The run reports how many facilities entered each class. On the shipped data the study area should show roughly 601 education points, 234 health points and 33 parks; a count of one where hundreds entered means a broken chain, not a finding.
+    The run reports how many facilities entered each class. In one example run on the shipped data, the study window filtered about 601 education points, 234 health points and 33 parks; compare those figures with the counts that entered your run — a class showing one point where hundreds entered means a broken chain, not a finding.
   </Step>
 </Steps>
 
-## What the example run produced
+## Example output
 
-The measured central-Jakarta run delivered:
+<Note>The values below come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return — your window, parameters and data updates will change them.</Note>
+
+In one example run on the shipped central-Jakarta data, the deliverables were:
 
 - three neighbourhood shortfall ramps (schools in purple, clinics in teal, parks in orange) sharing one 0/10/25/50/75/100% break scale, with the ADM4 boundary above them — exactly four visible deliverable layers;
 - a 44-row neighbourhood summary table carrying population, coverage count 0–3 and the three shortfall columns;
@@ -81,7 +83,7 @@ The measured central-Jakarta run delivered:
 - five charts: three per-class rankings, one grouped bar over the worst neighbourhoods, and a pinned heatmap comparing all three classes per kelurahan;
 - a report naming the radius, the park definition and the priority neighbourhoods.
 
-The measured contrast is the lesson: the same 33 parks cover about **32%** of residents through the road network, while a straight-line ring from the park boundary suggests about **56%**. Widening the definition to every `leisure = park` polygon with no size filter takes the straight-line reading to about **92%**, against **49%** for the same 33 parks — the definition is the biggest lever of all. Straight-line proximity overstates walking access; both the definition and the network matter.
+That example also shows why both the definition and the network matter: the same 33 parks cover about **32%** of residents through the road network, while a straight-line ring from the park boundary suggests about **56%**. Widening the definition to every `leisure = park` polygon with no size filter takes the straight-line reading to about **92%**, against **49%** for the same 33 parks. Straight-line proximity overstates walking access, and the exact shares depend on the park definition and the network data version.
 
 ## Read the results with care
 

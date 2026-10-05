@@ -5,3 +5,8 @@
 # Draft content
 drafts/
 *.draft.mdx
+
+# Generated handbook artifacts and build tooling
+output/
+scripts/
+tmp/

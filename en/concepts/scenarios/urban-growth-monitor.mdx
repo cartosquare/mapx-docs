@@ -68,13 +68,15 @@ Seven layers cover the Hanoi window. Only the built-up area is visible by defaul
   </Step>
 </Steps>
 
-## What the example run produced
+## Example output
 
-On the shipped Hanoi window (1985–2015), the measured run delivered:
+<Note>The values below come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return — your window, parameters and data updates will change them.</Note>
+
+In one example run on the shipped Hanoi data, the deliverables were:
 
 - four phases of **193.0 / 147.8 / 252.4 / 66.8 km²** of new built-up land, summing to the 660.0 km² in the raster;
 - **+467.0 km²** of new built-up land between 1991 and 2015, against a 469.1 km² LEI total — a 0.4% difference between the two area conventions that the report states;
-- expansion forms of **2.1% infill, 27.4% edge expansion and 70.5% outlying**, i.e. a city growing mostly outward in the measured period;
+- expansion forms of **2.1% infill, 27.4% edge expansion and 70.5% outlying** — in that example, most new built-up land was outlying;
 - a gravity centre that moved from (105.8186, 21.0301) to (105.8114, 21.0133) — about **2.0 km south-southwest** — while the 1σ major axis grew from 9.58 km to 11.06 km;
 - population/night-light quadrants of **1,311 / 657 / 657 / 1,310** cells out of 3,935 (medians: 932.6 residents, 1.96 night-light units);
 - 2,181 new built-up patches with a mean size of 239 cells (21.5 ha), plus three charts and a report.
@@ -85,7 +87,7 @@ On the shipped Hanoi window (1985–2015), the measured run delivered:
 - **Only one land-cover vintage is shipped.** Do not claim which land-use category was converted into built-up land.
 - **Compactness is a per-pixel shape metric.** A raster mask's staircase edge dominates its perimeter; compare it only within the same raster and resolution, never across cities.
 - **LEI depends on its parameters.** Quote the neighbourhood size, threshold and mask years with the infill/edge/outlying shares. Cells on the raster edge are counted as non-built, so the boundary band skews towards edge and outlying.
-- **"New patches" are clusters of a class mask.** The 2,181 whole-new-built patches (mean 21.5 ha) are the number to quote for patch structure.
+- **"New patches" are clusters of a class mask.** For patch structure, quote the whole-new-built patch count from your run (2,181 patches, mean 21.5 ha, in the example run).
 
 ## Related
 

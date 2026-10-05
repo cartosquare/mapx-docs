@@ -34,7 +34,7 @@ The design follows the "shortest stave" reading of carrying capacity: the most l
 | 2. Diagnose pressure | Where is low capacity combined with high population? | Grid at 1 km, Zonal statistics, Quadrant (median split) | Overload cells, population per cell, district pressure table |
 | 3. Explain and mitigate | Which constraint dominates, and what should each district do? | Raster class area, Zonal statistics, Charts, Report | Class-area and dominant-constraint tables, mounted pressure chart and report |
 
-**Four memberships feed the composite.** Slope is scored from 0–25°, wetness from the measured TWI range (6.08–9.28), flood depth from 0–3 m and rainfall from 1770–2521 mm inside the study area. Rainfall is a *waterlogging* constraint: more rain means a stronger limitation, not a bigger resource.
+**Four memberships feed the composite.** Slope is scored from 0–25°, wetness from the TWI range calibrated inside the study window (6.08–9.28), flood depth from 0–3 m and rainfall from 1770–2521 mm inside the same window. Rainfall is a *waterlogging* constraint: more rain means a stronger limitation, not a bigger resource.
 
 **Gaps are repaired, not hidden.** The flood raster stops at its model domain and the wetness index is undefined on perfectly flat cells. Both are filled from their own neighbourhood mean and reported as a data repair; a coverage floor of 99% of the study area is the acceptance check.
 
@@ -67,13 +67,15 @@ The design follows the "shortest stave" reading of carrying capacity: the most l
   </Step>
 
   <Step title="Read the failure modes in the result">
-    Every class should be non-empty and the delivered raster should cover at least 99% of the study area. If a class collapses, the documented fix is to calibrate the membership scale or run the gamma variant — not to renumber the classes.
+    Check that every class is non-empty and that the delivered raster covers at least 99% of the study area — that is the method's acceptance floor, not a promise about your numbers. If a class collapses, the documented fix is to calibrate the membership scale or run the gamma variant — not to renumber the classes.
   </Step>
 </Steps>
 
-## What the example run produced
+## Example output
 
-On the shipped Jakarta window, the measured run delivered:
+<Note>The values below come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return — your window, parameters and data updates will change them.</Note>
+
+In one example run on the shipped Jakarta data, the deliverables were:
 
 - **99.1%** coverage of the study area after repairing both input gaps (91.9% before the repair), with the NoData patches reduced from thousands of speckles to a small remainder;
 - four non-empty classes of roughly **11 / 23 / 25 / 41%** of the study area, where class 4 is the most constrained;

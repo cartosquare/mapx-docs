@@ -31,7 +31,7 @@ Seven layers cover the Dar es Salaam region. The watercourse layer starts hidden
 | 2. Demand gap | Where is demand high and supply low? | Grid at 500 m, Zonal statistics, Quadrant (median split), 1 km demand grid | Pressure quadrants (diagnostic) and the unserved-population demand layer |
 | 3. Siting comparison | Which new sites serve the most people? | Grid inside the worst wards, Overlay erase (30 m corridor), Zonal statistics/summary, Centroid points, Location-covering (MCLP), Location-allocation (k-median) | Recommended sites, the efficiency comparison, marginal coverage curve and residual gaps |
 
-**The supply set is narrowed before anything is measured.** Of 2,223 education points, 1,312 are schools — kindergartens, colleges and universities are not school supply for a walking-radius question. Of 1,463 health points, only 363 are clinics, hospitals or doctors; **1,020 entries (69.7%) are pharmacies** and are excluded. Without that screen, a "clinic" analysis is really a pharmacy map.
+**The supply set is narrowed before anything is computed.** Of 2,223 education points, 1,312 are schools — kindergartens, colleges and universities are not school supply for a walking-radius question. Of 1,463 health points, only 363 are clinics, hospitals or doctors; **1,020 entries (69.7%) are pharmacies** and are excluded. Without that screen, a "clinic" analysis is really a pharmacy map.
 
 **Candidates are a shortlist, not the whole city.** The scenario ranks the 90 wards by unserved population, keeps the ten worst, lays a 500 m grid inside them, removes the 30 m river corridor, drops cells that are already built out (building footprint share above 30%) and then caps the survivors by residential population. The ladder for large windows is documented; the physical filters are never relaxed to fit a budget.
 
@@ -68,9 +68,11 @@ Seven layers cover the Dar es Salaam region. The watercourse layer starts hidden
   </Step>
 </Steps>
 
-## What the example run produced
+## Example output
 
-On the shipped Dar es Salaam data, the measured run delivered:
+<Note>The values below come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return — your window, parameters and data updates will change them.</Note>
+
+In one example run on the shipped Dar es Salaam data, the deliverables were:
 
 - **90 wards** as the screening and reporting unit, with the status-quo service areas at 800 m for schools and 1000 m for clinics;
 - supply counts of **1,312 schools (1,305 inside the study area)** and **363 clinics (362 inside)**, with the excluded pharmacy share stated in the report;

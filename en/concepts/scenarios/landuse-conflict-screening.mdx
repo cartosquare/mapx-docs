@@ -34,7 +34,7 @@ Eight layers cover the Kigali window. Only land cover is visible by default; the
 
 **Ecological space is a composite, because the protected layer is nearly empty here.** Inside the city, the protected-area layer contains a single unnamed feature of about 0.09 km². The working definition is therefore the trees, shrub, water and wetland land-cover classes (WorldCover 10 / 20 / 80 / 90), with protected areas kept as a background cross-check and the 30 m waterway corridor as a separate constraint.
 
-**Development is read from the built-up land-cover class, not from building footprints.** The shipped footprint layer has 644,665 polygons; clipping, intersecting and aggregating it were all measured over the platform's step budget on this data. The runnable surface is the built-up class of the same 10 m land-cover raster, and the report states the substitution and the measured reason.
+**Development is read from the built-up land-cover class, not from building footprints.** The shipped footprint layer has 644,665 polygons; on this data, clipping, intersecting and aggregating it all exceed the platform's step budget. The runnable surface is the built-up class of the same 10 m land-cover raster, and the report states the substitution and the reason.
 
 **Conflict families are reported per type plus a union.** A patch can sit on a steep slope *and* inside the waterway setback. The scenario reports each family's area, then the de-duplicated union — never a naive sum presented as "total conflicts".
 
@@ -69,13 +69,15 @@ Eight layers cover the Kigali window. Only land cover is visible by default; the
   </Step>
 </Steps>
 
-## What the example run produced
+## Example output
 
-On the shipped Kigali window, the measured run delivered:
+<Note>The values below come from one example run with the default settings on the shipped data. They show the shape of the deliverables, not what your run will return — your window, parameters and data updates will change them.</Note>
+
+In one example run on the shipped Kigali data, the deliverables were:
 
 - an ecological-space layer of **1,387 patches / 270.1 km²** (patches of at least 1 ha), with the city mask applied to the vectorised patches rather than to the raster;
 - a terrain layer clipped from the country-wide DEM to **435 × 436** cells before slope analysis;
-- the four conflict families as separate layers — development on ≥25° slopes (8 cells / 0.046 km² in the measured run), inside the 30 m waterway setback, within 100 m of ecological space, and inside protected areas (no built-up land inside the in-city protected feature);
+- the four conflict families as separate layers — development on ≥25° slopes (8 cells / 0.046 km² in that example run), inside the 30 m waterway setback, within 100 m of ecological space, and inside protected areas (no built-up land inside the in-city protected feature);
 - a 500 m grid with conflict area and exposed population, plus a worst-patch board;
 - a report with the per-type and union areas and the remediation guidance.
 
