@@ -15,13 +15,15 @@ Seven layers cover the Hanoi window. Only the built-up area is visible by defaul
 
 | Layer | Data | Role in the study |
 |---|---|---|
-| Road network | OSM roads (hidden) | Test whether new built-up land follows the main axes |
-| Watercourses | OSM waterways, 2,565 lines (hidden) | River corridors as a growth constraint |
-| Administrative boundaries | 50 ADM3 units (hidden) | Attribution and cross tables |
+| Road network | OSM roads | Test whether new built-up land follows the main axes |
+| Watercourses | OSM waterways, 2,565 lines | River corridors as a growth constraint |
+| Administrative boundaries | 50 ADM3 units | Attribution and cross tables |
 | Built-up area | GHSL 2020 density, max 7,967 m²/cell (visible) | Growth-intensity backdrop |
-| Built-up history | WSF Evolution 1985–2015 build year, 733k valid cells (hidden) | The phase and form source |
-| Population | WorldPop 2020 (hidden) | Demand and activity axis |
-| Night lights | VIIRS, December 2017 median, 611 m (hidden) | Economic-activity proxy |
+| Built-up history | WSF Evolution 1985–2015 build year, 733k valid cells | The phase and form source |
+| Population | WorldPop 2020 | Demand and activity axis |
+| Night lights | VIIRS, December 2017 median, 611 m | Economic-activity proxy |
+
+*All layers come from the [built-in catalog](/en/concepts/builtin-datasets) with source and attribution attached, and they are not limited to Hanoi: the catalog provides the same datasets for other cities at the same specification — switch the study area, add the same entries, and this chapter's method chain transfers in minutes.*
 
 ## How the study works
 
@@ -31,45 +33,45 @@ Seven layers cover the Hanoi window. Only the built-up area is visible by defaul
 | 2. Measure the form | Is new growth infill, edge expansion or outlying? | Landscape expansion index on two built-up masks, Raster to polygons, Mean centre, Standard deviational ellipse, Directional distribution, Buffer and zonal summary | Infill / edge / outlying layer, centre shift and ellipse, share of new built-up near roads and waterways |
 | 3. Connect to activity | Where do population and night lights diverge? | Grid at 1 km, Zonal statistics, Quadrant (median split) | Population × night-light quadrants and the growth-management targets |
 
-**Form is measured with the landscape expansion index (LEI), not density.** Density cannot tell a dense low-rise extension from a dense infill block; the LEI separates them by how much of a new patch touches the earlier built-up area. The scenario uses the ≤1990 and ≤2015 masks (one-cell neighbourhood, 50% threshold, four-cell minimum patch) and reports the shares with those parameters attached.
-
-**The centre and the ellipse describe direction.** The gravity centre and its standard deviational ellipse are computed per phase, so the report can say how far and in which direction the city's mass moved, and whether it stretched along one axis.
-
-**Population and night lights are read together.** Cells with high population but low night light are the classic mismatch — a growth-management priority rather than a success story.
+In short, the study first reconstructs built-up expansion phase by phase, measuring new area, speed and intensity per period; it then classifies each new patch as infill, edge or leapfrog from how it touches the earlier built-up mask, and describes direction with the gravity centre and a standard deviational ellipse; finally it crosses growth with population and night lights in a quadrant grid to flag growth-management priorities, delivering phase layers, indicator tables and a report.
 
 ## Run it
 
 The screenshots below come from this scenario's reference workspace. Each step names the platform surface it uses, so you can follow the same path in your own project.
 
+<Tip>
+**Suggested question:** *"Run an urban-growth monitoring study for Hanoi: reconstruct the staged expansion of built-up land, analyse its speed, direction and intensity, flag the main growth-management issues with boundary guidance; deliver layers, charts and a report."*
+</Tip>
+
 ### 1. Open the scenario
 
 Open **Scenarios** in the top menu, select this card and choose **Open scenario**. The whole bundle imports at once: every layer keeps its default style, legend, source and attribution, and the camera flies to the study area. Use the **Layers** panel to switch layers on and off before you type anything.
 
-![The Hanoi growth scenario opened in the workspace, with the imported layers, the dark basemap and the chat panel](/images/scenarios/steps/urban-growth-monitor/chat.jpg)
+![The Hanoi scenario opened in a fresh project: the layer bundle imported, the Layers panel expanded, and the chat panel confirming the import with the suggested question](/images/scenarios/steps/urban-growth-monitor/open.jpg)
 
 ### 2. Ask the suggested question and review the plan
 
-The suggested question is: *"Run an urban-growth monitoring study for Hanoi: reconstruct the staged expansion of built-up land, analyse its speed, direction and intensity, flag the main growth-management issues with boundary guidance; deliver layers, charts and a report."* [Plan mode](/en/concepts/plan-mode) confirms the study area, the two mask years used for the form measurement and the report numbers before anything runs.
+Send the **suggested question** in the box above — or edit it first. [Plan mode](/en/concepts/plan-mode) confirms the study area, the two mask years used for the form measurement and the report numbers before anything runs.
 
-![The plan workbench for Hanoi: the approved plan and the recorded method decisions](/images/scenarios/steps/urban-growth-monitor/plan.jpg)
+![The Hanoi plan document in full-width view: side panels collapsed, plan sections and recorded decisions readable](/images/scenarios/steps/urban-growth-monitor/plan.jpg)
 
 ### 3. Approve the plan and run the analysis
 
-The run chains deterministic [analysis](/en/concepts/analysis) tools: the phased expansion metrics, the landscape expansion index between the two built-up masks, polygon conversion for the form layer, the gravity centre and standard deviational ellipse, and the 1 km grid with population and night-light quadrants.
+The run chains deterministic [analysis](/en/concepts/analysis) tools: the phased expansion metrics, the landscape expansion index between the two built-up masks, polygon conversion for the form layer, the gravity centre and standard deviational ellipse, and the 1 km grid with population and night-light quadrants. The **Analysis** panel keeps every run's operator, inputs, parameters and result layer, and the workflow graph in the centre visualises the whole chain.
 
-![The analysis graph for this scenario: each node is a deterministic operator, with inputs, parameters and artifacts available on click](/images/scenarios/steps/urban-growth-monitor/workflow.jpg)
+![The analysis view for Hanoi: the Analysis panel lists every operator run on the left, with the workflow graph in the centre](/images/scenarios/steps/urban-growth-monitor/analysis.jpg)
 
 ### 4. Style the result on the map
 
 The expansion-form layer keeps three human-readable classes on the dark basemap, with the quadrant grid and district labels as light references; the layer style editor is where the hue family and label halo are set.
 
-![The layer style editor open on a scenario deliverable: renderer, colours, outline, label field and legend controls](/images/scenarios/steps/urban-growth-monitor/style.jpg)
+![The style editor on a deliverable layer: classed-colour breaks and label settings, with the layer editing panel highlighted in red](/images/scenarios/steps/urban-growth-monitor/style.jpg)
 
 ### 5. Turn the result into charts and a report
 
 The run produces a dual-axis growth chart, a form-composition donut and a quadrant distribution. All are **[charts](/en/concepts/charts)** you can restyle or pin, and the **[report](/en/concepts/reports)** records the phase table, the form shares and the year-mismatch caveats.
 
-![A chart from this scenario opened in the chart editor, with its type, colours and data settings](/images/scenarios/steps/urban-growth-monitor/chart.jpg)
+![A chart from this scenario in the chart editor, with the editing area highlighted in red](/images/scenarios/steps/urban-growth-monitor/chart.jpg)
 
 ![The scenario report opened in the report canvas, with an executive summary, figures and embedded maps](/images/scenarios/steps/urban-growth-monitor/report.jpg)
 

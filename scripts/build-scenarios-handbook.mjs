@@ -41,6 +41,8 @@ const SCENARIOS = [
       lede: "在内罗毕识别生态、地形与洪涝硬约束，对剩余空间做建设适宜性分级与承载规模估算，最后提出开发边界与分级管控建议。",
       methods: "硬约束筛选 · 加权叠加 · 承载规模估算",
       deliverables: "适宜性分级、约束图层、承载规模表、图表与报告",
+      question: "在生态、坡度与洪涝硬约束之后，哪些地方可以建设",
+      type: "规划评估",
     },
     en: {
       title: "Development Suitability Baseline",
@@ -48,6 +50,8 @@ const SCENARIOS = [
       lede: "Screen ecological, terrain and flood constraints, grade the remaining land, estimate carrying capacity and propose a development boundary with tiered controls.",
       methods: "Hard-constraint screening · weighted overlay · capacity estimate",
       deliverables: "Suitability classes, constraint layers, capacity tables, charts and a report",
+      question: "Which land is buildable once ecology, slope and flood constraints are applied",
+      type: "Planning assessment",
     },
   },
   {
@@ -61,6 +65,8 @@ const SCENARIOS = [
       lede: "评估地形、湿度、洪涝与降水如何限制雅加达的发展，给出承载能力分级，并找出容量低、压力高的超载区域与治理对策。",
       methods: "模糊隶属度 · 短板合成 · 承压四象限",
       deliverables: "承载能力分级、超载格网、限制因子表、图表与报告",
+      question: "在水资源、气候与洪涝约束下还能承载多少开发",
+      type: "规划评估",
     },
     en: {
       title: "Carrying Capacity Assessment",
@@ -68,6 +74,8 @@ const SCENARIOS = [
       lede: "Assess how terrain, wetness, flood depth and rainfall constrain Jakarta's growth, grade carrying capacity, and flag the districts where pressure is highest.",
       methods: "Fuzzy membership · limiting-factor composite · pressure quadrants",
       deliverables: "Capacity classes, overload cells, constraint tables, charts and a report",
+      question: "How much development the water, climate and flood-hazard constraints allow",
+      type: "Planning assessment",
     },
   },
   {
@@ -81,13 +89,17 @@ const SCENARIOS = [
       lede: "审计雅加达中心城区谁能在 800 米步行范围内到达学校、诊所与公园，排出缺口最大的街区，并给出可达性评分。",
       methods: "步行服务区 · 缺口人口 · 2SFCA 可达性",
       deliverables: "三类缺口图层、街区综合表、榜单与热力图、报告",
+      question: "步行范围内谁被学校、医疗与绿地覆盖，谁没有被覆盖",
+      type: "公共服务",
     },
     en: {
-      title: "15-minute Life Circle Coverage",
+      title: "15-minute Neighbourhood Coverage",
       city: "Jakarta",
       lede: "Audit who can reach a school, a clinic and a park within an 800 m walk in central Jakarta, rank the neighbourhoods with the biggest shortfall, and score accessibility.",
       methods: "Walking service areas · shortfall population · 2SFCA",
-      deliverables: "Three shortfall layers, a neighbourhood table, boards and a heatmap, a report",
+      deliverables: "Three shortfall layers, a neighbourhood table, rankings and a heatmap, a report",
+      question: "Who is covered by schools, clinics and green space within walking distance, and who is not",
+      type: "Public services",
     },
   },
   {
@@ -101,13 +113,17 @@ const SCENARIOS = [
       lede: "诊断达累斯萨拉姆学校与诊所的覆盖缺口，测算未被服务人口，比选候选位置并给出最大覆盖模型推荐的选址方案。",
       methods: "覆盖诊断 · 候选筛选 · MCLP 与 k-中值对照",
       deliverables: "缺口榜单、候选格网、推荐点位、边际覆盖曲线与报告",
+      question: "缺口在哪里，哪些候选位置能补上",
+      type: "公共服务",
     },
     en: {
       title: "Public Facility Siting",
       city: "Dar es Salaam",
       lede: "Diagnose school and clinic coverage, measure the unserved demand, then compare candidate sites and recommend where to build with a maximum-coverage model.",
       methods: "Coverage diagnosis · candidate screening · MCLP vs k-median",
-      deliverables: "Shortfall boards, candidate cells, recommended sites, a marginal curve and a report",
+      deliverables: "Shortfall rankings, candidate cells, recommended sites, a marginal curve and a report",
+      question: "Where coverage gaps are, and which candidate sites close them",
+      type: "Public services",
     },
   },
   {
@@ -121,6 +137,8 @@ const SCENARIOS = [
       lede: "分期还原河内建成区扩张过程，区分填充、边缘与飞地式增长，并结合人口与夜间灯光判断增长管理的重点。",
       methods: "分期扩张指标 · 景观扩张指数 · 重心与标准差椭圆",
       deliverables: "扩张形态图层、分期指标表、四象限格网、图表与报告",
+      question: "建成区扩张有多快、往哪个方向、是否集约",
+      type: "城市监测",
     },
     en: {
       title: "Urban Growth Monitor",
@@ -128,6 +146,8 @@ const SCENARIOS = [
       lede: "Reconstruct Hanoi's built-up expansion phase by phase, measure how much is infill versus outward growth, and connect growth to population and night lights.",
       methods: "Phased expansion metrics · landscape expansion index · centre and ellipse",
       deliverables: "Expansion-form layers, phase tables, quadrant grid, charts and a report",
+      question: "How fast, in which direction, and how compactly the built-up area is expanding",
+      type: "Urban monitoring",
     },
   },
   {
@@ -141,13 +161,17 @@ const SCENARIOS = [
       lede: "识别基加利建设与生态空间、陡坡、河道岸线及保护地之间的冲突，分级排序并给出整改与避让建议。",
       methods: "冲突识别 · 分级排序 · 整改建议",
       deliverables: "四类冲突图层、最差斑块榜单、暴露人口格网与报告",
+      question: "建设与生态空间、陡坡、河道岸线在哪里冲突",
+      type: "生态核查",
     },
     en: {
       title: "Land-use Conflict Screening",
       city: "Kigali",
       lede: "Find where Kigali's development presses on ecological space, steep slopes and riverbanks, grade the conflicts, and turn them into remediation priorities.",
       methods: "Conflict screening · grading and prioritisation · remediation guidance",
-      deliverables: "Four conflict layers, a worst-patch board, an exposure grid and a report",
+      deliverables: "Four conflict layers, a worst-patch ranking, an exposure grid and a report",
+      question: "Where development collides with ecological space, steep slopes and riverbanks",
+      type: "Ecological compliance",
     },
   },
 ];
@@ -181,11 +205,13 @@ const UI = {
     backSub: "MapX 把空间数据、确定性分析与 AI 协作放进同一个工作区。",
     backUrl: "app.mapxagent.com",
     backSupport: "支持 · support@mapxagent.com",
+    promptLabel: "建议提问",
+    qrCaption: "扫码打开 MapX",
+    pdfKeywords: "MapX, 场景手册, 城乡规划, 空间分析, 开发适宜性, 承载能力, 生活圈, 设施选址, 城市增长, 用地冲突",
     colophonTitle: "关于本手册",
     colophonMeta: [
       ["版本", "第一版 · 2026 年 10 月"],
       ["收录", "MapX 内置的六个城乡规划场景"],
-      ["内容来源", "MapX 文档站的场景页面与产品内置数据目录"],
       ["数据来源", "各场景入口图层，逐层带来源、许可与署名"],
       ["配套文档", "场景、内置数据、分析、计划模式、图表、报告"],
       ["支持", "support@mapxagent.com"],
@@ -219,11 +245,13 @@ const UI = {
     backSub: "MapX brings spatial data, deterministic analysis and AI collaboration into one workspace.",
     backUrl: "app.mapxagent.com",
     backSupport: "Support · support@mapxagent.com",
+    promptLabel: "Suggested question",
+    qrCaption: "Scan to open MapX",
+    pdfKeywords: "MapX, scenario handbook, urban planning, spatial analysis, suitability, carrying capacity, 15-minute neighbourhood, facility siting, urban growth, land-use conflict",
     colophonTitle: "About this handbook",
     colophonMeta: [
       ["Edition", "First edition · October 2026"],
       ["Scope", "The six built-in urban and rural planning scenarios in MapX"],
-      ["Content", "Scenario pages from the MapX documentation and the built-in data catalog"],
       ["Data", "Each scenario's entry layers, with source, licence and attribution per layer"],
       ["Related docs", "Scenarios, built-in datasets, analysis, plan mode, charts, reports"],
       ["Support", "support@mapxagent.com"],
@@ -259,6 +287,7 @@ function parseBlocks(markdown) {
     line.startsWith("|") ||
     /^-\s/.test(line) ||
     line.startsWith("<Note>") ||
+    line.startsWith("<Tip>") ||
     line.startsWith("<Steps>") ||
     line.startsWith("![");
 
@@ -298,6 +327,26 @@ function parseBlocks(markdown) {
         .replace(/<\/Note>[\s\S]*$/, "")
         .trim();
       blocks.push({ type: "note", text });
+      i += 1;
+      continue;
+    }
+
+    if (line.startsWith("<Tip>")) {
+      const buffer = [];
+      let current = line;
+      while (true) {
+        buffer.push(current);
+        if (current.includes("</Tip>")) break;
+        if (i + 1 >= lines.length) break;
+        i += 1;
+        current = lines[i];
+      }
+      const text = buffer
+        .join(" ")
+        .replace(/^<Tip>/, "")
+        .replace(/<\/Tip>[\s\S]*$/, "")
+        .trim();
+      blocks.push({ type: "tip", text });
       i += 1;
       continue;
     }
@@ -464,66 +513,44 @@ function sectionKey(text) {
 const FOREWORD = {
   zh: `#FOREWORD#
 
-一个场景把「动手之前该有的东西」打包在一起：研究区、该区域的现成数据、映射到平台算子的方法，以及进去就能问的建议提问。打开一个场景，空项目立刻变成能回答真实规划问题的项目。
+MapX 是一个运行在浏览器里的 AI 空间分析平台：接入数据、用自然语言提问，平台会自动选择并执行合适的空间算子，几秒内把结果渲染成可交互的地图图层 —— 不需要安装 GIS 软件，也不需要数周的专业培训。
+
+数据接入、空间分析、样式编辑、图表、报告、分享与协作，都在同一个项目里完成；开发者还可以通过 REST API、CLI、MCP 与 Skill 把同样的能力接进自己的产品。本手册收录的六个场景，是体验这套能力最快的入口。
 
 ## 本手册收录什么
 
-本手册收录 MapX 内置的六个城乡规划场景。每个场景一章，结构一致：它回答的规划问题、自带的数据、研究怎么做、用到的平台能力、运行场景的步骤、一次示例运行的产出。
+本手册收录 MapX 内置的六个城乡规划场景。每个场景一章，结构一致：它回答的规划问题、自带的数据、研究怎么做、运行场景的步骤、一次示例运行的产出。
 
-| 场景 | 研究区 | 图层 | 回答什么 |
-|---|---|---|---|
-| 开发适宜性基础评价 | 内罗毕 | 8 | 在生态、坡度与洪涝硬约束之后，哪些地方可以建设 |
-| 资源环境承载能力评价 | 雅加达 | 6 | 在水资源、气候与洪涝约束下还能承载多少开发 |
-| 15 分钟生活圈覆盖 | 雅加达 | 7 | 步行范围内谁被学校、医疗与绿地覆盖，谁没有被覆盖 |
-| 公共服务设施选址 | 达累斯萨拉姆 | 7 | 缺口在哪里，哪些候选位置能补上 |
-| 城市增长与建成区扩张 | 河内 | 7 | 建成区扩张有多快、往哪个方向、是否集约 |
-| 用地冲突与生态约束核查 | 基加利 | 8 | 建设与生态空间、陡坡、河道岸线在哪里冲突 |
+| 场景类型 | 场景（研究区） | 解决问题 | 产出成果 | 平台求解时间 |
+|---|---|---|---|---|
+| 规划评估 | 开发适宜性基础评价（内罗毕） | 在生态、坡度与洪涝硬约束之后，哪些地方可以建设 | 适宜性分级、约束图层、承载规模表、图表与报告 | 约 1 小时 |
+| 规划评估 | 资源环境承载能力评价（雅加达） | 在水资源、气候与洪涝约束下还能承载多少开发 | 承载能力分级、超载格网、限制因子表、图表与报告 | 约 1 小时 |
+| 公共服务 | 15 分钟生活圈覆盖（雅加达） | 步行范围内谁被学校、医疗与绿地覆盖，谁没有被覆盖 | 三类缺口图层、街区综合表、榜单与热力图、报告 | 约 1 小时 |
+| 公共服务 | 公共服务设施选址（达累斯萨拉姆） | 缺口在哪里，哪些候选位置能补上 | 缺口榜单、候选格网、推荐点位、边际覆盖曲线与报告 | 约 1 小时 |
+| 城市监测 | 城市增长与建成区扩张（河内） | 建成区扩张有多快、往哪个方向、是否集约 | 扩张形态图层、分期指标表、四象限格网、图表与报告 | 约 1 小时 |
+| 生态核查 | 用地冲突与生态约束核查（基加利） | 建设与生态空间、陡坡、河道岸线在哪里冲突 | 四类冲突图层、最差斑块榜单、暴露人口格网与报告 | 约 1 小时 |
 
-## 怎么读这本手册
-
-- 关心「哪里能建、能承载多少」：从第 1 章（内罗毕）和第 2 章（雅加达）读起，第 6 章（基加利）是同一套约束逻辑用在建成空间上。
-- 关心公共服务覆盖与设施选址：按第 3 章（生活圈）到第 4 章（选址）的顺序读，前者找缺口，后者给方案。
-- 关心城市扩张与增长管理：直接读第 5 章（河内）。
-- 每个章节都可以独立阅读；章末「相关」列出可以继续查看的文档主题。
-
-## 关于书中的数字
-
-书中出现的面积、占比、排名与点位数量，来自一次示例运行（默认参数、随包数据版本），用于展示交付物的形态与合理量级，不代表你运行后的固定结果。研究窗口、参数选择与数据版本都会改变数值；每章「示例产出」小节的说明框都会再次提示这一点。
-
-## 数据与许可
-
-六个场景的入口图层全部来自 MapX 内置数据目录，逐层带来源、许可与署名。场景是分析辅助，输出为图层、图表与报告，不替代法定规划成果。`,
+*平台求解时间为示例运行的经验估算（含计划确认、分析运行与报告生成）；传统 GIS 流程完成同类研究通常需要数人日至数周。*`,
   en: `#FOREWORD#
 
-A scenario bundles everything a piece of spatial analysis needs before you type anything: a study area, the prepared datasets for it, a method that maps onto the platform's analysis tools, and suggested questions that work with that data. Opening one turns an empty project into a project that is ready to answer a real planning question.
+MapX is an AI-powered spatial analysis platform that runs in the browser: bring in data, ask questions in plain language, and the platform picks and runs the right spatial operations, rendering results as interactive map layers in seconds — no GIS software to install, no weeks of training.
+
+Data access, spatial analysis, style editing, charts, reports, sharing and collaboration all happen inside one project, and developers can wire the same capabilities into their own products through the REST API, CLI, MCP and skills. The six scenarios in this handbook are the fastest way to experience that workflow.
 
 ## What this handbook covers
 
-This handbook collects the six built-in urban and rural planning scenarios in MapX. Each scenario has one chapter, and every chapter follows the same structure: the planning question, the data it ships, how the study works, the platform capabilities it uses, how to run it, and what one example run produced.
+This handbook collects the six built-in urban and rural planning scenarios in MapX. Each scenario has one chapter, and every chapter follows the same structure: the planning question, the data it ships, how the study works, how to run it, and what one example run produced.
 
-| Scenario | Study area | Layers | What it answers |
-|---|---|---|---|
-| Development Suitability Baseline | Nairobi | 8 | Which land is buildable once ecology, slope and flood constraints are applied |
-| Carrying Capacity Assessment | Jakarta | 6 | How much development the water, climate and flood-hazard constraints allow |
-| 15-minute Life Circle Coverage | Jakarta | 7 | Who is covered by schools, clinics and green space within walking distance, and who is not |
-| Public Facility Siting | Dar es Salaam | 7 | Where coverage gaps are, and which candidate sites close them |
-| Urban Growth Monitor | Hanoi | 7 | How fast, in which direction, and how compactly the built-up area is expanding |
-| Land-use Conflict Screening | Kigali | 8 | Where development collides with ecological space, steep slopes and riverbanks |
+| Type | Scenario (study area) | Problem it solves | Deliverables | Time on MapX |
+|---|---|---|---|---|
+| Planning assessment | Development Suitability Baseline (Nairobi) | Which land is buildable once ecology, slope and flood constraints are applied | Suitability classes, constraint layers, capacity tables, charts and a report | ~1 hour |
+| Planning assessment | Carrying Capacity Assessment (Jakarta) | How much development the water, climate and flood-hazard constraints allow | Capacity classes, overload cells, constraint tables, charts and a report | ~1 hour |
+| Public services | 15-minute Neighbourhood Coverage (Jakarta) | Who is covered by schools, clinics and green space within walking distance, and who is not | Three shortfall layers, a neighbourhood table, rankings and a heatmap, a report | ~1 hour |
+| Public services | Public Facility Siting (Dar es Salaam) | Where coverage gaps are, and which candidate sites close them | Shortfall rankings, candidate cells, recommended sites, a marginal curve and a report | ~1 hour |
+| Urban monitoring | Urban Growth Monitor (Hanoi) | How fast, in which direction, and how compactly the built-up area is expanding | Expansion-form layers, phase tables, quadrant grid, charts and a report | ~1 hour |
+| Ecological compliance | Land-use Conflict Screening (Kigali) | Where development collides with ecological space, steep slopes and riverbanks | Four conflict layers, a worst-patch ranking, an exposure grid and a report | ~1 hour |
 
-## How to read it
-
-- For "where can the city build, and how much can it hold": start with chapters 1 (Nairobi) and 2 (Jakarta); chapter 6 (Kigali) applies the same constraint logic to built-up land.
-- For public service coverage and facility siting: read chapter 3 (life circle) before chapter 4 (siting) — the first finds the gaps, the second proposes sites.
-- For urban expansion and growth management: go straight to chapter 5 (Hanoi).
-- Every chapter stands on its own; the Related list at the end of each chapter names the documentation topics to continue with.
-
-## About the numbers
-
-The areas, shares, rankings and site counts in this handbook come from one example run with the default settings on the shipped data. They show the shape and plausible magnitude of the deliverables, not what your run will return. Your study window, parameter choices and data version will change the values; each chapter's Example output box repeats this caveat.
-
-## Data and licences
-
-Every entry layer in the six scenarios comes from the MapX built-in data catalog, with source, licence and attribution attached per layer. Scenarios are analysis aids: they deliver layers, charts and reports, and they do not replace statutory planning documents.`,
+*Solve times are empirical estimates from example runs (plan review, analysis and report generation included); a conventional GIS workflow typically takes person-days to weeks for the same study.*`,
 };
 
 const APPENDIX = {
@@ -540,13 +567,13 @@ const APPENDIX = {
 | 5 城市增长与建成区扩张 | 河内 | 7 | 分期扩张指标、景观扩张指数、重心与椭圆 | 扩张形态图层、分期指标表、四象限格网 |
 | 6 用地冲突与生态约束核查 | 基加利 | 8 | 冲突识别、分级排序、整改建议 | 四类冲突图层、最差斑块榜单、暴露人口格网 |
 
-## 附录 B：怎么开始
+## 附录 B：上手清单
 
-- 在 MapX 顶部菜单打开**场景**目录，选择你要研究的场景卡片。
-- 点**打开场景**：整包图层按默认样式导入当前项目，不需要上传或配置。
-- 用场景自带的**建议提问**启动分析；也可以先改再发。
-- 在**计划模式**里回答澄清问题、审阅计划书，然后批准执行。
-- 运行完成后，把结果导出为[报告]、[图表]或分享地图；继续在对话里追问以调整范围与阈值。
+- 打开**场景**目录，选中与你的研究问题匹配的卡片。
+- 点**打开场景**：整包图层按默认样式导入项目，无需上传或配置。
+- 发送场景自带的**建议提问**（每章「运行场景」开头的建议提问框可直接复制）。
+- 在**计划模式**里确认口径、批准计划书，然后开始执行。
+- 运行完成后导出**报告**、调整**图表**或分享地图，并继续追问以调整范围与阈值。
 
 ## 附录 C：数据与许可
 
@@ -559,18 +586,18 @@ const APPENDIX = {
 |---|---|---|---|---|
 | 1 Development Suitability Baseline | Nairobi | 8 | Hard-constraint screening, weighted overlay, capacity estimate | Suitability classes, development control tiers, charts and a report |
 | 2 Carrying Capacity Assessment | Jakarta | 6 | Fuzzy membership, limiting-factor composite, pressure quadrants | Capacity classes, overload cells, charts and a report |
-| 3 15-minute Life Circle Coverage | Jakarta | 7 | Walking service areas, shortfall population, 2SFCA | Three shortfall layers, a neighbourhood table, boards and a heatmap |
+| 3 15-minute Neighbourhood Coverage | Jakarta | 7 | Walking service areas, shortfall population, 2SFCA | Three shortfall layers, a neighbourhood table, rankings and a heatmap |
 | 4 Public Facility Siting | Dar es Salaam | 7 | Coverage diagnosis, candidate screening, MCLP vs k-median | Recommended sites, a marginal coverage curve, a ward balance table |
 | 5 Urban Growth Monitor | Hanoi | 7 | Phased expansion metrics, landscape expansion index, centre and ellipse | Expansion-form layers, phase tables, a quadrant grid |
-| 6 Land-use Conflict Screening | Kigali | 8 | Conflict screening, grading, remediation guidance | Four conflict layers, a worst-patch board, an exposure grid |
+| 6 Land-use Conflict Screening | Kigali | 8 | Conflict screening, grading, remediation guidance | Four conflict layers, a worst-patch ranking, an exposure grid |
 
-## Appendix B: Get started
+## Appendix B: Get-started checklist
 
-- Open the **Scenarios** catalog from the MapX top menu and pick the scenario you need.
-- Choose **Open scenario**: the whole layer bundle imports into the current project with default styles, no upload or configuration required.
-- Start the analysis with the scenario's **suggested question**, or edit it first.
-- In **plan mode**, answer the clarifications, review the plan document and approve it.
-- When the run finishes, export a report, work with the charts or share the map; keep asking follow-up questions to adjust the scope and thresholds.
+- Open the **Scenarios** catalog and pick the card that matches your planning question.
+- Choose **Open scenario**: the layer bundle imports with default styles, no upload or configuration.
+- Send the scenario's **suggested question** (copy it from the box at the start of each chapter's Run it section).
+- Confirm the conventions and approve the plan in **plan mode**, then let it run.
+- Export a **report**, refine the **charts** or share the map, and keep asking follow-ups to adjust scope and thresholds.
 
 ## Appendix C: Data and licences
 
@@ -690,10 +717,9 @@ a { color: #006bcb; text-decoration: none; }
   margin-top: 10mm; padding: 5mm 6mm; background: #f8fafc;
   border-left: 1.2mm solid #006bcb; font-size: 9.5pt; color: #334155;
 }
-.toc-entry {
-  display: flex; align-items: baseline; gap: 3mm;
-  padding: 3.4mm 0; border-bottom: 0.25mm solid #eef2f7;
-}
+.toc-entry { padding: 2.8mm 0; border-bottom: 0.25mm solid #eef2f7; }
+.toc-row { display: flex; align-items: baseline; gap: 3mm; }
+.toc-lede { font-size: 8.6pt; color: #64748b; padding-left: 13mm; margin-top: 0.7mm; }
 .toc-num { width: 10mm; font-weight: 700; color: #006bcb; font-size: 10pt; }
 .toc-title { font-weight: 600; font-size: 11pt; }
 .toc-city { color: #64748b; font-size: 9.5pt; }
@@ -843,12 +869,75 @@ figure.inline-figure figcaption {
 .backcover .back-title { font-size: 26pt; font-weight: 700; margin-bottom: 4mm; }
 .backcover .back-sub { font-size: 12pt; color: #cfe3f8; max-width: 120mm; }
 .backcover .back-foot { font-size: 10pt; color: #9fc4ea; border-top: 0.3mm solid rgba(255,255,255,0.18); padding-top: 4mm; }
+
+/* Pipeline diagram (foreword) -------------------------------------- */
+.pipeline-figure { margin: 5mm 0 6mm; break-inside: avoid; }
+.pipeline { display: flex; align-items: stretch; }
+.pipeline-figure figcaption { font-size: 8pt; color: #64748b; margin-top: 1.6mm; }
+.pipe-stage {
+  flex: 1; border: 0.3mm solid #dbe4ef; border-radius: 1.8mm;
+  border-top: 1.2mm solid var(--accent, #006bcb);
+  padding: 3mm 3.2mm 2.8mm; background: #fbfdff;
+}
+.pipe-num { font-size: 7.5pt; font-weight: 700; letter-spacing: 0.12em; color: var(--accent, #006bcb); }
+.pipe-title { font-size: 10.5pt; font-weight: 700; color: #0b1f36; margin: 0.8mm 0 1mm; }
+.pipe-keys { font-size: 8.2pt; color: #475569; line-height: 1.55; }
+.pipe-arrow { align-self: center; padding: 0 1.8mm; color: var(--accent, #006bcb); font-size: 13pt; font-weight: 700; }
+
+/* Table footnote ---------------------------------------------------- */
+p.table-note { font-size: 8.6pt; color: #64748b; margin: -2.8mm 0 5mm; }
+
+/* Tip callout -------------------------------------------------------- */
+.callout.tip { background: #f7f9fc; border-left-color: var(--accent, #006bcb); }
+.callout.tip .callout-label { color: var(--accent, #006bcb); }
+
+/* Chapter CTA -------------------------------------------------------- */
+.chapter-cta {
+  margin: 6mm 0 2mm; padding: 3.5mm 5mm;
+  background: #f8fafc; border-left: 1.2mm solid var(--accent, #006bcb);
+  border-radius: 0 1.4mm 1.4mm 0; font-size: 9.5pt; color: #1e3a5f;
+  break-inside: avoid;
+}
+.chapter-cta a.cta-link {
+  display: inline-block; padding: 0.5mm 2.6mm; border-radius: 1.2mm;
+  background: var(--accent, #006bcb); color: #ffffff;
+  text-decoration: none; font-weight: 600;
+}
+
+/* Back cover QR ------------------------------------------------------- */
+.back-qr { margin-top: 10mm; display: flex; align-items: center; gap: 4mm; }
+.back-qr img { width: 21mm; height: 21mm; border-radius: 1.6mm; background: #ffffff; padding: 1.6mm; }
+.back-qr-cap { font-size: 9.5pt; color: #cfe3f8; line-height: 1.6; }
 `;
 }
 
 /* ------------------------------------------------------------------ */
 /* Page builders                                                       */
 /* ------------------------------------------------------------------ */
+
+function renderForewordDiagram(lang) {
+  const stages =
+    lang === "zh"
+      ? [
+          ["接入数据", "上传文件 · 数据库连接 · 内置数据目录"],
+          ["对话分析", "自然语言提问 · 确定性算子 · 计划模式"],
+          ["可视化", "地图样式 · 3D · 图表"],
+          ["交付", "HTML / Word / PPT 报告 · 分享 · API"],
+        ]
+      : [
+          ["Bring in data", "Uploads · Databases · Built-in catalog"],
+          ["Ask & analyse", "Plain language · Deterministic operators · Plan mode"],
+          ["Visualise", "Map styles · 3D · Charts"],
+          ["Deliver", "HTML / Word / PPT reports · Sharing · API"],
+        ];
+  const parts = stages
+    .map(
+      ([title, keys], index) => `${index > 0 ? '<div class="pipe-arrow">›</div>' : ""}<div class="pipe-stage"><div class="pipe-num">${String(index + 1).padStart(2, "0")}</div><div class="pipe-title">${title}</div><div class="pipe-keys">${keys}</div></div>`,
+    )
+    .join("");
+  const caption = lang === "zh" ? "MapX 平台分析流程" : "MapX platform analysis flow";
+  return `<figure class="pipeline-figure"><div class="pipeline">${parts}</div><figcaption>${caption}</figcaption></figure>`;
+}
 
 function renderColophon(lang) {
   const ui = UI[lang];
@@ -857,12 +946,12 @@ function renderColophon(lang) {
     .join("");
   const lead =
     lang === "zh"
-      ? "这本手册把 MapX 内置的六个城乡规划场景整理成可独立阅读的章节：每章给出研究设计、数据构成、方法与平台能力、运行步骤，以及一次示例运行的产出。"
-      : "This handbook turns the six built-in urban and rural planning scenarios in MapX into self-contained chapters: study design, data, methods and platform capabilities, how to run the scenario, and what one example run produced.";
+      ? "这本手册把 MapX 内置的六个城乡规划场景整理成可独立阅读的章节：每章给出研究问题、数据构成、研究方法、运行步骤，以及一次示例运行的产出。"
+      : "This handbook turns the six built-in urban and rural planning scenarios in MapX into self-contained chapters: the planning question, the data, how the study works, how to run the scenario, and what one example run produced.";
   const licence =
     lang === "zh"
-      ? "本书内容与截图来自 MapX 文档站与产品内置场景；地图图层版权与署名见各场景入口数据集。示例数字仅用于说明交付物形态。"
-      : "Content and screenshots come from the MapX documentation and the built-in scenarios; map layer credits and licences are attached to each entry dataset. Example figures illustrate the shape of the deliverables only.";
+      ? "本手册内容与截图来自 MapX 产品内置场景；地图图层版权与署名见各场景入口数据集。示例数字仅用于说明交付物形态。"
+      : "Content and screenshots come from the built-in scenarios in the MapX product; map layer credits and licences are attached to each entry dataset. Example figures illustrate the shape of the deliverables only.";
   return `
   <section class="sheet colophon page-break">
     <h1>${ui.colophonTitle}</h1>
@@ -876,11 +965,11 @@ function renderToc(lang, pageMap) {
   const ui = UI[lang];
   const page = (key) => (pageMap && pageMap[key] ? String(pageMap[key]) : "—");
   const rows = [
-    `<div class="toc-entry"><span class="toc-num"></span><span class="toc-title">${ui.forewordLabel}</span><span class="toc-city"></span><span class="toc-dots"></span><span class="toc-page">${page("foreword")}</span></div>`,
+    `<div class="toc-entry"><div class="toc-row"><span class="toc-num"></span><span class="toc-title">${ui.forewordLabel}</span><span class="toc-city"></span><span class="toc-dots"></span><span class="toc-page">${page("foreword")}</span></div></div>`,
     ...SCENARIOS.map(
-      (scenario) => `<div class="toc-entry"><span class="toc-num">${String(scenario.num).padStart(2, "0")}</span><span class="toc-title">${scenario[lang].title}</span><span class="toc-city">${scenario[lang].city}</span><span class="toc-dots"></span><span class="toc-page">${page(`ch${scenario.num}`)}</span></div>`,
+      (scenario) => `<div class="toc-entry"><div class="toc-row"><span class="toc-num">${String(scenario.num).padStart(2, "0")}</span><span class="toc-title">${scenario[lang].title}</span><span class="toc-city">${scenario[lang].city}</span><span class="toc-dots"></span><span class="toc-page">${page(`ch${scenario.num}`)}</span></div><div class="toc-lede">${scenario[lang].question}</div></div>`,
     ),
-    `<div class="toc-entry"><span class="toc-num"></span><span class="toc-title">${ui.appendixLabel}</span><span class="toc-city"></span><span class="toc-dots"></span><span class="toc-page">${page("appendix")}</span></div>`,
+    `<div class="toc-entry"><div class="toc-row"><span class="toc-num"></span><span class="toc-title">${ui.appendixLabel}</span><span class="toc-city"></span><span class="toc-dots"></span><span class="toc-page">${page("appendix")}</span></div></div>`,
   ];
   return `
   <section class="sheet toc page-break">
@@ -904,6 +993,10 @@ async function renderChapter(scenario, lang) {
   const imageBlock = blocks.find((block) => block.type === "image");
   const hero = imageBlock ? imageBlock.src : "";
   const rendered = renderBlocksWithExample(blocks.filter((b) => b !== imageBlock), ui);
+  const cta =
+    lang === "zh"
+      ? `在 <a class="cta-link" href="https://app.mapxagent.com">app.mapxagent.com</a> 的场景目录打开「${scenario.zh.title}」，用建议提问直接开始你的研究。`
+      : `Open <strong>${scenario.en.title}</strong> from the scenario catalog at <a class="cta-link" href="https://app.mapxagent.com">app.mapxagent.com</a> and start from its suggested question.`;
 
   return `
   <section class="chapter" style="--accent:${scenario.accent}">
@@ -922,7 +1015,7 @@ async function renderChapter(scenario, lang) {
         </div>
       </div>
     </div>
-    <div class="sheet chapter-body">${rendered}</div>
+    <div class="sheet chapter-body">${rendered}<div class="chapter-cta">${cta}</div></div>
   </section>`;
 }
 
@@ -939,7 +1032,8 @@ function renderBlocksWithExample(blocks, ui) {
     }
   };
 
-  for (const block of blocks) {
+  for (let bi = 0; bi < blocks.length; bi += 1) {
+    const block = blocks[bi];
     if (skipRest) continue;
 
     if (block.type === "heading" && block.level === 2) {
@@ -963,7 +1057,10 @@ function renderBlocksWithExample(blocks, ui) {
     }
 
     if (block.type === "paragraph") {
-      output.push(`<p>${renderInline(block.text)}</p>`);
+      const trimmed = block.text.trim();
+      const prev = blocks[bi - 1];
+      const isTableNote = prev && prev.type === "table" && /^\*[\s\S]+\*$/.test(trimmed);
+      output.push(`<p${isTableNote ? ' class="table-note"' : ""}>${renderInline(trimmed)}</p>`);
       continue;
     }
 
@@ -990,6 +1087,12 @@ function renderBlocksWithExample(blocks, ui) {
       continue;
     }
 
+    if (block.type === "tip") {
+      const text = block.text.replace(/^\*\*(建议提问|Suggested question)[：:。.]\*\*\s*/, "");
+      output.push(`<aside class="callout tip"><span class="callout-label">${ui.promptLabel}</span><p>${renderInline(text)}</p></aside>`);
+      continue;
+    }
+
     if (block.type === "steps") {
       output.push(renderSteps(block, ui));
       continue;
@@ -1010,12 +1113,20 @@ function buildBook(lang, pageMap) {
   const appendix = APPENDIX[lang].replace("#APPENDIX#", "").trim();
   const chapters = SCENARIOS.map((scenario) => renderChapterPromise(scenario, lang));
   return Promise.all(chapters).then((chapterHtml) => {
-    const forewordHtml = renderBlocksWithExample(parseBlocks(foreword), ui);
+    const forewordBlocks = parseBlocks(foreword);
+    const splitAt = forewordBlocks.findIndex((b) => b.type === "heading" && b.level === 2);
+    const forewordHtml =
+      renderBlocksWithExample(splitAt === -1 ? forewordBlocks : forewordBlocks.slice(0, splitAt), ui) +
+      renderForewordDiagram(lang) +
+      renderBlocksWithExample(splitAt === -1 ? [] : forewordBlocks.slice(splitAt), ui);
     const appendixHtml = renderBlocksWithExample(parseBlocks(appendix), ui);
     return `<!doctype html>
 <html lang="${ui.lang}">
 <head>
 <meta charset="utf-8">
+<meta name="author" content="MapX">
+<meta name="description" content="${ui.coverSub}">
+<meta name="keywords" content="${ui.pdfKeywords}">
 <title>${ui.pdfTitle}</title>
 <style>${buildCss(ui)}</style>
 </head>
@@ -1045,11 +1156,12 @@ function renderChapterPromise(scenario, lang) {
 
 /* Synchronous cover/back-cover use preloaded data URIs. */
 let LOGO_DARK = "";
+let QR_DATA = "";
 function renderCoverSync(lang) {
   const ui = UI[lang];
   const thumbs = SCENARIOS.map((scenario) => {
     const image = imageCache.get(scenario.image) ?? "";
-    return `<figure class="cover-thumb"><img src="${image}" alt=""><figcaption>${scenario.num}. ${scenario[lang].title}</figcaption></figure>`;
+    return `<figure class="cover-thumb"><img src="${image}" alt=""><figcaption>${scenario[lang].title}</figcaption></figure>`;
   }).join("");
   return `
   <section class="cover">
@@ -1070,6 +1182,7 @@ function renderBackCoverSync(lang) {
     <div>
       <div class="back-title">${ui.backTitle}</div>
       <p class="back-sub">${ui.backSub}</p>
+      <div class="back-qr"><img src="${QR_DATA}" alt="MapX app"><div class="back-qr-cap">${ui.qrCaption}<br>app.mapxagent.com</div></div>
     </div>
     <div class="back-foot"><div>${ui.backUrl}</div><div>${ui.backSupport}</div></div>
   </section>`;
@@ -1188,6 +1301,7 @@ async function main() {
   await mkdir(OUT_DIR, { recursive: true });
 
   LOGO_DARK = await imageDataUri("logo-dark.png");
+  QR_DATA = await imageDataUri("images/handbook/qr-app.png");
   for (const scenario of SCENARIOS) await imageDataUri(scenario.image);
 
   const results = [];

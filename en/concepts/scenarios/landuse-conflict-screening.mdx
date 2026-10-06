@@ -7,7 +7,7 @@ keywords: ["land-use conflict", "ecological constraint", "steep slope", "waterwa
 
 Land-use Conflict Screening checks whether a hilly city's built-up land collides with the constraints it should respect: **ecological space, steep slopes, riverbanks and protected areas**. It reports each conflict family on its own and then a de-duplicated union, so one patch cannot be counted twice, and it ends with remediation priorities instead of a single "risk score".
 
-![The Kigali run as delivered: ecological space with the three conflict families and the worst-patch board](/images/scenarios/landuse-conflict-screening.jpg)
+![The Kigali run as delivered: ecological space with the three conflict families and the worst-patch ranking](/images/scenarios/landuse-conflict-screening.jpg)
 
 ## What the scenario ships
 
@@ -15,62 +15,64 @@ Eight layers cover the Kigali window. Only land cover is visible by default; the
 
 | Layer | Data | Role in the study |
 |---|---|---|
-| Watercourses | OSM waterways, 416 lines (hidden) | 30 m setback corridor |
-| Administrative boundaries | 8 ADM3 units (hidden) | Study area, attribution and labels |
-| Protected area constraints | Overture, 14 features in Rwanda; 1 inside the city (hidden) | Background and cross-check for ecological space |
-| Building footprints | Overture, 644,665 polygons (hidden) | Context layer; not used as the development surface (see below) |
+| Watercourses | OSM waterways, 416 lines | 30 m setback corridor |
+| Administrative boundaries | 8 ADM3 units | Study area, attribution and labels |
+| Protected area constraints | Overture, 14 features in Rwanda; 1 inside the city | Background and cross-check for ecological space |
+| Building footprints | Overture, 644,665 polygons | Context layer; not used as the development surface (see below) |
 | Land cover | ESA WorldCover 2021, 10 m, 11 classes (visible) | Ecological classes and the built-up surface |
-| Terrain | SRTM 30 m, clipped to the city (hidden) | Slope classes |
-| Surface water | JRC Global Surface Water, 0–99% frequency (hidden) | Water presence cross-check |
-| Population | GHSL, 100 m (hidden) | Exposed population per assessment cell |
+| Terrain | SRTM 30 m, clipped to the city | Slope classes |
+| Surface water | JRC Global Surface Water, 0–99% frequency | Water presence cross-check |
+| Population | GHSL, 100 m | Exposed population per assessment cell |
+
+*All layers come from the [built-in catalog](/en/concepts/builtin-datasets) with source and attribution attached, and they are not limited to Kigali: the catalog provides the same datasets for other cities at the same specification — switch the study area, add the same entries, and this chapter's method chain transfers in minutes.*
 
 ## How the study works
 
 | Stage | Question | What MapX runs | Output |
 |---|---|---|---|
 | 1. Identify the conflicts | Where does built-up land meet each constraint? | Raster calculator, Raster to polygons, Overlay clip, Euclidean distance (100 m / 30 m), Buffer, Slope, Reclassify | Ecological-space mask, steep-slope classes and the four conflict families |
-| 2. Grade and prioritise | Which conflicts matter most, and where do they cluster? | Append features, Zonal summary on a 500 m grid, Top N patch ranking, Label anchors | Conflict area per cell, exposed population, worst-patch board |
+| 2. Grade and prioritise | Which conflicts matter most, and where do they cluster? | Append features, Zonal summary on a 500 m grid, Top N patch ranking, Label anchors | Conflict area per cell, exposed population, worst-patch ranking |
 | 3. Remediate | What should be done per type and severity? | Select features, Zonal statistics, Charts, Report | Remediation table, charts and a compliance report |
 
-**Ecological space is a composite, because the protected layer is nearly empty here.** Inside the city, the protected-area layer contains a single unnamed feature of about 0.09 km². The working definition is therefore the trees, shrub, water and wetland land-cover classes (WorldCover 10 / 20 / 80 / 90), with protected areas kept as a background cross-check and the 30 m waterway corridor as a separate constraint.
-
-**Development is read from the built-up land-cover class, not from building footprints.** The shipped footprint layer has 644,665 polygons; on this data, clipping, intersecting and aggregating it all exceed the platform's step budget. The runnable surface is the built-up class of the same 10 m land-cover raster, and the report states the substitution and the reason.
-
-**Conflict families are reported per type plus a union.** A patch can sit on a steep slope *and* inside the waterway setback. The scenario reports each family's area, then the de-duplicated union — never a naive sum presented as "total conflicts".
+In short, the study first builds spatial masks for each constraint — ecological space, steep slopes and riverbank corridors — and overlays them with the development surface to produce four conflict layers; it then summarises conflict area and affected population on a grid and ranks the worst patches; finally it issues remediation and avoidance guidance by conflict type and grade, delivering conflict layers, a ranking and a screening report.
 
 ## Run it
 
 The screenshots below come from this scenario's reference workspace. Each step names the platform surface it uses, so you can follow the same path in your own project.
 
+<Tip>
+**Suggested question:** *"Screen land-use conflicts for Kigali: find development encroaching on ecological space, steep slopes or riverbanks, grade conflicts by severity, locate hotspots and recommend fixes; deliver layers, charts and a report."*
+</Tip>
+
 ### 1. Open the scenario
 
 Open **Scenarios** in the top menu, select this card and choose **Open scenario**. The whole bundle imports at once: every layer keeps its default style, legend, source and attribution, and the camera flies to the study area. Use the **Layers** panel to switch layers on and off before you type anything.
 
-![The Kigali conflict scenario opened in the workspace, with the imported layers, the map and the chat panel](/images/scenarios/steps/landuse-conflict-screening/chat.jpg)
+![The Kigali scenario opened in a fresh project: the layer bundle imported, the Layers panel expanded, and the chat panel confirming the import with the suggested question](/images/scenarios/steps/landuse-conflict-screening/open.jpg)
 
 ### 2. Ask the suggested question and review the plan
 
-The suggested question is: *"Screen land-use conflicts for Kigali: find development encroaching on ecological space, steep slopes or riverbanks, grade conflicts by severity, locate hotspots and recommend fixes; deliver layers, charts and a report."* [Plan mode](/en/concepts/plan-mode) records the ecological-space definition, the development surface and the rule that conflict families are reported per type plus a de-duplicated union.
+Send the **suggested question** in the box above — or edit it first. [Plan mode](/en/concepts/plan-mode) records the ecological-space definition, the development surface and the rule that conflict families are reported per type plus a de-duplicated union.
 
-![The plan workbench for Kigali: the approved plan and the recorded definition decisions](/images/scenarios/steps/landuse-conflict-screening/plan.jpg)
+![The Kigali plan document with the Plans panel open on the left; plan sections and recorded decisions readable](/images/scenarios/steps/landuse-conflict-screening/plan.jpg)
 
 ### 3. Approve the plan and run the analysis
 
-The chain uses raster algebra and polygon conversion to build the ecological-space layer, Euclidean distance for the 100 m encroachment band and the 30 m waterway setback, buffering, slope reclassification, the steep-slope mask, and the 500 m grid where conflict area and exposed population are summed.
+The chain uses raster algebra and polygon conversion to build the ecological-space layer, Euclidean distance for the 100 m encroachment band and the 30 m waterway setback, buffering, slope reclassification, the steep-slope mask, and the 500 m grid where conflict area and exposed population are summed. The **Analysis** panel keeps every run's operator, inputs, parameters and result layer, and the workflow graph in the centre visualises the whole chain.
 
-![The analysis graph for this scenario: each node is a deterministic operator, with inputs, parameters and artifacts available on click](/images/scenarios/steps/landuse-conflict-screening/workflow.jpg)
+![The analysis view for Kigali: the Analysis panel lists every operator run on the left, with the workflow graph in the centre](/images/scenarios/steps/landuse-conflict-screening/analysis.jpg)
 
 ### 4. Style the result on the map
 
-Each conflict family owns one hue so the four translucent layers stay readable together; the worst-patch board is styled as a dark-red fill with rank labels from an anchor layer, and legend titles carry the definitions.
+Each conflict family owns one hue so the four translucent layers stay readable together; the worst-patch ranking is styled as a dark-red fill with rank labels from an anchor layer, and legend titles carry the definitions.
 
-![The layer style editor open on a scenario deliverable: renderer, colours, outline, label field and legend controls](/images/scenarios/steps/landuse-conflict-screening/style.jpg)
+![The style editor on a deliverable layer: classed-colour breaks and label settings, with the layer editing panel highlighted in red](/images/scenarios/steps/landuse-conflict-screening/style.jpg)
 
 ### 5. Turn the result into charts and a report
 
 The run reports conflict area per family and the exposed population, with the union stated separately. The **[charts](/en/concepts/charts)** and the **[report](/en/concepts/reports)** quote those definitions rather than a single risk score.
 
-![A chart from this scenario opened in the chart editor, with its type, colours and data settings](/images/scenarios/steps/landuse-conflict-screening/chart.jpg)
+![A chart from this scenario in the chart editor, with the editing area highlighted in red](/images/scenarios/steps/landuse-conflict-screening/chart.jpg)
 
 ![The scenario report opened in the report canvas, with an executive summary, figures and embedded maps](/images/scenarios/steps/landuse-conflict-screening/report.jpg)
 
@@ -80,7 +82,7 @@ The run reports conflict area per family and the exposed population, with the un
 
 A finished run hands back a named, reusable set of deliverables instead of a single map:
 
-- **Layers** — the ecological-space layer, the four conflict families (ecological encroachment, steep slope, waterway setback, protected area) and the worst-patch board, all with their definitions in the legend.
+- **Layers** — the ecological-space layer, the four conflict families (ecological encroachment, steep slope, waterway setback, protected area) and the worst-patch ranking, all with their definitions in the legend.
 - **Tables** — the per-type conflict areas plus the de-duplicated union, and the exposed population per assessment cell.
 - **Charts** — the conflict-area and exposure summaries, editable and ready for the report.
 - **Report** — the compliance document with the definitions, the areas and the remediation guidance.

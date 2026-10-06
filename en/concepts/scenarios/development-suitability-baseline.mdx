@@ -22,7 +22,9 @@ Opening the scenario imports eight prepared layers for the Nairobi window. Every
 | DEM | Copernicus DEM GLO-30, 30 m (1,459–1,954 m) | Slope classes |
 | Land cover | Esri Sentinel-2 2020, 10 m, 9 classes (57% built-up) | Ecological classes and the existing built-up surface |
 | Flood hazard | WRI Aqueduct, 1 km | Flood avoidance line |
-| Population | GHS-POP, 1 km | Current population reference for the capacity comparison (hidden by default) |
+| Population | GHS-POP, 1 km | Current population reference for the capacity comparison |
+
+*All layers come from the [built-in catalog](/en/concepts/builtin-datasets) with source and attribution attached, and they are not limited to Nairobi: the catalog provides the same datasets for other cities at the same specification — switch the study area, add the same entries, and this chapter's method chain transfers in minutes.*
 
 The layer order is the display order: points, then lines, then polygons, then rasters. All eight stay in the project for follow-up questions; only the surfaces you see in the legend above are styled as deliverables.
 
@@ -36,43 +38,45 @@ The method is a chain of three planning questions. Each one maps onto determinis
 | 2. Grade and size what remains | How suitable is the remaining land, and how many people can it carry? | Weighted overlay (equal weights by default), Reclassify, Grid at 1 km, Zonal statistics | Suitability classes 1–4, population per evaluation cell, class-area and capacity tables |
 | 3. Propose the boundary | Where should the development boundary run, and what tiers apply? | Raster to polygons, Overlay erase and dissolve, Zonal summary, Label anchors | Development control tiers (priority / managed / restricted), charts and a written report |
 
-**The constraint definitions are explicit.** Ecological protection is the union of protected areas, the water, tree and flooded-vegetation land-cover classes, and the 50 m watercourse buffer; slope is split at 8°, 15° and 25°; flood is an avoidance line, not a suitability score. Suitability is then graded 1–4 over the land that survives those exclusions.
-
-**The capacity estimate is a planning convention.** Carrying capacity is derived at 100 m² of urban construction land per person. The report states the assumption; it is an estimate, not a measured capacity.
+In short, the study first subtracts the no-build space — ecological protection, steep slopes and the riparian buffer — from the study area, then grades the remaining land into four suitability classes with a weighted overlay and estimates carrying capacity per evaluation cell, and finally vectorises the result into three development control tiers (priority, managed, restricted) with charts and a report. The three stages share one deterministic operator chain: each stage's output layer is the next stage's input.
 
 ## Run it
 
 The screenshots below come from this scenario's reference workspace. Each step names the platform surface it uses, so you can follow the same path in your own project.
 
+<Tip>
+**Suggested question:** *"Run a development-suitability study for Nairobi: screen the ecological, terrain and flood constraints, grade buildable land and carrying capacity, then propose a development boundary with tiered controls; deliver layers, charts and a report."*
+</Tip>
+
 ### 1. Open the scenario
 
 Open **Scenarios** in the top menu, select this card and choose **Open scenario**. The whole bundle imports at once: every layer keeps its default style, legend, source and attribution, and the camera flies to the study area. Use the **Layers** panel to switch layers on and off before you type anything.
 
-![The Nairobi scenario opened in the workspace: the imported layers, the map and the chat panel ready for the suggested question](/images/scenarios/steps/development-suitability-baseline/chat.jpg)
+![The Nairobi scenario opened in a fresh project: the layer bundle imported, the Layers panel expanded, and the chat panel confirming the import with the suggested question](/images/scenarios/steps/development-suitability-baseline/open.jpg)
 
 ### 2. Ask the suggested question and review the plan
 
-The scenario ships one suggested question: *"Run a development-suitability study for Nairobi: screen the ecological, terrain and flood constraints, grade buildable land and carrying capacity, then propose a development boundary with tiered controls; deliver layers, charts and a report."* [Plan mode](/en/concepts/plan-mode) turns it into a reviewable plan: the AI asks which admin units and constraints to use and whether the ecological mask is a hard exclusion, then writes the plan document — objective and scope, data inputs, method and pipeline, quality checks, risks, deliverables and execution. Every section is marked as **system evidence** or **evidence + judgement**, and the assumptions are listed before anything runs.
+Send the **suggested question** in the box above — or edit it first. [Plan mode](/en/concepts/plan-mode) turns it into a reviewable plan: the AI asks which admin units and constraints to use and whether the ecological mask is a hard exclusion, then writes the plan document — objective and scope, data inputs, method and pipeline, quality checks, risks, deliverables and execution. Every section is marked as **system evidence** or **evidence + judgement**, and the assumptions are listed before anything runs.
 
-![The plan workbench for Nairobi: the approved plan document, its seven sections and the recorded clarifications and decisions](/images/scenarios/steps/development-suitability-baseline/plan.jpg)
+![The Nairobi plan document with the Plans panel on the left and the plan awaiting approval in the chat panel; plan sections and recorded decisions readable](/images/scenarios/steps/development-suitability-baseline/plan.jpg)
 
 ### 3. Approve the plan and run the analysis
 
-Approving the plan starts a chain of deterministic [analysis](/en/concepts/analysis) tools: slope and reclassification, raster calculator masks for the ecological protection area, buffering along waterways, overlay erase for the hard exclusions, the 1 km evaluation grid and zonal statistics. The **Analysis** ledger keeps the operator, inputs, parameters, status and result layer of every run, so each number in the report can be traced back to a step.
+Approving the plan starts a chain of deterministic [analysis](/en/concepts/analysis) tools: slope and reclassification, raster calculator masks for the ecological protection area, buffering along waterways, overlay erase for the hard exclusions, the 1 km evaluation grid and zonal statistics. The **Analysis** panel keeps the operator, inputs, parameters, status and result layer of every run, and the workflow graph in the centre visualises the whole chain, so each number in the report can be traced back to a step.
 
-![The analysis ledger for Nairobi: every operator run with its input, parameters, elapsed time and result layer](/images/scenarios/steps/development-suitability-baseline/analysis.jpg)
+![The analysis view for Nairobi: the Analysis panel lists every operator run on the left, with the workflow graph in the centre](/images/scenarios/steps/development-suitability-baseline/analysis.jpg)
 
 ### 4. Style the result on the map
 
 The layers arrive styled, and the **layer style editor** lets you change the renderer, colours, opacity, outline, labels and legend without writing code. Here the development control tiers keep human-readable class names, labels come from an anchor layer, and the constraint layers stay translucent so the tiers remain the strongest signal.
 
-![The layer style editor open on a scenario deliverable: renderer, colours, outline, label field and legend controls](/images/scenarios/steps/development-suitability-baseline/style.jpg)
+![The style editor on a deliverable layer: classed-colour breaks and label settings, with the layer editing panel highlighted in red](/images/scenarios/steps/development-suitability-baseline/style.jpg)
 
 ### 5. Turn the result into charts and a report
 
 Any result can become a **[chart](/en/concepts/charts)** — donut, pie, bar, heatmap, combo and more — with palettes, axis options and the choice to pin it to the map. The **[report](/en/concepts/reports)** canvas then combines the map, the charts and the tables into one document you can preview, revise and export; the same run can also produce a Word report for a formal submission.
 
-![A chart from this scenario opened in the chart editor, with its type, colours and data settings](/images/scenarios/steps/development-suitability-baseline/chart.jpg)
+![A chart from this scenario in the chart editor, with the editing area highlighted in red](/images/scenarios/steps/development-suitability-baseline/chart.jpg)
 
 ![The scenario report opened in the report canvas, with an executive summary, figures and embedded maps](/images/scenarios/steps/development-suitability-baseline/report.jpg)
 

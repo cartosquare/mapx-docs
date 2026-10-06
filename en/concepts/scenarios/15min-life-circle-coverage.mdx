@@ -1,13 +1,13 @@
 ---
-title: "15-minute Life Circle Coverage · Jakarta"
-sidebarTitle: "15-minute Life Circle Coverage"
+title: "15-minute Neighbourhood Coverage · Jakarta"
+sidebarTitle: "15-minute Neighbourhood Coverage"
 description: "Audit who can reach a school, a clinic and a park within an 800 m walk in central Jakarta, rank the neighbourhoods with the biggest shortfall, and score accessibility."
-keywords: ["15-minute life circle", "life circle", "walking distance", "service area", "accessibility", "2SFCA", "Jakarta", "scenario"]
+keywords: ["15-minute neighbourhood", "15-minute city", "walking distance", "service area", "accessibility", "2SFCA", "Jakarta", "scenario"]
 ---
 
-15-minute Life Circle Coverage measures the daily-life side of planning: **who can reach a school, a clinic and a park on foot**, and which neighbourhoods carry the largest shortfall. It is the MapX version of a 15-minute life-circle audit, and it deliberately reports two rulers — coverage and accessibility — instead of a single score.
+15-minute Neighbourhood Coverage measures the daily-life side of planning: **who can reach a school, a clinic and a park on foot**, and which neighbourhoods carry the largest shortfall. It is the MapX version of a 15-minute neighbourhood audit, and it deliberately reports two yardsticks — coverage and accessibility — instead of a single score.
 
-![The Jakarta life-circle run as delivered: three neighbourhood shortfall ramps, ADM4 boundaries and the pinned three-class comparison heatmap](/images/scenarios/15min-life-circle-coverage.jpg)
+![The Jakarta 15-minute neighbourhood run as delivered: three neighbourhood shortfall ramps, ADM4 boundaries and the pinned three-class comparison heatmap](/images/scenarios/15min-life-circle-coverage.jpg)
 
 ## What the scenario ships
 
@@ -23,7 +23,7 @@ Seven prepared layers cover Jakarta; the scenario's default study window is Kota
 | Neighbourhood boundaries | kelurahan (ADM4); 44 in the study area, 1.09 km² average | The evaluation unit that is ranked and named |
 | Population | WorldPop, 100 m | Residents at risk of being outside a circle |
 
-All layers come from the [built-in datasets](/en/concepts/builtin-datasets) catalog with styles and attribution attached.
+*All layers come from the [built-in catalog](/en/concepts/builtin-datasets) with source and attribution attached, and they are not limited to Jakarta: the catalog provides the same datasets for other cities at the same specification — switch the study area, add the same entries, and this chapter's method chain transfers in minutes.*
 
 ## How the study works
 
@@ -31,49 +31,53 @@ All layers come from the [built-in datasets](/en/concepts/builtin-datasets) cata
 |---|---|---|---|
 | 1. Coverage audit | How much of each neighbourhood is outside the walk? | Select features, Overlay clip/dissolve/erase, Network service area at 800 m, Zonal statistics, Field calculator | Shortfall layer per class with `gap_sum` and a share-of-residents column |
 | 2. Service mix and balance | Which neighbourhoods lack one, two or all three classes? | Zonal summary chaining, Overlay dissolve/erase | Neighbourhood summary table with population, coverage count 0–3 and three shortfall columns |
-| 3. Accessibility diagnosis | Where is access hardest, even inside the circle? | 2SFCA accessibility, Top N ranking, Label anchors, Charts | Top-10 shortfall boards, per-class accessibility scores and a pinned heatmap |
+| 3. Accessibility diagnosis | Where is access hardest, even inside the circle? | 2SFCA accessibility, Top N ranking, Label anchors, Charts | Top-10 shortfall rankings, per-class accessibility scores and a pinned heatmap |
 
-**One radius makes the classes comparable.** All three classes use an 800 m network walk, the upper end of the 15-minute life-circle standard (GB 50180-2018, 800–1000 m). A class-standard sensitivity — schools 800 m, clinics 1000 m, parks 500 m — is available as a documented variant.
-
-**The park definition is a decision, not a detail.** The shipped green layer contains road verges, golf fairways and tiny slivers. The scenario keeps `leisure = park` polygons of at least 0.5 ha and uses one centroid per park (with the default definition and the shipped data, 33 destination parks in the study area). Relaxing that definition changes the answer dramatically, so the definition is printed in the report.
-
-**Coverage and accessibility answer different questions.** The shortfall layer says whether residents can walk there; the 2SFCA score says how much supply there is per resident within reach. When they disagree, that disagreement is the finding.
+In short, the study first computes a walking service area for each of the three facility classes and crosses it with neighbourhood population to produce three shortfall layers of residents outside the circle; it then assembles the shortfalls into one neighbourhood table and ranks the neighbourhoods with the biggest gaps; finally a 2SFCA accessibility score measures how tight supply is inside the circle, cross-checking coverage against accessibility, and the run delivers rankings, a heatmap and a report.
 
 ## Run it
 
 The screenshots below come from this scenario's reference workspace. Each step names the platform surface it uses, so you can follow the same path in your own project.
 
+<Tip>
+**Suggested question:** *"Run a 15-minute neighbourhood diagnosis for central Jakarta (Jakpus): check the walking service areas of schools, clinics and parks, find coverage gaps and imbalanced districts, and name the areas to prioritise; deliver coverage layers, charts and a report."*
+</Tip>
+
 ### 1. Open the scenario
 
 Open **Scenarios** in the top menu, select this card and choose **Open scenario**. The whole bundle imports at once: every layer keeps its default style, legend, source and attribution, and the camera flies to the study area. Use the **Layers** panel to switch layers on and off before you type anything.
 
-![The Jakarta life-circle scenario opened in the workspace: imported facility layers, the map and the chat panel](/images/scenarios/steps/15min-life-circle-coverage/chat.jpg)
+![The Jakarta scenario opened in a fresh project: the layer bundle imported, the Layers panel expanded, and the chat panel confirming the import with the suggested question](/images/scenarios/steps/15min-life-circle-coverage/open.jpg)
 
 ### 2. Ask the suggested question and review the plan
 
-The suggested question is: *"Run a 15-minute life-circle diagnosis for central Jakarta (Jakpus): check the walking service areas of schools, clinics and parks, find coverage gaps and imbalanced districts, and name the areas to prioritise; deliver coverage layers, charts and a report."* [Plan mode](/en/concepts/plan-mode) asks the four decisions that change the answer — study unit, walking radius, supply assumption and deliverables — and fixes the rest, including the park definition, in the plan document.
+Send the **suggested question** in the box above — or edit it first. [Plan mode](/en/concepts/plan-mode) asks the four decisions that change the answer — study unit, walking radius, supply assumption and deliverables — and fixes the rest, including the park definition, in the plan document.
 
-![The plan workbench for the life-circle scenario: the approved plan and the recorded clarifications](/images/scenarios/steps/15min-life-circle-coverage/plan.jpg)
+![The Jakarta plan document in full-width view: side panels collapsed, plan sections and recorded decisions readable](/images/scenarios/steps/15min-life-circle-coverage/plan.jpg)
 
 ### 3. Approve the plan and run the analysis
 
-The run uses selection, clipping and erasing to shape the study area, network **service areas** at 800 m for all three facility classes, zonal statistics to count the residents left outside, field calculations for the shortfall shares, the accessibility model (2SFCA) and a chained summary table. The graph shows every branch, including the three facility classes side by side.
+The run uses selection, clipping and erasing to shape the study area, network **service areas** at 800 m for all three facility classes, zonal statistics to count the residents left outside, field calculations for the shortfall shares, the accessibility model (2SFCA) and a chained summary table. The graph shows every branch, including the three facility classes side by side. The **Analysis** panel keeps every run's operator, inputs, parameters and result layer.
 
-![The analysis graph for this scenario: each node is a deterministic operator, with inputs, parameters and artifacts available on click](/images/scenarios/steps/15min-life-circle-coverage/workflow.jpg)
+![The analysis view for Jakarta: the Analysis panel lists every operator run on the left, with the workflow graph in the centre](/images/scenarios/steps/15min-life-circle-coverage/analysis.jpg)
 
 ### 4. Style the result on the map
 
 The three shortfall ramps share one break scale, so a dark purple and a dark teal mean the same share; the ADM4 boundary sits on top with neighbourhood labels, and blank space means inside the circle.
 
-![The layer style editor open on a scenario deliverable: renderer, colours, outline, label field and legend controls](/images/scenarios/steps/15min-life-circle-coverage/style.jpg)
+![The style editor on a deliverable layer: classed-colour breaks and label settings, with the layer editing panel highlighted in red](/images/scenarios/steps/15min-life-circle-coverage/style.jpg)
 
 ### 5. Turn the result into charts and a report
 
-The run produces per-class ranking boards, a three-class comparison and a heatmap that can be pinned to the map while you pan the ramps. The **[report](/en/concepts/reports)** then names the priority neighbourhoods and states the radius, the park definition and the caveats.
+The run produces per-class rankings, a three-class comparison and a heatmap that can be pinned to the map while you pan the ramps. The **[report](/en/concepts/reports)** then names the priority neighbourhoods and states the radius, the park definition and the caveats. The same run can also export the report as a Word document for a formal submission or a slide deck for a presentation handoff.
 
-![A chart from this scenario opened in the chart editor, with its type, colours and data settings](/images/scenarios/steps/15min-life-circle-coverage/chart.jpg)
+![A chart from this scenario in the chart editor, with the editing area highlighted in red](/images/scenarios/steps/15min-life-circle-coverage/chart.jpg)
 
 ![The scenario report opened in the report canvas, with an executive summary, figures and embedded maps](/images/scenarios/steps/15min-life-circle-coverage/report.jpg)
+
+![The Word version of the same report: the document preview with the summary table, an embedded map figure and the written analysis](/images/scenarios/steps/15min-life-circle-coverage/word-report.jpg)
+
+![The slide-deck report generated from this run: the title slide in the presentation preview, with the report versions listed in the left panel](/images/scenarios/steps/15min-life-circle-coverage/ppt-report.jpg)
 
 ## Example output
 
@@ -81,8 +85,8 @@ The run produces per-class ranking boards, a three-class comparison and a heatma
 
 A finished run hands back a named, reusable set of deliverables instead of a single map:
 
-- **Layers** — one neighbourhood shortfall layer per facility class, the accessibility scores, the top-10 boards, the neighbourhood summary table as a layer, and the labelled boundary.
-- **Tables** — the neighbourhood summary with population, coverage count and the three shortfall columns, plus the per-class ranking boards.
+- **Layers** — one neighbourhood shortfall layer per facility class, the accessibility scores, the top-10 rankings, the neighbourhood summary table as a layer, and the labelled boundary.
+- **Tables** — the neighbourhood summary with population, coverage count and the three shortfall columns, plus the per-class rankings.
 - **Charts** — three class rankings, a grouped comparison and a heatmap, all editable and pinnable.
 - **Report** — the diagnosis document naming the priority neighbourhoods, with the radius, the park definition and the coverage caveats.
 
@@ -94,4 +98,4 @@ The layer names follow the run language, but the deliverable set is stable enoug
 - [Public Facility Siting](/en/concepts/scenarios/public-facility-siting) — turns the gaps into candidate sites
 - [Carrying Capacity Assessment](/en/concepts/scenarios/carrying-capacity-assessment) — the same city, read through environmental constraints
 - [Analysis](/en/concepts/analysis) — service areas, accessibility and zonal statistics
-- [Charts](/en/concepts/charts) — ranking boards and pinned comparison views
+- [Charts](/en/concepts/charts) — rankings and pinned comparison views

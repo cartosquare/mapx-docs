@@ -7,69 +7,71 @@ keywords: ["facility siting", "location allocation", "MCLP", "k-median", "maximu
 
 Public Facility Siting answers the last mile of public-service planning: **given what already exists, where should the next schools and clinics go?** The scenario runs the full arc — coverage diagnosis, demand gap, candidate screening and siting comparison — and reports how many currently unserved residents each recommended site would bring within reach.
 
-![The Dar es Salaam run as delivered: ward shortfall boards, demand/supply quadrants and ranked MCLP sites for schools and clinics](/images/scenarios/public-facility-siting.jpg)
+![The Dar es Salaam run as delivered: ward shortfall rankings, demand/supply quadrants and ranked MCLP sites for schools and clinics](/images/scenarios/public-facility-siting.jpg)
 
 ## What the scenario ships
 
-Seven layers cover the Dar es Salaam region. The watercourse layer starts hidden; it exists so the 30 m river setback can be applied to candidate sites.
+Seven layers cover the Dar es Salaam region.
 
 | Layer | Data | Role in the study |
 |---|---|---|
 | Education facilities | OSM education POIs (2,223) | Raw supply for the school analysis |
 | Health facilities | Healthsites.io (1,463) | Raw supply for the clinic analysis |
 | Road network | OSM roads (102,464 lines) | Walking/driving network for service areas and site snapping |
-| Watercourses | OSM waterways (11,160 lines, hidden) | 30 m riparian setback applied to candidates |
+| Watercourses | OSM waterways, 11,160 lines | 30 m riparian setback applied to candidates |
 | Ward boundaries | OCHA COD-AB ADM3 (90 wards, 1,667 km²) | Shortfall ranking, candidate scope and balance checks |
 | Building footprints | Overture (481,681 polygons) | Built-up intensity screen for candidate cells |
 | Population | WorldPop, 100 m | Demand and coverage weights |
+
+*All layers come from the [built-in catalog](/en/concepts/builtin-datasets) with source and attribution attached, and they are not limited to Dar es Salaam: the catalog provides the same datasets for other cities at the same specification — switch the study area, add the same entries, and this chapter's method chain transfers in minutes.*
 
 ## How the study works
 
 | Stage | Question | What MapX runs | Output |
 |---|---|---|---|
-| 1. Coverage diagnosis | Who is outside the standard today? | Select features (class screen), Overlay clip, Service area (800 m schools / 1000 m clinics), Overlay erase, Zonal statistics, Top N | Ward shortfall layer and a top-10 board per class |
+| 1. Coverage diagnosis | Who is outside the standard today? | Select features (class screen), Overlay clip, Service area (800 m schools / 1000 m clinics), Overlay erase, Zonal statistics, Top N | Ward shortfall layer and a top-10 ranking per class |
 | 2. Demand gap | Where is demand high and supply low? | Grid at 500 m, Zonal statistics, Quadrant (median split), 1 km demand grid | Pressure quadrants (diagnostic) and the unserved-population demand layer |
 | 3. Siting comparison | Which new sites serve the most people? | Grid inside the worst wards, Overlay erase (30 m corridor), Zonal statistics/summary, Centroid points, Location-covering (MCLP), Location-allocation (k-median) | Recommended sites, the efficiency comparison, marginal coverage curve and residual gaps |
 
-**The supply set is narrowed before anything is computed.** Of 2,223 education points, 1,312 are schools — kindergartens, colleges and universities are not school supply for a walking-radius question. Of 1,463 health points, only 363 are clinics, hospitals or doctors; **1,020 entries (69.7%) are pharmacies** and are excluded. Without that screen, a "clinic" analysis is really a pharmacy map.
-
-**Candidates are a shortlist, not the whole city.** The scenario ranks the 90 wards by unserved population, keeps the ten worst, lays a 500 m grid inside them, removes the 30 m river corridor, drops cells that are already built out (building footprint share above 30%) and then caps the survivors by residential population. The ladder for large windows is documented; the physical filters are never relaxed to fit a budget.
-
-**Two models, one recommendation.** The primary model is maximum coverage (MCLP): place *k* sites so the most unserved people fall within the standard radius. A k-median run with the same candidates and demand is reported alongside as the efficiency comparison — it minimises travel, but it is not the recommendation.
+In short, the study first audits the existing schools and clinics against their service standards to locate shortfall wards and unserved population; it then screens candidate grid cells inside the worst wards for setback and build-out conditions; finally a maximum-coverage model picks the recommended sites that serve the most unserved residents, with a second model as an efficiency reference, delivering recommended sites, a marginal coverage curve and a report.
 
 ## Run it
 
 The screenshots below come from this scenario's reference workspace. Each step names the platform surface it uses, so you can follow the same path in your own project.
 
+<Tip>
+**Suggested question:** *"Run a public-facility siting study for Dar es Salaam: diagnose the coverage and demand gaps of existing schools and clinics, then compare candidate sites for new facilities and recommend where to build; deliver layers, charts and a report."*
+</Tip>
+
 ### 1. Open the scenario
 
 Open **Scenarios** in the top menu, select this card and choose **Open scenario**. The whole bundle imports at once: every layer keeps its default style, legend, source and attribution, and the camera flies to the study area. Use the **Layers** panel to switch layers on and off before you type anything.
 
-![The Dar es Salaam siting scenario opened in the workspace, with the imported layers, the map and the chat panel](/images/scenarios/steps/public-facility-siting/chat.jpg)
+![The Dar es Salaam scenario opened in a fresh project: the layer bundle imported, the Layers panel expanded, and the chat panel confirming the import with the suggested question](/images/scenarios/steps/public-facility-siting/open.jpg)
 
 ### 2. Ask the suggested question and review the plan
 
-The suggested question is: *"Run a public-facility siting study for Dar es Salaam: diagnose the coverage and demand gaps of existing schools and clinics, then compare candidate sites for new facilities and recommend where to build; deliver layers, charts and a report."* [Plan mode](/en/concepts/plan-mode) records the supply-set definitions, the radius per class, the demand basis, the number of sites and the report language before the run starts.
+Send the **suggested question** in the box above — or edit it first. [Plan mode](/en/concepts/plan-mode) records the supply-set definitions, the radius per class, the demand basis, the number of sites and the report language before the run starts.
 
-![The plan workbench for Dar es Salaam: the approved plan, input slots and recorded decisions](/images/scenarios/steps/public-facility-siting/plan.jpg)
+![The Dar es Salaam plan document with the Plans panel open on the left; plan sections and recorded decisions readable](/images/scenarios/steps/public-facility-siting/plan.jpg)
 
 ### 3. Approve the plan and run the analysis
 
-The chain screens the supply set by facility class, builds the status-quo **service areas** (800 m schools, 1000 m clinics), erases them from the wards to get the shortfall, prepares the unserved demand on a grid, screens the candidate cells and then runs the two siting models: maximum coverage (MCLP) as the recommendation and k-median as the efficiency comparison.
+The chain screens the supply set by facility class, builds the status-quo **service areas** (800 m schools, 1000 m clinics), erases them from the wards to get the shortfall, prepares the unserved demand on a grid, screens the candidate cells and then runs the two siting models: maximum coverage (MCLP) as the recommendation and k-median as the efficiency comparison. The **Analysis** panel keeps every run's operator, inputs, parameters and result layer, and the workflow graph in the centre visualises the whole chain.
 
-![The analysis graph for this scenario: each node is a deterministic operator, with inputs, parameters and artifacts available on click](/images/scenarios/steps/public-facility-siting/workflow.jpg)
+![The analysis view for Dar es Salaam: the Analysis panel lists every operator run on the left, with the workflow graph in the centre](/images/scenarios/steps/public-facility-siting/analysis.jpg)
 
 ### 4. Style the result on the map
 
-Recommended sites are ranked circles in the class hue, the shortfall boards and demand/supply quadrants stay as hidden reference layers, and the legend states which model each marker belongs to.
+Recommended sites are ranked circles in the class hue, the shortfall rankings and demand/supply quadrants stay as hidden reference layers, and the legend states which model each marker belongs to.
 
-![The layer style editor open on a scenario deliverable: renderer, colours, outline, label field and legend controls](/images/scenarios/steps/public-facility-siting/style.jpg)
+![The style editor on a deliverable layer: classed-colour breaks and label settings, with the layer editing panel highlighted in red](/images/scenarios/steps/public-facility-siting/style.jpg)
 
 ### 5. Turn the result into charts and a report
 
 The marginal coverage curve answers whether the next site still earns its place, and the before/after bars show what the recommended sites add. Both are **[charts](/en/concepts/charts)**; the **[report](/en/concepts/reports)** carries the before/after pair and every disclosure about capacity, crowding and fairness.
 
-![A chart from this scenario opened in the chart editor, with its type, colours and data settings](/images/scenarios/steps/public-facility-siting/chart.jpg)
+![A chart from this scenario in the chart editor, with the editing area highlighted in red](/images/scenarios/steps/public-facility-siting/chart.jpg)
 
 ![The scenario report opened in the report canvas, with an executive summary, figures and embedded maps](/images/scenarios/steps/public-facility-siting/report.jpg)
 
@@ -79,7 +81,7 @@ The marginal coverage curve answers whether the next site still earns its place,
 
 A finished run hands back a named, reusable set of deliverables instead of a single map:
 
-- **Layers** — the recommended sites for each facility class, the comparison sites, their service areas, the residual gaps, the shortfall boards and the demand/supply quadrants.
+- **Layers** — the recommended sites for each facility class, the comparison sites, their service areas, the residual gaps, the shortfall rankings and the demand/supply quadrants.
 - **Tables** — the ward balance table, the selected-site list and the feasibility counts for the candidate filters.
 - **Charts** — the marginal coverage curve and the before/after coverage comparison.
 - **Report** — the siting study with the supply-set definitions, the before/after pair and the capacity, crowding and fairness disclosures.
@@ -89,7 +91,7 @@ The layer names follow the run language, but the deliverable set is stable enoug
 ## Related
 
 - [Scenarios](/en/concepts/scenarios) — the full catalog and how scenarios work
-- [15-minute Life Circle Coverage](/en/concepts/scenarios/15min-life-circle-coverage) — the coverage audit that motivates siting
+- [15-minute Neighbourhood Coverage](/en/concepts/scenarios/15min-life-circle-coverage) — the coverage audit that motivates siting
 - [Urban Growth Monitor](/en/concepts/scenarios/urban-growth-monitor) — where growth is heading, for forward-looking siting
 - [Analysis](/en/concepts/analysis) — network and overlay tools, scale guards and run semantics
 - [Reports](/en/concepts/reports) — assembling the siting package
