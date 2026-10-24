@@ -1,6 +1,42 @@
 {
-  "generatedAt": "2026-08-12T05:36:18.720Z",
+  "generatedAt": "2026-10-24T15:08:53.531Z",
   "endpoints": [
+    {
+      "method": "POST",
+      "path": "/add-field",
+      "file": "layer-edit-internal.ts",
+      "router": "layerEditInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/analysis/describe-template",
+      "file": "analysis-internal.ts",
+      "router": "analysisInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/analysis/get-run",
+      "file": "analysis-internal.ts",
+      "router": "analysisInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/analysis/list-templates",
+      "file": "analysis-internal.ts",
+      "router": "analysisInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/analysis/run",
+      "file": "analysis-internal.ts",
+      "router": "analysisInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/analysis/wait-run",
+      "file": "analysis-internal.ts",
+      "router": "analysisInternalRoutes"
+    },
     {
       "method": "GET",
       "path": "/api-keys",
@@ -50,10 +86,22 @@
       "router": "adminRoutes"
     },
     {
+      "method": "POST",
+      "path": "/api/admin/users/:id/credits",
+      "file": "admin.ts",
+      "router": "adminRoutes"
+    },
+    {
       "method": "GET",
       "path": "/api/admin/users/:id/usage",
       "file": "admin.ts",
       "router": "adminRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/avatars/:file",
+      "file": "user.ts",
+      "router": "userRoutes"
     },
     {
       "method": "POST",
@@ -63,9 +111,87 @@
     },
     {
       "method": "POST",
+      "path": "/api/billing/credits-topup",
+      "file": "billing.ts",
+      "router": "billingRoutes"
+    },
+    {
+      "method": "POST",
       "path": "/api/billing/portal",
       "file": "billing.ts",
       "router": "billingRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/builtin",
+      "file": "builtin.ts",
+      "router": "builtinRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/builtin/:key",
+      "file": "builtin.ts",
+      "router": "builtinRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/capture/layout/:ticket",
+      "file": "layout-capture-public.ts",
+      "router": "layoutCapturePublicRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/resources",
+      "file": "chat-resources.ts",
+      "router": "chatResourceRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-sources",
+      "file": "data-sources.ts",
+      "router": "dataSourceRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/data-sources",
+      "file": "data-sources.ts",
+      "router": "dataSourceRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/data-sources/:id",
+      "file": "data-sources.ts",
+      "router": "dataSourceRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/data-sources/:id",
+      "file": "data-sources.ts",
+      "router": "dataSourceRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-sources/:id/tables",
+      "file": "data-sources.ts",
+      "router": "dataSourceRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/data-sources/:id/tables/:table/import",
+      "file": "data-sources.ts",
+      "router": "dataSourceRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-sources/:id/tables/:table/sample",
+      "file": "data-sources.ts",
+      "router": "dataSourceRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/data-sources/:id/test",
+      "file": "data-sources.ts",
+      "router": "dataSourceRoutes"
     },
     {
       "method": "GET",
@@ -81,7 +207,19 @@
     },
     {
       "method": "GET",
+      "path": "/api/embed/:token/tiles/:fileId/:version/:z/:x/:y",
+      "file": "embed-public.ts",
+      "router": "embedPublicRoutes"
+    },
+    {
+      "method": "GET",
       "path": "/api/embed/file-content-stream",
+      "file": "embed-public.ts",
+      "router": "embedPublicRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/embed/layers/features/stream",
       "file": "embed-public.ts",
       "router": "embedPublicRoutes"
     },
@@ -99,7 +237,91 @@
     },
     {
       "method": "POST",
+      "path": "/api/internal/add-layer-from-file",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
       "path": "/api/internal/ask-user",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/builtin/get",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/builtin/import",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/builtin/list",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/capture-view",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/chart-pin",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/charts",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/db-export",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/db-import-layer",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/db-list-sources",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/db-list-tables",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/db-query",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/db-table-info",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/delete-chart",
       "file": "internal.ts",
       "router": "internalRoutes"
     },
@@ -112,6 +334,18 @@
     {
       "method": "POST",
       "path": "/api/internal/delete-layer",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/export-report-pdf",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/get-chart-asset",
       "file": "internal.ts",
       "router": "internalRoutes"
     },
@@ -135,6 +369,12 @@
     },
     {
       "method": "POST",
+      "path": "/api/internal/get-report",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
       "path": "/api/internal/import-file",
       "file": "internal.ts",
       "router": "internalRoutes"
@@ -147,7 +387,25 @@
     },
     {
       "method": "POST",
+      "path": "/api/internal/kb-document",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/kb-search",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
       "path": "/api/internal/list-assets",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/list-charts",
       "file": "internal.ts",
       "router": "internalRoutes"
     },
@@ -165,7 +423,31 @@
     },
     {
       "method": "POST",
+      "path": "/api/internal/list-mcp-tools",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
       "path": "/api/internal/map-state",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/patch-report",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/prune-intermediate-layers",
+      "file": "internal.ts",
+      "router": "internalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal/raster-stats",
       "file": "internal.ts",
       "router": "internalRoutes"
     },
@@ -213,9 +495,81 @@
     },
     {
       "method": "POST",
-      "path": "/api/internal/upload-base64",
-      "file": "internal.ts",
-      "router": "internalRoutes"
+      "path": "/api/invite/redeem",
+      "file": "invite.ts",
+      "router": "inviteRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/kbs",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/kbs",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/kbs/:id",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/kbs/:id",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/kbs/:id/documents",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/kbs/:id/documents",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/kbs/:id/documents/:docId",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/kbs/:id/documents/:docId/chunks",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/kbs/:id/documents/:docId/chunks/:chunkId",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/kbs/:id/reingest",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/kbs/:id/search",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/kbs/:id/urls",
+      "file": "kbs.ts",
+      "router": "kbRoutes"
     },
     {
       "method": "GET",
@@ -240,6 +594,36 @@
       "path": "/api/keys/verify",
       "file": "keys.ts",
       "router": "keyRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mcps",
+      "file": "mcps.ts",
+      "router": "mcpRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/mcps",
+      "file": "mcps.ts",
+      "router": "mcpRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/mcps/:id",
+      "file": "mcps.ts",
+      "router": "mcpRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/mcps/:id",
+      "file": "mcps.ts",
+      "router": "mcpRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/mcps/:id/test",
+      "file": "mcps.ts",
+      "router": "mcpRoutes"
     },
     {
       "method": "GET",
@@ -284,10 +668,52 @@
       "router": "sessionRoutes"
     },
     {
+      "method": "DELETE",
+      "path": "/api/sessions/:id/charts/:chartId",
+      "file": "charts.ts",
+      "router": "chartRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id/charts/:chartId",
+      "file": "charts.ts",
+      "router": "chartRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/charts/:chartId/duplicate",
+      "file": "charts.ts",
+      "router": "chartRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/charts/:chartId/pin",
+      "file": "charts.ts",
+      "router": "chartRoutes"
+    },
+    {
       "method": "POST",
       "path": "/api/sessions/:id/chat",
       "file": "chat.ts",
       "router": "chatRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/decks",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/decks/:deckId",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id/decks/:deckId",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
     },
     {
       "method": "GET",
@@ -298,6 +724,12 @@
     {
       "method": "PATCH",
       "path": "/api/sessions/:id/embed",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/events",
       "file": "sessions.ts",
       "router": "sessionRoutes"
     },
@@ -338,6 +770,24 @@
       "router": "sessionRoutes"
     },
     {
+      "method": "GET",
+      "path": "/api/sessions/:id/files/:fileId/preview",
+      "file": "data-file-preview.ts",
+      "router": "dataFilePreviewRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/files/batch-download",
+      "file": "batch-export.ts",
+      "router": "batchExportRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/import-builtin",
+      "file": "builtin.ts",
+      "router": "builtinRoutes"
+    },
+    {
       "method": "POST",
       "path": "/api/sessions/:id/import-project",
       "file": "project.ts",
@@ -360,6 +810,390 @@
       "path": "/api/sessions/:id/layers",
       "file": "sessions.ts",
       "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layers/:layerId/commit-edits",
+      "file": "layer-edit.ts",
+      "router": "layerEditRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layers/:layerId/copy-to-session",
+      "file": "layer-edit.ts",
+      "router": "layerEditRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layers/:layerId/download",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id/layers/:layerId/edit-state",
+      "file": "layer-edit.ts",
+      "router": "layerEditRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/sessions/:id/layers/:layerId/features/:fid",
+      "file": "layer-edit.ts",
+      "router": "layerEditRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layers/:layerId/features/:fid",
+      "file": "layer-edit.ts",
+      "router": "layerEditRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id/layers/:layerId/features/:fid",
+      "file": "layer-edit.ts",
+      "router": "layerEditRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layers/:layerId/features/stream",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layers/:layerId/fields",
+      "file": "layer-edit.ts",
+      "router": "layerEditRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/sessions/:id/layers/:layerId/fields/:name",
+      "file": "layer-edit.ts",
+      "router": "layerEditRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layers/:layerId/publish",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layers/:layerId/raster-stats",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layers/:layerId/reset-style",
+      "file": "sessions.ts",
+      "router": "sessionRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layers/:layerId/table",
+      "file": "layer-edit.ts",
+      "router": "layerEditRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layers/batch-download",
+      "file": "batch-export.ts",
+      "router": "batchExportRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layout-jobs/:jobId",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layout-jobs/:jobId/download",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/sessions/:id/layouts/:layoutId",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id/layouts/:layoutId",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/ai-command",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/approve",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/atlas",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId/atlases",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId/atlases/:atlasId",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/atlases/:atlasId/render-jobs",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/bindings/resolve",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/bindings/validate",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/brief",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId/comments",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/comments",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/:id/layouts/:layoutId/comments/:commentId",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/decks",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/draft-evaluate",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/draft-evaluate-failed",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/duplicate",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/freeze",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/freeze-failed",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/operations",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/operations/:operationId/undo",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/preflight",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId/preflight/:versionId",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/publish-packages",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/render",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/render-jobs",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId/render-jobs/:jobId",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/render-jobs/:jobId/cancel",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId/render-jobs/:jobId/download",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/render-jobs/:jobId/retry",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/render-variants",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/reopen",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/request-changes",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId/review-events",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId/share",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/share",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/share-kit",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/sessions/:id/layouts/:layoutId/share/:shareId",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/submit-review",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/variants",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/layouts/:layoutId/versions",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId/versions/:fromVersionId/diff/:toVersionId",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/layouts/:layoutId/versions/:versionId/map-assets/:itemId",
+      "file": "layouts.ts",
+      "router": "layoutRoutes"
     },
     {
       "method": "GET",
@@ -387,6 +1221,24 @@
     },
     {
       "method": "POST",
+      "path": "/api/sessions/:id/report/:fileId/export-pdf",
+      "file": "report.ts",
+      "router": "reportRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/report/:fileId/meta",
+      "file": "report.ts",
+      "router": "reportRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/report/:fileId/preview",
+      "file": "report.ts",
+      "router": "reportRoutes"
+    },
+    {
+      "method": "POST",
       "path": "/api/sessions/:id/report/:fileId/share",
       "file": "report.ts",
       "router": "reportRoutes"
@@ -394,6 +1246,18 @@
     {
       "method": "GET",
       "path": "/api/sessions/:id/report/:filename",
+      "file": "report.ts",
+      "router": "reportRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/reports/batch-export",
+      "file": "batch-export.ts",
+      "router": "batchExportRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/reports/overview",
       "file": "report.ts",
       "router": "reportRoutes"
     },
@@ -434,10 +1298,40 @@
       "router": "sessionRoutes"
     },
     {
+      "method": "GET",
+      "path": "/api/sessions/:id/turn",
+      "file": "chat.ts",
+      "router": "chatRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/turn/cancel",
+      "file": "chat.ts",
+      "router": "chatRoutes"
+    },
+    {
       "method": "POST",
       "path": "/api/sessions/:id/upload",
       "file": "upload.ts",
       "router": "uploadRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/upload-jobs",
+      "file": "upload-jobs.ts",
+      "router": "uploadJobRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:id/upload-jobs/:jobId",
+      "file": "upload-jobs.ts",
+      "router": "uploadJobRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/:id/upload-jobs/:jobId/cancel",
+      "file": "upload-jobs.ts",
+      "router": "uploadJobRoutes"
     },
     {
       "method": "POST",
@@ -447,9 +1341,45 @@
     },
     {
       "method": "POST",
-      "path": "/api/sessions/migrate",
+      "path": "/api/sessions/:id/upload/shapefile",
+      "file": "upload.ts",
+      "router": "uploadRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:sessionId/files/:fileId/raster/:filename",
       "file": "sessions.ts",
       "router": "sessionRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/:sid/layers/:layerId/tiles/:version/:z/:x/:y",
+      "file": "vector-tiles.ts",
+      "router": "vectorTileRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/share/chart/:token",
+      "file": "chart-assets.ts",
+      "router": "chartAssetRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/share/layout/:token",
+      "file": "layout-share-public.ts",
+      "router": "layoutSharePublicRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/share/layout/:token/comments",
+      "file": "layout-share-public.ts",
+      "router": "layoutSharePublicRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/share/layout/:token/map/:itemId",
+      "file": "layout-share-public.ts",
+      "router": "layoutSharePublicRoutes"
     },
     {
       "method": "GET",
@@ -459,15 +1389,339 @@
     },
     {
       "method": "GET",
+      "path": "/api/skills",
+      "file": "skills.ts",
+      "router": "skillRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/skills",
+      "file": "skills.ts",
+      "router": "skillRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/skills/:id",
+      "file": "skills.ts",
+      "router": "skillRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/skills/:id",
+      "file": "skills.ts",
+      "router": "skillRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/skills/:id",
+      "file": "skills.ts",
+      "router": "skillRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/skills/:id/download",
+      "file": "skills.ts",
+      "router": "skillRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/skills/:id/files",
+      "file": "skills.ts",
+      "router": "skillRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/skills/:id/files",
+      "file": "skills.ts",
+      "router": "skillRoutes"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/skills/:id/files",
+      "file": "skills.ts",
+      "router": "skillRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/symbol-assets/:id",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/symbol-assets/:id",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/symbol-assets/:id/content",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/symbol-assets/:id/thumbnail",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/symbol-assets/:id/thumbnail",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/symbol-libraries",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/symbol-libraries",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/symbol-libraries/:id",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/symbol-libraries/:id",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/symbol-libraries/:id/assets",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/symbol-libraries/:id/assets",
+      "file": "symbol-libraries.ts",
+      "router": "symbolLibraryRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/team-layout-templates",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/team-layout-templates",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/team-layout-templates/:templateId",
+      "file": "layout-t4.ts",
+      "router": "layoutT4Routes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/teams",
+      "file": "teams.ts",
+      "router": "teamRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/teams",
+      "file": "teams.ts",
+      "router": "teamRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/teams/invite",
+      "file": "teams.ts",
+      "router": "teamRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/teams/invites/:token/accept",
+      "file": "teams.ts",
+      "router": "teamRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/teams/leave",
+      "file": "teams.ts",
+      "router": "teamRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/teams/members/:userId",
+      "file": "teams.ts",
+      "router": "teamRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/teams/transfer",
+      "file": "teams.ts",
+      "router": "teamRoutes"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/user/avatar",
+      "file": "user.ts",
+      "router": "userRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/user/avatar",
+      "file": "user.ts",
+      "router": "userRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/user/avatar-preset",
+      "file": "user.ts",
+      "router": "userRoutes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/user/preferences",
+      "file": "user.ts",
+      "router": "userRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/user/preferences",
+      "file": "user.ts",
+      "router": "userRoutes"
+    },
+    {
+      "method": "GET",
       "path": "/api/user/profile",
       "file": "user.ts",
       "router": "userRoutes"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/user/profile",
+      "file": "user.ts",
+      "router": "userRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/copy-layer-to-session",
+      "file": "layer-edit-internal.ts",
+      "router": "layerEditInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/delete-features",
+      "file": "layer-edit-internal.ts",
+      "router": "layerEditInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/delete-field",
+      "file": "layer-edit-internal.ts",
+      "router": "layerEditInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/feature-table",
+      "file": "layer-edit-internal.ts",
+      "router": "layerEditInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/get-feature",
+      "file": "layer-edit-internal.ts",
+      "router": "layerEditInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/checkpoint",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/create",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/draft-evaluate",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/freeze",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/get",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/list",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/manage",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/proof",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/render",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/templates",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/layout/update",
+      "file": "layout-internal.ts",
+      "router": "layoutInternalRoutes"
     },
     {
       "method": "GET",
       "path": "/openapi.json",
       "file": "v1.ts",
       "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/plan/${suffix}",
+      "file": "workflow-internal.ts",
+      "router": "workflowInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/refresh-layer-data",
+      "file": "layer-edit-internal.ts",
+      "router": "layerEditInternalRoutes"
     },
     {
       "method": "GET",
@@ -614,16 +1868,106 @@
       "router": "v1Routes"
     },
     {
+      "method": "POST",
+      "path": "/update-features",
+      "file": "layer-edit-internal.ts",
+      "router": "layerEditInternalRoutes"
+    },
+    {
       "method": "GET",
       "path": "/usage",
       "file": "v1.ts",
       "router": "v1Routes"
     },
     {
+      "method": "POST",
+      "path": "/vector-add-features",
+      "file": "vector-internal.ts",
+      "router": "vectorInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/vector-commit-edits",
+      "file": "vector-internal.ts",
+      "router": "vectorInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/vector-export-features",
+      "file": "vector-internal.ts",
+      "router": "vectorInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/vector-query-features",
+      "file": "vector-internal.ts",
+      "router": "vectorInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/vector-query-sql",
+      "file": "vector-internal.ts",
+      "router": "vectorInternalRoutes"
+    },
+    {
       "method": "GET",
       "path": "/verify",
       "file": "v1.ts",
       "router": "v1Routes"
+    },
+    {
+      "method": "POST",
+      "path": "/workflow/${legacy}",
+      "file": "workflow-internal.ts",
+      "router": "workflowInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/workflow/describe",
+      "file": "workflow-internal.ts",
+      "router": "workflowInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/workflow/list",
+      "file": "workflow-internal.ts",
+      "router": "workflowInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/workflow/publish",
+      "file": "workflow-internal.ts",
+      "router": "workflowInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/workflow/resume-run",
+      "file": "workflow-internal.ts",
+      "router": "workflowInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/workflow/retry-step",
+      "file": "workflow-internal.ts",
+      "router": "workflowInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/workflow/run",
+      "file": "workflow-internal.ts",
+      "router": "workflowInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/workflow/save",
+      "file": "workflow-internal.ts",
+      "router": "workflowInternalRoutes"
+    },
+    {
+      "method": "POST",
+      "path": "/workflow/wait-run",
+      "file": "workflow-internal.ts",
+      "router": "workflowInternalRoutes"
     }
   ]
 }

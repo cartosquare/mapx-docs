@@ -5,11 +5,12 @@ description: "Take work out of MapX: map images, layer data as GeoJSON or Shapef
 keywords: ["export", "download data", "GeoJSON", "Shapefile", "GeoPackage", "FlatGeobuf", "CSV", "project manifest", "PDF report"]
 ---
 
-MapX exports fall into four groups, and each one starts from a different place in the workspace:
+MapX provides different export entry points for each kind of deliverable:
 
 | What you want | Where it starts | Format |
 |---|---|---|
 | A picture of the map | Share panel → **Social media share** | PNG |
+| Professional cartographic layout | Layouts → **Export** | PNG, SVG, PDF, FOGRA39 PDF/X-4 |
 | The data behind a layer | Layers panel → row download, or batch download | GeoJSON, FlatGeobuf, GeoPackage, Shapefile (zip) |
 | A source file you uploaded | Data panel → row **Download** | Original file |
 | A chart | Charts panel → chart export | PNG, SVG, CSV |
@@ -21,6 +22,7 @@ MapX exports fall into four groups, and each one starts from a different place i
 | Export | Free | Basic | Pro | Business |
 |---|---|---|---|---|
 | Share a map image | ✓ (watermark) | ✓ | ✓ | ✓ |
+| Professional cartography export | ✓ (MapX mark) | ✓ | ✓ | ✓ |
 | Embed the map | ✓ | ✓ | ✓ | ✓ |
 | Share a report link | ✓ | ✓ | ✓ | ✓ |
 | Download layers and files | ✗ | ✓ | ✓ | ✓ |
@@ -36,6 +38,21 @@ Downloading data requires **Basic or higher**. On Free you can analyse and visua
 The high-resolution PNG comes from the **Share** panel, where you also choose the aspect ratio, resolution, watermark, 3D perspective, pinned chart, and legend placement. It downloads straight to your browser and is never uploaded anywhere.
 
 See [Sharing](/en/sharing/sharing-maps#generate-a-share-image) for the full walkthrough.
+
+For paper sizes, millimetre layout, versions, proofing, SVG/PDF, or print PDF/X-4, use [Professional cartography](/en/concepts/cartographic-layout).
+
+## Professional cartography export
+
+In the layout studio, open **Export**, validate the latest draft, and choose an output:
+
+| Format | Use it for |
+|---|---|
+| PNG | Screens, web, and social publishing |
+| SVG | Editable layout elements; map frames remain embedded rasters |
+| Standard PDF | sRGB for screens, office documents, and general archives |
+| Print PDF/X-4 | FOGRA39/CMYK with a configured server print runtime |
+
+Free plans show the **MapX mark** in the bottom-right corner of the finished page. Basic and above can turn it off. In the export panel, turning the **MapX mark** switch on shows the mark and turning it off hides it. The mark stays inside the page, overlays content, and does not enlarge the canvas.
 
 ## Layer data
 

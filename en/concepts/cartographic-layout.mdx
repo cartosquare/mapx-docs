@@ -1,0 +1,313 @@
+---
+title: "Professional cartography"
+sidebarTitle: "Professional cartography"
+description: "Combine maps, layers, metrics, legends, and provenance in the workspace, validate the latest draft, and export PNG, SVG, or print-ready PDF."
+keywords: ["cartographic layout", "layout studio", "PDF/X-4", "FOGRA39", "version", "proof", "MapX mark"]
+---
+
+MapX turns an interactive map into a deliverable layout. A layout can contain map frames, text, legends, charts, tables, scale bars, north arrows, QR codes, inset maps, callouts, and source information.
+
+There are two cartography paths:
+
+| Goal | Entry point | Typical use |
+|---|---|---|
+| Capture the current map as PNG | **Share** → **Social media share** | Instant sharing, briefings, and presentations |
+| Control paper, margins, and every item | **Open professional layout studio** | A0–A4 maps, exhibition boards, report figures |
+
+<Info>
+**Social media share** captures only the map and downloads a PNG. It does not show title, author, or layout fields, and it does not create a layout record. Use the **professional layout studio** for titles, metrics, versions, proofing, or PDF.
+</Info>
+
+The professional workflow is **edit → proof → export**.
+
+<Steps>
+  <Step title="Open Layouts">
+    Select **Layouts** in the workspace rail to open the project's layout library.
+  </Step>
+
+  <Step title="Open a layout">
+    Choose an existing layout, or select the plus button to create one from a template.
+  </Step>
+
+  <Step title="Edit the page and items">
+    Use **Add** for content and **More document actions** for page settings, templates, the content outline, and history.
+  </Step>
+
+  <Step title="Validate the latest draft">
+    Select **Export**, then validate the current draft. Fix blockers; review warnings and advice against the delivery requirements.
+  </Step>
+
+  <Step title="Export">
+    Continue to export and choose the MapX mark, PNG, SVG, standard PDF, or print PDF/X-4.
+  </Step>
+</Steps>
+
+## Before you start
+
+Layouts use the map state and layers in the current project. Before opening the tools:
+
+1. Show the layers and geographic extent you want to deliver.
+2. Finish layer names, styles, labels, and legends.
+3. For print, confirm paper size, DPI, bleed, and printer requirements.
+
+## Capture the map quickly
+
+![The current Share panel for social media screenshots, with aspect ratio, resolution, viewfinder, legend, and map options](/images/layout/en/quick-capture.jpg)
+
+<Steps>
+  <Step title="Open Share">
+    In the workspace rail, select **Share**, then expand **Social media share**.
+  </Step>
+
+  <Step title="Choose an aspect ratio">
+    Pick 3:2, 16:9, 4:3, 1:1, or Auto.
+  </Step>
+
+  <Step title="Choose a resolution">
+    Pick 1x, 2x, or 3x. The viewfinder shows the final footprint and dims the area outside it.
+  </Step>
+
+  <Step title="Configure map elements">
+    Turn the legend, chart pins, 3D camera, and no-watermark option on or off as needed.
+  </Step>
+
+  <Step title="Generate">
+    Select **Generate**. The browser downloads a PNG directly without creating a layout, version, or link.
+  </Step>
+</Steps>
+
+On Free, the quick map capture always includes the **MapX mark**. Basic and above can turn on **No watermark** to remove it.
+
+<Warning>
+When **Keep 3D view** is off, the exported map returns to a north-up, top-down camera.
+</Warning>
+
+## Open the professional layout studio
+
+There are two ways to enter the studio:
+
+- Open **Layouts** in the workspace rail, then select an existing layout or create one.
+- In the **Share** panel, select **Open professional layout studio**.
+
+When no working layout exists, MapX creates an A3 studio draft from the current map.
+
+The layout library lists every professional layout in the project with its thumbnail and page specification:
+
+![The current layout library with project and layout thumbnails, paper size, DPI, scale, and pixel dimensions](/images/layout/en/layout-library.jpg)
+
+Inside a layout, the millimetre canvas occupies the map area:
+
+![The current professional layout studio with a millimetre canvas, layout toolbar, and zoom controls](/images/layout/en/studio.jpg)
+
+The studio has these areas:
+
+| Area | Purpose |
+|---|---|
+| Top toolbar | Return to the map, rename the layout, and lock editing; it provides Add, Export, and More directly |
+| Floating tool panels | Add items, apply templates, inspect stacking, and browse versions |
+| Canvas | Move, resize, rotate, snap, and align items with millimetre rulers and safe-area guides |
+| Inspector | Edit page, position, content, data, style, and layout constraints |
+
+### Choose a template
+
+Open **More document actions** → **Templates** to start from one of six editable layouts:
+
+![Choosing a template for a new layout, with six editable layouts, purposes, and page specifications](/images/layout/en/layout-start.jpg)
+
+| Template | Page |
+|---|---|
+| Planning notice | A2 landscape with the map, legend, and public-notice source |
+| Review sheet | A3 landscape with a map and evidence column |
+| Report figure | A4 portrait with title, extent, and source |
+| Site board | A1 landscape for viewing at a distance |
+| A3 analysis | A3 landscape with a map, chart, and attribute table |
+| Social 4:5 | 1080 × 1350 |
+
+Applying a template replaces the current layout structure. Save a version or duplicate the layout first if you need to preserve the current content.
+
+### Set up the page
+
+Open **More document actions** → **Page** to edit page settings. The default shortcuts are A3 landscape, A4 portrait, and social 4:5. Expand **Advanced print settings** to edit every parameter.
+
+![The current Page & output settings with A3, A4, and social 4:5 shortcuts](/images/layout/en/page-settings.jpg)
+
+| Parameter | Description |
+|---|---|
+| Paper | A0, A1, A2, A3, A4, 1:1, 4:5, 9:16, 16:9, 3:2, or a custom size |
+| Orientation | Landscape or portrait |
+| Size and DPI | Set the page size and output sharpness |
+| Safe area | Marks the edge region that important content should avoid |
+| Bleed | Adds a trimming allowance for print |
+| Print marks | Crop marks, registration marks, and colour bars |
+| Grid and baseline | Align multi-column content, tables, and dense text |
+
+Ordinary delivery uses sRGB. Choose FOGRA39 · PDF/X-4 at export time for print delivery.
+
+### Add and edit items
+
+Select **Add** in the top toolbar. Common items appear first; additional groups are available under **More elements**.
+
+![The current Add content panel with map frame, text, legend, chart, image, metric, source, and marker](/images/layout/en/add-elements.jpg)
+
+| Group | Items |
+|---|---|
+| Map | Map frame, marker, area highlight, extent box, leader line |
+| Story | Chart, attribute table, metric, callout |
+| Graphics | Text, image |
+| Publishing | Legend, scale bar, north arrow, source, QR code |
+
+Use the inspector tabs to edit a selected item:
+
+- **General**: position, size, rotation, z-order, lock, and visibility.
+- **Content**: text, chart, table, map, or QR settings.
+- **Data**: link an item to a layer, map frame, chart, table, analysis, or source.
+- **Style**: font, size, colour, background, border, and opacity.
+- **Layout constraints**: safe-area, snapping, and relative-position settings.
+
+Alignment guides appear while you drag items on the canvas. Hold `Cmd` or `Ctrl` to select multiple items, then move, duplicate, or delete them together.
+
+### Edit a map frame
+
+A map frame stores its own camera and visible layers and behaves independently from other map frames.
+
+![The current map-frame inspector with basemap, automatic or fixed scale, and visible layers](/images/layout/en/map-inspector.jpg)
+
+1. Select the map frame.
+2. Check visible layers and the basemap in the inspector.
+3. Pan or zoom inside the map frame to set the geographic extent.
+4. Enable a 3D camera, preserve the current camera, or use a fixed scale when needed.
+
+Fixed scale is useful when several maps must use the same `1:N` denominator. The inspector warns when the map frame size and current camera conflict.
+
+### Create an inset map
+
+Select a map frame, then use **Add inset** in the selection toolbar or choose box/lasso selection:
+
+1. Draw the area to enlarge inside the main map frame.
+2. MapX creates a related map frame and extent box.
+3. Move the new map frame to its final position on the page.
+4. Check that the main map and inset use the intended basemap, layers, and scale.
+
+### Edit a legend
+
+A legend is linked to one map frame and reads that frame's visible layers.
+
+- The default height follows the rendered legend content.
+- Use one or two columns and choose plain, boxed, or strip styling.
+- Adjust font size, swatch size, density, and layer order.
+- Hide or rename individual legend entries without changing map visibility.
+- Proofing reports overflow when the legend content does not fit.
+
+### Save drafts and versions
+
+Edits are continually autosaved to the working draft. The header reports saving, saved, conflict, or error status.
+
+- Open **More document actions** → **History**, then select **Save version** to create a version you can restore.
+- Restore a saved version into the current draft. MapX asks for confirmation first.
+- If the same layout is updated in another window, reopen the latest version or save the current version separately.
+
+Saving a version is not required for ordinary export. Use it when you want a restore point.
+
+## Run a proof
+
+Open **Export** in the top toolbar. The first stage is **Validate current draft**. You can also open **Export check** from the more-actions menu.
+
+![The current proof result grouped into blockers, warnings, and advice](/images/layout/en/proof-result.jpg)
+
+Validation always checks the latest draft and does not substitute an older version. Issues have three severities:
+
+| Severity | Meaning | Action |
+|---|---|---|
+| Blocker | Export cannot continue | Fix it |
+| Warning | Delivery quality may be affected | Fix it or acknowledge the risk |
+| Advisory | Optional improvement | Decide based on the delivery |
+
+Proofs check:
+
+- Whether the map is sharp enough for the page and output.
+- Missing or substituted fonts.
+- Empty or overflowing legends and references to hidden layers.
+- Items outside the page or inside the safe area.
+- Missing titles, sources, charts, tables, or linked data.
+- Whether the stacking order of items is clear.
+- Whether a QR link is valid.
+
+Select an issue to locate the item. An issue with a **Fix** action creates an undoable layout operation; run proof again after changes.
+
+After the latest draft passes, the export stage unlocks.
+
+## Export
+
+In the validated export panel:
+
+1. Choose whether to show the **MapX mark**.
+2. Choose PNG, SVG, or standard PDF.
+3. For print, use the separate **Export print PDF** action.
+
+![The current export panel with passing validation, the MapX mark enabled, and PNG, SVG, standard PDF, and print PDF/X-4 outputs](/images/layout/en/export.jpg)
+
+| Output | Description |
+|---|---|
+| PNG | Screens, web, and social publishing |
+| SVG | For continuing to edit layout elements |
+| Standard PDF | sRGB, suitable for screens, office documents, and general archives |
+| Print PDF/X-4 | FOGRA39/CMYK workflow with the selected bleed and print marks |
+
+### The MapX mark and watermark
+
+The MapX mark is a light map tag in the bottom-right corner of the page:
+
+- It appears in the bottom-right corner of the finished page.
+- Free plans always show the mark.
+- Basic, Pro, and Business can turn it off.
+
+The **MapX mark** switch follows the visible result:
+
+- **On**: previews and exported files show the mark.
+- **Off**: previews and exported files hide the mark.
+
+On Free, the switch stays on and disabled, with an upgrade hint. In the quick screenshot flow the control is named **No watermark**, and turning it on removes the mark.
+
+<Warning>
+Keep important text, source lines, and legend entries away from the bottom-right corner so the mark does not cover them.
+</Warning>
+
+### Print PDF
+
+If print PDF is unavailable, use standard PDF or contact an administrator to check the print-output setup.
+
+## Delivery checklist
+
+- [ ] Title, author, organization, and source are complete.
+- [ ] The map frame uses the intended layers, basemap, and camera.
+- [ ] The legend matches visible layers; scale bar and north arrow are correct.
+- [ ] Important text is inside the safe area and does not sit under the bottom-right mark.
+- [ ] Map-frame DPI meets the delivery requirement.
+- [ ] The latest draft has passed proof.
+- [ ] Ordinary delivery uses sRGB; print delivery uses the correct print format.
+- [ ] A saved version exists when you need a restore point.
+
+## Troubleshooting
+
+### Why is Export still unavailable?
+
+The latest draft has not passed validation, the proof is stale, or the draft still has a save conflict. Validate the current draft again and fix blockers.
+
+### Why does the map frame show low DPI?
+
+Its pixel dimensions are too small for the page's millimetre size and DPI. Increase page DPI, reduce the map-frame size, or capture a higher-resolution map frame.
+
+### Why are fonts unavailable?
+
+The layout uses a font that is unavailable. Switch to an available font and run proof again.
+
+### Why is JPEG missing?
+
+The export panel provides PNG, SVG, standard PDF, and print PDF/X-4, but not JPEG.
+
+## Related
+
+- [Exporting maps, data, charts, and reports](/en/sharing/exporting)
+- [Sharing maps, reports, and projects](/en/sharing/sharing-maps)
+- [Charts](/en/concepts/charts)
+- [Reports](/en/concepts/reports)
