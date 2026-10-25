@@ -76,9 +76,9 @@
                     "group": "Built-in scenarios",
                     "expanded": false,
                     "pages": [
+                      "en/concepts/scenarios/15min-life-circle-coverage",
                       "en/concepts/scenarios/development-suitability-baseline",
                       "en/concepts/scenarios/carrying-capacity-assessment",
-                      "en/concepts/scenarios/15min-life-circle-coverage",
                       "en/concepts/scenarios/public-facility-siting",
                       "en/concepts/scenarios/urban-growth-monitor",
                       "en/concepts/scenarios/landuse-conflict-screening"
@@ -201,9 +201,9 @@
                     "group": "内置场景",
                     "expanded": false,
                     "pages": [
+                      "zh/concepts/scenarios/15min-life-circle-coverage",
                       "zh/concepts/scenarios/development-suitability-baseline",
                       "zh/concepts/scenarios/carrying-capacity-assessment",
-                      "zh/concepts/scenarios/15min-life-circle-coverage",
                       "zh/concepts/scenarios/public-facility-siting",
                       "zh/concepts/scenarios/urban-growth-monitor",
                       "zh/concepts/scenarios/landuse-conflict-screening"

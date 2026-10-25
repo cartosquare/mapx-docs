@@ -31,8 +31,32 @@ const EDITION = "2026-10";
 
 const SCENARIOS = [
   {
-    key: "development-suitability-baseline",
+    key: "15min-life-circle-coverage",
     num: 1,
+    accent: "#4F46E5",
+    image: "images/scenarios/15min-life-circle-coverage.jpg",
+    zh: {
+      title: "15 分钟生活圈覆盖",
+      city: "雅加达",
+      lede: "审计雅加达中心城区谁能在 800 米步行范围内到达学校、诊所与公园，排出缺口最大的街区，并给出可达性评分。",
+      methods: "步行服务区 · 缺口人口 · 2SFCA 可达性",
+      deliverables: "三类缺口图层、街区综合表、榜单与热力图、报告",
+      question: "步行范围内谁被学校、医疗与绿地覆盖，谁没有被覆盖",
+      type: "公共服务",
+    },
+    en: {
+      title: "15-minute Neighbourhood Coverage",
+      city: "Jakarta",
+      lede: "Audit who can reach a school, a clinic and a park within an 800 m walk in central Jakarta, rank the neighbourhoods with the biggest shortfall, and score accessibility.",
+      methods: "Walking service areas · shortfall population · 2SFCA",
+      deliverables: "Three shortfall layers, a neighbourhood table, rankings and a heatmap, a report",
+      question: "Who is covered by schools, clinics and green space within walking distance, and who is not",
+      type: "Public services",
+    },
+  },
+  {
+    key: "development-suitability-baseline",
+    num: 2,
     accent: "#006BCB",
     image: "images/scenarios/development-suitability-baseline.jpg",
     zh: {
@@ -56,7 +80,7 @@ const SCENARIOS = [
   },
   {
     key: "carrying-capacity-assessment",
-    num: 2,
+    num: 3,
     accent: "#0F766E",
     image: "images/scenarios/carrying-capacity-assessment.jpg",
     zh: {
@@ -76,30 +100,6 @@ const SCENARIOS = [
       deliverables: "Capacity classes, overload cells, constraint tables, charts and a report",
       question: "How much development the water, climate and flood-hazard constraints allow",
       type: "Planning assessment",
-    },
-  },
-  {
-    key: "15min-life-circle-coverage",
-    num: 3,
-    accent: "#4F46E5",
-    image: "images/scenarios/15min-life-circle-coverage.jpg",
-    zh: {
-      title: "15 分钟生活圈覆盖",
-      city: "雅加达",
-      lede: "审计雅加达中心城区谁能在 800 米步行范围内到达学校、诊所与公园，排出缺口最大的街区，并给出可达性评分。",
-      methods: "步行服务区 · 缺口人口 · 2SFCA 可达性",
-      deliverables: "三类缺口图层、街区综合表、榜单与热力图、报告",
-      question: "步行范围内谁被学校、医疗与绿地覆盖，谁没有被覆盖",
-      type: "公共服务",
-    },
-    en: {
-      title: "15-minute Neighbourhood Coverage",
-      city: "Jakarta",
-      lede: "Audit who can reach a school, a clinic and a park within an 800 m walk in central Jakarta, rank the neighbourhoods with the biggest shortfall, and score accessibility.",
-      methods: "Walking service areas · shortfall population · 2SFCA",
-      deliverables: "Three shortfall layers, a neighbourhood table, rankings and a heatmap, a report",
-      question: "Who is covered by schools, clinics and green space within walking distance, and who is not",
-      type: "Public services",
     },
   },
   {
@@ -208,14 +208,6 @@ const UI = {
     promptLabel: "建议提问",
     qrCaption: "扫码打开 MapX",
     pdfKeywords: "MapX, 场景手册, 城乡规划, 空间分析, 开发适宜性, 承载能力, 生活圈, 设施选址, 城市增长, 用地冲突",
-    colophonTitle: "关于本手册",
-    colophonMeta: [
-      ["版本", "第一版 · 2026 年 10 月"],
-      ["收录", "MapX 内置的六个城乡规划场景"],
-      ["数据来源", "各场景入口图层，逐层带来源、许可与署名"],
-      ["配套文档", "场景、内置数据、分析、计划模式、图表、报告"],
-      ["支持", "support@mapxagent.com"],
-    ],
   },
   en: {
     lang: "en",
@@ -248,14 +240,6 @@ const UI = {
     promptLabel: "Suggested question",
     qrCaption: "Scan to open MapX",
     pdfKeywords: "MapX, scenario handbook, urban planning, spatial analysis, suitability, carrying capacity, 15-minute neighbourhood, facility siting, urban growth, land-use conflict",
-    colophonTitle: "About this handbook",
-    colophonMeta: [
-      ["Edition", "First edition · October 2026"],
-      ["Scope", "The six built-in urban and rural planning scenarios in MapX"],
-      ["Data", "Each scenario's entry layers, with source, licence and attribution per layer"],
-      ["Related docs", "Scenarios, built-in datasets, analysis, plan mode, charts, reports"],
-      ["Support", "support@mapxagent.com"],
-    ],
   },
 };
 
@@ -523,9 +507,9 @@ MapX 是一个运行在浏览器里的 AI 空间分析平台：接入数据、�
 
 | 场景类型 | 场景（研究区） | 解决问题 | 产出成果 | 平台求解时间 |
 |---|---|---|---|---|
+| 公共服务 | 15 分钟生活圈覆盖（雅加达） | 步行范围内谁被学校、医疗与绿地覆盖，谁没有被覆盖 | 三类缺口图层、街区综合表、榜单与热力图、报告 | 约 1 小时 |
 | 规划评估 | 开发适宜性基础评价（内罗毕） | 在生态、坡度与洪涝硬约束之后，哪些地方可以建设 | 适宜性分级、约束图层、承载规模表、图表与报告 | 约 1 小时 |
 | 规划评估 | 资源环境承载能力评价（雅加达） | 在水资源、气候与洪涝约束下还能承载多少开发 | 承载能力分级、超载格网、限制因子表、图表与报告 | 约 1 小时 |
-| 公共服务 | 15 分钟生活圈覆盖（雅加达） | 步行范围内谁被学校、医疗与绿地覆盖，谁没有被覆盖 | 三类缺口图层、街区综合表、榜单与热力图、报告 | 约 1 小时 |
 | 公共服务 | 公共服务设施选址（达累斯萨拉姆） | 缺口在哪里，哪些候选位置能补上 | 缺口榜单、候选格网、推荐点位、边际覆盖曲线与报告 | 约 1 小时 |
 | 城市监测 | 城市增长与建成区扩张（河内） | 建成区扩张有多快、往哪个方向、是否集约 | 扩张形态图层、分期指标表、四象限格网、图表与报告 | 约 1 小时 |
 | 生态核查 | 用地冲突与生态约束核查（基加利） | 建设与生态空间、陡坡、河道岸线在哪里冲突 | 四类冲突图层、最差斑块榜单、暴露人口格网与报告 | 约 1 小时 |
@@ -543,9 +527,9 @@ This handbook collects the six built-in urban and rural planning scenarios in Ma
 
 | Type | Scenario (study area) | Problem it solves | Deliverables | Time on MapX |
 |---|---|---|---|---|
+| Public services | 15-minute Neighbourhood Coverage (Jakarta) | Who is covered by schools, clinics and green space within walking distance, and who is not | Three shortfall layers, a neighbourhood table, rankings and a heatmap, a report | ~1 hour |
 | Planning assessment | Development Suitability Baseline (Nairobi) | Which land is buildable once ecology, slope and flood constraints are applied | Suitability classes, constraint layers, capacity tables, charts and a report | ~1 hour |
 | Planning assessment | Carrying Capacity Assessment (Jakarta) | How much development the water, climate and flood-hazard constraints allow | Capacity classes, overload cells, constraint tables, charts and a report | ~1 hour |
-| Public services | 15-minute Neighbourhood Coverage (Jakarta) | Who is covered by schools, clinics and green space within walking distance, and who is not | Three shortfall layers, a neighbourhood table, rankings and a heatmap, a report | ~1 hour |
 | Public services | Public Facility Siting (Dar es Salaam) | Where coverage gaps are, and which candidate sites close them | Shortfall rankings, candidate cells, recommended sites, a marginal curve and a report | ~1 hour |
 | Urban monitoring | Urban Growth Monitor (Hanoi) | How fast, in which direction, and how compactly the built-up area is expanding | Expansion-form layers, phase tables, quadrant grid, charts and a report | ~1 hour |
 | Ecological compliance | Land-use Conflict Screening (Kigali) | Where development collides with ecological space, steep slopes and riverbanks | Four conflict layers, a worst-patch ranking, an exposure grid and a report | ~1 hour |
@@ -560,9 +544,9 @@ const APPENDIX = {
 
 | 场景 | 研究区 | 图层 | 主要方法 | 核心交付 |
 |---|---|---|---|---|
-| 1 开发适宜性基础评价 | 内罗毕 | 8 | 硬约束筛选、加权叠加、承载规模估算 | 适宜性分级、开发管控分区、图表与报告 |
-| 2 资源环境承载能力评价 | 雅加达 | 6 | 模糊隶属度、短板合成、承压四象限 | 承载能力分级、超载格网、图表与报告 |
-| 3 15 分钟生活圈覆盖 | 雅加达 | 7 | 步行服务区、缺口人口、2SFCA | 三类缺口图层、街区综合表、榜单与热力图 |
+| 1 15 分钟生活圈覆盖 | 雅加达 | 7 | 步行服务区、缺口人口、2SFCA | 三类缺口图层、街区综合表、榜单与热力图 |
+| 2 开发适宜性基础评价 | 内罗毕 | 8 | 硬约束筛选、加权叠加、承载规模估算 | 适宜性分级、开发管控分区、图表与报告 |
+| 3 资源环境承载能力评价 | 雅加达 | 6 | 模糊隶属度、短板合成、承压四象限 | 承载能力分级、超载格网、图表与报告 |
 | 4 公共服务设施选址 | 达累斯萨拉姆 | 7 | 覆盖诊断、候选筛选、MCLP 与 k-中值对照 | 推荐点位、边际覆盖曲线、均衡核查表 |
 | 5 城市增长与建成区扩张 | 河内 | 7 | 分期扩张指标、景观扩张指数、重心与椭圆 | 扩张形态图层、分期指标表、四象限格网 |
 | 6 用地冲突与生态约束核查 | 基加利 | 8 | 冲突识别、分级排序、整改建议 | 四类冲突图层、最差斑块榜单、暴露人口格网 |
@@ -584,9 +568,9 @@ const APPENDIX = {
 
 | Scenario | Study area | Layers | Key methods | Deliverables |
 |---|---|---|---|---|
-| 1 Development Suitability Baseline | Nairobi | 8 | Hard-constraint screening, weighted overlay, capacity estimate | Suitability classes, development control tiers, charts and a report |
-| 2 Carrying Capacity Assessment | Jakarta | 6 | Fuzzy membership, limiting-factor composite, pressure quadrants | Capacity classes, overload cells, charts and a report |
-| 3 15-minute Neighbourhood Coverage | Jakarta | 7 | Walking service areas, shortfall population, 2SFCA | Three shortfall layers, a neighbourhood table, rankings and a heatmap |
+| 1 15-minute Neighbourhood Coverage | Jakarta | 7 | Walking service areas, shortfall population, 2SFCA | Three shortfall layers, a neighbourhood table, rankings and a heatmap |
+| 2 Development Suitability Baseline | Nairobi | 8 | Hard-constraint screening, weighted overlay, capacity estimate | Suitability classes, development control tiers, charts and a report |
+| 3 Carrying Capacity Assessment | Jakarta | 6 | Fuzzy membership, limiting-factor composite, pressure quadrants | Capacity classes, overload cells, charts and a report |
 | 4 Public Facility Siting | Dar es Salaam | 7 | Coverage diagnosis, candidate screening, MCLP vs k-median | Recommended sites, a marginal coverage curve, a ward balance table |
 | 5 Urban Growth Monitor | Hanoi | 7 | Phased expansion metrics, landscape expansion index, centre and ellipse | Expansion-form layers, phase tables, a quadrant grid |
 | 6 Land-use Conflict Screening | Kigali | 8 | Conflict screening, grading, remediation guidance | Four conflict layers, a worst-patch ranking, an exposure grid |
@@ -707,16 +691,8 @@ a { color: #006bcb; text-decoration: none; }
   padding-top: 4mm;
 }
 
-/* Colophon / TOC -------------------------------------------------- */
-.colophon h1, .toc h1 { font-size: 22pt; margin: 0 0 6mm; color: #0b1f36; }
-.colophon .lead { font-size: 11pt; color: #334155; }
-.colophon .meta-table { width: 100%; border-collapse: collapse; margin-top: 8mm; font-size: 9.5pt; }
-.colophon .meta-table td { padding: 3mm 0; border-bottom: 0.25mm solid #e2e8f0; vertical-align: top; }
-.colophon .meta-table td:first-child { width: 30mm; color: #64748b; }
-.colophon .licence {
-  margin-top: 10mm; padding: 5mm 6mm; background: #f8fafc;
-  border-left: 1.2mm solid #006bcb; font-size: 9.5pt; color: #334155;
-}
+/* TOC ------------------------------------------------------------------ */
+.toc h1 { font-size: 22pt; margin: 0 0 6mm; color: #0b1f36; }
 .toc-entry { padding: 2.8mm 0; border-bottom: 0.25mm solid #eef2f7; }
 .toc-row { display: flex; align-items: baseline; gap: 3mm; }
 .toc-lede { font-size: 8.6pt; color: #64748b; padding-left: 13mm; margin-top: 0.7mm; }
@@ -939,28 +915,6 @@ function renderForewordDiagram(lang) {
   return `<figure class="pipeline-figure"><div class="pipeline">${parts}</div><figcaption>${caption}</figcaption></figure>`;
 }
 
-function renderColophon(lang) {
-  const ui = UI[lang];
-  const rows = ui.colophonMeta
-    .map(([label, value]) => `<tr><td>${label}</td><td>${value}</td></tr>`)
-    .join("");
-  const lead =
-    lang === "zh"
-      ? "这本手册把 MapX 内置的六个城乡规划场景整理成可独立阅读的章节：每章给出研究问题、数据构成、研究方法、运行步骤，以及一次示例运行的产出。"
-      : "This handbook turns the six built-in urban and rural planning scenarios in MapX into self-contained chapters: the planning question, the data, how the study works, how to run the scenario, and what one example run produced.";
-  const licence =
-    lang === "zh"
-      ? "本手册内容与截图来自 MapX 产品内置场景；地图图层版权与署名见各场景入口数据集。示例数字仅用于说明交付物形态。"
-      : "Content and screenshots come from the built-in scenarios in the MapX product; map layer credits and licences are attached to each entry dataset. Example figures illustrate the shape of the deliverables only.";
-  return `
-  <section class="sheet colophon page-break">
-    <h1>${ui.colophonTitle}</h1>
-    <p class="lead">${lead}</p>
-    <table class="meta-table">${rows}</table>
-    <div class="licence">${licence}</div>
-  </section>`;
-}
-
 function renderToc(lang, pageMap) {
   const ui = UI[lang];
   const page = (key) => (pageMap && pageMap[key] ? String(pageMap[key]) : "—");
@@ -1132,7 +1086,6 @@ function buildBook(lang, pageMap) {
 </head>
 <body class="lang-${lang}">
 ${renderCoverSync(lang)}
-${renderColophon(lang)}
 ${renderToc(lang, pageMap)}
 <section class="sheet foreword page-break" style="--accent:#006BCB">
   <div class="kicker">FOREWORD</div>
