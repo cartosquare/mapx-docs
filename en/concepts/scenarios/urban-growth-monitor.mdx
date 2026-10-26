@@ -27,7 +27,7 @@ Seven layers cover the Hanoi window. Only the built-up area is visible by defaul
 
 ## How the study works
 
-| Stage | Question | What MapX runs | Output |
+| Stage | Question | What MapX Agent runs | Output |
 |---|---|---|---|
 | 1. Reconstruct the expansion | How much built-up land was added in each period? | Expansion metrics (`periodBreaks` 1990 / 2000 / 2010 / 2015), Raster class area, Land change matrix | Phase table with new area, annual growth, intensity and compactness; built-year cross table |
 | 2. Measure the form | Is new growth infill, edge expansion or outlying? | Landscape expansion index on two built-up masks, Raster to polygons, Mean centre, Standard deviational ellipse, Directional distribution, Buffer and zonal summary | Infill / edge / outlying layer, centre shift and ellipse, share of new built-up near roads and waterways |

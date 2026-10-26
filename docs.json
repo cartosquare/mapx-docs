@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "luma",
-  "name": "MapX",
+  "name": "MapX Agent",
   "colors": {
     "primary": "#006BCB",
     "light": "#3D8BFF",
@@ -9,8 +9,8 @@
   },
   "favicon": "/favicon.svg",
   "logo": {
-    "light": "/logo.png",
-    "dark": "/logo-dark.png"
+    "light": "/logo/mapx-agent-light.svg",
+    "dark": "/logo/mapx-agent-dark.svg"
   },
   "navbar": {
     "links": [
@@ -21,7 +21,7 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Try MapX Free",
+      "label": "Try MapX Agent Free",
       "href": "https://app.mapxagent.com"
     }
   },
@@ -151,7 +151,7 @@
           ],
           "primary": {
             "type": "button",
-            "label": "免费试用 MapX",
+            "label": "免费试用 MapX Agent",
             "href": "https://app.mapxagent.com"
           }
         },

@@ -28,7 +28,7 @@ Eight layers cover the Kigali window. Only land cover is visible by default; the
 
 ## How the study works
 
-| Stage | Question | What MapX runs | Output |
+| Stage | Question | What MapX Agent runs | Output |
 |---|---|---|---|
 | 1. Identify the conflicts | Where does built-up land meet each constraint? | Raster calculator, Raster to polygons, Overlay clip, Euclidean distance (100 m / 30 m), Buffer, Slope, Reclassify | Ecological-space mask, steep-slope classes and the four conflict families |
 | 2. Grade and prioritise | Which conflicts matter most, and where do they cluster? | Append features, Zonal summary on a 500 m grid, Top N patch ranking, Label anchors | Conflict area per cell, exposed population, worst-patch ranking |

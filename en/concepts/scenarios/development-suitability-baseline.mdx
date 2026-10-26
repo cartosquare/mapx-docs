@@ -32,7 +32,7 @@ The layer order is the display order: points, then lines, then polygons, then ra
 
 The method is a chain of three planning questions. Each one maps onto deterministic [analysis](/en/concepts/analysis) tools, so every number in the report can be traced back to a run.
 
-| Stage | Question | What MapX runs | Output |
+| Stage | Question | What MapX Agent runs | Output |
 |---|---|---|---|
 | 1. Screen the hard constraints | Which land is off-limits? | Slope, Reclassify, Buffer, Raster calculator, Overlay erase, Raster class area, Zonal statistics | Ecological protection mask and its polygons, the 50 m riparian buffer, constraint-area tables |
 | 2. Grade and size what remains | How suitable is the remaining land, and how many people can it carry? | Weighted overlay (equal weights by default), Reclassify, Grid at 1 km, Zonal statistics | Suitability classes 1–4, population per evaluation cell, class-area and capacity tables |

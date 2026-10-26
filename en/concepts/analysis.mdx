@@ -1,11 +1,11 @@
 ---
-title: "Spatial analysis in MapX"
+title: "Spatial analysis in MapX Agent"
 sidebarTitle: "Analysis"
-description: "MapX analysis runs deterministic spatial tools — distance, overlay, network, terrain, raster and statistics — against your project data. Start them from the chat or from the Analysis catalog."
+description: "MapX Agent analysis runs deterministic spatial tools — distance, overlay, network, terrain, raster and statistics — against your project data. Start them from the chat or from the Analysis catalog."
 keywords: ["spatial analysis", "analysis tools", "buffer", "overlay", "network analysis", "zonal statistics", "terrain", "analysis runs"]
 ---
 
-Analysis in MapX is a catalog of **deterministic spatial tools** that run on the server against your project data — the operations you would otherwise script in PostGIS, pgRouting, GDAL, QGIS, or Python. The AI chooses the tool and fills in the parameters when you ask in chat, but the computation itself is a fixed tool run, so results are reproducible.
+Analysis in MapX Agent is a catalog of **deterministic spatial tools** that run on the server against your project data — the operations you would otherwise script in PostGIS, pgRouting, GDAL, QGIS, or Python. The AI chooses the tool and fills in the parameters when you ask in chat, but the computation itself is a fixed tool run, so results are reproducible.
 
 ![The Analysis catalog in the workspace, with tool families on the left and tool details on the right](/images/concepts/analysis-catalog.png)
 
@@ -75,7 +75,7 @@ Each run produces a result layer, and some tools also produce tables or charts:
 
 Runs move through a small state machine: **queued → running → succeeded**, with **failed** and **cancelled** as terminal states. The ledger shows elapsed time per run and keeps a history per project.
 
-When a run fails, MapX reports the reason in plain language and suggests the next step — for example a scale or memory budget that the input exceeds, a missing field, or a data source that needs filling before terrain analysis. Typical fixes:
+When a run fails, MapX Agent reports the reason in plain language and suggests the next step — for example a scale or memory budget that the input exceeds, a missing field, or a data source that needs filling before terrain analysis. Typical fixes:
 
 - **Input too large** — clip the extent first, or run the tool on a subset.
 - **Wrong geometry type** — check the layer type in the **Layers** panel; some tools need polygons where you have points, or the reverse.

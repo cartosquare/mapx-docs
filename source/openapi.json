@@ -1,9 +1,9 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "MapX SaaS API",
+    "title": "MapX Agent SaaS API",
     "version": "1.0.0",
-    "description": "Public REST API for MapX. Authenticate with a personal API key (Bearer mkx_...) created from the MapX account. All endpoints are scoped to the account that owns the key; each endpoint also enforces a capability scope (session, chat, files, layers, map, reports, remote, keys). Errors use a uniform envelope: {\"error\":{\"code\",\"message\",\"details\"}}. Rate limit: 300 requests per minute per key. The API resource is named `session` for historical reasons; it represents a persistent project in the product (a workspace with map state, layers, files, chat history, and reports)."
+    "description": "Public REST API for MapX Agent. Authenticate with a personal API key (Bearer mkx_...) created from the MapX Agent account. All endpoints are scoped to the account that owns the key; each endpoint also enforces a capability scope (session, chat, files, layers, map, reports, remote, keys). Errors use a uniform envelope: {\"error\":{\"code\",\"message\",\"details\"}}. Rate limit: 300 requests per minute per key. The API resource is named `session` for historical reasons; it represents a persistent project in the product (a workspace with map state, layers, files, chat history, and reports)."
   },
   "servers": [
     {
@@ -310,7 +310,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -354,7 +354,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -398,7 +398,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -442,7 +442,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -486,7 +486,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -530,7 +530,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -897,7 +897,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -941,7 +941,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -985,7 +985,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -1029,7 +1029,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -1073,7 +1073,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -1117,7 +1117,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -1388,7 +1388,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -1432,7 +1432,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -1476,7 +1476,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -1520,7 +1520,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -1564,7 +1564,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -1608,7 +1608,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -1966,7 +1966,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2010,7 +2010,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2054,7 +2054,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2098,7 +2098,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2142,7 +2142,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2186,7 +2186,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2269,7 +2269,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2313,7 +2313,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2357,7 +2357,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2401,7 +2401,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2445,7 +2445,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2489,7 +2489,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2688,7 +2688,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2732,7 +2732,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2776,7 +2776,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2820,7 +2820,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2864,7 +2864,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -2908,7 +2908,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3007,7 +3007,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3051,7 +3051,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3095,7 +3095,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3139,7 +3139,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3183,7 +3183,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3227,7 +3227,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3323,7 +3323,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3367,7 +3367,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3411,7 +3411,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3455,7 +3455,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3499,7 +3499,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3543,7 +3543,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3662,7 +3662,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3706,7 +3706,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3750,7 +3750,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3794,7 +3794,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3838,7 +3838,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -3882,7 +3882,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4009,7 +4009,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4053,7 +4053,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4097,7 +4097,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4141,7 +4141,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4185,7 +4185,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4229,7 +4229,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4316,7 +4316,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4360,7 +4360,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4404,7 +4404,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4448,7 +4448,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4492,7 +4492,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4536,7 +4536,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4630,7 +4630,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4674,7 +4674,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4718,7 +4718,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4762,7 +4762,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4806,7 +4806,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -4850,7 +4850,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5052,7 +5052,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5096,7 +5096,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5140,7 +5140,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5184,7 +5184,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5228,7 +5228,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5272,7 +5272,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5406,7 +5406,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5450,7 +5450,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5494,7 +5494,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5538,7 +5538,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5582,7 +5582,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5626,7 +5626,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5777,7 +5777,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5821,7 +5821,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5865,7 +5865,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5909,7 +5909,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5953,7 +5953,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -5997,7 +5997,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6109,7 +6109,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6153,7 +6153,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6197,7 +6197,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6241,7 +6241,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6285,7 +6285,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6329,7 +6329,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6421,7 +6421,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6465,7 +6465,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6509,7 +6509,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6553,7 +6553,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6597,7 +6597,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6641,7 +6641,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6751,7 +6751,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6795,7 +6795,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6839,7 +6839,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6883,7 +6883,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6927,7 +6927,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -6971,7 +6971,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -8720,7 +8720,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -8764,7 +8764,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -8808,7 +8808,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -8852,7 +8852,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -8896,7 +8896,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -8940,7 +8940,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -9775,7 +9775,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -9819,7 +9819,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -9863,7 +9863,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -9907,7 +9907,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -9951,7 +9951,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -9995,7 +9995,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10121,7 +10121,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10165,7 +10165,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10209,7 +10209,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10253,7 +10253,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10297,7 +10297,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10341,7 +10341,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10460,7 +10460,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10504,7 +10504,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10548,7 +10548,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10592,7 +10592,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10636,7 +10636,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10680,7 +10680,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10766,7 +10766,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10810,7 +10810,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10854,7 +10854,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10898,7 +10898,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10942,7 +10942,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -10986,7 +10986,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11072,7 +11072,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11116,7 +11116,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11160,7 +11160,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11204,7 +11204,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11248,7 +11248,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11292,7 +11292,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11408,7 +11408,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11452,7 +11452,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11496,7 +11496,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11540,7 +11540,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11584,7 +11584,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11628,7 +11628,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11787,7 +11787,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11831,7 +11831,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11875,7 +11875,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11919,7 +11919,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -11963,7 +11963,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12007,7 +12007,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12092,7 +12092,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12136,7 +12136,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12180,7 +12180,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12224,7 +12224,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12268,7 +12268,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12312,7 +12312,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12401,7 +12401,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12445,7 +12445,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12489,7 +12489,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12533,7 +12533,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12577,7 +12577,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12621,7 +12621,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12751,7 +12751,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12795,7 +12795,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12839,7 +12839,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12883,7 +12883,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12927,7 +12927,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -12971,7 +12971,7 @@
                       "properties": {
                         "code": {
                           "type": "string",
-                          "description": "MapX v1 error code.",
+                          "description": "MapX Agent v1 error code.",
                           "enum": [
                             "bad_request",
                             "unauthorized",
@@ -13028,7 +13028,7 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Personal API key (mkx_...) created from the MapX account."
+        "description": "Personal API key (mkx_...) created from the MapX Agent account."
       }
     }
   }

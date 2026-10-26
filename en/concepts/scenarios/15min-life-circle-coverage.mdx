@@ -5,7 +5,7 @@ description: "Audit who can reach a school, a clinic and a park within an 800 m 
 keywords: ["15-minute neighbourhood", "15-minute city", "walking distance", "service area", "accessibility", "2SFCA", "Jakarta", "scenario"]
 ---
 
-15-minute Neighbourhood Coverage measures the daily-life side of planning: **who can reach a school, a clinic and a park on foot**, and which neighbourhoods carry the largest shortfall. It is the MapX version of a 15-minute neighbourhood audit, and it deliberately reports two yardsticks — coverage and accessibility — instead of a single score.
+15-minute Neighbourhood Coverage measures the daily-life side of planning: **who can reach a school, a clinic and a park on foot**, and which neighbourhoods carry the largest shortfall. It is the MapX Agent version of a 15-minute neighbourhood audit, and it deliberately reports two yardsticks — coverage and accessibility — instead of a single score.
 
 ![The Jakarta 15-minute neighbourhood run as delivered: three neighbourhood shortfall ramps, ADM4 boundaries and the pinned three-class comparison heatmap](/images/scenarios/15min-life-circle-coverage.jpg)
 
@@ -27,7 +27,7 @@ Seven prepared layers cover Jakarta; the scenario's default study window is Kota
 
 ## How the study works
 
-| Stage | Question | What MapX runs | Output |
+| Stage | Question | What MapX Agent runs | Output |
 |---|---|---|---|
 | 1. Coverage audit | How much of each neighbourhood is outside the walk? | Select features, Overlay clip/dissolve/erase, Network service area at 800 m, Zonal statistics, Field calculator | Shortfall layer per class with `gap_sum` and a share-of-residents column |
 | 2. Service mix and balance | Which neighbourhoods lack one, two or all three classes? | Zonal summary chaining, Overlay dissolve/erase | Neighbourhood summary table with population, coverage count 0–3 and three shortfall columns |

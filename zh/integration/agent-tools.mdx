@@ -1,10 +1,10 @@
 ---
 title: "Agent 工具接入"
 sidebarTitle: "Agent 工具接入"
-description: "给任何 LLM 代理一个链接：它下载 mapx skill、安装 CLI，就能驱动 MapX 项目。"
+description: "给任何 LLM 代理一个链接：它下载 mapx skill、安装 CLI，就能驱动 MapX Agent 项目。"
 ---
 
-把 MapX 集成到外部代理不需要按代理逐个适配。Claude Code、Codex、OpenCode、OpenClaw、Hermes、WorkBuddy 以及其他 LLM 工具循环都可以使用同一个 skill 文件。代理下载它并按其中说明完成自我配置。
+把 MapX Agent 集成到外部代理不需要按代理逐个适配。Claude Code、Codex、OpenCode、OpenClaw、Hermes、WorkBuddy 以及其他 LLM 工具循环都可以使用同一个 skill 文件。代理下载它并按其中说明完成自我配置。
 
 ## 一步接入
 
@@ -52,4 +52,4 @@ mapx session create --title "agent test"
 mapx upload ./data.geojson --session <session_id>
 ```
 
-如果三步都成功，代理就可以端到端驱动 MapX 项目了。
+如果三步都成功，代理就可以端到端驱动 MapX Agent 项目了。

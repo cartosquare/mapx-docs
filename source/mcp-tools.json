@@ -148,7 +148,7 @@
     },
     {
       "name": "map_layout_freeze",
-      "description": "Freeze the current draft into a publication snapshot. Map frames are captured by the open MapX workspace because WebGL map rendering cannot be reconstructed in the API process; the tool waits for that browser capture to finish. Use a fresh expected_revision.",
+      "description": "Freeze the current draft into a publication snapshot. Map frames are captured by the open MapX Agent workspace because WebGL map rendering cannot be reconstructed in the API process; the tool waits for that browser capture to finish. Use a fresh expected_revision.",
       "file": "tools/crates/mapx-mcp/src/tools/layout.rs"
     },
     {

@@ -48,7 +48,7 @@
     },
     {
       "name": "styles",
-      "description": "Complete reference for Mapx layer styles. Covers geometry types (circle/line/fill, plus raster for COG layers), renderer types (single/categorized/graduated/heatmap/interpolated/multi_field/chart, plus rgb/color/hillshade for raster layers), paint keys per geometry, label annotation, legend toggle, JSON schemas, and examples. Use this skill when modifying layer styles via map_update_layer_style or map_import_file MCP tools.",
+      "description": "Complete reference for MapX Agent layer styles. Covers geometry types (circle/line/fill, plus raster for COG layers), renderer types (single/categorized/graduated/heatmap/interpolated/multi_field/chart, plus rgb/color/hillshade for raster layers), paint keys per geometry, label annotation, legend toggle, JSON schemas, and examples. Use this skill when modifying layer styles via map_update_layer_style or map_import_file MCP tools.",
       "path": "skills/styles/SKILL.md"
     },
     {

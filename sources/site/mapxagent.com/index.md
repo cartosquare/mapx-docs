@@ -5,7 +5,7 @@
 # Your CSV Has Location Data. 
 Let AI Turn It Into Answers.
 
-Upload your data, describe what you need in plain English — MapX runs spatial analysis that used to require a GIS specialist.
+Upload your data, describe what you need in plain English — MapX Agent runs spatial analysis that used to require a GIS specialist.
 
 [Try It Free — No Setup Required](https://app.mapxagent.com)
 
@@ -25,11 +25,11 @@ Type what you need in plain English — site evaluation, buffer zones, heatmaps.
 
 ### 100K+ Data Points. Zero Lag.
 
-From a few hundred to hundreds of thousands of rows — MapX renders them all smoothly with GPU-accelerated WebGL. Blazing fast performance, built-in analysis.
+From a few hundred to hundreds of thousands of rows — MapX Agent renders them all smoothly with GPU-accelerated WebGL. Blazing fast performance, built-in analysis.
 
 ### Drop Your File. We'll Figure It Out.
 
-CSV, GeoJSON, Excel — MapX auto-detects your location columns, cleans messy data, and gets you to an interactive map in seconds.
+CSV, GeoJSON, Excel — MapX Agent auto-detects your location columns, cleans messy data, and gets you to an interactive map in seconds.
 
 ### Maps That Look Like You Made Them.
 
@@ -45,7 +45,7 @@ How It Works
 
 Use plain language: site evaluation, area analysis, heatmap distribution — as natural as talking to a colleague.
 
-Before MapX
+Before MapX Agent
 
 Open QGIS or ArcGIS Pro
 
@@ -61,7 +61,7 @@ Export map — send screenshot to boss
 
 ⏱ 30+ minutes per analysis
 
-With MapX
+With MapX Agent
 
 Type: "Show me all stores within 500m of metro stations, color by revenue"
 
@@ -87,7 +87,7 @@ Type your spatial question in plain English, or drag-and-drop a CSV file. No GIS
 
 ### AI Processes
 
-MapX auto-detects your data, selects the right spatial operations, runs buffer/overlay/join as needed.
+MapX Agent auto-detects your data, selects the right spatial operations, runs buffer/overlay/join as needed.
 
 03
 
@@ -113,9 +113,9 @@ from question to interactive map
 
 data points rendered at 60fps
 
-> “I used to wait 3 days for my GIS team to run a site selection analysis. Now I type a sentence and get my answer in 30 seconds. MapX replaced a $600/year ArcGIS seat and a $5,000 consulting budget.”
+> “I used to wait 3 days for my GIS team to run a site selection analysis. Now I type a sentence and get my answer in 30 seconds. MapX Agent replaced a $600/year ArcGIS seat and a $5,000 consulting budget.”
 
-See MapX in Action
+See MapX Agent in Action
 
 Watch how to go from CSV to interactive map in 30 seconds.
 
@@ -218,15 +218,15 @@ From $1,000/mo
 
 ArcGIS seat: $600+/year
 
-→ MapX Pro: ~$599/year
+→ MapX Agent Pro: ~$599/year
 
 GIS team turnaround: 3 days
 
-→ MapX: 30 seconds
+→ MapX Agent: 30 seconds
 
 Site selection report: $500–5,000
 
-→ MapX: one-click report
+→ MapX Agent: one-click report
 
 All plans include full dataset rendering — shared maps never truncate data points.
 
@@ -240,11 +240,11 @@ What if I need GIS-level analysis — not just visualization?
 
 Can I cancel anytime?
 
-What if I outgrow MapX?
+What if I outgrow MapX Agent?
 
-Can MapX generate professional reports?
+Can MapX Agent generate professional reports?
 
-Do I need to know GIS to use MapX?
+Do I need to know GIS to use MapX Agent?
 
 ## Your First Spatial Analysis Is Free.
 

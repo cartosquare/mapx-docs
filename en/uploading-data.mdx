@@ -1,17 +1,17 @@
 ---
-title: "Uploading and Preparing Your Location Data in MapX"
+title: "Uploading and Preparing Your Location Data in MapX Agent"
 sidebarTitle: "Upload Data"
-description: "Learn how to upload CSV, GeoJSON, and Excel files to MapX. Covers automatic location column detection, column naming tips, and fixing common import errors."
+description: "Learn how to upload CSV, GeoJSON, and Excel files to MapX Agent. Covers automatic location column detection, column naming tips, and fixing common import errors."
 ---
 
-MapX accepts **CSV, GeoJSON, Excel, GeoTIFF, Shapefile, and text documents**
+MapX Agent accepts **CSV, GeoJSON, Excel, GeoTIFF, Shapefile, and text documents**
 (TXT, Markdown, Word, and PDF). **CSV, GeoJSON, and Excel** are
 general-purpose data formats — they carry attributes and location columns that
-MapX auto-detects. **GeoTIFF and Shapefile** are GIS-specific formats: GeoTIFF
+MapX Agent auto-detects. **GeoTIFF and Shapefile** are GIS-specific formats: GeoTIFF
 is rendered as a raster image layer on the map, and Shapefile is converted to a
 vector layer (points, lines, or polygons). **Text and document files** do not
-become map layers — MapX reads them as source material the AI can analyze, for
-example when generating a report. When you upload a tabular file, MapX scans it
+become map layers — MapX Agent reads them as source material the AI can analyze, for
+example when generating a report. When you upload a tabular file, MapX Agent scans it
 automatically, identifies the columns that contain location information, and
 renders your data on the map canvas within seconds.
 
@@ -35,7 +35,7 @@ layer, and you can restyle the color bands on the fly.
 
 Uploads process in the background and show their progress in the upload queue —
 you can keep working while a file converts or imports. When an upload finishes,
-MapX zooms the map to fit the new layer.
+MapX Agent zooms the map to fit the new layer.
 
 Paid plans can upload single files up to **20 GB**. Uploads are queued, so you
 can add several files at once; each file is processed in order.
@@ -49,19 +49,19 @@ uploaded together:
 - **Optional**: `.prj` (coordinate system), `.cpg` (character encoding), plus
   spatial/attribute index files (`.sbn`, `.sbx`, `.qix`, etc.)
 
-Select all of these files at once — MapX groups them into a single upload and
+Select all of these files at once — MapX Agent groups them into a single upload and
 shows an error if a required file is missing. You can also package the files
-into a `.zip` and upload that. If the `.prj` file is absent, MapX assumes WGS84
+into a `.zip` and upload that. If the `.prj` file is absent, MapX Agent assumes WGS84
 (EPSG:4326); attribute encoding is read from `.cpg` when present. The geometry
 is reprojected to WGS84 and added to the map as a regular vector layer.
 
 ## How Auto-Detection Works
 
-When you upload a file, MapX performs the following steps before displaying your data:
+When you upload a file, MapX Agent performs the following steps before displaying your data:
 
-1. **Header scan** — MapX reads the column names and checks them against a built-in list of common location field names (see [Column Naming Tips](#column-naming-tips) below).
-2. **Value inspection** — For candidate columns, MapX samples up to 100 rows to confirm that the values look like valid coordinates (decimal degrees in the range −180 to 180 for longitude, −90 to 90 for latitude).
-3. **Confidence preview** — MapX shows you the detected columns and a small sample of matched rows before import completes. You can confirm the detection or manually reassign columns if needed.
+1. **Header scan** — MapX Agent reads the column names and checks them against a built-in list of common location field names (see [Column Naming Tips](#column-naming-tips) below).
+2. **Value inspection** — For candidate columns, MapX Agent samples up to 100 rows to confirm that the values look like valid coordinates (decimal degrees in the range −180 to 180 for longitude, −90 to 90 for latitude).
+3. **Confidence preview** — MapX Agent shows you the detected columns and a small sample of matched rows before import completes. You can confirm the detection or manually reassign columns if needed.
 4. **Map render** — Once confirmed, all rows with valid coordinates are plotted on the map. Rows with missing or invalid coordinates are skipped, and a count of skipped rows is shown in the import summary.
 
 ## Column Naming Tips
@@ -93,7 +93,7 @@ For the fastest and most reliable auto-detection, use one of the following stand
 ## Handling Messy Data
 
 <Accordion title="My lat/lng columns have unusual names">
-  If MapX does not automatically detect your coordinate columns, you can map them manually during the import preview step. Click **Edit column mapping**, then use the dropdowns to assign which column represents latitude and which represents longitude. Your custom mapping is saved for the project — if you re-upload the same file, MapX will remember the mapping.
+  If MapX Agent does not automatically detect your coordinate columns, you can map them manually during the import preview step. Click **Edit column mapping**, then use the dropdowns to assign which column represents latitude and which represents longitude. Your custom mapping is saved for the project — if you re-upload the same file, MapX Agent will remember the mapping.
 
   For bulk workflows or repeated uploads, renaming your columns to one of the standard names listed above is the most reliable long-term solution.
 </Accordion>
@@ -101,11 +101,11 @@ For the fastest and most reliable auto-detection, use one of the following stand
 <Accordion title="Some rows have missing coordinates">
   Rows where the latitude or longitude value is blank, `null`, `N/A`, or outside the valid coordinate range (−90 to 90 for lat, −180 to 180 for lng) are automatically skipped during import. The import summary panel shows the total number of skipped rows and lets you download a CSV of the problematic rows so you can investigate and re-upload.
 
-  Missing coordinates do not cause the import to fail — MapX simply plots the rows it can and reports what was skipped.
+  Missing coordinates do not cause the import to fail — MapX Agent simply plots the rows it can and reports what was skipped.
 </Accordion>
 
 <Accordion title="My addresses aren't coordinates">
-  MapX supports address-based geocoding (converting a street address to lat/lng) on the **Basic, Pro, and Business** plans. If your file contains an address column instead of numeric coordinates, MapX will detect it and offer to geocode the column automatically before rendering the map.
+  MapX Agent supports address-based geocoding (converting a street address to lat/lng) on the **Basic, Pro, and Business** plans. If your file contains an address column instead of numeric coordinates, MapX Agent will detect it and offer to geocode the column automatically before rendering the map.
 
   Geocoding uses the column names listed in the [Column Naming Tips](#column-naming-tips) section. Each address lookup counts as one AI prompt against your monthly allowance. Free plan users can manually convert addresses to coordinates using a free tool like [geocod.io](https://geocod.io) or Google Sheets before uploading.
 </Accordion>

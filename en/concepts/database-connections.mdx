@@ -1,10 +1,10 @@
 ---
 title: "Database connections"
 sidebarTitle: "Database connections"
-description: "Connect MapX to an external PostgreSQL or MySQL database to query data in chat, import results as layers, or turn PostGIS spatial tables into live map layers."
+description: "Connect MapX Agent to an external PostgreSQL or MySQL database to query data in chat, import results as layers, or turn PostGIS spatial tables into live map layers."
 ---
 
-A database connection links MapX to an external PostgreSQL or MySQL database. Once connected, the AI can inspect the schema and run read-only queries, you can import results as map layers, and PostGIS spatial tables can become live layers on the map — no data export required.
+A database connection links MapX Agent to an external PostgreSQL or MySQL database. Once connected, the AI can inspect the schema and run read-only queries, you can import results as map layers, and PostGIS spatial tables can become live layers on the map — no data export required.
 
 ## Add a connection
 
@@ -30,7 +30,7 @@ When a table has spatial columns (PostGIS geometry or MySQL spatial types), you 
 
 ## Use a PostGIS table as a live layer
 
-If your PostgreSQL database uses PostGIS, you can take a spatial table and put it straight on the map as a layer. Choose the table, and MapX renders it like any other layer — style it by attribute, filter it, run analysis on it, and keep it in sync with the database: when the underlying table changes, the layer updates too.
+If your PostgreSQL database uses PostGIS, you can take a spatial table and put it straight on the map as a layer. Choose the table, and MapX Agent renders it like any other layer — style it by attribute, filter it, run analysis on it, and keep it in sync with the database: when the underlying table changes, the layer updates too.
 
 Live PostGIS layers behave like the rest of your layers:
 

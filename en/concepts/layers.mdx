@@ -1,10 +1,10 @@
 ---
-title: "Working with Layers in MapX"
+title: "Working with Layers in MapX Agent"
 sidebarTitle: "Layers"
-description: "Manage, style, and edit every layer in a MapX project — toggle visibility, filter and search, reorder, batch-manage, restyle, and edit attributes or geometry directly."
+description: "Manage, style, and edit every layer in a MapX Agent project — toggle visibility, filter and search, reorder, batch-manage, restyle, and edit attributes or geometry directly."
 ---
 
-MapX uses a layer-based canvas — the same mental model as design tools like Figma or Photoshop, applied to geographic data. Every dataset you upload, every analysis you run, and every online or database source you connect produces a named layer that sits on top of a basemap. Layers can be stacked, toggled, reordered, and individually styled, giving you precise control over what your map communicates and how it looks.
+MapX Agent uses a layer-based canvas — the same mental model as design tools like Figma or Photoshop, applied to geographic data. Every dataset you upload, every analysis you run, and every online or database source you connect produces a named layer that sits on top of a basemap. Layers can be stacked, toggled, reordered, and individually styled, giving you precise control over what your map communicates and how it looks.
 
 This page covers the full lifecycle of a layer: finding and organizing it, styling it, and editing the data behind it.
 
@@ -73,7 +73,7 @@ The style editor includes a 3D section for layers rendered in 3D view — for ex
 
 ## Editing data and geometry
 
-MapX lets you edit a layer's data and geometry without leaving the browser. Open the attribute table from a layer in the Layers panel, inspect the rows, and make changes that are written back to the layer's source. Editing works for layers you uploaded as GeoJSON files and for PostGIS database layers alike.
+MapX Agent lets you edit a layer's data and geometry without leaving the browser. Open the attribute table from a layer in the Layers panel, inspect the rows, and make changes that are written back to the layer's source. Editing works for layers you uploaded as GeoJSON files and for PostGIS database layers alike.
 
 Changes save immediately: each edit you finish is committed on the spot — there is no separate "start editing" session to begin or end.
 
@@ -93,18 +93,18 @@ In the Layers panel, open the layer's row actions menu (`⋯`) and choose **Attr
 
 ### Edit geometry
 
-Click the pencil button on a row to enter geometry editing. MapX shows the feature's vertices on the map:
+Click the pencil button on a row to enter geometry editing. MapX Agent shows the feature's vertices on the map:
 
 - **Move a vertex** — drag it to a new position; the shape previews live as you drag.
 - **Add a vertex** — click a midpoint handle on a line or polygon edge.
 - **Delete a vertex** — double-click a vertex (lines keep at least 2 points, polygon rings keep at least 3).
 - **Move a point feature** — drag the point marker to its new location.
 
-Use **Save** to commit the geometry, or **Cancel** to discard the changes. If you try to leave the table, switch features, or delete the feature while a geometry edit is still unsaved, MapX asks you to **Save**, **Discard**, or **Cancel** first.
+Use **Save** to commit the geometry, or **Cancel** to discard the changes. If you try to leave the table, switch features, or delete the feature while a geometry edit is still unsaved, MapX Agent asks you to **Save**, **Discard**, or **Cancel** first.
 
 ### Editing with others
 
-If someone else changes the same feature while you are editing it, MapX keeps the latest version and asks you to apply your change again — your edit is not silently lost.
+If someone else changes the same feature while you are editing it, MapX Agent keeps the latest version and asks you to apply your change again — your edit is not silently lost.
 
 ### Editing limits
 
@@ -117,7 +117,7 @@ Layers with up to 10,000 features and 20 MB are fully editable. Larger layers op
 
 ## Multi-Layer Analysis
 
-One of MapX's most powerful capabilities is combining multiple layers in a single view. A typical multi-layer map might include:
+One of MapX Agent's most powerful capabilities is combining multiple layers in a single view. A typical multi-layer map might include:
 
 1. A **demographic heatmap** as the bottom-most layer (continuous color, semi-transparent)
 2. **Competitor locations** as a point layer (red, medium opacity)
@@ -130,4 +130,4 @@ To build this view, upload each dataset separately and issue a series of prompts
 Show my store locations sized by revenue, competitor locations in red, and a heatmap of population density underneath. Add 1 km buffer zones around my stores.
 ```
 
-MapX creates and stacks the layers automatically. You can then fine-tune each one from the Layers panel, and edit the underlying data straight from the attribute table.
+MapX Agent creates and stacks the layers automatically. You can then fine-tune each one from the Layers panel, and edit the underlying data straight from the attribute table.

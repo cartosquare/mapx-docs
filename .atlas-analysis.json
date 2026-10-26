@@ -1,7 +1,7 @@
 {
   "projectType": "saas",
-  "projectName": "MapX",
-  "projectDescription": "MapX is an AI-powered spatial analysis platform that lets anyone turn CSV and GeoJSON data into interactive maps, heatmaps, and professional reports using plain English — no GIS training required.",
+  "projectName": "MapX Agent",
+  "projectDescription": "MapX Agent is an AI-powered spatial analysis platform that lets anyone turn CSV and GeoJSON data into interactive maps, heatmaps, and professional reports using plain English — no GIS training required.",
   "theme": "luma",
   "primaryColor": "#1b6cda",
   "lightColor": "#bcc483",
